@@ -1,0 +1,26 @@
+{
+  "Html": "/tMax14web/OphClientPage.html",
+
+	"Ophs": [
+		{
+			"hID": 0,
+			"EXD": "",
+			"nStu": "",
+			"nStuD": "",
+			"pStu": "",
+			"Org": "",
+			"Dst": "",
+			"Shp": "",
+			"Cne": "",
+			"Acc": "",
+			"NOP": 0,
+			"GrW": 0.0,
+			"shBD": "",
+			"shND": "",
+			"shPD": "",
+			"shTD": ""
+
+		}
+	]
+
+}
