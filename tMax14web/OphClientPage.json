@@ -5,6 +5,8 @@
 		{
 			"hID": 0,
 			"EXD": "",
+			"ROT": "",
+			"MOT": "",
 			"nStu": "",
 			"nStuD": "",
 			"pStu": "",
@@ -15,10 +17,28 @@
 			"Acc": "",
 			"NOP": 0,
 			"GrW": 0.0,
+			
 			"shBD": "",
+			"shED": "",
 			"shND": "",
 			"shPD": "",
-			"shTD": ""
+			"shTD": "",
+
+			"DTM": "",
+			"PTM": "",
+			"EOH": "",
+			"REOH": "",
+			"AOH": "",
+			"RTR": "",
+			"ROS": "",
+			"POD": "",
+
+			"ETD": "",
+			"ATD": "",
+			"ETA": "",
+			"ATA": "",
+			
+			"CntNoS": ""
 
 		}
 	]

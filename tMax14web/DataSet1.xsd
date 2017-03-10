@@ -25,6 +25,7 @@
               <Mapping SourceColumn="HID" DataSetColumn="HID" />
               <Mapping SourceColumn="ROT" DataSetColumn="ROT" />
               <Mapping SourceColumn="MOT" DataSetColumn="MOT" />
+              <Mapping SourceColumn="MID" DataSetColumn="MID" />
               <Mapping SourceColumn="EXD" DataSetColumn="EXD" />
               <Mapping SourceColumn="NSTU" DataSetColumn="NSTU" />
               <Mapping SourceColumn="NSTUD" DataSetColumn="NSTUD" />
@@ -35,12 +36,26 @@
               <Mapping SourceColumn="SHP" DataSetColumn="SHP" />
               <Mapping SourceColumn="CNE" DataSetColumn="CNE" />
               <Mapping SourceColumn="ACC" DataSetColumn="ACC" />
-              <Mapping SourceColumn="NOP" DataSetColumn="NOP" />
-              <Mapping SourceColumn="GRW" DataSetColumn="GRW" />
               <Mapping SourceColumn="SHBD" DataSetColumn="SHBD" />
+              <Mapping SourceColumn="SHED" DataSetColumn="SHED" />
               <Mapping SourceColumn="SHND" DataSetColumn="SHND" />
               <Mapping SourceColumn="SHPD" DataSetColumn="SHPD" />
               <Mapping SourceColumn="SHTD" DataSetColumn="SHTD" />
+              <Mapping SourceColumn="NOP" DataSetColumn="NOP" />
+              <Mapping SourceColumn="GRW" DataSetColumn="GRW" />
+              <Mapping SourceColumn="DTM" DataSetColumn="DTM" />
+              <Mapping SourceColumn="PTM" DataSetColumn="PTM" />
+              <Mapping SourceColumn="EOH" DataSetColumn="EOH" />
+              <Mapping SourceColumn="REOH" DataSetColumn="REOH" />
+              <Mapping SourceColumn="AOH" DataSetColumn="AOH" />
+              <Mapping SourceColumn="RTR" DataSetColumn="RTR" />
+              <Mapping SourceColumn="ROS" DataSetColumn="ROS" />
+              <Mapping SourceColumn="ETD" DataSetColumn="ETD" />
+              <Mapping SourceColumn="ATD" DataSetColumn="ATD" />
+              <Mapping SourceColumn="ETA" DataSetColumn="ETA" />
+              <Mapping SourceColumn="ATA" DataSetColumn="ATA" />
+              <Mapping SourceColumn="POD" DataSetColumn="POD" />
+              <Mapping SourceColumn="CNTNOS" DataSetColumn="CNTNOS" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -52,7 +67,7 @@
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="OPH" msprop:Generator_TableClassName="OPHDataTable" msprop:Generator_TableVarName="tableOPH" msprop:Generator_RowChangedName="OPHRowChanged" msprop:Generator_TablePropName="OPH" msprop:Generator_RowDeletingName="OPHRowDeleting" msprop:Generator_RowChangingName="OPHRowChanging" msprop:Generator_RowEvHandlerName="OPHRowChangeEventHandler" msprop:Generator_RowDeletedName="OPHRowDeleted" msprop:Generator_RowClassName="OPHRow" msprop:Generator_UserTableName="OPH" msprop:Generator_RowEvArgName="OPHRowChangeEvent">
+        <xs:element name="OPH" msprop:Generator_TableClassName="OPHDataTable" msprop:Generator_TableVarName="tableOPH" msprop:Generator_TablePropName="OPH" msprop:Generator_RowDeletingName="OPHRowDeleting" msprop:Generator_RowChangingName="OPHRowChanging" msprop:Generator_RowEvHandlerName="OPHRowChangeEventHandler" msprop:Generator_RowDeletedName="OPHRowDeleted" msprop:Generator_UserTableName="OPH" msprop:Generator_RowChangedName="OPHRowChanged" msprop:Generator_RowEvArgName="OPHRowChangeEvent" msprop:Generator_RowClassName="OPHRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="HID" msprop:Generator_ColumnVarNameInTable="columnHID" msprop:Generator_ColumnPropNameInRow="HID" msprop:Generator_ColumnPropNameInTable="HIDColumn" msprop:Generator_UserColumnName="HID" type="xs:int" minOccurs="0" />
@@ -70,7 +85,14 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EXD" msprop:Generator_ColumnVarNameInTable="columnEXD" msprop:Generator_ColumnPropNameInRow="EXD" msprop:Generator_ColumnPropNameInTable="EXDColumn" msprop:Generator_UserColumnName="EXD" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MID" msprop:Generator_ColumnVarNameInTable="columnMID" msprop:Generator_ColumnPropNameInRow="MID" msprop:Generator_ColumnPropNameInTable="MIDColumn" msprop:Generator_UserColumnName="MID" type="xs:int" minOccurs="0" />
+              <xs:element name="EXD" msprop:Generator_ColumnVarNameInTable="columnEXD" msprop:Generator_ColumnPropNameInRow="EXD" msprop:Generator_ColumnPropNameInTable="EXDColumn" msprop:Generator_UserColumnName="EXD" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="NSTU" msprop:Generator_ColumnVarNameInTable="columnNSTU" msprop:Generator_ColumnPropNameInRow="NSTU" msprop:Generator_ColumnPropNameInTable="NSTUColumn" msprop:Generator_UserColumnName="NSTU" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -134,9 +156,14 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="NOP" msprop:Generator_ColumnVarNameInTable="columnNOP" msprop:Generator_ColumnPropNameInRow="NOP" msprop:Generator_ColumnPropNameInTable="NOPColumn" msprop:Generator_UserColumnName="NOP" type="xs:int" minOccurs="0" />
-              <xs:element name="GRW" msprop:Generator_ColumnVarNameInTable="columnGRW" msprop:Generator_ColumnPropNameInRow="GRW" msprop:Generator_ColumnPropNameInTable="GRWColumn" msprop:Generator_UserColumnName="GRW" type="xs:decimal" minOccurs="0" />
               <xs:element name="SHBD" msprop:Generator_ColumnVarNameInTable="columnSHBD" msprop:Generator_ColumnPropNameInRow="SHBD" msprop:Generator_ColumnPropNameInTable="SHBDColumn" msprop:Generator_UserColumnName="SHBD" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHED" msprop:Generator_ColumnVarNameInTable="columnSHED" msprop:Generator_ColumnPropNameInRow="SHED" msprop:Generator_ColumnPropNameInTable="SHEDColumn" msprop:Generator_UserColumnName="SHED" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
@@ -161,6 +188,99 @@
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOP" msprop:Generator_ColumnVarNameInTable="columnNOP" msprop:Generator_ColumnPropNameInRow="NOP" msprop:Generator_ColumnPropNameInTable="NOPColumn" msprop:Generator_UserColumnName="NOP" type="xs:int" minOccurs="0" />
+              <xs:element name="GRW" msprop:Generator_ColumnVarNameInTable="columnGRW" msprop:Generator_ColumnPropNameInRow="GRW" msprop:Generator_ColumnPropNameInTable="GRWColumn" msprop:Generator_UserColumnName="GRW" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DTM" msprop:Generator_ColumnVarNameInTable="columnDTM" msprop:Generator_ColumnPropNameInRow="DTM" msprop:Generator_ColumnPropNameInTable="DTMColumn" msprop:Generator_UserColumnName="DTM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PTM" msprop:Generator_ColumnVarNameInTable="columnPTM" msprop:Generator_ColumnPropNameInRow="PTM" msprop:Generator_ColumnPropNameInTable="PTMColumn" msprop:Generator_UserColumnName="PTM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EOH" msprop:Generator_ColumnVarNameInTable="columnEOH" msprop:Generator_ColumnPropNameInRow="EOH" msprop:Generator_ColumnPropNameInTable="EOHColumn" msprop:Generator_UserColumnName="EOH" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REOH" msprop:Generator_ColumnVarNameInTable="columnREOH" msprop:Generator_ColumnPropNameInRow="REOH" msprop:Generator_ColumnPropNameInTable="REOHColumn" msprop:Generator_UserColumnName="REOH" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AOH" msprop:Generator_ColumnVarNameInTable="columnAOH" msprop:Generator_ColumnPropNameInRow="AOH" msprop:Generator_ColumnPropNameInTable="AOHColumn" msprop:Generator_UserColumnName="AOH" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RTR" msprop:Generator_ColumnVarNameInTable="columnRTR" msprop:Generator_ColumnPropNameInRow="RTR" msprop:Generator_ColumnPropNameInTable="RTRColumn" msprop:Generator_UserColumnName="RTR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ROS" msprop:Generator_ColumnVarNameInTable="columnROS" msprop:Generator_ColumnPropNameInRow="ROS" msprop:Generator_ColumnPropNameInTable="ROSColumn" msprop:Generator_UserColumnName="ROS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETD" msprop:Generator_ColumnVarNameInTable="columnETD" msprop:Generator_ColumnPropNameInRow="ETD" msprop:Generator_ColumnPropNameInTable="ETDColumn" msprop:Generator_UserColumnName="ETD" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ATD" msprop:Generator_ColumnVarNameInTable="columnATD" msprop:Generator_ColumnPropNameInRow="ATD" msprop:Generator_ColumnPropNameInTable="ATDColumn" msprop:Generator_UserColumnName="ATD" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETA" msprop:Generator_ColumnVarNameInTable="columnETA" msprop:Generator_ColumnPropNameInRow="ETA" msprop:Generator_ColumnPropNameInTable="ETAColumn" msprop:Generator_UserColumnName="ETA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ATA" msprop:Generator_ColumnVarNameInTable="columnATA" msprop:Generator_ColumnPropNameInRow="ATA" msprop:Generator_ColumnPropNameInTable="ATAColumn" msprop:Generator_UserColumnName="ATA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POD" msprop:Generator_ColumnVarNameInTable="columnPOD" msprop:Generator_ColumnPropNameInRow="POD" msprop:Generator_ColumnPropNameInTable="PODColumn" msprop:Generator_UserColumnName="POD" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNTNOS" msprop:Generator_ColumnVarNameInTable="columnCNTNOS" msprop:Generator_ColumnPropNameInRow="CNTNOS" msprop:Generator_ColumnPropNameInTable="CNTNOSColumn" msprop:Generator_UserColumnName="CNTNOS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

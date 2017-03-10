@@ -23,10 +23,16 @@ namespace tMax14web
 				OphsElementJson he = new OphsElementJson()
 				{
 					hID = row.HID,
+					EXD = row.EXD,
+
+					ROT = row.ROT,
+					MOT = row.MOT,
+					
 					Org = row.ORG,
 					Dst = row.DST,
 					nStu = row.NSTU,
 					nStuD = row.NSTUD,
+					
 					Shp = row.SHP,
 					Cne = row.CNE,
 					Acc = row.ACC,
@@ -34,9 +40,25 @@ namespace tMax14web
 					GrW = row.GRW,
 
 					shBD = row.SHBD,
+					shED = row.SHED,
 					shND = row.SHND,
 					shPD = row.SHPD,
 					shTD = row.SHTD,
+					
+					DTM  = row.DTM,
+					PTM	 = row.PTM,
+					EOH	 = row.EOH,
+					REOH = row.REOH,
+					AOH	 = row.AOH,
+					RTR	 = row.RTR,
+					ROS	 = row.ROS,
+					POD	 = row.POD,
+					ETD	 = row.ETD,
+					ATD	 = row.ATD,
+					ETA	 = row.ETA,
+					ATA  = row.ATA,
+
+					CntNoS = row.CNTNOS
 
 				};
 
