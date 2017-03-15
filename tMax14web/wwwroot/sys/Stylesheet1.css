@@ -1,0 +1,168 @@
+﻿
+table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+thead {
+    display: table-row-group;
+}
+
+td, th {
+  	line-height: 1em;
+	padding: 0.2em 0.2em;
+	border: 1px solid #CBCBCB;
+}
+
+th {
+	text-align:center;
+}
+
+td.nw {
+	max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+}
+
+td.trh {
+	min-width: 55px;
+	text-align: center;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.blank_row {
+	border: none;
+}
+
+.curRow {
+	background-color: orange !important;
+	color: white;
+}
+
+.curSort {
+	background-color: red !important;
+	color: white;
+}
+
+/*
+thead {
+	background-color: maroon;
+	color: white;
+}
+
+tfoot {
+	background-color: maroon;
+	color: white;
+}
+*/
+[scope="row"] {
+	background-color: orange;
+	color: white;
+	text-align: center;
+}
+
+[abbr="P"] {	/*Puan*/
+	text-align: center;
+	font-weight: bold;
+}
+[abbr="O"] {	/*Oynadigi*/
+	text-align: center;
+	font-weight: bold;
+}
+[abbr="A"] {	/*Aldigi*/
+	text-align: center;
+}
+[abbr="B"] {	/*Berabere*/
+	text-align: center;
+}
+[abbr="V"] {	/*Verdigi*/
+	text-align: center;
+}
+[abbr="AV"] {	/*Avaraj Aldigi-Verdigi*/
+	text-align: center;
+}
+[abbr="R"] {	/*Rank*/
+	text-align: center;
+	background-color: blue; /*Galip*/
+	color: white;
+}
+[abbr="#"] {	/*Index*/
+	text-align: center;
+}
+[abbr="D"] {	/*OyuncuDouble*/
+	font-weight: bold;
+}
+[abbr="S"] {	/*OyuncuSingle*/
+	font-style: normal;
+}
+[abbr="G"] {	/*Galip*/
+	background-color: #ccffcc;
+	color: black;
+}
+
+[winner="G"] {
+	background-color: #ccffcc; /*Galip*/
+	color: black;
+	/*background: linear-gradient(#ccffcc, white);*/
+}
+[winner="B"] {
+	background-color: #ffff80; /*Beraber*/
+	color: black;
+}
+[winner="M"] {
+	background-color: #ffe6cc; /*Maglup;*/
+	color: black;
+}
+
+@media print {
+	a[href]:after {
+		content: none !important;
+	}
+
+	table {
+		  width: 100%; margin: 0; float: none;
+	}
+}
+
+
+/* THE FOLLOWING CSS IS REQUIRED AND SHOULD NOT BE MODIFIED. 
+    div.fauxRow {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      page-break-inside: avoid;
+    }
+    table.fauxRow {border-spacing: 0;}
+    table.fauxRow > tbody > tr > td {
+      padding: 0;
+      overflow: hidden;
+    }
+    table.fauxRow > tbody > tr > td > table.print {
+      display: inline-table;
+      vertical-align: top;
+    }
+    table.fauxRow > tbody > tr > td > table.print > caption {caption-side: top;}
+    .noBreak {
+      float: right;
+      width: 100%;
+      visibility: hidden;
+    }
+    .noBreak:before, .noBreak:after {
+      display: block;
+      content: "";
+    }
+    .noBreak:after {margin-top: -594mm;}
+    .noBreak > div {
+      display: inline-block;
+      vertical-align: top;
+      width:100%;
+      page-break-inside: avoid;
+    }
+    table.print > tbody > tr {page-break-inside: avoid;}
+    table.print > tbody > .metricsRow > td {border-top: none !important;}
+	table.fauxRow, table.print {
+      font-size: 16px;
+      line-height: 20px;
+    }
+	*/

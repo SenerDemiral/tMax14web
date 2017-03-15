@@ -1,33 +1,95 @@
-﻿<link rel="import" href="/sys/vaadin-date-picker/vaadin-date-picker.html">
+﻿<link rel="import" href="/sys/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="/sys/app-layout/app-drawer/app-drawer.html">
+
+<link rel="import" href="/sys/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="/sys/app-layout/app-header/app-header.html">
+
+<link rel="import" href="/sys/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="/sys/app-layout/app-scroll-effects/app-scroll-effects.html">
+
+<link rel="import" href="/sys/iron-icons/iron-icons.html">
+<link rel="import" href="/sys/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/sys/paper-input/paper-input.html">
+<link rel="import" href="/sys/paper-button/paper-button.html">
+<link rel="import" href="/sys/paper-styles/color.html">
+
+<link rel="import" href="/sys/iron-input/iron-input.html">
+<link rel="import" href="/sys/iron-selector/iron-selector.html">
+
+<link rel="import" href="/sys/app-layout/demo/sample-content.html">
 
 <template>
     <template is="dom-bind">
-		<input placeholder="First Name" value="{{model.fID$::input}}" focus-target>
-		<vaadin-date-picker id="my-picker" label="Start" value="{{model.StartDate$}}"></vaadin-date-picker>
-		<table style="margin-bottom:20px">
-			<tfoot>
-				<tr>
-					<th colspan="3" scope="row">tMax14web</th>
-					<th scope="row"><img src="/sys/table-tennis-min.svg" alt="" style="width:2em;height:2em"/></th>
-				</tr>
-				<tr>
-					<th style="color:lightgray;font-weight:normal" colspan="4">Şener DEMİRAL</th>
-				</tr>
-			</tfoot>
-			<tbody>
-				<tr>
-					<td><a href="/tMax14web/OphClient">Houses</a></td>
-					<td><a href="/tMax14web/OyncRank">Oyuncu Rank</a></td>
-					<td><a href="/tMax14web/Bilgi/RankCalc">Bilgi</a></td>
-					<td><a href="/tMax14web/Bilgi/About">Hakkında</a></td>
-					<!--<td><a href="javascript:history.go(-1)">GoBack</a></td>-->
-				</tr>
-			</tbody>
-		</table>
-		<//br>
-		<!--<input type="button" value="GoBack" onclick="history.go(-1)" />-->
-		<div>
-            <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
-        </div>
-    </template>
+	<style is="custom-style">
+		body {
+			margin: 0;
+			font-family: 'Roboto', 'Noto', sans-serif;
+			/*background-color: #eee;*/
+	    }
+/*
+    app-toolbar {
+      background-color: #00897B;
+      color: #fff;
+    }
+*/
+    app-drawer {
+      --app-drawer-content-container: {
+        background-color: white;
+		padding: 120px 10px;
+      }
+    }
+    .drawer-contents {
+      background-color: white;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+      app-header {
+        background-color: #00897B;
+        color: #fff;
+      }
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }									   
+
+	paper-button {
+		margin: 10px 0px;
+	}
+    </style>
+
+	<app-header reveals>
+		<app-toolbar id="toolbar">
+			<paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+			<div main-title>tMax14web</div>
+			<paper-icon-button icon="file-download"></paper-icon-button>
+			<paper-icon-button icon="search"></paper-icon-button>
+			<paper-icon-button icon="close"></paper-icon-button>
+			<input value="{{model.fID$::input}}">
+		</app-toolbar>
+	</app-header>
+
+			<div>
+		        <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
+			</div>
+
+			<app-drawer id="drawer" opened>
+				<!--<div class="drawer-contents">-->
+						<paper-input label="FirmaID" value="{{model.fID$}}"></paper-input>
+						<paper-input type="password" label="Password" value="{{model.fPW$}}"></paper-input>
+						<paper-input type="date" label="Tarih >=" value="{{model.StartDate$}}"></paper-input>
+					<div>
+					<a tabindex="-1" href="/tMax14web/OphClient">
+						<paper-button raised>House</paper-button>
+					</a>
+					</div>
+					<div>
+					<paper-button raised><a tabindex="-1" title="MouseSağClick->OpenNewTab" href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]">Download</a>
+					</paper-button>
+					</div>
+				<!--</div>-->
+			</app-drawer>
+
+
+</template>
+ 
 </template>

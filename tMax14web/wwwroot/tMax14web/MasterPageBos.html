@@ -1,0 +1,41 @@
+﻿
+<template>
+    <template is="dom-bind">
+		<input placeholder="First Name" value="{{model.fID$::input}}" focus-target>
+		<!--<vaadin-date-picker id="my-picker" label="Start" value="{{model.StartDate$}}"></vaadin-date-picker>-->
+		<input placeholder="Trh >=" type="date" label="Start" value="{{model.StartDate$::input}}">
+		<table style="margin-bottom:20px">
+			<tfoot>
+				<tr>
+					<th colspan="3" scope="row">tMax14web</th>
+					<!--<th scope="row"><img src="/sys/table-tennis-min.svg" alt="" style="width:2em;height:2em"/></th>-->
+				</tr>
+				<tr>
+					<th style="color:lightgray;font-weight:normal" colspan="4">Şener DEMİRAL</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td><a href="/tMax14web/OphClient">Houses</a></td>
+					<td><a href="/tMax14web/OphClient2">Oyuncu Rank</a></td>
+					<td><a href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" target="_blank">ToExcel</a></td>
+					<td><a href="/tMax14web/Bilgi/About">Hakkında</a></td>
+					<!--<td><a href="javascript:history.go(-1)">GoBack</a></td>-->
+				</tr>
+			</tbody>
+		</table>
+		<//br>
+		<!--<input type="button" value="GoBack" onclick="history.go(-1)" />-->
+		<!--
+		<div>
+			<template is="imported-template" model="{{model.CurrentPage}}" 
+				content$="{{model.CurrentPage.Html}}"></template>
+		</div>
+		-->
+		<div>
+            <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
+		</div>
+    </template>
+</template>
+
+<!--link rel="import" href="/sys/vaadin-date-picker/vaadin-date-picker.html">-->

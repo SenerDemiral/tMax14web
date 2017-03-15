@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.IO;
 using System.Text;
 using Starcounter;
+
 
 namespace tMax14web
 {
@@ -21,8 +22,8 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
 					
-					<!--<link rel=""import"" href=""/sys/bootstrap.html"">
 					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
+					<!--<link rel=""import"" href=""/sys/bootstrap.html"">
 					<link rel=""import"" href=""/sys/iron-icons/maps-icons.html"">
 					<link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"" integrity=""sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"" crossorigin=""anonymous"">
 					
@@ -97,6 +98,144 @@ namespace tMax14web
 				}
 
 				return sb.ToString();  */
+			});
+
+			Handle.GET("/tMax14web/OphClient2", () => {
+				var master = new OphClientPage();
+				master.Data = null;
+
+				return master;
+			});
+
+			Handle.GET("/tMax14web/movie.xls", () => {
+
+				DataSet1 dts = new DataSet1();
+				DataSet1TableAdapters.OPHTableAdapter ophta = new DataSet1TableAdapters.OPHTableAdapter();
+				int nor = opha.Fill(dts.OPH, "57036", "2016-01-01");
+
+				Response r = new Response();
+
+				var pck = new OfficeOpenXml.ExcelPackage();
+				OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Demo");
+				ws.Cells["A1"].LoadFromDataTable(dts.OPH, true);
+
+				//var p = pck.GetAsByteArray();
+				var oms = new MemoryStream();
+				//FileStream strw = File.Open("c:\\transorient\\A1234-B.xlsx", FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+				FileStream strw = new FileStream("c:\\transorient\\A1234.xlsx", FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+
+				//pck.SaveAs(strw);
+				pck.SaveAs(oms);
+				oms.WriteTo(strw);
+
+				oms.Seek(0, SeekOrigin.Begin);
+				r.StreamedBody = oms;
+
+				strw.Close();
+				//oms.Close();
+
+				FileStream stream = File.Open("c:\\transorient\\A1234.xlsx", FileMode.Open, FileAccess.Read, FileShare.Read);
+				r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+				r.Headers["Content-Disposition"] = "attachment; filename=sener3.xlsx";
+
+				//r.StreamedBody = stream;
+				return r;
+
+				/*
+				using(var xlPackage = new OfficeOpenXml.ExcelPackage(ms))
+				{
+					var wb = xlPackage.Workbook;
+					var ws = wb.Worksheets.Add("WS1");
+					ws.Cells["A1"].LoadFromDataTable(dts.OPH, true);
+
+					var oms = new MemoryStream();
+					xlPackage.SaveAs(oms);
+					//return ms.ToArray();
+
+					r.StreamedBody = oms;
+					r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+						//ContentType = "application/octet-stream"
+					//ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+					r.Headers["Content-Disposition"] = "attachment; filename=sener2.xlsx";
+
+				} */
+				return r;
+
+				/*
+				FileStream stream = File.Open("c:\\transorient\\AFB950618.xls", FileMode.Open, FileAccess.Read, FileShare.Read);
+
+				Response r = new Response()
+				{
+					StreamedBody = stream,
+						
+					ContentType = "application/xls"
+				};
+				//ContentType = "application/octet-stream"
+				//ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+				r.Headers["Content-Disposition"] = "attachment; filename=sener.xls";
+				
+				return r;  */
+			});
+
+			Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) => {
+
+				DataSet1 dts = new DataSet1();
+				DataSet1TableAdapters.OPHTableAdapter ophta = new DataSet1TableAdapters.OPHTableAdapter();
+				int nor = opha.Fill(dts.OPH, frtID, sDate);
+
+
+				using(OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage())
+				{
+					//Create the worksheet
+					OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Demo");
+					ws.Cells["A1"].LoadFromDataTable(dts.OPH, true);
+
+					Response r = new Response();
+					r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+					r.Headers["Content-Disposition"] = "attachment; filename=tMax14web-ophs.xlsx";
+
+					var oms = new MemoryStream();
+					pck.SaveAs(oms);
+					oms.Seek(0, SeekOrigin.Begin);
+
+					r.StreamedBody = oms;
+					return r;
+				}
+			});
+
+			Handle.GET("/tMax14web/dilara", () => {
+
+				DataSet1 dts = new DataSet1();
+				DataSet1TableAdapters.OPHTableAdapter ophta = new DataSet1TableAdapters.OPHTableAdapter();
+				int nor = opha.Fill(dts.OPH, "57036", "2016-01-01");
+
+				OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage();
+				var oms = new MemoryStream();
+				try
+				{
+					OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Demo");
+					ws.Cells["A1"].LoadFromDataTable(dts.OPH, true);
+
+					Response r = new Response();
+					r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+					r.Headers["Content-Disposition"] = "attachment; filename=sener6.xlsx";
+
+					pck.SaveAs(oms);
+					oms.Seek(0, SeekOrigin.Begin);
+
+					r.StreamedBody = oms;
+					return r;
+
+				}
+				finally
+				{
+					if(pck != null)
+						pck.Dispose();
+					//if(oms != null)
+					//	oms.Dispose();
+				}
+
 			});
 		}
 	}

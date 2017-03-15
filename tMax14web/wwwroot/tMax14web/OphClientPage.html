@@ -1,349 +1,263 @@
-﻿<link rel="import" href="/sys/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="/sys/vaadin-grid/vaadin-grid-sorter.html">
-<link rel="import" href="/sys/vaadin-grid/vaadin-grid-filter.html">
-<link rel="import" href="/sys/vaadin-grid/vaadin-grid-column-group.html">
-
-<template>
+﻿<template>
     <template is="dom-bind">
-		<style is="custom-style">
-			vaadin-grid {
-				/*height:auto;*/
-				position: relative;
-				font: 300 16px/1.55 "Open Sans", sans-serif;
-				-webkit-font-smoothing: antialiased;
-				--divider-color: #d4d4d4;
-
-				--vaadin-grid-cell: {
-					padding: 0 4px;
-					/*height: 20px;*/
-					border-right: 1px solid #d4d4d4;
-					box-sizing: border-box;
-					font-size: 12px;
-				};
-
-				--vaadin-grid-header-cell: {
-					height: 28px;
-					border-bottom: 1px solid #d4d4d4;
-					/*background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);*/
-					background-color: #42849e;
-					color: #fff;
-				};
-
-				--vaadin-grid-footer-cell: {
-					background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);
-				};
-
-				--vaadin-grid-cell-last-frozen: {
-					box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
-				};
-
-				--vaadin-grid-body-row-active-cell: {
-					background-image: linear-gradient(to bottom, #1b87e3 2%, #166ed5 98%);
-					color: #c8dbed;
-					text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
-					border-right-color: #1d69b4;
-				};
-
-				--vaadin-grid-body-row-odd-cell: {
-					background-color: #f5f5f5;
-				};
-			
-				--vaadin-grid-loading-spinner: {
-					display: none;
-				};
-	  
-				--vaadin-grid-body-cell: {
-					transition: opacity 0.2s;
-				};
-				
-				--vaadin-grid-loading-body-cell: {
-					opacity: 0.2;
-				};
-
-				--vaadin-grid-focused-cell: {
-					box-shadow: inset 0 0 0 2px rgba(27, 135, 227, 1);
-				};
-			}
-
-			vaadin-grid vaadin-grid-filter {
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				bottom: 0;
-				padding: 5px;
-			}
-
-			vaadin-grid .grouptitle {
-				text-align: center;
-				font-weight: bold;
-			}
-		
-			vaadin-grid input {
-				width: 100%;
-				box-sizing: border-box;
-			}
-
-			vaadin-grid .header-content {
-				text-align: center;
-				font-weight: bold;
-			}
-		</style>
-
-		<div>Houses</div>    
-		<vaadin-grid id="ophs" items={{model.Ophs}}>
-		<!--
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<div class="header-content">Houses</div>
+		<!--<div style="width:100%;overflow:hidden;box-sizing:border-box">-->
+		<!--<table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">-->
+		<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
+		<!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
+			<thead>
+				<tr>
+					<th id="hID">ID</th>
+					<th id="EXD">EXD</th>
+					<th id="ROT">R</th>
+					<th id="MOT">M</th>
+					<th id="Org">Org</th>
+					<th id="Dst">Dst</th>
+					<th id="nStu">Statu</th>
+					<th id="nStuD"></th>
+					<th id="pStu">Problem</th>
+					<th id="pStuD"></th>
+					
+					<th id="Shp">Shp</th>
+					<th id="Cne">Cne</th>
+					<th id="Acc">Acc</th>
+					<th id="DTM">DTM</th>
+					<th id="PTM">PTM</th>
+					<th id="NOP">NOP</th>
+					<th id="GrW">GrW</th>
+					<th id="shBD">Booking</th>
+					<th id="shED">InHand</th>
+					<th id="shPD">Departed</th>
+					<th id="shTD">@Dst</th>
+					<th id="EOH">EOH</th>
+					<th id="REOH">REOH</th>
+					<th id="AOH">AOH</th>
+					<th id="RTR">RTR</th>
+					<th id="POD">POD</th>
+					<th id="ETD">ETD</th>
+					<th id="ATD">ATD</th>
+					<th id="ETA">ETA</th>
+					<th id="ATA">ATA</th>
+					<th id="CntNoS">Cnt#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<template is="dom-repeat" items="[[abcd]]" dene="[[processInit(model.Html)]]">
+					<tr>
+						<td>[[item.hID]]</td>
+						<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>
+						<td>[[item.ROT]]</td>
+						<td>[[item.MOT]]</td>
+						<td>[[item.Org]]</td>
+						<td>[[item.Dst]]</td>
+						<td>[[item.nStu]]</td>
+						<td class="trh">[[item.nStuD]]</td>
+						<td>[[item.pStu]]</td>
+						<td>[[item.pStuD]]</td>
+						
+						<td>[[item.Shp]]</td>
+						<td>[[item.Cne]]</td>
+						<td>[[item.Acc]]</td>
+						<td>[[item.DTM]]</td>
+						<td>[[item.PTM]]</td>
+						<td>[[item.NOP]]</td>
+						<td>[[item.GrW]]</td>
+						<td class="trh">[[item.shBD]]</td>
+						<td class="trh">[[item.shED]]</td>
+						<td class="trh">[[item.shPD]]</td>
+						<td class="trh">[[item.shTD]]</td>
+						<td class="trh">[[item.EOH]]</td>
+						<td class="trh">[[item.REOH]]</td>
+						<td class="trh">[[item.AOH]]</td>
+						<td class="trh">[[item.RTR]]</td>
+						<td class="trh">[[item.POD]]</td>
+						<td class="trh">[[item.ETD]]</td>
+						<td class="trh">[[item.ATD]]</td>
+						<td class="trh">[[item.ETA]]</td>
+						<td class="trh">[[item.ATA]]</td>
+						<td>[[item.CntNoS]]</td> 
+					</tr">
 				</template>
-		-->	
-				<vaadin-grid-column-group resizable>
-					<template class="header">
-						<vaadin-grid-sorter path="hID">ID</vaadin-grid-sorter>
-					</template>
-					<vaadin-grid-column width="60px">
-						<template class="header">
-							<vaadin-grid-filter path="hID" value="[[_filterhID]]">
-								<input placeholder="ID" value="{{_filterhID::input}}" focus-target>
-							</vaadin-grid-filter>
-						</template>
-						<template>[[item.hID]]</template>
-					</vaadin-grid-column>
-				</vaadin-grid-column-group>
-
-				<vaadin-grid-column-group resizable>
-					<template class="header">
-						<vaadin-grid-sorter path="ROT"></vaadin-grid-sorter>
-					</template>
-					<vaadin-grid-column width="50px">
-						<template class="header">
-							<vaadin-grid-filter path="ROT" value="[[_filterROT]]">
-								<input placeholder="ROT" value="{{_filterROT::input}}" focus-target>
-							</vaadin-grid-filter>
-						</template>
-						<template><span style="text-align:center">[[item.ROT]]</span></template>
-					</vaadin-grid-column>
-				</vaadin-grid-column-group>
-
-				<vaadin-grid-column-group resizable>
-					<template class="header">
-						<vaadin-grid-sorter path="MOT"></vaadin-grid-sorter>
-					</template>
-					<vaadin-grid-column width="50px">
-						<template class="header">
-							<vaadin-grid-filter path="MOT" value="[[_filterMOT]]">
-								<input placeholder="MOT" value="{{_filterMOT::input}}" focus-target>
-							</vaadin-grid-filter>
-						</template>
-						<template><span style="text-align:center">[[item.MOT]]</span></template>
-					</vaadin-grid-column>
-				</vaadin-grid-column-group>
-
-				<vaadin-grid-column-group resizable>
-					<template class="header">
-						<vaadin-grid-sorter path="nStu">LastStatu</vaadin-grid-sorter>
-					</template>	
-					<vaadin-grid-column>
-						<template>[[item.nStu]]</template>
-					</vaadin-grid-column>
-				</vaadin-grid-column-group>
-
-				<vaadin-grid-column-group resizable>
-					<template class="header">
-						<vaadin-grid-sorter path="nStuD">LastStatuDate</vaadin-grid-sorter>
-					</template>	
-					<vaadin-grid-column  width="110px" flex-grow="0">
-						<template class="header">
-							<vaadin-grid-filter path="nStuD" value="[[_filternStuD]]">
-								<input placeholder="Filter" value="{{_filternStuD::input}}" focus-target>
-							</vaadin-grid-filter>
-						</template>
-						<template>[[item.nStuD]]</template>
-					</vaadin-grid-column>
-				</vaadin-grid-column-group>
-
-				<vaadin-grid-column  width="100px" flex="0">
-					<template class="header">
-						<vaadin-grid-filter path="Org" value="[[_filterOrg]]">
-							<input placeholder="Org" value="{{_filterOrg::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>	
-					<template>[[item.Org]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column  width="100px" flex="1">
-					<template class="header">
-						<vaadin-grid-filter path="Dst" value="[[_filterDst]]">
-							<input placeholder="Dst" value="{{_filterDst::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.Dst]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="Shp">Shp</vaadin-grid-sorter>
-					</template>
-					<template>[[item.Shp]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="Cne">Cne</vaadin-grid-sorter>
-					</template>
-					<template>[[item.Cne]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="Acc">Acc</vaadin-grid-sorter>
-					</template>
-					<template>[[item.Acc]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column  width="80px">
-					<template class="header">
-						<vaadin-grid-sorter path="NOP">NOP</vaadin-grid-sorter>
-					</template>
-					<template><span style="text-align:center">[[item.NOP]]</span></template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column  width="80px">
-					<template class="header">
-						<vaadin-grid-sorter path="GrW">GrW</vaadin-grid-sorter>
-					</template>
-					<template><span style="text-align:center">[[item.GrW]]</span></template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="DTM">DTM</vaadin-grid-sorter>
-					</template>
-					<template>[[item.DTM]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="PTM">PTM</vaadin-grid-sorter>
-					</template>
-					<template>[[item.PTM]]</template>
-				</vaadin-grid-column>
-	
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="shBD">Booking</vaadin-grid-sorter>
-					</template>
-					<template>[[item.shBD]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="shED">inHand</vaadin-grid-sorter>
-					</template>
-					<template>[[item.shED]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="shND">Departed</vaadin-grid-sorter>
-					</template>
-					<template>[[item.shND]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="shPD">@Dst</vaadin-grid-sorter>
-					</template>
-					<template>[[item.shPD]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="EOH">EOH</vaadin-grid-sorter>
-					</template>
-					<template>[[item.EOH]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="REOH">REOH</vaadin-grid-sorter>
-					</template>
-					<template>[[item.REOH]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="AOH">AOH</vaadin-grid-sorter>
-					</template>
-					<template>[[item.AOH]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="RTR">RTR</vaadin-grid-sorter>
-					</template>
-					<template>[[item.RTR]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="ROS">ROS</vaadin-grid-sorter>
-					</template>
-					<template>[[item.ROS]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="shTD">POD</vaadin-grid-sorter>
-					</template>
-					<template>[[item.shTD]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="ETD">ETD</vaadin-grid-sorter>
-					</template>
-					<template>[[item.ETD]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="ATD">ATD</vaadin-grid-sorter>
-					</template>
-					<template>[[item.ATD]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="ETA">ETA</vaadin-grid-sorter>
-					</template>
-					<template>[[item.ETA]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-sorter path="ATA">ATA</vaadin-grid-sorter>
-					</template>
-					<template>[[item.ATA]]</template>
-				</vaadin-grid-column>
-
-				<vaadin-grid-column-group resizable>
-					<template class="header">
-						<vaadin-grid-sorter path="CntNoS">Cnt#</vaadin-grid-sorter>
-					</template>
-					<vaadin-grid-column>
-						<template class="header">
-							<vaadin-grid-filter path="CntNoS" value="[[_filterCntNoS]]">
-								<input placeholder="CntNoS" value="{{_filterCntNoS::input}}" focus-target>
-							</vaadin-grid-filter>
-						</template>
-						<template>[[item.CntNoS]]</template>
-					</vaadin-grid-column>
-				</vaadin-grid-column-group>
-	
-
-			<!--</vaadin-grid-column-group>-->
-	</vaadin-grid>
+			</tbody>	
+		</table>
+		</div>
     </template>
+
+	<script>
+		//document.getElementsByTagName("BODY")[0].onhashchange = function () { myFunction() };
+
+		/*
+		document.querySelector("#12345").addEventListener('DOMSubtreeModified', function () {
+			console.log(new Date());
+			document.title = 'DOM Changed at ' + new Date();
+		}, false);
+		*/
+		
+		//alert("dfadfadf");
+		console.log("1");
+		var curRowIndex = -1;
+		console.log("2");
+		var curCellIndex = -1;
+		/*
+		HTMLImports.whenReady(function () {
+			console.log("Ready");
+		});
+		console.log("3");
+		*/
+		(function () {
+
+//			var curRowIndex = -1;
+//			var curCellIndex = -1;
+
+			console.log("4");
+
+			var script = document._currentScript || document.currentScript;
+			tmplt = script.previousElementSibling;
+
+			tmplt.processInit = function (val) {
+				console.log("processInit this1", this.$.tblOphs);
+				console.log("processInit this2", this.$["EXD"]);
+				if (curCellIndex != -1) {
+					this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+				}
+				if (curRowIndex != -1) {
+					this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+				}
+				curRowIndex = -1;
+				curCellIndex = -1;
+				tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+				console.log("processInit", tmplt.abcd.length);
+
+				// table header row da degisiklik oldugunda calisir	!!!deprecated in DOM level 3
+				/*
+				this.$.tblOphs.rows[0].addEventListener('DOMSubtreeModified', function () {
+					console.log("-----------:", new Date());
+					//document.title = 'DOM Changed at ' + new Date();
+				}, false);
+				*/
+			};
+
+
+			//tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+			console.log("model.Ophs", tmplt);
+
+			tmplt.MyFnc = function (e, x) {
+				console.log("TableMyFnc", e);
+				//console.log("Dilara 1: ", curRowIndex);
+
+				if (e.target.parentNode.rowIndex == 0)
+				{
+					console.log("target ID", e.target.id);
+					if (curCellIndex != -1) {
+						this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+						//x.rows[0].cells[curCellIndex].classList.remove("curSort");
+					}
+					console.log("TableMyFnc2", this);
+					curCellIndex = e.target.cellIndex;
+					e.target.classList.add("curSort");
+
+					sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+					//copy = JSON.parse(JSON.stringify(tmplt.abcd));
+					//tmplt.abcd.sort(firstBy(e.target.id));
+					//sener = tmplt.abcd.sort(firstBy(e.target.id));
+					tmplt.abcd = sener.sort(firstBy(e.target.id));
+					//tmplt.model.Ophs = sener.sort(firstBy(e.target.id));
+				}
+				else
+				{
+					if (curRowIndex != -1) {
+						//x.rows[curRowIndex].classList.remove("curRow");
+						this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+					}
+					curRowIndex = e.target.parentNode.rowIndex;
+					e.target.parentNode.classList.add("curRow");
+				}
+			}
+
+			tmplt.onSorthIDClick2 = function (event) {
+				//copy = JSON.parse(JSON.stringify(tmplt.abcd));
+				tmplt.model.Ophs = tmplt.model.Ophs.sort(firstBy("hID"));
+			}
+
+			tmplt.onSorthIDClick = function (event) {
+				copy = JSON.parse(JSON.stringify(tmplt.abcd));
+				tmplt.abcd = copy.sort(firstBy("hID"));
+			}
+
+			tmplt.onSortEXDClick = function (event) {
+				copy = JSON.parse(JSON.stringify(tmplt.abcd));
+				tmplt.abcd = copy.sort(firstBy("EXD", -1));
+			}
+
+			tmplt.onSortBazRankClick = function (event) {
+				copy = JSON.parse(JSON.stringify(tmplt.abcd));
+				tmplt.abcd = copy.sort(firstBy("BazRank", -1));
+			}
+
+			/*
+			tmplt.onSortAdClick = function (event) {
+				copy = JSON.parse(JSON.stringify(tmplt.abcd));
+				//copy = tmplt.model.OyncRank; //puppet.js den hata geliyor!
+				tmplt.abcd = copy.sort(
+					function (a, b) {
+						var a1 = a.Ad, b1 = b.Ad;
+						if (a1 == b1) return 0;
+						return a1 > b1 ? 1 : -1;
+					});
+			}
+			*/
+			tmplt.onSortDenemeClick = function (event) {
+				tmplt.model.SortAd$++;
+				//console.log("model.SortAd$.Clicked", tmplt.abcd);
+				console.log("model.SortAd$", tmplt.model.SortAd$);
+				copy = JSON.parse(JSON.stringify(tmplt.abcd));
+				//copy = tmplt.model.OyncRank; //puppet.js den hata geliyor!
+				if (tmplt.model.SortAd$ % 2 == 0) {
+					tmplt.abcd = copy.sort(
+						function (a, b) {
+							var a1 = a.Idx, b1 = b.Idx;
+							if (a1 == b1) return 0;
+							return a1 > b1 ? 1 : -1;
+						});
+				}
+				else {
+					tmplt.abcd = copy.sort(
+						function (a, b) {
+							var a1 = a.Ad, b1 = b.Ad;
+							if (a1 == b1) return 0;
+							return a1 > b1 ? 1 : -1;
+						});
+				}
+				//tmplt.model.SortAd$ = 5;	 
+				//console.log("model.SortAd$.sorted", copy);
+				//tmplt.model.OyncRank = JSON.parse(JSON.stringify(copy));
+
+			}
+			 
+			tmplt.onTakimMsbkClick = function (event) {
+				//console.log("OnToogleClick", event.model.__data__.item.TakimClick$);
+				event.model.__data__.item.TakimMsbkClick$ = parseInt(event.model.__data__.item.TakimMsbkClick$, 10) + 1;
+				//tmplt.set("event.model.__data__.item.TakimClick$", parseInt(tmplt.get(event.model.__data__.item.TakimClick$), 10) + 1);
+			}
+
+			tmplt.onTakimOyuncuClick = function (event) {
+				event.model.__data__.item.TakimOyuncuClick$ = parseInt(event.model.__data__.item.TakimOyuncuClick$, 10) + 1;
+			}
+
+			tmplt.onTakimMapClick = function (event) {
+				//console.log("OnToogleMap 1", event.model.__data__);
+				//console.log("OnToogleMap 2", event.model.__data__.item);
+				//console.log("OnToogleMap 3", event.model.__data__.item.TakimMapClick$);
+				//console.log("OnToogleMap 4", event.model.__data__['item.TakimMapClick$']);
+				//event.stopPropagation();
+				//event.preventDefault();
+				event.model.__data__.item.TakimMapClick$ += 1;
+				console.log("model1", tmplt.model);
+				//tmplt.set("model.TakimMapClick$", ++tmplt.model.TakimMapClick$);
+				//console.log("model2", tmplt.model);
+				//event.model.__data__.item.TakimMapClick$ = parseInt(event.model.__data__.item.TakimMapClick$, 10) + 1;
+			}
+		})();
+
+	</script>
+
 </template>

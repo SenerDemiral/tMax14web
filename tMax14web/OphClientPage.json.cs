@@ -16,7 +16,8 @@ namespace tMax14web
 
 			DataSet1 ds = new DataSet1();
 			DataSet1TableAdapters.OPHTableAdapter opha = new DataSet1TableAdapters.OPHTableAdapter();
-			opha.Fill(ds.OPH, fid, std);
+			int nor = opha.Fill(ds.OPH, fid, std);
+			Ophs.Clear();
 
 			foreach(DataSet1.OPHRow row in ds.OPH.Rows) 
 			{
