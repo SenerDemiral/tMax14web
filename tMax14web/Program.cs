@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Text;
+using System;
 using Starcounter;
 
 
@@ -17,10 +17,10 @@ namespace tMax14web
 					<title>{0}</title>
 					
 					<script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
-					<script src=""/sys/thenBy.js""></script>
 					<link rel=""import"" href=""/sys/polymer/polymer.html"">
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
+					<script src=""/sys/thenBy.js""></script>
 					
 					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					<!--<link rel=""import"" href=""/sys/bootstrap.html"">
@@ -39,8 +39,8 @@ namespace tMax14web
 					</template>
 					<puppet-client ref=""puppet-root"" remote-url=""{1}"" use-web-socket=""true""></puppet-client>
 
-					<!--
 					<starcounter-debug-aid></starcounter-debug-aid>
+					<!--
 					<script src=""https://code.jquery.com/jquery-3.1.1.slim.min.js"" integrity=""sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"" crossorigin=""anonymous""></script>
 					<script src=""https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"" integrity=""sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"" crossorigin=""anonymous""></script>
 					<script src=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"" integrity=""sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"" crossorigin=""anonymous""></script>
@@ -105,6 +105,165 @@ namespace tMax14web
 				master.Data = null;
 
 				return master;
+			});
+			//Db.SQL("DROP INDEX tmIndex_OPH_Opm ON OPH");
+			//Db.SQL("DROP INDEX tmIndex_OPH_Shp ON OPH");
+			//Db.SQL("DROP INDEX tmIndex_OPH_Cne ON OPH");
+			//Db.SQL("DROP INDEX tmIndex_OPH_Acc ON OPH");
+
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRT_FrtID").First == null)
+				Db.SQL("CREATE INDEX tmIndex_FRT_FrtID ON FRT(FrtID)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_OpmID").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPM_OpmID ON OPM(OpmID)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_OphID").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPH_OphID ON OPH(OphID)");
+
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Shp").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPM_Shp ON OPM(Shp)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Cne").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPM_Cne ON OPM(Cne)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Acc").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPM_Acc ON OPM(Acc)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Crr").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPM_Crr ON OPM(Crr)");
+
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Opm").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPH_Opm ON OPH(Opm)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Shp").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPH_Shp ON OPH(Shp)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Cne").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPH_Cne ON OPH(Cne)");
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Acc").First == null)
+				Db.SQL("CREATE INDEX tmIndex_OPH_Acc ON OPH(Acc)");
+
+
+			Handle.GET("/tMax14web/WEB_FRT_MDFD", () => {
+				DataSet1 dts = new DataSet1();
+				DataSet1TableAdapters.WEB_FRT_MDFDTableAdapter ta = new DataSet1TableAdapters.WEB_FRT_MDFDTableAdapter();
+				int nor = ta.Fill(dts.WEB_FRT_MDFD, "F");
+				Db.Transact(() =>
+				{
+					foreach(DataSet1.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
+					{
+						new TMDB.FRT
+						{
+							FrtID = row.FRTID,
+							AdN = row.ADN,
+							LocID = row.LOCID
+						};
+					}
+				});
+
+				return "WEB-FRT-MDFD "+nor.ToString();
+			});
+
+			Handle.GET("/tMax14web/WEB_OPM_MDFD", () => {
+			
+				DataSet1 dts = new DataSet1();
+				DataSet1TableAdapters.WEB_OPM_MDFDTableAdapter ta = new DataSet1TableAdapters.WEB_OPM_MDFDTableAdapter();
+				int nor = ta.Fill(dts.WEB_OPM_MDFD, "F");
+				Db.Transact(() =>
+				{
+					Nullable<Int32> nullInt = null;
+					DateTime? nullDate = null;
+					foreach(DataSet1.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
+					{
+						var t = new TMDB.OPM
+						{
+							OpmID = row.OPMID,
+							RefNo = row.IsREFNONull() ? null : row.REFNO,
+							EXD = row.EXD,
+							ROT = row.ROT,
+							MOT = row.MOT,
+							Org = row.ORG,
+							Dst = row.DST,
+							ShpID = row.IsSHPIDNull() ? nullInt : row.SHPID,
+							CneID = row.IsCNEIDNull() ? nullInt : row.CNEID,
+							AccID = row.IsACCIDNull() ? nullInt : row.ACCID,
+							CrrID = row.IsCRRIDNull() ? nullInt : row.CRRID,
+							nStu = row.NSTU,
+							pStu = row.PSTU,
+							ETD = row.IsETDNull() ? nullDate : row.ETD,
+							ATD = row.IsATDNull() ? nullDate : row.ATD,
+							ETA = row.IsETANull() ? nullDate : row.ETA,
+							ATA = row.IsATANull() ? nullDate : row.ATA,
+
+							Vhc = row.IsVHCNull() ? null : row.VHC,
+							CntNoS = row.IsCNTNOSNull() ? null : row.CNTNOS
+						};
+						if(t.ShpID != null)
+							t.Shp = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.ShpID).First;
+						if(t.CneID != null)
+							t.Cne = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.CneID).First;
+						if(t.AccID != null)
+							t.Acc = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.AccID).First;
+						if(t.CrrID != null)
+							t.Crr = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.CrrID).First;
+					}
+				});
+				
+				//var m = Db.SQL<TMDB.OPM>("SELECT m FROM OPM m WHERE m.OpmID = ?", 978348).First;
+
+				return "WEB-OPM-MDFD " + nor.ToString();
+			});
+
+			Handle.GET("/tMax14web/WEB_OPH_MDFD", () => {
+
+				DataSet1 dts = new DataSet1();
+				DataSet1TableAdapters.WEB_OPH_MDFDTableAdapter ta = new DataSet1TableAdapters.WEB_OPH_MDFDTableAdapter();
+				int nor = ta.Fill(dts.WEB_OPH_MDFD, "F");
+				Db.Transact(() =>
+				{
+					Nullable<Int32> nullInt = null;
+					DateTime? nullDate = null;
+					foreach(DataSet1.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
+					{
+						var t = new TMDB.OPH
+						{
+							OphID = row.OPHID,
+							OpmID = row.OPMID,
+							RefNo = row.IsREFNONull() ? null : row.REFNO,
+							EXD = row.EXD,
+							ROT = row.ROT,
+							MOT = row.MOT,
+							Org = row.ORG,
+							Dst = row.DST,
+							ShpID = row.IsSHPIDNull() ? nullInt : row.SHPID,
+							CneID = row.IsCNEIDNull() ? nullInt : row.CNEID,
+							AccID = row.IsACCIDNull() ? nullInt : row.ACCID,
+							nStu = row.NSTU,
+							pStu = row.PSTU,
+							NOP = row.NOP,
+							GrW = (double)row.GRW,
+							DTM = row.DTM,
+							PTM = row.PTM,
+
+							nStuTS = row.IsNSTUTSNull() ? nullDate : row.NSTUTS,
+							pStuTS = row.IsPSTUTSNull() ? nullDate : row.PSTUTS,
+							EOH = row.IsEOHNull() ? nullDate : row.EOH,
+							REOH = row.IsREOHNull() ? nullDate : row.REOH,
+							AOH = row.IsAOHNull() ? nullDate : row.AOH,
+							RTR = row.IsRTRNull() ? nullDate : row.RTR,
+							ROS = row.IsROSNull() ? nullDate : row.ROS,
+							POD = row.IsPODNull() ? nullDate : row.POD,
+
+							CntNoS = row.IsCNTNOSNull() ? null : row.CNTNOS
+						};
+						if(t.OpmID != null)
+							t.Opm = Db.SQL<TMDB.OPM>("SELECT f FROM OPM f WHERE f.OpmID = ?", t.OpmID).First;
+						if(t.ShpID != null)
+							t.Shp = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.ShpID).First;
+						if(t.CneID != null)
+							t.Cne = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.CneID).First;
+						if(t.AccID != null)
+							t.Acc = Db.SQL<TMDB.FRT>("SELECT f FROM FRT f WHERE f.FrtID = ?", t.AccID).First;
+
+					}
+				});
+
+				//var m = Db.SQL<TMDB.OPM>("SELECT m FROM OPM m WHERE m.OpmID = ?", 978348).First;
+
+				return "WEB-OPH-MDFD " + nor.ToString();
 			});
 
 			Handle.GET("/tMax14web/movie.xls", () => {
@@ -178,7 +337,7 @@ namespace tMax14web
 				return r;  */
 			});
 
-			Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) => {
+			Handle.GET("/tMax14web/ophs2xlsx222/{?}/{?}", (string frtID, string sDate) => {
 
 				DataSet1 dts = new DataSet1();
 				DataSet1TableAdapters.OPHTableAdapter ophta = new DataSet1TableAdapters.OPHTableAdapter();
@@ -190,6 +349,115 @@ namespace tMax14web
 					//Create the worksheet
 					OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Demo");
 					ws.Cells["A1"].LoadFromDataTable(dts.OPH, true);
+
+					Response r = new Response();
+					r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+					r.Headers["Content-Disposition"] = "attachment; filename=tMax14web-ophs.xlsx";
+
+					var oms = new MemoryStream();
+					pck.SaveAs(oms);
+					oms.Seek(0, SeekOrigin.Begin);
+
+					r.StreamedBody = oms;
+					return r;
+				}
+			});
+
+			Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) => {
+
+				DataSet1 dts = new DataSet1();
+				//DataSet1.XHRow row = new DataSet1.XHRow();
+				//row.EXD = DBNull.Value;
+				
+				var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.ShpID = ? and h.EXD >= ?", Convert.ToInt32(frtID), Convert.ToDateTime(sDate));
+				foreach(var h in ophs)
+				{
+					var r = dts.XH.NewXHRow();
+					if(h.EXD != null) r["EXD"] = h.EXD;
+
+					r.ID = h.OphID;
+					r.ROT = h.ROT;
+					r.MOT = h.MOT;
+					r.Org = h.Org;
+					r.Dst = h.Dst;
+					r.Shp = h.ShpAd;
+					r.Cne = h.CneAd;
+					r.Acc = h.AccAd;
+					r.Statu = h.nStu;
+					r.Problem = h.pStu;
+					if(h.nStuTS != null) r["StuDate"] = h.nStuTS;
+					if(h.pStuTS != null) r["PrbDate"] = h.pStuTS;
+					if(h.REOH != null) r["REOH"] = h.REOH;
+					if(h.EOH != null) r["EOH"] = h.EOH;
+					if(h.AOH != null) r["AOH"] = h.AOH;
+					if(h.RTR != null) r["RTR"] = h.RTR;
+					if(h.ROS != null) r["ROS"] = h.ROS;
+					if(h.POD != null) r["POD"] = h.POD;
+					if(h.EOH != null) r["EOH"] = h.EOH;
+					r["CntNo"] = h.CntNoS;
+
+					dts.XH.AddXHRow(r);
+
+				}
+				
+				using(OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage())
+				{
+					//Create the worksheet
+					
+					OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("House");
+					ws.Cells["A1"].LoadFromDataTable(dts.XH, true);
+
+					var range = ws.Cells["A1:X1"];
+					range.AutoFilter = true;
+
+					ws.Column(2).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(11).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(13).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(14).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(15).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(16).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(17).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(18).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(19).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(20).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(21).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column(22).Style.Numberformat.Format = "dd.mm.yy";
+					
+					ws.Column(2).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(3).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(4).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(5).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(6).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(11).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(13).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(14).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(15).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(16).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(17).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(18).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(19).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(20).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(21).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+					ws.Column(22).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+					ws.Row(1).Style.Font.Bold = true;
+					ws.View.FreezePanes(2, 2);
+					for(int c = 1; c <= ws.Dimension.Columns; c++)
+					{
+						ws.Column(c).AutoFit(5);
+
+					}
+					/*
+					var abcd = ws.Cells["M2"].Value.GetType().ToString();
+					var cdef = ws.Dimension.Columns;
+					for (int c = 1; c <= ws.Dimension.Columns; c++)
+					{
+						// 1.Satir Baslik hepsi string
+						if(ws.Cells[2, c].Value.GetType().ToString() == "DateTime")
+							ws.Column(c).Style.Numberformat.Format = "dd.mm.yy";
+
+					}
+					*/
 
 					Response r = new Response();
 					r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -236,6 +504,10 @@ namespace tMax14web
 					//	oms.Dispose();
 				}
 
+			});
+
+			Handle.GET("/tMax14web/deneme", () => {
+				return "deneme";
 			});
 		}
 	}

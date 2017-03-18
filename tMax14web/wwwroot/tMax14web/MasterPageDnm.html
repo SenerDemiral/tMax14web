@@ -1,0 +1,71 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+<link rel="import" href="/sys/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="/sys/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="/sys/app-layout/app-header/app-header.html">
+<link rel="import" href="/sys/iron-icons/iron-icons.html">
+<link rel="import" href="/sys/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="/sys/app-layout/demo/sample-content.html">
+
+
+<template>
+    <template is="dom-bind">
+        
+
+<style is="custom-style">
+  html, body {
+    margin: 0;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #f1f1f1;
+    max-height: 368px;
+  }
+  app-toolbar {
+    background-color: #4285f4;
+    color: #fff;
+  }
+
+  paper-icon-button {
+    --paper-icon-button-ink-color: white;
+  }
+
+  paper-icon-button + [main-title] {
+    margin-left: 24px;
+  }
+  paper-progress {
+    display: block;
+    width: 100%;
+    --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+    --paper-progress-container-color: transparent;
+  }
+  app-header {
+    @apply(--layout-fixed-top);
+    color: #fff;
+    --app-header-background-rear-layer: {
+      background-color: #ef6c00;
+    };
+  }
+  app-drawer {
+    --app-drawer-scrim-background: rgba(0, 0, 100, 0.8);
+    --app-drawer-content-container: {
+      background-color: #B0BEC5;
+    }
+  }
+  sample-content {
+    padding-top: 64px;
+  }
+</style>
+<app-header reveals>
+  <app-toolbar>
+    <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+    <div main-title>My app</div>
+    <paper-icon-button icon="delete"></paper-icon-button>
+    <paper-icon-button icon="search"></paper-icon-button>
+    <paper-icon-button icon="close"></paper-icon-button>
+    <paper-progress value="10" indeterminate bottom-item></paper-progress>
+  </app-toolbar>
+</app-header>
+<app-drawer id="drawer" swipe-open></app-drawer>
+<sample-content size="10"></sample-content>
+    </template>
+</template>

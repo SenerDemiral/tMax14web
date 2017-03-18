@@ -1,0 +1,137 @@
+﻿<link rel="import" href="/sys/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="/sys/app-layout/app-drawer/app-drawer.html">
+
+<link rel="import" href="/sys/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="/sys/app-layout/app-header/app-header.html">
+
+<link rel="import" href="/sys/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="/sys/app-layout/app-scroll-effects/app-scroll-effects.html">
+
+<link rel="import" href="/sys/iron-icons/iron-icons.html">
+<link rel="import" href="/sys/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/sys/paper-input/paper-input.html">
+<link rel="import" href="/sys/paper-button/paper-button.html">
+<link rel="import" href="/sys/paper-styles/color.html">
+
+<link rel="import" href="/sys/iron-input/iron-input.html">
+<link rel="import" href="/sys/iron-selector/iron-selector.html">
+
+<link rel="import" href="/sys/app-layout/demo/sample-content.html">
+
+<template>
+    <template is="dom-bind">
+	<style is="custom-style">
+		body {
+			margin: 0;
+			font-family: 'Roboto', 'Noto', sans-serif;
+			/*background-color: #eee;*/
+	    }
+/*
+    app-toolbar {
+      background-color: #00897B;
+      color: #fff;
+    }
+*/
+    app-drawer {
+      --app-drawer-content-container: {
+        background-color: white;
+		padding: 120px 10px;
+      }
+    }
+    .drawer-contents {
+      background-color: white;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+      app-header {
+        background-color: #00897B;
+        color: #fff;
+      }
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }									   
+
+	paper-button {
+		margin: 10px 0px;
+	}
+    </style>
+
+	<app-header reveals>
+		<app-toolbar id="toolbar">
+			<paper-icon-button icon="menu" on-click="drawerToggle"></paper-icon-button>
+			<paper-icon-button icon="menu" onclick="drawer2.toggle()"></paper-icon-button>
+			<paper-icon-button icon="menu" onclick$="myFunc({{model.StartDate$}})"></paper-icon-button>
+			<div main-title>tMax14web</div>
+			<paper-icon-button icon="file-download"></paper-icon-button>
+			<paper-icon-button icon="search"></paper-icon-button>
+			<paper-icon-button icon="close"></paper-icon-button>
+			<input value="{{model.fID$::input}}">
+		</app-toolbar>
+	</app-header>
+
+			<div>
+		        <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
+			</div>
+
+			<app-drawer id="drawer2" swipe-open>
+				<!--<div class="drawer-contents">-->
+						<paper-input label="Firma ID" value="{{model.fID$}}"></paper-input>
+						<paper-input type="password" label="Password" value="{{model.fPW$}}"></paper-input>
+						<paper-input type="date" label="Tarih >=" value="{{model.StartDate$}}"></paper-input>
+					<div>
+					<a tabindex="-1" href="/tMax14web/OphClient">
+						<paper-button raised>House</paper-button>
+					</a>
+					</div>
+					<div>
+					<paper-button raised>
+						<a tabindex="-1" title="MouseSağClick->OpenNewTab" target="_blank" href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]">Download
+						<paper-icon-button  tabindex="-1" icon="file-download"></paper-icon-button>
+						</a>
+					
+					</paper-button>
+					<!--ilki FF da calismiyor-->
+					<button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" onclick="tmplt.Download(event)">Download</button>
+					<button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" on-click="Download">D3</button>
+					<button type="button" on-click="D1">D1</button>
+					<button type="button" onclick="myFunc(event)">D2</button>
+					</div>
+				<!--</div>-->
+			</app-drawer>
+
+
+</template>
+	<script>
+		window.addEventListener('WebComponentsReady', function (e) {
+			// imports are loaded and elements have been registered
+			console.log('Components are ready');
+		});
+		function myFunc(e) {
+			console.log("D2", e);
+		}
+		(function () {
+			var script = document._currentScript || document.currentScript;
+			console.log("script", script);
+			tmplt = script.previousElementSibling;
+			console.log("Sener");
+			tmplt.Download = function (e) {
+				console.log("Download.e", e);
+				console.log("Download.e.target", e.target);
+				console.log("Download.e.target.dataset", e.target.dataset);
+				console.log("Download.e.target.dataLink", e.target.dataLink);
+				window.open(e.target.dataLink);
+				//window.open(e.target.dataLink, "_blank");
+			}
+			tmplt.D1 = function () {
+				console.log("D1");
+			}
+			tmplt.drawerToggle = function () {
+				console.log("tmplt.drawerToggle", this.$.drawer2);
+				this.$.drawer2.toggle();
+			}
+		})();
+
+	</script>
+ 
+</template>

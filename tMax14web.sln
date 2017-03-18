@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tMax14web", "tMax14web\tMax14web.csproj", "{07D4A360-B2DE-44E5-A772-DAE046F43707}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDB", "TMDB\TMDB.csproj", "{914F4287-AFF3-40BD-80A5-FA646EC58DC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{07D4A360-B2DE-44E5-A772-DAE046F43707}.Debug|x64.Build.0 = Debug|x64
 		{07D4A360-B2DE-44E5-A772-DAE046F43707}.Release|x64.ActiveCfg = Release|x64
 		{07D4A360-B2DE-44E5-A772-DAE046F43707}.Release|x64.Build.0 = Release|x64
+		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Debug|x64.ActiveCfg = Debug|x64
+		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Debug|x64.Build.0 = Debug|x64
+		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Release|x64.ActiveCfg = Release|x64
+		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,5 @@
-﻿<link rel="import" href="/sys/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="/sys/app-layout/app-drawer/app-drawer.html">
-
-<link rel="import" href="/sys/app-layout/app-header-layout/app-header-layout.html">
+﻿<link rel="import" href="/sys/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="/sys/app-layout/app-header/app-header.html">
-
 <link rel="import" href="/sys/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="/sys/app-layout/app-scroll-effects/app-scroll-effects.html">
 
@@ -59,7 +55,9 @@
 
 	<app-header reveals>
 		<app-toolbar id="toolbar">
-			<paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+			<paper-icon-button icon="menu" on-click="drawerToggle"></paper-icon-button>	<!--Hepsinde calisiyor-->
+			<paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> <!--FF+Edge de calismiyor Shoadow olunca calismiyor wc-lite olursa calisiyor Shady ama bu seferde sc calismiyor-->
+			<paper-icon-button icon="menu" onclick$="myFunc('{{model.StartDate$}}')"></paper-icon-button>
 			<div main-title>tMax14web</div>
 			<paper-icon-button icon="file-download"></paper-icon-button>
 			<paper-icon-button icon="search"></paper-icon-button>
@@ -72,9 +70,9 @@
 		        <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
 			</div>
 
-			<app-drawer id="drawer" opened>
+			<app-drawer id="drawer" swipe-open>
 				<!--<div class="drawer-contents">-->
-						<paper-input label="FirmaID" value="{{model.fID$}}"></paper-input>
+						<paper-input label="Firma ID" value="{{model.fID$}}"></paper-input>
 						<paper-input type="password" label="Password" value="{{model.fPW$}}"></paper-input>
 						<paper-input type="date" label="Tarih >=" value="{{model.StartDate$}}"></paper-input>
 					<div>
@@ -83,13 +81,55 @@
 					</a>
 					</div>
 					<div>
-					<paper-button raised><a tabindex="-1" title="MouseSağClick->OpenNewTab" href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]">Download</a>
+					<paper-button raised data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" on-click="Download">Download</paper-button>
+						<!--
+					<paper-button raised>
+						<a tabindex="-1" title="MouseSağClick->OpenNewTab" target="_blank" href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]">Download
+						<paper-icon-button  tabindex="-1" icon="file-download"></paper-icon-button>
+						</a>
 					</paper-button>
+					ilki FF da calismiyor
+					<button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" onclick="tmplt.Download(event)">Download</button>
+					<button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" on-click="Download">D3</button>
+					<button type="button" onclick="myFunc(event)">D2</button>
+						-->
 					</div>
 				<!--</div>-->
 			</app-drawer>
 
 
 </template>
+	<script>
+		document.addEventListener('WebComponentsReady', function (e) {
+			// imports are loaded and elements have been registered
+			console.log('Components are ready');
+		});
+		function myFunc(e) {
+			//<paper-icon-button icon="menu" onclick$="myFunc({{model.StartDate$}})"></paper-icon-button>
+			//onclick$ olunca calisiyor ama
+			//Tarih 2017-12-31 eksileri cikartma gibi algilayip 1972 olarak gosteriyor.
+			//Parametreyi tirnak icine alinca OK tarih de dogru geliyor
+			//<paper-icon-button icon="menu" onclick$="myFunc('{{model.StartDate$}}')"></paper-icon-button>
+			console.log("D2", e);
+		}
+		(function () {
+			var script = document._currentScript || document.currentScript;
+			tmplt = script.previousElementSibling;
+			tmplt.Download = function (e) {
+				//console.log("Download.e", e);
+				//console.log("Download.e.target", e.target);
+				//console.log("Download.e.target.dataset", e.target.dataset);
+				//console.log("Download.e.target.dataLink", e.target.dataLink);
+				window.open(e.target.dataLink, "_blank");
+			}
+
+			tmplt.drawerToggle = function () {
+				// Chrome+FF+Edge de calisiyor
+				console.log("tmplt.drawerToggle", this.$.drawer);
+				this.$.drawer.toggle();
+			}
+		})();
+
+	</script>
  
 </template>

@@ -1,121 +1,97 @@
-﻿<template>
+﻿<link rel="import" href="/sys/moment-element/moment-element.html">
+
+<template>
     <template is="dom-bind">
+		<div>[[processInit(model.Html)]]</div>
+
 		<!--<div style="width:100%;overflow:hidden;box-sizing:border-box">-->
 		<!--<table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">-->
+		<!--<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">-->
 		<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
 		<!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
 			<thead>
 				<tr>
-					<th id="hID">ID</th>
-					<th id="EXD">EXD</th>
+					<th id="OphID">ID</th>
+					<th id="EXD_t">EXD</th>
 					<th id="ROT">R</th>
 					<th id="MOT">M</th>
 					<th id="Org">Org</th>
 					<th id="Dst">Dst</th>
 					<th id="nStu">Statu</th>
-					<th id="nStuD"></th>
+					<th id="nStuTS_t"></th>
 					<th id="pStu">Problem</th>
-					<th id="pStuD"></th>
+					<th id="pStuTS_t"></th>
 					
-					<th id="Shp">Shp</th>
-					<th id="Cne">Cne</th>
-					<th id="Acc">Acc</th>
+					<th id="ShpAd">Shp</th>
+					<th id="CneAd">Cne</th>
+					<th id="AccAd">Acc</th>
 					<th id="DTM">DTM</th>
 					<th id="PTM">PTM</th>
 					<th id="NOP">NOP</th>
 					<th id="GrW">GrW</th>
-					<th id="shBD">Booking</th>
-					<th id="shED">InHand</th>
-					<th id="shPD">Departed</th>
-					<th id="shTD">@Dst</th>
-					<th id="EOH">EOH</th>
-					<th id="REOH">REOH</th>
-					<th id="AOH">AOH</th>
-					<th id="RTR">RTR</th>
-					<th id="POD">POD</th>
-					<th id="ETD">ETD</th>
-					<th id="ATD">ATD</th>
-					<th id="ETA">ETA</th>
-					<th id="ATA">ATA</th>
+					<th id="EOH_t">EOH</th>
+					<th id="REOH_t">REOH</th>
+					<th id="AOH_t">AOH</th>
+					<th id="RTR_t">RTR</th>
+					<th id="POD_t">POD</th>
+					<th id="ETD_t">ETD</th>
+					<th id="ATD_t">ATD</th>
+					<th id="ETA_t">ETA</th>
+					<th id="ATA_t">ATA</th>
 					<th id="CntNoS">Cnt#</th>
 				</tr>
 			</thead>
 			<tbody>
-				<template is="dom-repeat" items="[[abcd]]" dene="[[processInit(model.Html)]]">
+				<template is="dom-repeat" items="[[abcd]]">
 					<tr>
-						<td>[[item.hID]]</td>
-						<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>
+						<td>[[item.OphID]]</td>
+						<!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
+						<td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td>[[item.ROT]]</td>
 						<td>[[item.MOT]]</td>
 						<td>[[item.Org]]</td>
 						<td>[[item.Dst]]</td>
 						<td>[[item.nStu]]</td>
-						<td class="trh">[[item.nStuD]]</td>
+						<td class="trh"><moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td>[[item.pStu]]</td>
 						<td>[[item.pStuD]]</td>
 						
-						<td>[[item.Shp]]</td>
-						<td>[[item.Cne]]</td>
-						<td>[[item.Acc]]</td>
+						<td>[[item.ShpAd]]</td>
+						<td>[[item.CneAd]]</td>
+						<td>[[item.AccAd]]</td>
+
 						<td>[[item.DTM]]</td>
 						<td>[[item.PTM]]</td>
 						<td>[[item.NOP]]</td>
 						<td>[[item.GrW]]</td>
-						<td class="trh">[[item.shBD]]</td>
-						<td class="trh">[[item.shED]]</td>
-						<td class="trh">[[item.shPD]]</td>
-						<td class="trh">[[item.shTD]]</td>
-						<td class="trh">[[item.EOH]]</td>
-						<td class="trh">[[item.REOH]]</td>
-						<td class="trh">[[item.AOH]]</td>
-						<td class="trh">[[item.RTR]]</td>
-						<td class="trh">[[item.POD]]</td>
-						<td class="trh">[[item.ETD]]</td>
-						<td class="trh">[[item.ATD]]</td>
-						<td class="trh">[[item.ETA]]</td>
-						<td class="trh">[[item.ATA]]</td>
+						<td class="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td>[[item.CntNoS]]</td> 
 					</tr">
 				</template>
 			</tbody>	
 		</table>
-		</div>
     </template>
-
+	
 	<script>
-		//document.getElementsByTagName("BODY")[0].onhashchange = function () { myFunction() };
-
-		/*
-		document.querySelector("#12345").addEventListener('DOMSubtreeModified', function () {
-			console.log(new Date());
-			document.title = 'DOM Changed at ' + new Date();
-		}, false);
-		*/
-		
-		//alert("dfadfadf");
-		console.log("1");
-		var curRowIndex = -1;
-		console.log("2");
-		var curCellIndex = -1;
-		/*
-		HTMLImports.whenReady(function () {
-			console.log("Ready");
-		});
-		console.log("3");
-		*/
-		(function () {
-
-//			var curRowIndex = -1;
-//			var curCellIndex = -1;
-
-			console.log("4");
+		(function ()
+		{
+			var curRowIndex = -1;
+			var curCellIndex = -1;
 
 			var script = document._currentScript || document.currentScript;
 			tmplt = script.previousElementSibling;
 
 			tmplt.processInit = function (val) {
-				console.log("processInit this1", this.$.tblOphs);
-				console.log("processInit this2", this.$["EXD"]);
+				//console.log("processInit this1", this.$.tblOphs);
+				//console.log("processInit this2", this.$["EXD"]);
 				if (curCellIndex != -1) {
 					this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
 				}
@@ -127,45 +103,30 @@
 				tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
 				console.log("processInit", tmplt.abcd.length);
 
-				// table header row da degisiklik oldugunda calisir	!!!deprecated in DOM level 3
-				/*
-				this.$.tblOphs.rows[0].addEventListener('DOMSubtreeModified', function () {
-					console.log("-----------:", new Date());
-					//document.title = 'DOM Changed at ' + new Date();
-				}, false);
-				*/
 			};
 
-
-			//tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			console.log("model.Ophs", tmplt);
-
 			tmplt.MyFnc = function (e, x) {
-				console.log("TableMyFnc", e);
-				//console.log("Dilara 1: ", curRowIndex);
-
 				if (e.target.parentNode.rowIndex == 0)
 				{
-					console.log("target ID", e.target.id);
+					console.log("target ID", e.target.id.substring(e.target.id.length - 2));
 					if (curCellIndex != -1) {
 						this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
 						//x.rows[0].cells[curCellIndex].classList.remove("curSort");
 					}
-					console.log("TableMyFnc2", this);
+					//console.log("TableMyFnc2", this);
 					curCellIndex = e.target.cellIndex;
 					e.target.classList.add("curSort");
 
-					sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-					//copy = JSON.parse(JSON.stringify(tmplt.abcd));
-					//tmplt.abcd.sort(firstBy(e.target.id));
-					//sener = tmplt.abcd.sort(firstBy(e.target.id));
-					tmplt.abcd = sener.sort(firstBy(e.target.id));
-					//tmplt.model.Ophs = sener.sort(firstBy(e.target.id));
+					var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+					//if (e.target.id.substring(e.target.id.length - 2) == "_t")
+					if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
+						tmplt.abcd = sener.sort(firstBy(e.target.id, -1));
+					else
+						tmplt.abcd = sener.sort(firstBy(e.target.id));
 				}
 				else
 				{
 					if (curRowIndex != -1) {
-						//x.rows[curRowIndex].classList.remove("curRow");
 						this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
 					}
 					curRowIndex = e.target.parentNode.rowIndex;
@@ -173,89 +134,6 @@
 				}
 			}
 
-			tmplt.onSorthIDClick2 = function (event) {
-				//copy = JSON.parse(JSON.stringify(tmplt.abcd));
-				tmplt.model.Ophs = tmplt.model.Ophs.sort(firstBy("hID"));
-			}
-
-			tmplt.onSorthIDClick = function (event) {
-				copy = JSON.parse(JSON.stringify(tmplt.abcd));
-				tmplt.abcd = copy.sort(firstBy("hID"));
-			}
-
-			tmplt.onSortEXDClick = function (event) {
-				copy = JSON.parse(JSON.stringify(tmplt.abcd));
-				tmplt.abcd = copy.sort(firstBy("EXD", -1));
-			}
-
-			tmplt.onSortBazRankClick = function (event) {
-				copy = JSON.parse(JSON.stringify(tmplt.abcd));
-				tmplt.abcd = copy.sort(firstBy("BazRank", -1));
-			}
-
-			/*
-			tmplt.onSortAdClick = function (event) {
-				copy = JSON.parse(JSON.stringify(tmplt.abcd));
-				//copy = tmplt.model.OyncRank; //puppet.js den hata geliyor!
-				tmplt.abcd = copy.sort(
-					function (a, b) {
-						var a1 = a.Ad, b1 = b.Ad;
-						if (a1 == b1) return 0;
-						return a1 > b1 ? 1 : -1;
-					});
-			}
-			*/
-			tmplt.onSortDenemeClick = function (event) {
-				tmplt.model.SortAd$++;
-				//console.log("model.SortAd$.Clicked", tmplt.abcd);
-				console.log("model.SortAd$", tmplt.model.SortAd$);
-				copy = JSON.parse(JSON.stringify(tmplt.abcd));
-				//copy = tmplt.model.OyncRank; //puppet.js den hata geliyor!
-				if (tmplt.model.SortAd$ % 2 == 0) {
-					tmplt.abcd = copy.sort(
-						function (a, b) {
-							var a1 = a.Idx, b1 = b.Idx;
-							if (a1 == b1) return 0;
-							return a1 > b1 ? 1 : -1;
-						});
-				}
-				else {
-					tmplt.abcd = copy.sort(
-						function (a, b) {
-							var a1 = a.Ad, b1 = b.Ad;
-							if (a1 == b1) return 0;
-							return a1 > b1 ? 1 : -1;
-						});
-				}
-				//tmplt.model.SortAd$ = 5;	 
-				//console.log("model.SortAd$.sorted", copy);
-				//tmplt.model.OyncRank = JSON.parse(JSON.stringify(copy));
-
-			}
-			 
-			tmplt.onTakimMsbkClick = function (event) {
-				//console.log("OnToogleClick", event.model.__data__.item.TakimClick$);
-				event.model.__data__.item.TakimMsbkClick$ = parseInt(event.model.__data__.item.TakimMsbkClick$, 10) + 1;
-				//tmplt.set("event.model.__data__.item.TakimClick$", parseInt(tmplt.get(event.model.__data__.item.TakimClick$), 10) + 1);
-			}
-
-			tmplt.onTakimOyuncuClick = function (event) {
-				event.model.__data__.item.TakimOyuncuClick$ = parseInt(event.model.__data__.item.TakimOyuncuClick$, 10) + 1;
-			}
-
-			tmplt.onTakimMapClick = function (event) {
-				//console.log("OnToogleMap 1", event.model.__data__);
-				//console.log("OnToogleMap 2", event.model.__data__.item);
-				//console.log("OnToogleMap 3", event.model.__data__.item.TakimMapClick$);
-				//console.log("OnToogleMap 4", event.model.__data__['item.TakimMapClick$']);
-				//event.stopPropagation();
-				//event.preventDefault();
-				event.model.__data__.item.TakimMapClick$ += 1;
-				console.log("model1", tmplt.model);
-				//tmplt.set("model.TakimMapClick$", ++tmplt.model.TakimMapClick$);
-				//console.log("model2", tmplt.model);
-				//event.model.__data__.item.TakimMapClick$ = parseInt(event.model.__data__.item.TakimMapClick$, 10) + 1;
-			}
 		})();
 
 	</script>

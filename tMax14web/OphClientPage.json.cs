@@ -1,3 +1,4 @@
+using System;
 using Starcounter;
 
 namespace tMax14web
@@ -10,15 +11,29 @@ namespace tMax14web
 			base.OnData();
 
 			var parent = (MasterPage)this.Parent;
-			var fid = parent.fID;
-			var std = parent.StartDate;
+			var fid = Convert.ToInt32(parent.fID);
+			var fpw = parent.fPW;
+			var std = Convert.ToDateTime(parent.StartDate);
 
+			Ophs.Clear();
+			if(fpw != "can")
+				return;
+			   
+			Ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.ShpID = ? and h.EXD >= ?", fid, std);
 
+			/*
+			foreach(var h in ophs) 
+			{
+				var a = h.nStuTS;
+				var b = h.nStuTS_t;
+				var c = h.REOH_t;
+			}
+			*/
+			
+			/*
 			DataSet1 ds = new DataSet1();
 			DataSet1TableAdapters.OPHTableAdapter opha = new DataSet1TableAdapters.OPHTableAdapter();
 			int nor = opha.Fill(ds.OPH, fid, std);
-			Ophs.Clear();
-
 			foreach(DataSet1.OPHRow row in ds.OPH.Rows) 
 			{
 				OphsElementJson he = new OphsElementJson()
@@ -64,7 +79,7 @@ namespace tMax14web
 				};
 
 				Ophs.Add(he);
-			}
+			} */
 
 		}
 	}
