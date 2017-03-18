@@ -101,6 +101,11 @@ namespace TMDB
 		public string CneAd => Cne == null ? "" : Cne.AdN;
 		public string AccAd => Acc == null ? "" : Acc.AdN;
 
+		public DateTime? ETD => Opm == null ? null : Opm.ETD;
+		public DateTime? ATD => Opm == null ? null : Opm.ATD;
+		public DateTime? ETA => Opm == null ? null : Opm.ETA;
+		public DateTime? ATA => Opm == null ? null : Opm.ATA;
+
 		public string ETD_t => Opm == null ? "" : $"{Opm.ETD:s}";
 		public string ATD_t => Opm == null ? "" : $"{Opm.ATD:s}";
 		public string ETA_t => Opm == null ? "" : $"{Opm.ETA:s}";
