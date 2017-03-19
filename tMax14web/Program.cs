@@ -472,12 +472,8 @@ namespace tMax14web
 				}
 			});
 
-			Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) => {
-
-				DataSet1 dts = new DataSet1();
-				//DataSet1.XHRow row = new DataSet1.XHRow();
-				//row.EXD = DBNull.Value;
-
+			Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) => 
+			{
 				using(OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage())
 				{
 					//Create the worksheet
@@ -549,8 +545,32 @@ namespace tMax14web
 					ws.Cells[1, (int)hFlds.ATA].Value = "ATA";
 					ws.Cells[1, (int)hFlds.CntNoS].Value = "Cnt#";
 
+					//var values = Enum.GetValues(typeof(hFlds));		// Array of values
+					int[] df = new int[] 
+					{
+						(int)hFlds.EXD,
+						(int)hFlds.nStuTS,
+						(int)hFlds.pStuTS,
+						(int)hFlds.REOH,
+						(int)hFlds.EOH,
+						(int)hFlds.AOH,
+						(int)hFlds.RTR,
+						(int)hFlds.ROS,
+						(int)hFlds.POD,
+						(int)hFlds.ETD,
+						(int)hFlds.ATD,
+						(int)hFlds.ETA,
+						(int)hFlds.ATA
+					};
+					
+					foreach(int c in df)
+					{
+						ws.Column(c).Style.Numberformat.Format = "dd.mm.yy";
+					}
+					/*
 					ws.Column((int)hFlds.EXD).Style.Numberformat.Format = "dd.mm.yy";
 					ws.Column((int)hFlds.nStuTS).Style.Numberformat.Format = "dd.mm.yy";
+					ws.Column((int)hFlds.pStuTS).Style.Numberformat.Format = "dd.mm.yy";
 					ws.Column((int)hFlds.REOH).Style.Numberformat.Format = "dd.mm.yy";
 					ws.Column((int)hFlds.EOH).Style.Numberformat.Format = "dd.mm.yy";
 					ws.Column((int)hFlds.AOH).Style.Numberformat.Format = "dd.mm.yy";
@@ -561,23 +581,11 @@ namespace tMax14web
 					ws.Column((int)hFlds.ATD).Style.Numberformat.Format = "dd.mm.yy";
 					ws.Column((int)hFlds.ETA).Style.Numberformat.Format = "dd.mm.yy";
 					ws.Column((int)hFlds.ATA).Style.Numberformat.Format = "dd.mm.yy";
-
+					*/
 					ws.Column((int)hFlds.ROT).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
 					ws.Column((int)hFlds.MOT).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
 					ws.Column((int)hFlds.NOP).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
 					ws.Column((int)hFlds.GrW).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.EXD).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.nStuTS).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.REOH).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.EOH).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.AOH).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.RTR).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.ROS).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.POD).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.ETD).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.ATD).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.ETA).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-					//ws.Column((int)hFlds.ATA).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
 
 					ws.Row(1).Style.Font.Bold = true;
 					var range = ws.Cells["A1:AB1"];
@@ -646,37 +654,9 @@ namespace tMax14web
 			});
 		}
 
-		enum hFlds 
+		enum hFlds:int
 		{
-			None,
-			OphID,
-			EXD,
-			ROT,
-			MOT,
-			Org,
-			Dst,
-			nStu,
-			nStuTS,
-			pStu,
-			pStuTS,
-			Shp,
-			Cne,
-			Acc,
-			DTM,
-			PTM,
-			NOP,
-			GrW,
-			EOH,
-			REOH,
-			AOH,
-			RTR,
-			ROS,
-			POD,
-			ETD,
-			ATD,
-			ETA,
-			ATA,
-			CntNoS
+			None, OphID, EXD, ROT, MOT, Org, Dst, nStu,	nStuTS,	pStu, pStuTS, Shp, Cne,	Acc, DTM, PTM, NOP,	GrW, EOH, REOH,	AOH, RTR, ROS, POD,	ETD, ATD, ETA, ATA,	CntNoS
 		};
 	}
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tMax14web", "tMax14web\tMax
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDB", "TMDB\TMDB.csproj", "{914F4287-AFF3-40BD-80A5-FA646EC58DC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tMax14rest", "tMax14rest\tMax14rest.csproj", "{B93F5B7C-12DE-428A-BAFB-DDAFEFE36ABB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Debug|x64.Build.0 = Debug|x64
 		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Release|x64.ActiveCfg = Release|x64
 		{914F4287-AFF3-40BD-80A5-FA646EC58DC6}.Release|x64.Build.0 = Release|x64
+		{B93F5B7C-12DE-428A-BAFB-DDAFEFE36ABB}.Debug|x64.ActiveCfg = Debug|x64
+		{B93F5B7C-12DE-428A-BAFB-DDAFEFE36ABB}.Debug|x64.Build.0 = Debug|x64
+		{B93F5B7C-12DE-428A-BAFB-DDAFEFE36ABB}.Release|x64.ActiveCfg = Release|x64
+		{B93F5B7C-12DE-428A-BAFB-DDAFEFE36ABB}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

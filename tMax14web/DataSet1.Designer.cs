@@ -1202,6 +1202,8 @@ namespace tMax14web {
             
             private global::System.Data.DataColumn columnLOCID;
             
+            private global::System.Data.DataColumn columnPWD;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WEB_FRT_MDFDDataTable() {
@@ -1277,6 +1279,14 @@ namespace tMax14web {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PWDColumn {
+                get {
+                    return this.columnPWD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1312,14 +1322,15 @@ namespace tMax14web {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WEB_FRT_MDFDRow AddWEB_FRT_MDFDRow(System.DateTime EVNTTS, string EVNT, int FRTID, string ADN, string LOCID) {
+            public WEB_FRT_MDFDRow AddWEB_FRT_MDFDRow(System.DateTime EVNTTS, string EVNT, int FRTID, string ADN, string LOCID, string PWD) {
                 WEB_FRT_MDFDRow rowWEB_FRT_MDFDRow = ((WEB_FRT_MDFDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         EVNTTS,
                         EVNT,
                         FRTID,
                         ADN,
-                        LOCID};
+                        LOCID,
+                        PWD};
                 rowWEB_FRT_MDFDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWEB_FRT_MDFDRow);
                 return rowWEB_FRT_MDFDRow;
@@ -1347,6 +1358,7 @@ namespace tMax14web {
                 this.columnFRTID = base.Columns["FRTID"];
                 this.columnADN = base.Columns["ADN"];
                 this.columnLOCID = base.Columns["LOCID"];
+                this.columnPWD = base.Columns["PWD"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1362,9 +1374,12 @@ namespace tMax14web {
                 base.Columns.Add(this.columnADN);
                 this.columnLOCID = new global::System.Data.DataColumn("LOCID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLOCID);
+                this.columnPWD = new global::System.Data.DataColumn("PWD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPWD);
                 this.columnEVNT.MaxLength = 1;
                 this.columnADN.MaxLength = 20;
                 this.columnLOCID.MaxLength = 5;
+                this.columnPWD.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4369,6 +4384,22 @@ namespace tMax14web {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PWD {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_FRT_MDFD.PWDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PWD\' in table \'WEB_FRT_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_FRT_MDFD.PWDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEVNTTSNull() {
                 return this.IsNull(this.tableWEB_FRT_MDFD.EVNTTSColumn);
             }
@@ -4425,6 +4456,18 @@ namespace tMax14web {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLOCIDNull() {
                 this[this.tableWEB_FRT_MDFD.LOCIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPWDNull() {
+                return this.IsNull(this.tableWEB_FRT_MDFD.PWDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPWDNull() {
+                this[this.tableWEB_FRT_MDFD.PWDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -7030,6 +7073,7 @@ namespace tMax14web.DataSet1TableAdapters {
             tableMapping.ColumnMappings.Add("FRTID", "FRTID");
             tableMapping.ColumnMappings.Add("ADN", "ADN");
             tableMapping.ColumnMappings.Add("LOCID", "LOCID");
+            tableMapping.ColumnMappings.Add("PWD", "PWD");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
