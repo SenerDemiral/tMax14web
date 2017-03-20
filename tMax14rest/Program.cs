@@ -18,72 +18,203 @@ namespace tMax14rest
 
 				return "OK";
 			});
-
-			Handle.PUT("/tMax14rest/OPH", (OphMsg hJ) => 
+			
+			Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
 			{
 				string rMsg = "OK";
-				// hM'nin ilk field da OPH olmali
-				if(hJ[0].ToString() != "OPH")
-					return "!HATA";
+				// jsn'nin ilk field da FRT olmali, ikinci (Evnt) field bos olmamali
+				if(jsn[0].ToString() != "FRT" || jsn[1].ToString() == "")
+					return "!HATA-WrongMessageFormat";
 
 				Db.Transact(() =>
 				{
 					try
 					{
-						int OphID = int.Parse(hJ.OphID);
+						int FrtID = int.Parse(jsn.FrtID);
 
-						if(hJ.Evnt == "D")
+						if(jsn.Evnt == "D")
 						{
-							var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID);
+							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where rec.FrtID = ?", FrtID);
+							foreach(var rec in frts)
+							{
+								rec.Delete();
+							}
+						}
+						else
+						{
+							TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
+							if(jsn.Evnt == "I" && rec == null)
+							{
+								rec = new TMDB.FRT();
+							}
+
+							if(rec == null)
+								rMsg = "NoFirma2Update";
+							else
+							{
+								rec.MdfdOn = DateTime.Now;
+								rec.FrtID = Convert.ToInt32(jsn.FrtID);
+								rec.AdN = jsn.AdN;
+								rec.LocID = jsn.LocID;
+								rec.Pwd = jsn.Pwd;
+							}
+						}
+					}
+					catch(Exception ex)
+					{
+						rMsg = ex.Message;
+					}
+				});
+				return rMsg;
+			});
+
+			Handle.PUT("/tMax14rest/OPM", (OpmMsg jsn) =>
+			{
+				string rMsg = "OK";
+				// jsn'nin ilk field da OPM olmali, ikinci (Evnt) field bos olmamali
+				if(jsn[0].ToString() != "OPM" || jsn[1].ToString() == "")
+					return "!HATA-WrongMessageFormat";
+				
+				Db.Transact(() =>
+				{
+					try
+					{
+						int OpmID = int.Parse(jsn.OpmID);
+
+						if(jsn.Evnt == "D")
+						{
+							var opms = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID);
+							foreach(var rec in opms)
+							{
+								//Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
+								rec.Delete();
+							}
+						}
+						else
+						{
+							TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
+							if(jsn.Evnt == "I" && rec == null)
+							{
+								rec = new TMDB.OPM();
+							}
+
+							if(rec == null)
+								rMsg = "NoHouse2Update";
+							else
+							{
+								rec.MdfdOn = DateTime.Now;
+								rec.OpmID = OpmID;
+								rec.ROT = jsn.ROT;
+								rec.MOT = jsn.MOT;
+								rec.Org = jsn.Org;
+								rec.Dst = jsn.Dst;
+								
+								//rec.CntNoS = jsn.CntNoS;
+
+								rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+								rec.CneID = jsn.CneID == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
+								rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
+								rec.CrrID = jsn.CrrID == "" ? (int?)null : Convert.ToInt32(jsn.CrrID);
+
+								rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+								rec.ETD = jsn.ETD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETD);
+								rec.ATD = jsn.ATD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
+								rec.ETA = jsn.ETA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
+								rec.ATA = jsn.ATA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
+
+								if(rec.ShpID != null)
+									rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+								if(rec.CneID != null)
+									rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+								if(rec.AccID != null)
+									rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+								if(rec.CrrID != null)
+									rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
+							}
+						}
+					}
+					catch(Exception ex)
+					{
+						rMsg = ex.Message;
+					}
+				});
+				return rMsg;
+			});
+
+			Handle.PUT("/tMax14rest/OPH", (OphMsg jsn) => 
+			{
+				string rMsg = "OK";
+				// hM'nin ilk field da OPH olmali, ikinci (Evnt) field bos olmamali
+				if(jsn[0].ToString() != "OPH" || jsn[1].ToString() == "")
+					return "!HATA-WrongMessageFormat";
+
+				Db.Transact(() =>
+				{
+					try
+					{
+						int OphID = int.Parse(jsn.OphID);
+
+						if(jsn.Evnt == "D")
+						{
+							var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where rec.OphID = ?", OphID);
 							foreach(var hr in ophs)
 							{
-								//Db.SQL("delete from OPH h where h.OphID = ?", OphID);	Boyle yapamiyor!!
+								//Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
 								hr.Delete();
 							}
 						}
 						else
 						{
-							TMDB.OPH h = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID).First;
-							if(hJ.Evnt == "I"&& h == null)
+							TMDB.OPH rec = Db.SQL<TMDB.OPH>("select h from OPH h where rec.OphID = ?", OphID).First;
+							if(jsn.Evnt == "I"&& rec == null)
 							{
-								h = new TMDB.OPH();
+								rec = new TMDB.OPH();
 							}
 
-							if(h == null)
+							if(rec == null)
 								rMsg = "NoHouse2Update";
 							else
 							{
-								h.OphID = OphID;
-								h.OpmID = hJ.OpmID == "" ? (int?)null : Convert.ToInt32(hJ.OpmID);
-								h.ROT = hJ.ROT;
-								h.MOT = hJ.MOT;
-								h.Org = hJ.Org;
-								h.Dst = hJ.Dst;
-								h.ShpID = hJ.ShpID == "" ? (int?)null : Convert.ToInt32(hJ.ShpID);
-								h.CneID = hJ.ShpID == "" ? (int?)null : Convert.ToInt32(hJ.ShpID);
-								h.AccID = hJ.ShpID == "" ? (int?)null : Convert.ToInt32(hJ.ShpID);
+								rec.MdfdOn = DateTime.Now;
+								rec.OphID = OphID;
+								rec.OpmID = jsn.OpmID == "" ? (int?)null : Convert.ToInt32(jsn.OpmID);
+								rec.ROT = jsn.ROT;
+								rec.MOT = jsn.MOT;
+								rec.Org = jsn.Org;
+								rec.Dst = jsn.Dst;
+								rec.nStu = jsn.nStu;
+								rec.pStu = jsn.pStu;
+								rec.DTM = jsn.DTM;
+								rec.PTM = jsn.PTM;
+								rec.NOP = jsn.NOP == "" ? (int?)null : Convert.ToInt32(jsn.NOP); 
+								rec.GrW = jsn.GrW == "" ? (Double?)null : Convert.ToDouble(jsn.GrW);
+								rec.CntNoS = jsn.CntNoS;
 
-								h.EXD = hJ.EXD == "" ? (DateTime?)null : Convert.ToDateTime(hJ.EXD);
-								h.nStuTS = hJ.nStuTS == "" ? (DateTime?)null : Convert.ToDateTime(hJ.nStuTS);
-								h.pStuTS = hJ.pStuTS == "" ? (DateTime?)null : Convert.ToDateTime(hJ.pStuTS);
-								h.REOH = hJ.REOH == "" ? (DateTime?)null : Convert.ToDateTime(hJ.REOH);
-								h.EOH = hJ.EOH == "" ? (DateTime?)null : Convert.ToDateTime(hJ.EOH);
-								h.AOH = hJ.AOH == "" ? (DateTime?)null : Convert.ToDateTime(hJ.AOH);
-								h.RTR = hJ.RTR == "" ? (DateTime?)null : Convert.ToDateTime(hJ.RTR);
-								h.POD = hJ.POD == "" ? (DateTime?)null : Convert.ToDateTime(hJ.POD);
+								rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+								rec.CneID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+								rec.AccID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
 
-								if(h.OpmID != null)
+								rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+								rec.nStuTS = jsn.nStuTS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
+								rec.pStuTS = jsn.pStuTS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.pStuTS);
+								rec.REOH = jsn.REOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
+								rec.EOH = jsn.EOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
+								rec.AOH = jsn.AOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
+								rec.RTR = jsn.RTR == "" ? (DateTime?)null : Convert.ToDateTime(jsn.RTR);
+								rec.POD = jsn.POD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
+
+								if(rec.OpmID != null)
 								{
-									h.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", h.OpmID).First;
-									if(h.Opm == null)
-										rMsg += $"NoMaster:{h.OpmID} ";
+									rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
+									if(rec.Opm == null)
+										rMsg += $"NoMaster:{rec.OpmID} ";
 								}
-								if(h.ShpID != null)
-									h.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", h.ShpID).First;
-								if(h.CneID != null)
-									h.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", h.CneID).First;
-								if(h.AccID != null)
-									h.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", h.AccID).First;
+								if(rec.ShpID != null)
+									rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+								if(rec.CneID != null)
+									rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+								if(rec.AccID != null)
+									rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
 							}
 						}
 					}

@@ -8,21 +8,25 @@ namespace TMDB
 	[Database]
 	public class FRT
 	{
+		public DateTime MdfdOn;
 		public int FrtID;
 		public string AdN;
 		public string LocID;
+		public string Pwd;
 
 		public FRT()
 		{
 			FrtID = 0;
 			AdN = "";
 			LocID = "";
+			Pwd = "";
 		}
 	}
 
 	[Database]
 	public class OPM
 	{
+		public DateTime MdfdOn;
 		public int OpmID;
 		public string RefNo;
 		public DateTime? EXD;
@@ -56,6 +60,7 @@ namespace TMDB
 	[Database]
 	public class OPH
 	{
+		public DateTime MdfdOn;
 		public int OphID;
 		public int? OpmID;
 		public string RefNo;
