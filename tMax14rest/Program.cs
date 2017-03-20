@@ -66,7 +66,7 @@ namespace tMax14rest
 					}
 				});
 				return rMsg;
-			});
+			}, new HandlerOptions() { SkipRequestFilters = true });
 
 			Handle.PUT("/tMax14rest/OPM", (OpmMsg jsn) =>
 			{
@@ -139,7 +139,7 @@ namespace tMax14rest
 					}
 				});
 				return rMsg;
-			});
+			}, new HandlerOptions() { SkipRequestFilters = true });
 
 			Handle.PUT("/tMax14rest/OPH", (OphMsg jsn) => 
 			{
@@ -224,7 +224,7 @@ namespace tMax14rest
 					}
 				});
 				return rMsg;
-			});
+			}, new HandlerOptions() { SkipRequestFilters = true });
 
 		}
 	}
