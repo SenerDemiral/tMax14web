@@ -11,7 +11,8 @@ namespace tMax14supply
 	class Program
 	{
 		private static readonly CronDaemon cron_daemon = new CronDaemon();
-		private static Node localNode = new Node("127.0.0.1", 8080);
+		//private static Node localNode = new Node("127.0.0.1", 8080);
+		private static Node localNode = new Node("www.masatenisi.online", 8080);
 		private static tMax14DataSet dts = new tMax14DataSet();
 		private static tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter fta = new tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter();
 		private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
@@ -43,6 +44,15 @@ namespace tMax14supply
 				Console.WriteLine("Stopped");
 
 				return "Timer stopped";
+			});
+
+			Handle.GET("/tMax14supply/FRT", () =>
+			{
+				Console.WriteLine("Frt Push to Server");
+				
+				FrtCron();
+
+				return "FRT Pushed";
 			});
 
 			Handle.PUT("/tMax14supply/task", (FrtMsg frt) =>
@@ -82,7 +92,7 @@ namespace tMax14supply
 
 		static void FrtCron()
 		{
-			int nor = fta.Fill(dts.WEB_FRT_MDFD, "X");
+			int nor = fta.Fill(dts.WEB_FRT_MDFD, "F");
 			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
 			{
 				FrtMsg jsn = new FrtMsg
