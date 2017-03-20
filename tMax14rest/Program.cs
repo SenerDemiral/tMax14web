@@ -21,6 +21,7 @@ namespace tMax14rest
 			
 			Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
 			{
+				Console.WriteLine("FRT: " + jsn.FrtID);
 				string rMsg = "OK";
 				// jsn'nin ilk field da FRT olmali, ikinci (Evnt) field bos olmamali
 				if(jsn[0].ToString() != "FRT" || jsn[1].ToString() == "")
