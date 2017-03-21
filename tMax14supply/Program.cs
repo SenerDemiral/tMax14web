@@ -66,10 +66,15 @@ namespace tMax14supply
 			Handle.GET("/tMax14supply/OPMfull", () =>
 			{
 				Console.WriteLine("Opm Push to Server");
-
 				OpmCron("F");
-
 				return "OPM Pushed";
+			});
+
+			Handle.GET("/tMax14supply/OPHfull", () =>
+			{
+				Console.WriteLine("Oph Push to Server");
+				OphCron("F");
+				return "OPH Pushed";
 			});
 
 			Handle.PUT("/tMax14supply/task", (FrtMsg frt) =>
@@ -85,7 +90,7 @@ namespace tMax14supply
 
 			FrtCron();
 			OpmCron("X");
-			OphCron();
+			OphCron("X");
 
 			/*
 				FrtMsg f = new FrtMsg() {
@@ -104,7 +109,7 @@ namespace tMax14supply
 		{
 			FrtCron();
 			OpmCron("X");
-			OphCron();
+			OphCron("X");
 		}
 
 		static void FrtCron()
@@ -232,6 +237,7 @@ namespace tMax14supply
 					OphMsg.OphAElementJson abcd = new OphMsg.OphAElementJson
 					{
 						Evnt = row.EVNT,
+						OphID = row.OPHID.ToString(),
 						OpmID = row.OPMID.ToString(),
 						EXD = row.EXD.ToString(),
 						ROT = row.ROT,
@@ -262,7 +268,7 @@ namespace tMax14supply
 		}
 
 		static void OphCronOrg()
-		{
+		{	/*
 			int nor = hta.Fill(dts.WEB_OPH_MDFD, "X");
 			foreach(tMax14DataSet.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
 			{
@@ -299,6 +305,7 @@ namespace tMax14supply
 				}
 			}
 			hta.Update(dts.WEB_OPH_MDFD);
+			*/
 		}
 
 	}
