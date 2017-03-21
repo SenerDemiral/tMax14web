@@ -12,7 +12,7 @@ namespace tMax14supply
 	{
 		private static readonly CronDaemon cron_daemon = new CronDaemon();
 		//private static Node localNode = new Node("127.0.0.1", 8080);
-		private static Node localNode = new Node("tmax.masatenisi.online", 80);
+		private static Node localNode = new Node("tmax.masatenisi.online", 80, 600);
 		private static tMax14DataSet dts = new tMax14DataSet();
 		private static tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter fta = new tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter();
 		private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
@@ -48,20 +48,26 @@ namespace tMax14supply
 
 			Handle.GET("/tMax14supply/FRT", () =>
 			{
+				
 				Console.WriteLine("Frt Push to Server");
 				FrtMsg f = new FrtMsg();
-				Dictionary<string, string> dic = new Dictionary<string, string>();
-			Response res = localNode.GET("/tMax14rest/FRT");
+				Response rrr = Http.GET(80, "http://tmax.masatenisi.online/tmax14rest/frt");
+				//Response rrr = Http.GET(80, "http://tmax.masatenisi.online/tmax14rest/frt");
+				Response res = localNode.GET("/tMax14rest/FRT");
+//				Http.GET<string>()
 				//FrtCron();
 
 				return "FRT Pushed";
 			});
-
-			Handle.GET("/tMax14supply/OPM", () =>
+			
+			
+			
+			
+			Handle.GET("/tMax14supply/OPMfull", () =>
 			{
 				Console.WriteLine("Opm Push to Server");
 
-				OpmCron();
+				OpmCron("F");
 
 				return "OPM Pushed";
 			});
@@ -78,7 +84,7 @@ namespace tMax14supply
 			Console.WriteLine("Task");
 
 			FrtCron();
-			OpmCron();
+			OpmCron("X");
 			OphCron();
 
 			/*
@@ -97,7 +103,7 @@ namespace tMax14supply
 		private static void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			FrtCron();
-			OpmCron();
+			OpmCron("X");
 			OphCron();
 		}
 
@@ -123,32 +129,49 @@ namespace tMax14supply
 			fta.Update(dts.WEB_FRT_MDFD);
 		}
 
-		static void OpmCron()
+		static void OpmCron(string typ)
 		{
-			int nor = mta.Fill(dts.WEB_OPM_MDFD, "F");
-			OpmMsg jsn = new OpmMsg();
-			foreach(tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
+			int nor = mta.Fill(dts.WEB_OPM_MDFD, typ);
+			tMax14DataSet.WEB_OPM_MDFDRow row;
+			int bs = 1000;	// records chunk
+			int ek = nor / bs;
+			int ei = 0, ri = 0;
+			for(int k = 0; k <= ek; k++)
 			{
-				OpmMsg.OpmAElementJson abcd = new OpmMsg.OpmAElementJson {
-					Evnt = row.EVNT,
-					OpmID = row.OPMID.ToString(),
-					EXD = row.EXD.ToString(),
-					ROT = row.ROT,
-					MOT = row.MOT,
-					Org = row.ORG,
-					Dst = row.DST,
-					ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
-					CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
-					AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
-					CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString(),
-					ETD = row.IsETDNull() ? "" : row.ETD.ToString(),
-					ATD = row.IsATDNull() ? "" : row.ATD.ToString(),
-					ETA = row.IsETANull() ? "" : row.ETA.ToString(),
-					ATA = row.IsATANull() ? "" : row.ATA.ToString(),
-				};
-				jsn.OpmA.Add(abcd);
+				OpmMsg jsn = new OpmMsg();
+				jsn.Tbl = "OPM";
+
+				ei = nor - (k * bs);
+				if(ei > bs)
+					ei = bs;
+				
+				for(int i = 0; i < ei; i++)
+				{
+					ri = k * bs + i;
+					row = (tMax14DataSet.WEB_OPM_MDFDRow)dts.WEB_OPM_MDFD.Rows[ri];
+					OpmMsg.OpmAElementJson abcd = new OpmMsg.OpmAElementJson
+					{
+						Evnt = row.EVNT,
+						OpmID = row.OPMID.ToString(),
+						EXD = row.EXD.ToString(),
+						ROT = row.ROT,
+						MOT = row.MOT,
+						Org = row.ORG,
+						Dst = row.DST,
+						ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
+						CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
+						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
+						CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString(),
+						ETD = row.IsETDNull() ? "" : row.ETD.ToString(),
+						ATD = row.IsATDNull() ? "" : row.ATD.ToString(),
+						ETA = row.IsETANull() ? "" : row.ETA.ToString(),
+						ATA = row.IsATANull() ? "" : row.ATA.ToString(),
+					};
+					jsn.OpmA.Add(abcd);
+				}
+				var aaa = jsn.ToJsonUtf8().Length;
+				Response res = localNode.PUT("/tMax14rest/OPM", jsn.ToJsonUtf8(), null, 600);
 			}
-			Response res = localNode.PUT("/tMax14rest/OPM", jsn.ToJsonUtf8(), null, 60);
 		}
 
 		static void OpmCronOrg()
@@ -185,7 +208,60 @@ namespace tMax14supply
 			mta.Update(dts.WEB_OPM_MDFD);
 			*/
 		}
-		static void OphCron()
+
+		static void OphCron(string typ)
+		{
+			int nor = hta.Fill(dts.WEB_OPH_MDFD, typ);
+			tMax14DataSet.WEB_OPH_MDFDRow row;
+			int bs = 1000;  // records chunk
+			int ek = nor / bs;
+			int ei = 0, ri = 0;
+			for(int k = 0; k <= ek; k++)
+			{
+				OphMsg jsn = new OphMsg();
+				jsn.Tbl = "OPH";
+
+				ei = nor - (k * bs);
+				if(ei > bs)
+					ei = bs;
+
+				for(int i = 0; i < ei; i++)
+				{
+					ri = k * bs + i;
+					row = (tMax14DataSet.WEB_OPH_MDFDRow)dts.WEB_OPH_MDFD.Rows[ri];
+					OphMsg.OphAElementJson abcd = new OphMsg.OphAElementJson
+					{
+						Evnt = row.EVNT,
+						OpmID = row.OPMID.ToString(),
+						EXD = row.EXD.ToString(),
+						ROT = row.ROT,
+						MOT = row.MOT,
+						Org = row.ORG,
+						Dst = row.ORG,
+						ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
+						CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
+						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
+						DTM = row.DTM,
+						PTM = row.PTM,
+						CntNoS = row.CNTNOS,
+
+						nStu = row.NSTU,
+						pStu = row.PSTU,
+						nStuTS = row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString(),
+						pStuTS = row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString(),
+						REOH = row.IsREOHNull() ? "" : row.REOH.ToString(),
+						AOH = row.IsAOHNull() ? "" : row.AOH.ToString(),
+						RTR = row.IsRTRNull() ? "" : row.RTR.ToString(),
+						POD = row.IsPODNull() ? "" : row.POD.ToString(),
+					};
+					jsn.OphA.Add(abcd);
+				}
+				var aaa = jsn.ToJsonUtf8().Length;
+				Response res = localNode.PUT("/tMax14rest/OPH", jsn.ToJsonUtf8(), null, 600);
+			}
+		}
+
+		static void OphCronOrg()
 		{
 			int nor = hta.Fill(dts.WEB_OPH_MDFD, "X");
 			foreach(tMax14DataSet.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
