@@ -18,7 +18,11 @@ namespace tMax14rest
 
 				return "OK";
 			});
-			
+			Handle.GET("/tMax14rest/FRT", (FrtMsg jsn) =>
+			{
+				return "/tMax14rest/FRT";
+			});
+
 			Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
 			{
 				Console.WriteLine("FRT: " + jsn.FrtID);

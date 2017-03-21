@@ -101,7 +101,7 @@ namespace tMax14supply
 
 		static void FrtCron()
 		{
-			int nor = fta.Fill(dts.WEB_FRT_MDFD, "F");
+			int nor = fta.Fill(dts.WEB_FRT_MDFD, "X");
 			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
 			{
 				FrtMsg jsn = new FrtMsg
