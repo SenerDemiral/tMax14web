@@ -12,7 +12,7 @@ namespace tMax14supply
 	{
 		private static readonly CronDaemon cron_daemon = new CronDaemon();
 		//private static Node localNode = new Node("127.0.0.1", 8080);
-		private static Node localNode = new Node("www.masatenisi.online", 8080);
+		private static Node localNode = new Node("tmax.masatenisi.online", 80);
 		private static tMax14DataSet dts = new tMax14DataSet();
 		private static tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter fta = new tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter();
 		private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
@@ -51,6 +51,15 @@ namespace tMax14supply
 				Console.WriteLine("Frt Push to Server");
 				
 				FrtCron();
+
+				return "FRT Pushed";
+			});
+
+			Handle.GET("/tMax14supply/OPM", () =>
+			{
+				Console.WriteLine("Opm Push to Server");
+
+				OpmCron();
 
 				return "FRT Pushed";
 			});
@@ -114,6 +123,35 @@ namespace tMax14supply
 
 		static void OpmCron()
 		{
+			int nor = mta.Fill(dts.WEB_OPM_MDFD, "F");
+			OpmMsg jsn = new OpmMsg();
+			foreach(tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
+			{
+				OpmMsg.OpmAElementJson abcd = new OpmMsg.OpmAElementJson {
+					Evnt = row.EVNT,
+					OpmID = row.OPMID.ToString(),
+					EXD = row.EXD.ToString(),
+					ROT = row.ROT,
+					MOT = row.MOT,
+					Org = row.ORG,
+					Dst = row.DST,
+					ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
+					CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
+					AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
+					CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString(),
+					ETD = row.IsETDNull() ? "" : row.ETD.ToString(),
+					ATD = row.IsATDNull() ? "" : row.ATD.ToString(),
+					ETA = row.IsETANull() ? "" : row.ETA.ToString(),
+					ATA = row.IsATANull() ? "" : row.ATA.ToString(),
+				};
+				jsn.OpmA.Add(abcd);
+			}
+			Response res = localNode.PUT("/tMax14rest/OPM", jsn.ToJsonUtf8(), null, 60);
+		}
+
+		static void OpmCronOrg()
+		{
+		/*
 			int nor = mta.Fill(dts.WEB_OPM_MDFD, "X");
 			foreach(tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
 			{
@@ -143,8 +181,8 @@ namespace tMax14supply
 				}
 			}
 			mta.Update(dts.WEB_OPM_MDFD);
+			*/
 		}
-
 		static void OphCron()
 		{
 			int nor = hta.Fill(dts.WEB_OPH_MDFD, "X");

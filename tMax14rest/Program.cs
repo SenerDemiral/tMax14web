@@ -69,8 +69,79 @@ namespace tMax14rest
 				return rMsg;
 			});
 
-			Handle.PUT("/tMax14rest/OPM", (OpmMsg jsn) =>
+			Handle.PUT("/tMax14rest/OPM", (OpmMsg opmMsg) =>
 			{
+				string rMsg = "OK";
+				// jsn'nin ilk field da OPM olmali, ikinci (Evnt) field bos olmamali
+				if(opmMsg[0].ToString() != "OPM")
+					return "!HATA-WrongMessageFormat";
+
+				Db.Transact(() =>
+				{
+					foreach(var jsn in opmMsg.OpmA)
+					{
+						int OpmID = int.Parse(jsn.OpmID);
+
+						if(jsn.Evnt == "D")
+						{
+							var opms = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID);
+							foreach(var rec in opms)
+							{
+								//Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
+								rec.Delete();
+							}
+						}
+						else
+						{
+							TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
+							if(jsn.Evnt == "I" && rec == null)
+							{
+								rec = new TMDB.OPM();
+							}
+
+							if(rec == null)
+								rMsg = "NoHouse2Update";
+							else
+							{
+								rec.MdfdOn = DateTime.Now;
+								rec.OpmID = OpmID;
+								rec.ROT = jsn.ROT;
+								rec.MOT = jsn.MOT;
+								rec.Org = jsn.Org;
+								rec.Dst = jsn.Dst;
+
+								//rec.CntNoS = jsn.CntNoS;
+
+								rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+								rec.CneID = jsn.CneID == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
+								rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
+								rec.CrrID = jsn.CrrID == "" ? (int?)null : Convert.ToInt32(jsn.CrrID);
+
+								rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+								rec.ETD = jsn.ETD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETD);
+								rec.ATD = jsn.ATD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
+								rec.ETA = jsn.ETA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
+								rec.ATA = jsn.ATA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
+
+								if(rec.ShpID != null)
+									rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+								if(rec.CneID != null)
+									rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+								if(rec.AccID != null)
+									rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+								if(rec.CrrID != null)
+									rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
+							}
+						}
+					}
+				});
+				return rMsg;
+			}, new HandlerOptions() { SkipRequestFilters = true });
+
+			/*
+			Handle.PUT("/tMax14rest/OPMorg", (OpmMsg jsn) =>
+			{
+				
 				string rMsg = "OK";
 				// jsn'nin ilk field da OPM olmali, ikinci (Evnt) field bos olmamali
 				if(jsn[0].ToString() != "OPM" || jsn[1].ToString() == "")
@@ -140,8 +211,9 @@ namespace tMax14rest
 					}
 				});
 				return rMsg;
+				
 			}, new HandlerOptions() { SkipRequestFilters = true });
-
+			*/
 			Handle.PUT("/tMax14rest/OPH", (OphMsg jsn) => 
 			{
 				string rMsg = "OK";
