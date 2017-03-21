@@ -49,8 +49,10 @@ namespace tMax14supply
 			Handle.GET("/tMax14supply/FRT", () =>
 			{
 				Console.WriteLine("Frt Push to Server");
-				
-				FrtCron();
+				FrtMsg f = new FrtMsg();
+				Dictionary<string, string> dic = new Dictionary<string, string>();
+			Response res = localNode.GET("/tMax14rest/FRT");
+				//FrtCron();
 
 				return "FRT Pushed";
 			});

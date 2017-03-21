@@ -18,7 +18,7 @@ namespace tMax14rest
 
 				return "OK";
 			});
-			Handle.GET("/tMax14rest/FRT", (FrtMsg jsn) =>
+			Handle.GET("/tMax14rest/FRT", () =>
 			{
 				return "/tMax14rest/FRT";
 			});
