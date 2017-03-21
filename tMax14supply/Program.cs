@@ -249,6 +249,8 @@ namespace tMax14supply
 						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
 						DTM = row.DTM,
 						PTM = row.PTM,
+						NOP = row.IsNOPNull() ? "" : row.NOP.ToString(),
+						GrW = row.IsGRWNull() ? "" : row.GRW.ToString(),
 						CntNoS = row.CNTNOS,
 
 						nStu = row.NSTU,

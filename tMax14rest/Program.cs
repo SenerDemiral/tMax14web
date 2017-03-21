@@ -189,7 +189,7 @@ namespace tMax14rest
 								rec.DTM = jsn.DTM;
 								rec.PTM = jsn.PTM;
 								rec.NOP = jsn.NOP == "" ? (int?)null : Convert.ToInt32(jsn.NOP);
-								rec.GrW = jsn.GrW == "" ? (Double?)null : Convert.ToDouble(jsn.GrW);
+								rec.GrW = jsn.GrW == "" ? (double?)null : Convert.ToDouble(jsn.GrW);
 								rec.CntNoS = jsn.CntNoS;
 
 								rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
