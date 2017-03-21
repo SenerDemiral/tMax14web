@@ -61,7 +61,7 @@ namespace tMax14supply
 
 				OpmCron();
 
-				return "FRT Pushed";
+				return "OPM Pushed";
 			});
 
 			Handle.PUT("/tMax14supply/task", (FrtMsg frt) =>

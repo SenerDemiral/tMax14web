@@ -71,6 +71,7 @@ namespace tMax14rest
 
 			Handle.PUT("/tMax14rest/OPM", (OpmMsg opmMsg) =>
 			{
+				Console.WriteLine("/tMax14rest/OPM");
 				string rMsg = "OK";
 				// jsn'nin ilk field da OPM olmali, ikinci (Evnt) field bos olmamali
 				if(opmMsg[0].ToString() != "OPM")
@@ -136,7 +137,7 @@ namespace tMax14rest
 					}
 				});
 				return rMsg;
-			}, new HandlerOptions() { SkipRequestFilters = true });
+			});
 
 			/*
 			Handle.PUT("/tMax14rest/OPMorg", (OpmMsg jsn) =>
