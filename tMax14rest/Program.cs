@@ -28,7 +28,7 @@ namespace tMax14rest
 			{
 				// Handle s and send response
 				FrtMsg jsn = new FrtMsg();
-				jsn.Data = s;
+				jsn.PopulateFromJson(s);
 				ws.Send("OK");
 			});
 
