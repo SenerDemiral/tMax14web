@@ -62,10 +62,17 @@ namespace tMax14supply
 
 				return "FRT Pushed";
 			});
-			
-			
-			
-			
+
+
+
+			Handle.GET("/tMax14supply/FRTfull", () =>
+			{
+				Console.WriteLine("FRT Push to Server");
+				FrtCron("F");
+				return "FRT Pushed";
+			});
+
+
 			Handle.GET("/tMax14supply/OPMfull", () =>
 			{
 				Console.WriteLine("Opm Push to Server");
@@ -82,7 +89,7 @@ namespace tMax14supply
 
 			Handle.PUT("/tMax14supply/task", (FrtMsg frt) =>
 			{
-				Console.WriteLine(frt.AdN);
+				Console.WriteLine(frt.ToString());
 				return "task";
 			});
 		}
@@ -135,11 +142,11 @@ namespace tMax14supply
 			}
 			if(ws.ReadyState != WebSocketState.Open)
 				ws.Connect();
-			ws.Send(jsn.ToJsonUtf8());
+			ws.Send(jsn.ToString());
 		}
 
 		static void FrtCron2()
-		{
+		{	/*
 			int nor = fta.Fill(dts.WEB_FRT_MDFD, "X");
 			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
 			{
@@ -158,6 +165,7 @@ namespace tMax14supply
 				}
 			}
 			fta.Update(dts.WEB_FRT_MDFD);
+			*/
 		}
 
 		static void OpmCron(string typ)

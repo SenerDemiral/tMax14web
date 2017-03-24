@@ -27,7 +27,9 @@ namespace tMax14rest
 			Handle.WebSocket("ws", (String s, WebSocket ws) =>
 			{
 				// Handle s and send response
-				ws.Send(s);
+				FrtMsg jsn = new FrtMsg();
+				jsn.Data = s;
+				ws.Send("OK");
 			});
 
 			Handle.WebSocket("ws", (byte[] data, WebSocket ws) =>
