@@ -24,7 +24,41 @@ namespace tMax14rest
 				return "/tMax14rest/FRT";
 			});
 
-			Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
+			Handle.WebSocket("ws", (String s, WebSocket ws) =>
+			{
+				// Handle s and send response
+				ws.Send(s);
+			});
+
+			Handle.WebSocket("ws", (byte[] data, WebSocket ws) =>
+			{
+				FrtMsg jsn = new FrtMsg();
+				jsn.Data = data;
+				// Handle s and send response
+				ws.Send("????");
+			});
+
+			Handle.GET("/wsConnect", (Request req) =>
+			{
+				// Checking if its a WebSocket upgrade request.
+				if(req.WebSocketUpgrade)
+				{
+					WebSocket ws = req.SendUpgrade("ws");
+					Console.WriteLine("ws Connected {0}", DateTime.Now);
+					return HandlerStatus.Handled;
+				}
+
+				// We only support WebSockets upgrades in this HTTP handler
+				// and not other ordinary HTTP requests.
+				return new Response()
+				{
+					StatusCode = 500,
+					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+				};
+			});
+
+			/*
+			Handle.PUT("/tMax14rest/FRTold", (FrtMsg jsn) =>
 			{
 				Console.WriteLine("FRT: " + jsn.FrtID);
 				string rMsg = "OK";
@@ -73,7 +107,7 @@ namespace tMax14rest
 				});
 				return rMsg;
 			});
-
+			*/
 			Handle.PUT("/tMax14rest/OPM", (OpmMsg opmMsg) =>
 			{
 				StringBuilder sb = new StringBuilder();

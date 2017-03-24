@@ -1,9 +1,12 @@
 {
 	"Tbl": "FRT",
-	"Evnt": "",
-
-	"FrtID": "",
-	"AdN": "",
-	"LocID": "",
-	"Pwd": ""
+	"FrtA": [
+		{
+			"Evnt": "",
+			"FrtID": "",
+			"AdN": "",
+			"LocID": "",
+			"Pwd": ""
+		}
+	]
 }

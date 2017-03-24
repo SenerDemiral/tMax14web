@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Starcounter.Internal;
 using CronNET;
 using System.Threading;
+using WebSocketSharp;
 
 namespace tMax14supply
 {
@@ -18,6 +19,8 @@ namespace tMax14supply
 		private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
 		private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
 		private static System.Timers.Timer timer = new System.Timers.Timer(30000);
+		
+		private static WebSocketSharp.WebSocket ws = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsConnect");
 
 		static void Main(string[] args)
 		{
@@ -88,7 +91,7 @@ namespace tMax14supply
 		{
 			Console.WriteLine("Task");
 
-			FrtCron();
+			FrtCron("X");
 			OpmCron("X");
 			OphCron("X");
 
@@ -107,12 +110,35 @@ namespace tMax14supply
 
 		private static void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			FrtCron();
+			FrtCron("X");
 			OpmCron("X");
 			OphCron("X");
 		}
 
-		static void FrtCron()
+
+		static void FrtCron(string typ)
+		{
+			int nor = fta.Fill(dts.WEB_FRT_MDFD, typ);
+			FrtMsg jsn = new FrtMsg();
+			jsn.Tbl = "FRT";
+
+			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
+			{
+				FrtMsg.FrtAElementJson jsnE = new FrtMsg.FrtAElementJson
+				{
+					Evnt = row.EVNT,
+					FrtID = row.FRTID.ToString(),
+					AdN = row.ADN,
+					Pwd = row.PWD
+				};
+				jsn.FrtA.Add(jsnE);
+			}
+			if(ws.ReadyState != WebSocketState.Open)
+				ws.Connect();
+			ws.Send(jsn.ToJsonUtf8());
+		}
+
+		static void FrtCron2()
 		{
 			int nor = fta.Fill(dts.WEB_FRT_MDFD, "X");
 			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
