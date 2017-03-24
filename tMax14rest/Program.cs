@@ -35,7 +35,7 @@ namespace tMax14rest
 			Handle.WebSocket("ws", (byte[] data, WebSocket ws) =>
 			{
 				FrtMsg jsn = new FrtMsg();
-				jsn.Data = data;
+				jsn.PopulateFromJson(data, data.Length);
 				// Handle s and send response
 				ws.Send("????");
 			});
