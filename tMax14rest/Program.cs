@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using Starcounter;
+using Starcounter.Advanced.XSON;
+using Starcounter.XSON.Serializer;
 
 namespace tMax14rest
 {
@@ -8,6 +10,7 @@ namespace tMax14rest
 	{
 		static void Main()
 		{
+
 			Handle.PUT("/tMax14rest/ResetAll", (OphMsg hJ) =>
 			{
 				Db.Transact(() =>
@@ -28,7 +31,10 @@ namespace tMax14rest
 			{
 				// Handle s and send response
 				FrtMsg jsn = new FrtMsg();
-				jsn.PopulateFromJson(s);
+				var settings = new JsonSerializerSettings();
+				
+				settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+				jsn.PopulateFromJson(s, settings);
 				ws.Send("OK");
 			});
 

@@ -142,7 +142,7 @@ namespace tMax14supply
 			}
 			if(ws.ReadyState != WebSocketState.Open)
 				ws.Connect();
-			ws.Send(jsn.ToJsonUtf8());
+			ws.Send(jsn.ToJson());
 		}
 
 		static void FrtCron2()
