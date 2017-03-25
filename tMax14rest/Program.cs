@@ -240,6 +240,7 @@ namespace tMax14rest
 			*/
 			Handle.PUT("/tMax14rest/OPM", (OpmMsg opmMsg) =>
 			{
+				/*
 				StringBuilder sb = new StringBuilder();
 				Console.WriteLine("/tMax14rest/OPM");
 				// jsn'nin ilk field da OPM olmali
@@ -303,8 +304,9 @@ namespace tMax14rest
 							}
 						}
 					}
-				});
-				return sb.ToString();
+				});	  
+				return sb.ToString();*/
+				return "";
 			});
 
 			Handle.PUT("/tMax14rest/OPH", (OphMsg msg) =>
