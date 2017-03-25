@@ -1,22 +1,18 @@
 {
-	"Tbl": "OPM",
-	"OpmA": [
-		{
-			"Evnt": "",
-			"OpmID": "",
-			"EXD": "",
-			"ROT": "",
-			"MOT": "",
-			"Org": "",
-			"Dst": "",
-			"ShpID": "",
-			"CneID": "",
-			"AccID": "",
-			"CrrID": "",
-			"ETD": "",
-			"ATD": "",
-			"ETA": "",
-			"ATA": ""
-		}
-	]
+	"Tbl": "",
+	"Evnt": "",
+	"OpmID": "",
+	"EXD": "",
+	"ROT": "",
+	"MOT": "",
+	"Org": "",
+	"Dst": "",
+	"ShpID": "",
+	"CneID": "",
+	"AccID": "",
+	"CrrID": "",
+	"ETD": "",
+	"ATD": "",
+	"ETA": "",
+	"ATA": ""
 }

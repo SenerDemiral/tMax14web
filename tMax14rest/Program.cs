@@ -27,7 +27,7 @@ namespace tMax14rest
 				return "/tMax14rest/FRT";
 			});
 
-			Handle.WebSocket("ws", (String s, WebSocket ws) =>
+			Handle.WebSocket("wsFrt", (String s, WebSocket ws) =>
 			{
 				// Handle s and send response
 				FrtMsg jsn = new FrtMsg();
@@ -89,18 +89,97 @@ namespace tMax14rest
 				ws.Send("????");
 			});
 
-			Handle.GET("/wsConnect", (Request req) =>
+			Handle.GET("/wsFrtConnect", (Request req) =>
 			{
 				// Checking if its a WebSocket upgrade request.
 				if(req.WebSocketUpgrade)
 				{
-					WebSocket ws = req.SendUpgrade("ws");
+					WebSocket ws = req.SendUpgrade("wsFrt");
 					Console.WriteLine("ws Connected {0}", DateTime.Now);
 					return HandlerStatus.Handled;
 				}
 
 				// We only support WebSockets upgrades in this HTTP handler
 				// and not other ordinary HTTP requests.
+				return new Response()
+				{
+					StatusCode = 500,
+					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+				};
+			});
+
+			Handle.WebSocket("wsOpm", (String s, WebSocket ws) =>
+			{
+				OpmMsg jsn = new OpmMsg();
+				jsn.PopulateFromJson(s);
+				string rMsg = "OK";
+
+				Db.Transact(() =>
+				{
+						int OpmID = int.Parse(jsn.OpmID);
+
+					if(jsn.Evnt == "D")
+					{
+						var opms = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID);
+						foreach(var rec in opms)
+						{
+							//Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
+							rec.Delete();
+						}
+					}
+					else
+					{
+						TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
+						if(jsn.Evnt == "I" && rec == null)
+						{
+							rec = new TMDB.OPM();
+						}
+
+						if(rec != null)
+						{
+							rec.MdfdOn = DateTime.Now;
+							rec.OpmID = OpmID;
+							rec.ROT = jsn.ROT;
+							rec.MOT = jsn.MOT;
+							rec.Org = jsn.Org;
+							rec.Dst = jsn.Dst;
+
+							//rec.CntNoS = jsn.CntNoS;
+
+							rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+							rec.CneID = jsn.CneID == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
+							rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
+							rec.CrrID = jsn.CrrID == "" ? (int?)null : Convert.ToInt32(jsn.CrrID);
+
+							rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+							rec.ETD = jsn.ETD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETD);
+							rec.ATD = jsn.ATD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
+							rec.ETA = jsn.ETA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
+							rec.ATA = jsn.ATA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
+
+							if(rec.ShpID != null)
+								rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+							if(rec.CneID != null)
+								rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+							if(rec.AccID != null)
+								rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+							if(rec.CrrID != null)
+								rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
+						}
+					}
+				});
+
+				ws.Send(rMsg);
+			});
+
+			Handle.GET("/wsOpmConnect", (Request req) =>
+			{
+				if(req.WebSocketUpgrade)
+				{
+					WebSocket ws = req.SendUpgrade("wsOpm");
+					Console.WriteLine("wsOpm Connected {0}", DateTime.Now);
+					return HandlerStatus.Handled;
+				}
 				return new Response()
 				{
 					StatusCode = 500,

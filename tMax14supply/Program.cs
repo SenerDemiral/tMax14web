@@ -20,13 +20,15 @@ namespace tMax14supply
 		private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
 		private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
 		private static System.Timers.Timer timer = new System.Timers.Timer(30000);
-		
-		private static WebSocketSharp.WebSocket ws = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsConnect");
+
+		private static WebSocketSharp.WebSocket wsFrt = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsFrtConnect");
+		private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsOpmConnect");
+		private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsOphConnect");
 
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Basla1");
-			ws.OnMessage += (sndr, ev) =>
+			wsFrt.OnMessage += (sndr, ev) =>
 			{
 				if(ev.Data != "OK")
 					Console.WriteLine("wsMessage: " + ev.Data);
@@ -131,30 +133,26 @@ namespace tMax14supply
 
 		static void FrtCron(string typ)
 		{
-			int nor = fta.Fill(dts.WEB_FRT_MDFD, typ);
-			/*
-			FrtMsg.FrtAElementJson jsnE = new FrtMsg.FrtAElementJson();
-			jsnE.Evnt = "event";
-			jsnE.FrtID = "1111";
-			jsnE.AdN = "adn";
-			jsnE.Pwd = "pwd";
-			jsn.FrtA.Add(jsnE);
-			*/
-			if(ws.ReadyState != WebSocketState.Open)
-				ws.Connect();
+			if(wsFrt.ReadyState != WebSocketState.Open)
+				wsFrt.Connect();
 
-
-			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
+			if(wsFrt.ReadyState == WebSocketState.Open)
 			{
-				var jsn = new FrtMsg
+				int nor = fta.Fill(dts.WEB_FRT_MDFD, typ);
+				foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
 				{
-					Evnt = row.EVNT,
-					FrtID = row.FRTID.ToString(),
-					AdN = row.ADN,
-					Pwd = row.PWD
-				};
-				ws.Send(jsn.ToJson());
+					var jsn = new FrtMsg
+					{
+						Evnt = row.EVNT,
+						FrtID = row.FRTID.ToString(),
+						AdN = row.ADN,
+						Pwd = row.PWD
+					};
+					wsFrt.Send(jsn.ToJson());
+				}
 			}
+			wsFrt.Close();
+
 			//var aaa = jsn.ToJson();
 			//var oms = new MemoryStream();
 			//byte[] buf = jsn.ToJsonUtf8();
@@ -186,8 +184,9 @@ namespace tMax14supply
 			*/
 		}
 
-		static void OpmCron(string typ)
+		static void OpmCron2(string typ)
 		{
+			/*
 			int nor = mta.Fill(dts.WEB_OPM_MDFD, typ);
 			tMax14DataSet.WEB_OPM_MDFDRow row;
 			int bs = 1000;	// records chunk
@@ -229,41 +228,42 @@ namespace tMax14supply
 				var aaa = jsn.ToJsonUtf8().Length;
 				Response res = localNode.PUT("/tMax14rest/OPM", jsn.ToJsonUtf8(), null, 600);
 			}
+			*/
 		}
 
-		static void OpmCronOrg()
+		static void OpmCron(string typ)
 		{
-		/*
-			int nor = mta.Fill(dts.WEB_OPM_MDFD, "X");
-			foreach(tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
+			if(wsOpm.ReadyState != WebSocketState.Open)
+				wsOpm.Connect();
+
+			if(wsOpm.ReadyState == WebSocketState.Open)
 			{
-				OpmMsg jsn = new OpmMsg
+				int nor = mta.Fill(dts.WEB_OPM_MDFD, typ);
+				foreach(tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
 				{
-					Tbl = "OPM",
-					Evnt = row.EVNT,
-					OpmID = row.OPMID.ToString(),
-					EXD = row.EXD.ToString(),
-					ROT = row.ROT,
-					MOT = row.MOT,
-					Org = row.ORG,
-					Dst = row.DST,
-					ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
-					CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
-					AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
-					CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString(),
-					ETD = row.IsETDNull() ? "" : row.ETD.ToString(),
-					ATD = row.IsATDNull() ? "" : row.ATD.ToString(),
-					ETA = row.IsETANull() ? "" : row.ETA.ToString(),
-					ATA = row.IsATANull() ? "" : row.ATA.ToString(),
-				};
-				Response res = localNode.PUT("/tMax14rest/OPM", jsn.ToJsonUtf8(), null, 10);
-				if(res.StatusCode == 200)
-				{
-					row.Delete();
+					OpmMsg jsn = new OpmMsg
+					{
+						Tbl = "OPM",
+						Evnt = row.EVNT,
+						OpmID = row.OPMID.ToString(),
+						EXD = row.EXD.ToString(),
+						ROT = row.ROT,
+						MOT = row.MOT,
+						Org = row.ORG,
+						Dst = row.DST,
+						ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
+						CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
+						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
+						CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString(),
+						ETD = row.IsETDNull() ? "" : row.ETD.ToString(),
+						ATD = row.IsATDNull() ? "" : row.ATD.ToString(),
+						ETA = row.IsETANull() ? "" : row.ETA.ToString(),
+						ATA = row.IsATANull() ? "" : row.ATA.ToString(),
+					};
+					wsOpm.Send(jsn.ToJson());
 				}
+				wsOpm.Close();
 			}
-			mta.Update(dts.WEB_OPM_MDFD);
-			*/
 		}
 
 		static void OphCron(string typ)
