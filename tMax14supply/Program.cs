@@ -268,6 +268,49 @@ namespace tMax14supply
 
 		static void OphCron(string typ)
 		{
+			if(wsOph.ReadyState != WebSocketState.Open)
+				wsOph.Connect();
+
+			if(wsOph.ReadyState == WebSocketState.Open)
+			{
+				int nor = hta.Fill(dts.WEB_OPH_MDFD, typ);
+				foreach(tMax14DataSet.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
+				{
+					OphMsg jsn = new OphMsg
+					{
+						Tbl = "OPH",
+						Evnt = row.EVNT,
+						OpmID = row.OPMID.ToString(),
+						EXD = row.EXD.ToString(),
+						ROT = row.ROT,
+						MOT = row.MOT,
+						Org = row.ORG,
+						Dst = row.ORG,
+						ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
+						CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
+						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
+						DTM = row.DTM,
+						PTM = row.PTM,
+						CntNoS = row.CNTNOS,
+
+						nStu = row.NSTU,
+						pStu = row.PSTU,
+						nStuTS = row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString(),
+						pStuTS = row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString(),
+						REOH = row.IsREOHNull() ? "" : row.REOH.ToString(),
+						AOH = row.IsAOHNull() ? "" : row.AOH.ToString(),
+						RTR = row.IsRTRNull() ? "" : row.RTR.ToString(),
+						POD = row.IsPODNull() ? "" : row.POD.ToString(),
+					};
+					wsOph.Send(jsn.ToJson());
+				}
+				wsOph.Close();
+			}
+		}
+
+		static void OphCron2(string typ)
+		{
+			/*
 			int nor = hta.Fill(dts.WEB_OPH_MDFD, typ);
 			tMax14DataSet.WEB_OPH_MDFDRow row;
 			int bs = 1000;  // records chunk
@@ -318,49 +361,9 @@ namespace tMax14supply
 				}
 				var aaa = jsn.ToJsonUtf8().Length;
 				Response res = localNode.PUT("/tMax14rest/OPH", jsn.ToJsonUtf8(), null, 600);
-			}
+			}*/
 		}
 
-		static void OphCronOrg()
-		{	/*
-			int nor = hta.Fill(dts.WEB_OPH_MDFD, "X");
-			foreach(tMax14DataSet.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
-			{
-				OphMsg jsn = new OphMsg
-				{
-					Tbl = "OPH",
-					Evnt = row.EVNT,
-					OpmID = row.OPMID.ToString(),
-					EXD = row.EXD.ToString(),
-					ROT = row.ROT,
-					MOT = row.MOT,
-					Org = row.ORG,
-					Dst = row.ORG,
-					ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
-					CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
-					AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
-					DTM = row.DTM,
-					PTM = row.PTM,
-					CntNoS = row.CNTNOS,
-
-					nStu = row.NSTU,
-					pStu = row.PSTU,
-					nStuTS = row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString(),
-					pStuTS = row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString(),
-					REOH = row.IsREOHNull() ? "" : row.REOH.ToString(),
-					AOH = row.IsAOHNull() ? "" : row.AOH.ToString(),
-					RTR = row.IsRTRNull() ? "" : row.RTR.ToString(),
-					POD = row.IsPODNull() ? "" : row.POD.ToString(),
-				};
-				Response res = localNode.PUT("/tMax14rest/OPH", jsn.ToJsonUtf8(), null, 10);
-				if(res.StatusCode == 200)
-				{
-					row.Delete();
-				}
-			}
-			hta.Update(dts.WEB_OPH_MDFD);
-			*/
-		}
 
 	}
 }
