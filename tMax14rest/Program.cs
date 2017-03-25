@@ -35,7 +35,7 @@ namespace tMax14rest
 				//settings.MissingMemberHandling = MissingMemberHandling.Ignore;
 				jsn.PopulateFromJson(s);
 
-				Console.WriteLine(jsn.FrtID);
+				//Console.WriteLine(jsn.FrtID);
 				ws.Send(jsn.FrtID);
 			});
 

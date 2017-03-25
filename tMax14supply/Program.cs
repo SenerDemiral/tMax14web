@@ -28,7 +28,7 @@ namespace tMax14supply
 			Console.WriteLine("Basla1");
 			ws.OnMessage += (sndr, ev) =>
 			{
-				Console.WriteLine("wsMessage: " + ev.Data);
+				//Console.WriteLine("wsMessage: " + ev.Data);
 			};
 
 			timer.AutoReset = true;
