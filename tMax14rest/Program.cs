@@ -31,11 +31,12 @@ namespace tMax14rest
 			{
 				// Handle s and send response
 				FrtMsg jsn = new FrtMsg();
-				var settings = new JsonSerializerSettings();
-				
-				settings.MissingMemberHandling = MissingMemberHandling.Ignore;
-				jsn.PopulateFromJson(s, settings);
-				ws.Send("OK");
+				//var settings = new JsonSerializerSettings();
+				//settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+				jsn.PopulateFromJson(s);
+
+				Console.WriteLine(jsn.FrtID);
+				ws.Send(jsn.FrtID);
 			});
 
 			Handle.WebSocket("ws", (byte[] data, WebSocket ws) =>

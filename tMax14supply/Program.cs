@@ -26,7 +26,11 @@ namespace tMax14supply
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Basla1");
-			
+			ws.OnMessage += (sndr, ev) =>
+			{
+				Console.WriteLine("wsMessage: " + ev.Data);
+			};
+
 			timer.AutoReset = true;
 			timer.Elapsed += Timer_Elapsed;
 			
@@ -93,6 +97,11 @@ namespace tMax14supply
 				Console.WriteLine(frt.ToString());
 				return "task";
 			});
+		}
+
+		private static void Ws_OnMessage(object sender, MessageEventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 
 		static void task()
