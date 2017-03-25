@@ -242,6 +242,7 @@ namespace tMax14rest
 							rec.EOH = jsn.EOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
 							rec.AOH = jsn.AOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
 							rec.RTR = jsn.RTR == "" ? (DateTime?)null : Convert.ToDateTime(jsn.RTR);
+							rec.ROS = jsn.RTR == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROS);
 							rec.POD = jsn.POD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
 
 							if(rec.OpmID != null)

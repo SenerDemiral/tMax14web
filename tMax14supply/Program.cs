@@ -280,6 +280,7 @@ namespace tMax14supply
 					{
 						Tbl = "OPH",
 						Evnt = row.EVNT,
+						OphID = row.OPHID.ToString(),
 						OpmID = row.OPMID.ToString(),
 						EXD = row.EXD.ToString(),
 						ROT = row.ROT,
@@ -291,6 +292,8 @@ namespace tMax14supply
 						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
 						DTM = row.DTM,
 						PTM = row.PTM,
+						NOP = row.IsNOPNull() ? "" : row.NOP.ToString(),
+						GrW = row.IsGRWNull() ? "" : row.GRW.ToString(),
 						CntNoS = row.CNTNOS,
 
 						nStu = row.NSTU,
@@ -298,8 +301,10 @@ namespace tMax14supply
 						nStuTS = row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString(),
 						pStuTS = row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString(),
 						REOH = row.IsREOHNull() ? "" : row.REOH.ToString(),
+						EOH = row.IsEOHNull() ? "" : row.EOH.ToString(),
 						AOH = row.IsAOHNull() ? "" : row.AOH.ToString(),
 						RTR = row.IsRTRNull() ? "" : row.RTR.ToString(),
+						ROS = row.IsROSNull() ? "" : row.ROS.ToString(),
 						POD = row.IsPODNull() ? "" : row.POD.ToString(),
 					};
 					wsOph.Send(jsn.ToJson());
