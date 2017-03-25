@@ -1,12 +1,8 @@
 {
 	"Tbl": "FRT",
-	"FrtA": [
-		{
-			"Evnt": "",
-			"FrtID": "",
-			"AdN": "",
-			"LocID": "",
-			"Pwd": ""
-		}
-	]
+	"Evnt": "aa",				
+	"FrtID": "bb",
+	"AdN": "cc",
+	"LocID": "dd",
+	"Pwd": "ee"
 }

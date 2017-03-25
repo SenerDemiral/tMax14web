@@ -6,6 +6,7 @@ using Starcounter.Internal;
 using CronNET;
 using System.Threading;
 using WebSocketSharp;
+using System.IO;
 
 namespace tMax14supply
 {
@@ -126,23 +127,35 @@ namespace tMax14supply
 		static void FrtCron(string typ)
 		{
 			int nor = fta.Fill(dts.WEB_FRT_MDFD, typ);
-			FrtMsg jsn = new FrtMsg();
-			jsn.Tbl = "FRT";
+			/*
+			FrtMsg.FrtAElementJson jsnE = new FrtMsg.FrtAElementJson();
+			jsnE.Evnt = "event";
+			jsnE.FrtID = "1111";
+			jsnE.AdN = "adn";
+			jsnE.Pwd = "pwd";
+			jsn.FrtA.Add(jsnE);
+			*/
+			if(ws.ReadyState != WebSocketState.Open)
+				ws.Connect();
+
 
 			foreach(tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
 			{
-				FrtMsg.FrtAElementJson jsnE = new FrtMsg.FrtAElementJson
+				var jsn = new FrtMsg
 				{
 					Evnt = row.EVNT,
 					FrtID = row.FRTID.ToString(),
 					AdN = row.ADN,
 					Pwd = row.PWD
 				};
-				jsn.FrtA.Add(jsnE);
+				ws.Send(jsn.ToJson());
 			}
-			if(ws.ReadyState != WebSocketState.Open)
-				ws.Connect();
-			ws.Send(jsn.ToJson());
+			//var aaa = jsn.ToJson();
+			//var oms = new MemoryStream();
+			//byte[] buf = jsn.ToJsonUtf8();
+			//oms.Read(buf, 0, buf.Length);
+			//oms.Seek(0, SeekOrigin.Begin);
+
 		}
 
 		static void FrtCron2()
