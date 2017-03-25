@@ -34,9 +34,51 @@ namespace tMax14rest
 				//var settings = new JsonSerializerSettings();
 				//settings.MissingMemberHandling = MissingMemberHandling.Ignore;
 				jsn.PopulateFromJson(s);
+				string rMsg = "OK";
 
 				//Console.WriteLine(jsn.FrtID);
-				ws.Send(jsn.FrtID);
+
+				Db.Transact(() =>
+				{
+					try
+					{
+						int FrtID = int.Parse(jsn.FrtID);
+
+						if(jsn.Evnt == "D")
+						{
+							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where rec.FrtID = ?", FrtID);
+							foreach(var rec in frts)
+							{
+								rec.Delete();
+							}
+						}
+						else
+						{
+							TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
+							if(jsn.Evnt == "I" && rec == null)
+							{
+								rec = new TMDB.FRT();
+							}
+
+							if(rec == null)
+								rMsg = "NoFirma2Update";
+							else
+							{
+								rec.MdfdOn = DateTime.Now;
+								rec.FrtID = Convert.ToInt32(jsn.FrtID);
+								rec.AdN = jsn.AdN;
+								rec.LocID = jsn.LocID;
+								rec.Pwd = jsn.Pwd;
+							}
+						}
+					}
+					catch(Exception ex)
+					{
+						rMsg = ex.Message;
+					}
+				});
+
+				ws.Send(rMsg);
 			});
 
 			Handle.WebSocket("ws", (byte[] data, WebSocket ws) =>
