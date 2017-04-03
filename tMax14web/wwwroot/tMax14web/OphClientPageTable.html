@@ -1,0 +1,141 @@
+﻿<link rel="import" href="/sys/moment-element/moment-element.html">
+
+<template>
+    <template is="dom-bind">
+		<div>[[processInit(model.Html)]]</div>
+
+		<!--<div style="width:100%;overflow:hidden;box-sizing:border-box">-->
+		<!--<table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">-->
+		<!--<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">-->
+		<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
+		<!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
+			<thead>
+				<tr>
+					<th id="OphID">ID</th>
+					<th id="EXD_t">EXD</th>
+					<th id="ROT">R</th>
+					<th id="MOT">M</th>
+					<th id="Org">Org</th>
+					<th id="Dst">Dst</th>
+					<th id="nStu">Statu</th>
+					<th id="nStuTS_t"></th>
+					<th id="pStu">Problem</th>
+					<th id="pStuTS_t"></th>
+					
+					<th id="ShpAd">Shp</th>
+					<th id="CneAd">Cne</th>
+					<th id="AccAd">Acc</th>
+					<th id="DTM">DTM</th>
+					<th id="PTM">PTM</th>
+					<th id="NOP">NOP</th>
+					<th id="GrW">GrW</th>
+					<th id="EOH_t">EOH</th>
+					<th id="REOH_t">REOH</th>
+					<th id="AOH_t">AOH</th>
+					<th id="RTR_t">RTR</th>
+					<th id="POD_t">POD</th>
+					<th id="ETD_t">ETD</th>
+					<th id="ATD_t">ATD</th>
+					<th id="ETA_t">ETA</th>
+					<th id="ATA_t">ATA</th>
+					<th id="CntNoS">Cnt#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<template is="dom-repeat" items="[[abcd]]">
+					<tr>
+						<td>[[item.OphID]]</td>
+						<!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
+						<td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td>[[item.ROT]]</td>
+						<td>[[item.MOT]]</td>
+						<td>[[item.Org]]</td>
+						<td>[[item.Dst]]</td>
+						<td>[[item.nStu]]</td>
+						<td class="trh"><moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td>[[item.pStu]]</td>
+						<td>[[item.pStuD]]</td>
+						
+						<td>[[item.ShpAd]]</td>
+						<td>[[item.CneAd]]</td>
+						<td>[[item.AccAd]]</td>
+
+						<td>[[item.DTM]]</td>
+						<td>[[item.PTM]]</td>
+						<td>[[item.NOP]]</td>
+						<td>[[item.GrW]]</td>
+						<td class="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td>[[item.CntNoS]]</td> 
+					</tr">
+				</template>
+			</tbody>	
+		</table>
+    </template>
+	
+	<script>
+		(function ()
+		{
+			var curRowIndex = -1;
+			var curCellIndex = -1;
+
+			var script = document._currentScript || document.currentScript;
+			tmplt = script.previousElementSibling;
+
+			tmplt.processInit = function (val) {
+				//console.log("processInit this1", this.$.tblOphs);
+				//console.log("processInit this2", this.$["EXD"]);
+				if (curCellIndex != -1) {
+					this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+				}
+				if (curRowIndex != -1) {
+					this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+				}
+				curRowIndex = -1;
+				curCellIndex = -1;
+				tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+				console.log("processInit", tmplt.abcd.length);
+
+			};
+
+			tmplt.MyFnc = function (e, x) {
+				if (e.target.parentNode.rowIndex == 0)
+				{
+					console.log("target ID", e.target.id.substring(e.target.id.length - 2));
+					if (curCellIndex != -1) {
+						this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+						//x.rows[0].cells[curCellIndex].classList.remove("curSort");
+					}
+					//console.log("TableMyFnc2", this);
+					curCellIndex = e.target.cellIndex;
+					e.target.classList.add("curSort");
+
+					var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+					//if (e.target.id.substring(e.target.id.length - 2) == "_t")
+					if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
+						tmplt.abcd = sener.sort(firstBy(e.target.id, -1));
+					else
+						tmplt.abcd = sener.sort(firstBy(e.target.id));
+				}
+				else
+				{
+					if (curRowIndex != -1) {
+						this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+					}
+					curRowIndex = e.target.parentNode.rowIndex;
+					e.target.parentNode.classList.add("curRow");
+				}
+			}
+
+		})();
+
+	</script>
+
+</template>

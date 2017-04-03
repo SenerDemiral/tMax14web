@@ -1,12 +1,12 @@
 ![Bower version](https://img.shields.io/bower/v/vaadin-grid.svg)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/vaadin/vaadin-grid)
-[![Build Status](https://travis-ci.org/vaadin/vaadin-grid.svg?branch=2.0-dev)](https://travis-ci.org/vaadin/vaadin-grid)
-[![Coverage Status](https://coveralls.io/repos/github/vaadin/vaadin-grid/badge.svg?branch=2.0-dev)](https://coveralls.io/github/vaadin/vaadin-grid?branch=2.0-dev)
+[![Build Status](https://travis-ci.org/vaadin/vaadin-grid.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-grid)
+[![Coverage Status](https://coveralls.io/repos/github/vaadin/vaadin-grid/badge.svg?branch=master)](https://coveralls.io/github/vaadin/vaadin-grid?branch=master)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # &lt;vaadin-grid&gt;
 
-[Live Demo ↗](https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-grid/demo/)
+[Live Demo ↗](https://cdn.vaadin.com/vaadin-grid/2.0.0-beta1/demo/)
 
 [&lt;vaadin-grid&gt;](https://vaadin.com/elements/-/element/vaadin-grid) is a free, high quality data grid / data table [Polymer](http://polymer-project.org) element, part of the [Vaadin Core Elements](https://vaadin.com/elements).
 
@@ -53,7 +53,7 @@
 </template>
 ```
 
-[<img src="https://github.com/vaadin/vaadin-grid/raw/master/screenshot.png" width="481" alt="Screenshot of vaadin-grid">](https://vaadin.com/elements/-/element/vaadin-grid)
+<img src="https://github.com/vaadin/vaadin-grid/raw/master/grid.gif">
 
 
 ## Contributing

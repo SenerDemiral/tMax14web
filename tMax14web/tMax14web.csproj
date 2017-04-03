@@ -130,7 +130,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\tMax14web\OphClientPage.html" />
+    <None Include="wwwroot\tMax14web\OphClientPageTable.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\tMax14web\MasterPage.html" />
@@ -142,11 +142,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\tMax14web\OphClientPageVaadin.html" />
+    <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\sys\Stylesheet1.css" />
     <Content Include="wwwroot\sys\thenBy.js" />
+    <None Include="wwwroot\tMax14web\OphClientPageVaadin.html" />
     <None Include="wwwroot\tMax14web\OphClientPageO1.html" />
     <None Include="wwwroot\tMax14web\OphClientPageOriginal.html" />
     <None Include="wwwroot\tMax14web\MasterPageOriginal.html" />
