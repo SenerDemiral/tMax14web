@@ -8,7 +8,7 @@
         outline: none;
       }
 
-      :host([navigating]:not([interacting])) [focused] > tr[focused] > [focused] ::content > .cell-content {
+      :host([navigating]:not([interacting])) [focused] > tr[focused] > [focused] ::content > vaadin-grid-cell-content {
         box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
         @apply(--vaadin-grid-focused-cell);
       }
@@ -208,7 +208,7 @@
     },
 
     _onTab: function(e) {
-      if (this.interacting) {
+      if (this.interacting || !this._virtualFocus) {
         return;
       }
 
@@ -225,7 +225,12 @@
               this._virtualFocus = this.$.footer;
               e.preventDefault();
             } else {
-              this._virtualFocus = null;
+              // IE11 doesn't handle the footer trap `focus` event above syncronously
+              // which means that virtualFocus gets set to null before the handler is run
+              // causing focus being transferred back to body focus trap.
+              this.async(function() {
+                this._virtualFocus = null;
+              }, 1);
             }
             break;
 
@@ -267,7 +272,6 @@
             e.preventDefault();
             break;
           case this.$.header:
-            this.$.headerFocusTrap.focus();
             this._virtualFocus = null;
             break;
         }

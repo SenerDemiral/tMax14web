@@ -59,15 +59,15 @@
     "iron-a11y-announcer": "^1.0.5"
   },
   "homepage": "https://github.com/vaadin/vaadin-grid",
-  "version": "2.0.0-alpha4",
-  "_release": "2.0.0-alpha4",
+  "version": "2.0.0-beta2",
+  "_release": "2.0.0-beta2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.0-alpha4",
-    "commit": "4fed1c848116c2a8cb83f88340ad8e933158acfc"
+    "tag": "v2.0.0-beta2",
+    "commit": "4ac0bef8a43ac1102f6c288923e5e04c9363948f"
   },
   "_source": "https://github.com/vaadin/vaadin-grid.git",
-  "_target": "2.0.0-alpha4",
+  "_target": "2.0.0-beta2",
   "_originalSource": "vaadin/vaadin-grid",
   "_direct": true
 }

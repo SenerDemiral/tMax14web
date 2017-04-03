@@ -15,15 +15,16 @@ namespace tMax14web
 					<meta charset=""utf-8"">
 				    <meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=yes"">
 					<title>{0}</title>
-					
 					<script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
+					
 					<link rel=""import"" href=""/sys/polymer/polymer.html"">
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
 					<script src=""/sys/thenBy.js""></script>
 					
-					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					<!--<link rel=""import"" href=""/sys/bootstrap.html"">
+					<script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
+					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					<link rel=""import"" href=""/sys/iron-icons/maps-icons.html"">
 					<link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"" integrity=""sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"" crossorigin=""anonymous"">
 					
