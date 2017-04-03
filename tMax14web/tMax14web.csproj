@@ -82,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MainHandlers.cs" />
     <Compile Include="MasterPage.json.cs">
       <DependentUpon>MasterPage.json</DependentUpon>
     </Compile>

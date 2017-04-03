@@ -12,6 +12,7 @@
 			<thead>
 				<tr>
 					<th id="OphID">ID</th>
+					<th id="RefNo">RefNo</th>
 					<th id="EXD_t">EXD</th>
 					<th id="ROT">R</th>
 					<th id="MOT">M</th>
@@ -45,6 +46,7 @@
 				<template is="dom-repeat" items="[[abcd]]">
 					<tr>
 						<td>[[item.OphID]]</td>
+						<td>[[item.RefNo]]</td>
 						<!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
 						<td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td>[[item.ROT]]</td>
