@@ -6,6 +6,21 @@ namespace TMDB
 {
 
 	[Database]
+	public class WebSocketId
+	{
+		public UInt64 Id;
+		public UInt32 NumBroadcasted;
+		public DateTime ToU;	// Time of Update
+	}
+
+	[Database]
+	public class WsMsg
+	{
+		public string Msg;
+		public DateTime ToU;    // Time of Update
+	}
+
+	[Database]
 	public class FRT
 	{
 		public DateTime MdfdOn;

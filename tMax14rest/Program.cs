@@ -3,11 +3,17 @@ using System.Text;
 using Starcounter;
 using Starcounter.Advanced.XSON;
 using Starcounter.XSON.Serializer;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Threading;
 
 namespace tMax14rest
 {
 	class Program
 	{
+		// NOTE: Timer should be static, otherwise its garbage collected.
+		static Timer WebSocketSessionsTimer = null;
+
 		static void Main()
 		{
 
@@ -116,7 +122,7 @@ namespace tMax14rest
 
 				Db.Transact(() =>
 				{
-						int OpmID = int.Parse(jsn.OpmID);
+					int OpmID = int.Parse(jsn.OpmID);
 
 					if(jsn.Evnt == "D")
 					{
@@ -639,6 +645,186 @@ namespace tMax14rest
 			}, new HandlerOptions() { SkipRequestFilters = true });
 			*/
 
+			int wsc1 = 0;
+			int wsc2 = 0;
+			ConcurrentDictionary<UInt64, string> cd = new ConcurrentDictionary<UInt64, string>();
+
+			Handle.GET("/wss", (Request req) =>
+			{
+				StringBuilder sb = new StringBuilder();
+				
+				var list = cd.Keys.ToList();
+				list.Sort();
+
+				// Loop through keys.
+				foreach(var key in list)
+				{
+					sb.AppendLine($"{key} - {cd[key]}");
+					//Console.WriteLine("{0}: {1}", key, cd[key]);
+				}
+				/*
+				foreach(var pair in cd)
+				{
+					sb.AppendLine($"{pair.Key} - {pair.Value}");
+					//Console.WriteLine("{0}, {1}", pair.Key, pair.Value);
+				}*/
+				//return cd.Count.ToString();
+				//return $"{wsc1} - {wsc2}";
+				return sb.ToString();
+			});
+
+			Handle.GET("/wsConnect/{?}", (string p1, Request req) =>
+			{
+				if(req.WebSocketUpgrade)
+				{
+					// Save wsIdlower, wsIdUpper in database.
+					Db.Transact(() => {
+						new TMDB.WebSocketId()
+						{
+							Id = req.GetWebSocketId(),  //ws.ToUInt64()
+							ToU = DateTime.Now
+						};
+					});
+
+
+					cd.TryAdd(req.GetWebSocketId(), p1);
+
+					var hd = req.HeadersDictionary;
+					string prm = string.Empty;
+					if(req.HeadersDictionary.ContainsKey("Sec-WebSocket-Protocol"))
+						prm = hd["Sec-WebSocket-Protocol"];
+					
+					wsc1++;
+
+					if(req.HeadersDictionary.TryGetValue("Sec-WebSocket-Protocol", out prm))
+					{
+						//cd.TryAdd(req.GetWebSocketId(), prm);
+						var id = req.GetWebSocketId();
+						// Use prm
+					}
+
+					//WebSocket ws = req.SendUpgrade("ws");
+					req.SendUpgrade("ws");
+					//Console.WriteLine("ws Connected {0}", DateTime.Now);
+					return HandlerStatus.Handled;
+				}
+				return new Response()
+				{
+					StatusCode = 500,
+					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+				};
+			});
+			Handle.WebSocket("ws", (String s, WebSocket ws) =>
+			{
+				//Console.WriteLine("ws received {0} {1}", s, DateTime.Now);
+				ws.Send("echo: " + s + "   " + ws.ToUInt64().ToString());
+
+			});
+
+			Handle.GET("/wsConnect2", (Request req) =>
+			{
+				if(req.WebSocketUpgrade)
+				{
+					var hd = req.HeadersDictionary;
+					string prm = string.Empty;
+					if(req.HeadersDictionary.ContainsKey("Sec-WebSocket-Protocol"))
+						prm = hd["Sec-WebSocket-Protocol"];
+
+					if(req.HeadersDictionary.TryGetValue("Sec-WebSocket-Protocol", out prm))
+					{
+						//cd.TryAdd(req.GetWebSocketId(), prm);
+						wsc2++;
+						var id = req.GetWebSocketId();
+						// Use prm
+					}
+
+					//WebSocket ws = req.SendUpgrade("ws");
+					req.SendUpgrade("ws2");
+					Console.WriteLine("ws Connected {0}", DateTime.Now);
+					return HandlerStatus.Handled;
+				}
+				return new Response()
+				{
+					StatusCode = 500,
+					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+				};
+			});
+			Handle.WebSocket("ws2", (String s, WebSocket ws) =>
+			{
+				Console.WriteLine("ws2 received {0} {1}", s, DateTime.Now);
+				ws.Send("echo: " + s + "   " + ws.ToUInt64().ToString());
+
+			});
+
+			Handle.GET("/wsMsg/{?}", (String msg) =>
+			{
+				Db.Transact(() =>
+				{
+					new TMDB.WsMsg()
+					{
+						Msg = msg,
+						ToU = DateTime.Now
+					};
+				});
+				return "OK";
+			});
+
+			// Removing existing objects from database.
+			Db.Transact(() => {
+				Db.SlowSQL("DELETE FROM WebSocketId");
+			});
+
+			WebSocketSessionsTimer = new Timer((state) => {
+
+				// Getting sessions for current scheduler.
+				Scheduling.ScheduleTask(() => {
+
+					Db.Transact(() => {
+						foreach(TMDB.WebSocketId wsDb in Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w"))
+						{
+							foreach(TMDB.WsMsg wm in Db.SQL<TMDB.WsMsg>("select m from TMDB.WsMsg m where m.ToU > ?", wsDb.ToU))
+							{
+								WebSocket ws = new WebSocket(wsDb.Id);
+								ws.Send(wm.Msg);
+
+								wsDb.ToU = DateTime.Now;
+							}
+
+							/*
+								WebSocket ws = new WebSocket(wsDb.Id);
+
+							// Checking if ready to disconnect after certain amount of sends.
+							if(wsDb.NumBroadcasted == 100)
+							{
+								ws.Disconnect();
+								wsDb.Delete();
+
+								// Proceeding to next active WebSocket.
+								continue;
+							}
+
+							String sendMsg = "Broadcasting id: " + wsDb.Id + "  " + wsDb.NumBroadcasted;
+							ws.Send(sendMsg+wsc1);
+							wsDb.NumBroadcasted++;
+							wsDb.ToU = DateTime.Now; */
+						}
+					});
+
+				});
+
+			}, null, 1000, 10000);
+
+			Handle.WebSocketDisconnect("ws", (WebSocket ws) => {
+
+				Db.Transact(() => {
+
+					TMDB.WebSocketId wsId = Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w WHERE w.Id=?", ws.ToUInt64()).First;
+					if(wsId != null)
+					{
+						wsId.Delete();
+					}
+				});
+			});
 		}
 	}
 }
