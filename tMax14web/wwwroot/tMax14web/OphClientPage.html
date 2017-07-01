@@ -18,7 +18,8 @@
 					<th id="MOT">M</th>
 					<th id="Org">Org</th>
 					<th id="Dst">Dst</th>
-					<th id="nStu">Statu</th>
+					
+                    <th id="nStu">Statu</th>
 					<th id="nStuTS_t"></th>
 					<th id="pStu">Problem</th>
 					<th id="pStuTS_t"></th>
@@ -26,11 +27,20 @@
 					<th id="ShpAd">Shp</th>
 					<th id="CneAd">Cne</th>
 					<th id="AccAd">Acc</th>
+					<th id="MnfAd">Mnf</th>
+					<th id="NfyAd">Nfy</th>
+
 					<th id="DTM">DTM</th>
 					<th id="PTM">PTM</th>
-					<th id="NOP">NOP</th>
+					
+                    <th id="NOP">NOP</th>
 					<th id="GrW">GrW</th>
-					<th id="EOH_t">EOH</th>
+					<th id="VM3">VM3</th>
+					<th id="ChW">ChW</th>
+					
+                    <th id="ROS_t">ROS Request On Site</th>
+					<th id="ROH_t">ROH</th>
+					<th id="EOH_t">EOH Expected On Hand</th>
 					<th id="REOH_t">REOH</th>
 					<th id="AOH_t">AOH</th>
 					<th id="RTR_t">RTR</th>
@@ -39,7 +49,9 @@
 					<th id="ATD_t">ATD</th>
 					<th id="ETA_t">ETA</th>
 					<th id="ATA_t">ATA</th>
-					<th id="CntNoS">Cnt#</th>
+					<th id="ACOT_t">ACOT</th>
+					
+                    <th id="CntNoS">Cnt#</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,7 +60,7 @@
 						<td>[[item.OphID]]</td>
 						<td>[[item.RefNo]]</td>
 						<!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
-						<td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td><moment-element datetime="[[item.EXD_t]]" output-format=[[model.Cols.0.Fmt]]></moment-element></td>
 						<td>[[item.ROT]]</td>
 						<td>[[item.MOT]]</td>
 						<td>[[item.Org]]</td>
@@ -61,11 +73,19 @@
 						<td>[[item.ShpAd]]</td>
 						<td>[[item.CneAd]]</td>
 						<td>[[item.AccAd]]</td>
+						<td>[[item.MnfAd]]</td>
+						<td>[[item.NfyAd]]</td>
 
 						<td>[[item.DTM]]</td>
 						<td>[[item.PTM]]</td>
+
 						<td>[[item.NOP]]</td>
 						<td>[[item.GrW]]</td>
+						<td>[[item.VM3]]</td>
+						<td>[[item.ChW]]</td>
+
+						<td class="trh"><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ROH_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td class="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td class="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td class="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
@@ -75,6 +95,7 @@
 						<td class="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td class="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td class="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+						<td class="trh"><moment-element datetime="[[item.ACOT_t]]" output-format="DD.MM.YY"></moment-element></td>
 						<td>[[item.CntNoS]]</td> 
 					</tr">
 				</template>
@@ -102,7 +123,8 @@
 				}
 				curRowIndex = -1;
 				curCellIndex = -1;
-				tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+				//--tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+				tmplt.abcd = tmplt.model.Ophs;
 				console.log("processInit", tmplt.abcd.length);
 
 			};
@@ -120,6 +142,7 @@
 					e.target.classList.add("curSort");
 
 					var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+				    //var sener = {...tmplt.model.Ophs}; ES7
 					//if (e.target.id.substring(e.target.id.length - 2) == "_t")
 					if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
 						tmplt.abcd = sener.sort(firstBy(e.target.id, -1));

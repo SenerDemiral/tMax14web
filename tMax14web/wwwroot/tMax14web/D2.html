@@ -1,0 +1,37 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template id="t" is="dom-bind">
+        <github-browser-app dilara={{data}}>1111 [[data]]</github-browser-app>
+        <!--<github-browser-app dilara="SENER">2222 [[data]]</github-browser-app>-->
+        <div>123-{{data}}-456</div>
+        <div>{{something}}</div>
+    <div class="row">
+        <label><b>Choose your domain name:</b><br>http://<input type="text" value="{{data}}" placeholder="yourdomain">.com</label>
+    </div>
+    <div class="row">
+        <b>Your domain:</b><br>{{data}}.com
+    </div>
+
+    </template>
+    <script>
+        console.log('seeeenrt');
+        window.addEventListener('WebComponentsReady', function (e) {
+            console.log('WebComponentsReady');
+            document.querySelector('#t').something = "yo";
+       });
+    </script>
+
+    <script>
+      var t = document.querySelector('#t');
+      console.log(t);
+
+      // The dom-change event signifies when the template has stamped its DOM.
+      t.addEventListener('dom-change', function() {
+          console.log('auto-binding template is ready.');
+          document.querySelector('#t').something = "yoyoyo";
+          console.log(t.dilara);
+          console.log(document.querySelector('#t'));
+      });
+    </script>
+</template>

@@ -3,6 +3,6 @@
 	"fID$": "57036",
 	"fPW$": "can",
 	"StartDate$": "2015-12-31",
-	"Download$": 0,
+	"DownloadTrigger$": 0,
 	"CurrentPage": {}
 }

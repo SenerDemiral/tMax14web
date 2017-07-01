@@ -77,7 +77,9 @@ namespace tMax14web
 					//Create the worksheet
 
 					OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("House");
-					var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.ShpID = ? and h.EXD >= ?", Convert.ToInt32(frtID), Convert.ToDateTime(sDate));
+                    int FRTID = Convert.ToInt32(frtID);
+
+                    var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", FRTID, FRTID, FRTID, Convert.ToDateTime(sDate));
 					int cr = 2;
 					foreach(var h in ophs)
 					{
@@ -96,10 +98,15 @@ namespace tMax14web
 						ws.Cells[cr, (int)hFlds.Shp].Value = h.ShpAd;
 						ws.Cells[cr, (int)hFlds.Cne].Value = h.CneAd;
 						ws.Cells[cr, (int)hFlds.Acc].Value = h.AccAd;
+						ws.Cells[cr, (int)hFlds.Mnf].Value = h.MnfAd;
+						ws.Cells[cr, (int)hFlds.Nfy].Value = h.NfyAd;
 						ws.Cells[cr, (int)hFlds.DTM].Value = h.DTM;
 						ws.Cells[cr, (int)hFlds.PTM].Value = h.PTM;
 						ws.Cells[cr, (int)hFlds.NOP].Value = h.NOP;
 						ws.Cells[cr, (int)hFlds.GrW].Value = h.GrW;
+						ws.Cells[cr, (int)hFlds.VM3].Value = h.VM3;
+						ws.Cells[cr, (int)hFlds.ChW].Value = h.ChW;
+						ws.Cells[cr, (int)hFlds.ROH].Value = h.ROH;
 						ws.Cells[cr, (int)hFlds.REOH].Value = h.REOH;
 						ws.Cells[cr, (int)hFlds.EOH].Value = h.EOH;
 						ws.Cells[cr, (int)hFlds.AOH].Value = h.AOH;
@@ -110,6 +117,7 @@ namespace tMax14web
 						ws.Cells[cr, (int)hFlds.ATD].Value = h.ATD;
 						ws.Cells[cr, (int)hFlds.ETA].Value = h.ETA;
 						ws.Cells[cr, (int)hFlds.ATA].Value = h.ATA;
+						ws.Cells[cr, (int)hFlds.ACOT].Value = h.ACOT;
 						ws.Cells[cr, (int)hFlds.CntNoS].Value = h.CntNoS;
 
 						cr++;
@@ -129,10 +137,15 @@ namespace tMax14web
 					ws.Cells[1, (int)hFlds.Shp].Value = "Shp";
 					ws.Cells[1, (int)hFlds.Cne].Value = "Cne";
 					ws.Cells[1, (int)hFlds.Acc].Value = "Acc";
+					ws.Cells[1, (int)hFlds.Mnf].Value = "Mnf";
+					ws.Cells[1, (int)hFlds.Nfy].Value = "Nfy";
 					ws.Cells[1, (int)hFlds.DTM].Value = "DTM";
 					ws.Cells[1, (int)hFlds.PTM].Value = "PTM";
 					ws.Cells[1, (int)hFlds.NOP].Value = "NOP";
 					ws.Cells[1, (int)hFlds.GrW].Value = "GrW";
+					ws.Cells[1, (int)hFlds.VM3].Value = "VM3";
+					ws.Cells[1, (int)hFlds.ChW].Value = "ChW";
+					ws.Cells[1, (int)hFlds.ROH].Value = "ROH";
 					ws.Cells[1, (int)hFlds.EOH].Value = "EOH";
 					ws.Cells[1, (int)hFlds.REOH].Value = "REOH";
 					ws.Cells[1, (int)hFlds.AOH].Value = "AOH";
@@ -143,7 +156,8 @@ namespace tMax14web
 					ws.Cells[1, (int)hFlds.ATD].Value = "ATD";
 					ws.Cells[1, (int)hFlds.ETA].Value = "ETA";
 					ws.Cells[1, (int)hFlds.ATA].Value = "ATA";
-					ws.Cells[1, (int)hFlds.CntNoS].Value = "Cnt#";
+                    ws.Cells[1, (int)hFlds.ACOT].Value = "ACOT";
+                    ws.Cells[1, (int)hFlds.CntNoS].Value = "Cnt#";
 
 					//var values = Enum.GetValues(typeof(hFlds));		// Array of values
 					int[] df = new int[] //DateFields
@@ -151,6 +165,7 @@ namespace tMax14web
 						(int)hFlds.EXD,
 						(int)hFlds.nStuTS,
 						(int)hFlds.pStuTS,
+						(int)hFlds.ROH,
 						(int)hFlds.REOH,
 						(int)hFlds.EOH,
 						(int)hFlds.AOH,
@@ -160,10 +175,11 @@ namespace tMax14web
 						(int)hFlds.ETD,
 						(int)hFlds.ATD,
 						(int)hFlds.ETA,
-						(int)hFlds.ATA
+						(int)hFlds.ATA,
+						(int)hFlds.ACOT
 					};
 
-					foreach(int c in df)
+                    foreach (int c in df)
 					{
 						ws.Column(c).Style.Numberformat.Format = "dd.mm.yy";
 					}
@@ -215,37 +231,11 @@ namespace tMax14web
 				}
 			});
 
-			Handle.GET("/tMax14web/ophs2xlsxDENEME/{?}/{?}", (string frtID, string sDate) => {
-
-				DataSet1 dts = new DataSet1();
-				DataSet1TableAdapters.OPHTableAdapter ophta = new DataSet1TableAdapters.OPHTableAdapter();
-				//int nor = opha.Fill(dts.OPH, frtID, sDate);
-
-
-				using(OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage())
-				{
-					//Create the worksheet
-					OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Demo");
-					ws.Cells["A1"].LoadFromDataTable(dts.OPH, true);
-
-					Response r = new Response();
-					r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-					r.Headers["Content-Disposition"] = "attachment; filename=tMax14web-ophs.xlsx";
-
-					var oms = new MemoryStream();
-					pck.SaveAs(oms);
-					oms.Seek(0, SeekOrigin.Begin);
-
-					r.StreamedBody = oms;
-					return r;
-				}
-			});
-
 
 		}
 		enum hFlds : int
 		{
-			None, OphID, RefNo, EXD, ROT, MOT, Org, Dst, nStu, nStuTS, pStu, pStuTS, Shp, Cne, Acc, DTM, PTM, NOP, GrW, EOH, REOH, AOH, RTR, ROS, POD, ETD, ATD, ETA, ATA, CntNoS
+			None, OphID, RefNo, EXD, ROT, MOT, Org, Dst, nStu, nStuTS, pStu, pStuTS, Shp, Cne, Acc, Mnf, Nfy, DTM, PTM, NOP, GrW, VM3, ChW, ROH, EOH, REOH, AOH, RTR, ROS, POD, ETD, ATD, ETA, ATA, ACOT, CntNoS
 		};
 	}
 }

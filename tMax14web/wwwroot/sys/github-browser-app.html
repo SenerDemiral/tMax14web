@@ -1,0 +1,55 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+
+    <dom-module id="github-browser-app">
+        <template>
+        <div>D2 [[dilara]]</div>
+        <div>formatDate:[[_formatDate(dilara)]]</div>
+        <!--<div>denemeDeneme:[[denemeDeneme('aaa', 'bbb')]]</div>-->
+        <content></content>
+
+        <template is="dom-repeat" items="[[columns]]" as="column">
+          <div>col:[[column]]</div>
+          <div>itm:[[index]]</div>
+                <div>Fmt:[[_formatDate(column)]]</div>
+          <div>dnm:[[denemeDeneme(column)]]</div>
+          <div>get:[[get(column)]]</div>
+        </template>
+
+        </template>
+        <script>
+          Polymer({
+            is: 'github-browser-app',
+            properties: {
+              loading: Boolean,
+              dilara: {
+                  type: String,
+                  value: 'DILARA',
+                  notify: true
+              },
+              repo: {
+                type: String,
+                observer: '_fetchCommits'
+              },
+              columns: Array,
+            },
+
+            ready: function () {
+                console.log('ready');
+                this.columns = ['name.first', 'name.last', 'email'];
+            },
+              
+            _formatDate: function (dateString) {
+                console.log(dateString);
+                console.log(this.get(['columns', 0]));
+                return 'abcde ' + dateString;
+            },
+
+            denemeDeneme: function (col, itm) {
+                console.log('deneme  ' + col);
+                var www = this.columns[0];
+                console.log(this.columns);
+                return 'abcde';
+          }
+          });
+        </script>
+    </dom-module>

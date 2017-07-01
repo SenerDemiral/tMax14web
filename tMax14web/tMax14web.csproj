@@ -48,10 +48,6 @@
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=5.8.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
-      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.5.8.0\lib\net40-client\FirebirdSql.Data.FirebirdClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -74,13 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSet1.cs">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <Compile Include="D2.json.cs">
+      <DependentUpon>D2.json</DependentUpon>
     </Compile>
     <Compile Include="MainHandlers.cs" />
     <Compile Include="MasterPage.json.cs">
@@ -104,17 +95,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <TypedJSON Include="OphClientPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
@@ -122,6 +102,9 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="MasterPageBos.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="D2.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="packages.config" />
@@ -146,8 +129,10 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\sys\github-browser-app.html" />
     <Content Include="wwwroot\sys\Stylesheet1.css" />
     <Content Include="wwwroot\sys\thenBy.js" />
+    <None Include="wwwroot\tMax14web\D2.html" />
     <None Include="wwwroot\tMax14web\OphClientPageVaadin.html" />
     <None Include="wwwroot\tMax14web\OphClientPageO1.html" />
     <None Include="wwwroot\tMax14web\OphClientPageOriginal.html" />

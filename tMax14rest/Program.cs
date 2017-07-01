@@ -171,9 +171,10 @@ namespace tMax14rest
 							rec.ETD = jsn.ETD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETD);
 							rec.ATD = jsn.ATD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
 							rec.ETA = jsn.ETA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
-							rec.ATA = jsn.ATA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
+                            rec.ATA = jsn.ATA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
+                            rec.ACOT = jsn.ACOT == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ACOT);
 
-							if(rec.ShpID != null)
+                            if (rec.ShpID != null)
 								rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
 							if(rec.CneID != null)
 								rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
@@ -246,15 +247,20 @@ namespace tMax14rest
 							rec.PTM = jsn.PTM;
 							rec.NOP = jsn.NOP == "" ? (int?)null : Convert.ToInt32(jsn.NOP);
 							rec.GrW = jsn.GrW == "" ? (double?)null : Convert.ToDouble(jsn.GrW);
-							rec.CntNoS = jsn.CntNoS;
+                            rec.VM3 = jsn.VM3 == "" ? (double?)null : Convert.ToDouble(jsn.VM3);
+							rec.ChW = jsn.ChW == "" ? (int?)null : Convert.ToInt32(jsn.ChW);
+                            rec.CntNoS = jsn.CntNoS;
 
-							rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
-							rec.CneID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
-							rec.AccID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+                            rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+							rec.CneID = jsn.CneID == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
+                            rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
+                            rec.MnfID = jsn.MnfID == "" ? (int?)null : Convert.ToInt32(jsn.MnfID);
+                            rec.NfyID = jsn.NfyID == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
 
-							rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+                            rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
 							rec.nStuTS = jsn.nStuTS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
 							rec.pStuTS = jsn.pStuTS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.pStuTS);
+							rec.ROH = jsn.ROH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROH);
 							rec.REOH = jsn.REOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
 							rec.EOH = jsn.EOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
 							rec.AOH = jsn.AOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
@@ -270,8 +276,12 @@ namespace tMax14rest
 								rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
 							if(rec.AccID != null)
 								rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
-						}
-					}
+                            if (rec.MnfID != null)
+                                rec.Mnf = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).First;
+                            if (rec.NfyID != null)
+                                rec.Nfy = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.NfyID).First;
+                        }
+                    }
 				});
 				ws.Send(rMsg);
 			});
