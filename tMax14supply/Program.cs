@@ -230,7 +230,7 @@ namespace tMax14supply
 						row.Delete();
 				}
 				if(typ == "X")
-					fta.Update(dts.WEB_FRT_MDFD);
+					mta.Update(dts.WEB_OPM_MDFD);
 				
 				//wsOpm.Close();
 			}
@@ -289,7 +289,7 @@ namespace tMax14supply
 						row.Delete();
 				}
 				if(typ == "X")
-					fta.Update(dts.WEB_FRT_MDFD);
+					hta.Update(dts.WEB_OPH_MDFD);
 				
 				//wsOph.Close();
 			}

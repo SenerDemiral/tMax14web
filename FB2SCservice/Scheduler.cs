@@ -26,19 +26,23 @@ namespace FB2SCservice
             timer1.Interval = 30000;    // 30sec
             timer1.Elapsed += Timer1_Elapsed;
             timer1.Enabled = true;
-            Library.WriteErrorLog("FB2SC Service started");
+            FbLibrary.Logs.WriteErrorLog("FB2SC Service started");
         }
 
         private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Library.WriteErrorLog("Timer ticked");
-            Library.FrtCron("F");
+            //Library.WriteErrorLog("Timer ticked");
+            //Library.FrtCron("F");
+            //FbLibrary.Logs.WriteErrorLog("Timer ticked");
+            FbLibrary.SendWithWebSocket.FrtSend("F");
+            FbLibrary.SendWithWebSocket.OpmSend("F");
+            FbLibrary.SendWithWebSocket.OphSend("F");
         }
 
         protected override void OnStop()
         {
             timer1.Enabled = false;
-            Library.WriteErrorLog("FB2SC Service stopped");
+            FbLibrary.Logs.WriteErrorLog("FB2SC Service stopped");
         }
     }
 }
