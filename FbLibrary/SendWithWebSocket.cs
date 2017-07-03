@@ -39,13 +39,14 @@ namespace FbLibrary
                         Logs.WriteErrorLog("FRT Full " + nor.ToString());
 
                     dynamic jsn = new JObject();
+
                     foreach (tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
                     {
-                        jsn.Evnt = row.EVNT;
-                        jsn.FrtID = row.FRTID;
-                        jsn.AdN = row.ADN;
-                        jsn.LocID = row.LOCID;
-                        jsn.Pwd = row.PWD;
+                        jsn.Evnt = row["EVNT"];
+                        jsn.FrtID = row["FRTID"];
+                        jsn.AdN = row["ADN"];
+                        jsn.LocID = row["LOCID"];
+                        jsn.Pwd = row["PWD"];
                         /*
                         //jsn.AdN = Regex.Replace(row.ADN.ToLower(), @"(^\w)|(\s\w)", m => m.Value.ToUpper());  // Word first char to Upper
                         //Logs.WriteErrorLog(jsn.ToString());   // Formatted 
@@ -162,40 +163,40 @@ namespace FbLibrary
                     foreach (tMax14DataSet.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
                     {
                         jsn.Tbl = "OPH";
-                        jsn.Evnt = row.EVNT;
-                        jsn.OphID = row.OPHID.ToString();
-                        jsn.OpmID = row.OPMID.ToString();
-                        jsn.RefNo = row.REFNO;
-                        jsn.EXD = row.EXD.ToString();
-                        jsn.ROT = row.ROT;
-                        jsn.MOT = row.MOT;
-                        jsn.Org = row.ORG;
-                        jsn.Dst = row.DST;
-                        jsn.ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString();
-                        jsn.CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString();
-                        jsn.AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString();
-                        jsn.MnfID = row.IsMNFIDNull() ? "" : row.MNFID.ToString();
-                        jsn.NfyID = row.IsNFYIDNull() ? "" : row.NFYID.ToString();
-                        jsn.DTM = row.DTM;
-                        jsn.PTM = row.PTM;
-                        jsn.NOP = row.IsNOPNull() ? "" : row.NOP.ToString();
-                        jsn.GrW = row.IsGRWNull() ? "" : row.GRW.ToString();
-                        jsn.VM3 = row.IsVM3Null() ? "" : row.VM3.ToString();
-                        jsn.ChW = row.IsCHWNull() ? "" : row.CHW.ToString();
-                        jsn.CntNoS = row.CNTNOS;
+                        jsn.Evnt = row["EVNT"];
+                        jsn.OphID = row["OPHID"];
+                        jsn.OpmID = row["OPMID"];
+                        jsn.RefNo = row["REFNO"];
+                        jsn.EXD = row["EXD"];  // row.EXD.ToString();
+                        jsn.ROT = row["ROT"];  // row.ROT;
+                        jsn.MOT = row["MOT"];  // row.MOT;
+                        jsn.Org = row["Org"];  // row.ORG;
+                        jsn.Dst = row["Dst"];  // row.DST;
+                        jsn.ShpID = row["ShpID"];  // row.IsSHPIDNull() ? "" : row.SHPID.ToString();
+                        jsn.CneID = row["CneID"];  // row.IsCNEIDNull() ? "" : row.CNEID.ToString();
+                        jsn.AccID = row["AccID"];  // row.IsACCIDNull() ? "" : row.ACCID.ToString();
+                        jsn.MnfID = row["MnfID"];  // row.IsMNFIDNull() ? "" : row.MNFID.ToString();
+                        jsn.NfyID = row["NfyID"];  // row.IsNFYIDNull() ? "" : row.NFYID.ToString();
+                        jsn.DTM = row["DTM"];  // row.DTM;
+                        jsn.PTM = row["PTM"];  // row.PTM;
+                        jsn.NOP = row["NOP"];  // row.IsNOPNull() ? "" : row.NOP.ToString();
+                        jsn.GrW = row["GRW"];  // row.IsGRWNull() ? "" : row.GRW.ToString();
+                        jsn.VM3 = row["VM3"];  // row.IsVM3Null() ? "" : row.VM3.ToString();
+                        jsn.ChW = row["CHW"];  // row.IsCHWNull() ? "" : row.CHW.ToString();
+                        jsn.CntNoS = row["CNTNOS"];  // row.CNTNOS;
 
-                        jsn.nStu = row.NSTU;
-                        jsn.pStu = row.PSTU;
-                        jsn.nStuTS = row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString();
-                        jsn.pStuTS = row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString();
-                        jsn.ROH = row.IsROHNull() ? "" : row.ROH.ToString();
-                        jsn.REOH = row.IsREOHNull() ? "" : row.REOH.ToString();
-                        jsn.EOH = row.IsEOHNull() ? "" : row.EOH.ToString();
-                        jsn.AOH = row.IsAOHNull() ? "" : row.AOH.ToString();
-                        jsn.RTR = row.IsRTRNull() ? "" : row.RTR.ToString();
-                        jsn.ROS = row.IsROSNull() ? "" : row.ROS.ToString();
-                        jsn.POD = row.IsPODNull() ? "" : row.POD.ToString();
-                        jsn.DRBD = row.IsDRBDNull() ? "" : row.DRBD.ToString();
+                        jsn.nStu = row["NSTU"]; // row.NSTU;
+                        jsn.pStu = row["PSTU"]; // row.PSTU;
+                        jsn.nStuTS = row["NSTUTS"]; // row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString();
+                        jsn.pStuTS = row["PSTUTS"]; // row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString();
+                        jsn.ROH = row["ROH"]; // row.IsROHNull() ? "" : row.ROH.ToString();
+                        jsn.REOH = row["REOH"]; // row.IsREOHNull() ? "" : row.REOH.ToString();
+                        jsn.EOH = row["EOH"]; // row.IsEOHNull() ? "" : row.EOH.ToString();
+                        jsn.AOH = row["AOH"]; // row.IsAOHNull() ? "" : row.AOH.ToString();
+                        jsn.RTR = row["RTR"]; // row.IsRTRNull() ? "" : row.RTR.ToString();
+                        jsn.ROS = row["ROS"]; // row.IsROSNull() ? "" : row.ROS.ToString();
+                        jsn.POD = row["POD"]; // row.IsPODNull() ? "" : row.POD.ToString();
+                        jsn.DRBD = row["DRBD"]; // row.IsDRBDNull() ? "" : row.DRBD.ToString();
 
                         wsOph.Send(JsonConvert.SerializeObject(jsn));
 

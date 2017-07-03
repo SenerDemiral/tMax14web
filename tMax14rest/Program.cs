@@ -76,14 +76,17 @@ namespace tMax14rest
 				};
 			});
 
-			Handle.WebSocket("wsFrt", (String s, WebSocket ws) =>
+			Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
 			{
-				// Handle s and send response
-				FrtMsg jsn = new FrtMsg();
-				//var settings = new JsonSerializerSettings();
-				//settings.MissingMemberHandling = MissingMemberHandling.Ignore;
-				jsn.PopulateFromJson(s);
-				string rMsg = "OK";
+                // Handle str and send response
+                //FrtMsg jsn = new FrtMsg();
+                //jsn.PopulateFromJson(str);
+                //var settings = new JsonSerializerSettings();
+                //settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+
+                dynamic jsn = JValue.Parse(str);
+
+                string rMsg = "OK";
 
 				//Console.WriteLine(jsn.FrtID);
 
@@ -91,9 +94,10 @@ namespace tMax14rest
 				{
 					try
 					{
-						int FrtID = int.Parse(jsn.FrtID);
+                        //int FrtID = int.Parse(jsn.FrtID);
+                        int FrtID = jsn.FrtID;
 
-						if(jsn.Evnt == "D")
+                        if (jsn.Evnt == "D")
 						{
 							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where rec.FrtID = ?", FrtID);
 							foreach(var rec in frts)
@@ -114,7 +118,7 @@ namespace tMax14rest
 							else
 							{
 								rec.MdfdOn = DateTime.Now;
-								rec.FrtID = Convert.ToInt32(jsn.FrtID);
+                                rec.FrtID = FrtID; // Convert.ToInt32(jsn.FrtID);
 								rec.AdN = jsn.AdN;
 								rec.LocID = jsn.LocID;
 								rec.Pwd = jsn.Pwd;
@@ -145,11 +149,11 @@ namespace tMax14rest
 				};
 			});
 
-			Handle.WebSocket("wsOpm", (String s, WebSocket ws) =>
+			Handle.WebSocket("wsOpm", (string str, WebSocket ws) =>
 			{
                 //OpmMsg jsn = new OpmMsg();
-                //jsn.PopulateFromJson(s);
-                dynamic jsn = JValue.Parse(s);
+                //jsn.PopulateFromJson(str);
+                dynamic jsn = JValue.Parse(str);
 				string rMsg = "OK";
 
 				Db.Transact(() =>
@@ -231,17 +235,20 @@ namespace tMax14rest
 				};
 			});
 
-			Handle.WebSocket("wsOph", (String s, WebSocket ws) =>
+			Handle.WebSocket("wsOph", (string str, WebSocket ws) =>
 			{
-				OphMsg jsn = new OphMsg();
-				jsn.PopulateFromJson(s);
-				string rMsg = "OK";
+                //OphMsg jsn = new OphMsg();
+                //jsn.PopulateFromJson(s);
+                dynamic jsn = JValue.Parse(str);
+
+                string rMsg = "OK";
 
 				Db.Transact(() =>
 				{
-					int OphID = int.Parse(jsn.OphID);
+                    //int OphID = int.Parse(jsn.OphID);
+                    int OphID = jsn.OphID;
 
-					if(jsn.Evnt == "D")
+                    if (jsn.Evnt == "D")
 					{
 						var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID);
 						foreach(var rec in ophs)
@@ -262,7 +269,7 @@ namespace tMax14rest
 						{
 							rec.MdfdOn = DateTime.Now;
 							rec.OphID = OphID;
-							rec.OpmID = jsn.OpmID == "" ? (int?)null : Convert.ToInt32(jsn.OpmID);
+                            rec.OpmID = jsn.OpmID;// == "" ? (int?)null : Convert.ToInt32(jsn.OpmID);
 							rec.RefNo = jsn.RefNo;
 							rec.ROT = jsn.ROT;
 							rec.MOT = jsn.MOT;
@@ -272,28 +279,28 @@ namespace tMax14rest
 							rec.pStu = jsn.pStu;
 							rec.DTM = jsn.DTM;
 							rec.PTM = jsn.PTM;
-							rec.NOP = jsn.NOP == "" ? (int?)null : Convert.ToInt32(jsn.NOP);
-							rec.GrW = jsn.GrW == "" ? (double?)null : Convert.ToDouble(jsn.GrW);
-                            rec.VM3 = jsn.VM3 == "" ? (double?)null : Convert.ToDouble(jsn.VM3);
-							rec.ChW = jsn.ChW == "" ? (int?)null : Convert.ToInt32(jsn.ChW);
+                            rec.NOP = jsn.NOP; // == "" ? (int?)null : Convert.ToInt32(jsn.NOP);
+                            rec.GrW = jsn.GrW; // == "" ? (double?)null : Convert.ToDouble(jsn.GrW);
+                            rec.VM3 = jsn.VM3; // == "" ? (double?)null : Convert.ToDouble(jsn.VM3);
+                            rec.ChW = jsn.ChW; // == "" ? (int?)null : Convert.ToInt32(jsn.ChW);
                             rec.CntNoS = jsn.CntNoS;
 
-                            rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
-							rec.CneID = jsn.CneID == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
-                            rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
-                            rec.MnfID = jsn.MnfID == "" ? (int?)null : Convert.ToInt32(jsn.MnfID);
-                            rec.NfyID = jsn.NfyID == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
+                            rec.ShpID = jsn.ShpID;// == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+                            rec.CneID = jsn.CneID;// == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
+                            rec.AccID = jsn.AccID;// == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
+                            rec.MnfID = jsn.MnfID;// == "" ? (int?)null : Convert.ToInt32(jsn.MnfID);
+                            rec.NfyID = jsn.NfyID;// == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
 
-                            rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
-							rec.nStuTS = jsn.nStuTS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
-							rec.pStuTS = jsn.pStuTS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.pStuTS);
-							rec.ROH = jsn.ROH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROH);
-							rec.REOH = jsn.REOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
-							rec.EOH = jsn.EOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
-							rec.AOH = jsn.AOH == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
-							rec.RTR = jsn.RTR == "" ? (DateTime?)null : Convert.ToDateTime(jsn.RTR);
-							rec.ROS = jsn.ROS == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROS);
-							rec.POD = jsn.POD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
+                            rec.EXD = jsn.EXD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+                            rec.nStuTS = jsn.nStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
+                            rec.pStuTS = jsn.pStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.pStuTS);
+                            rec.ROH = jsn.ROH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROH);
+                            rec.REOH = jsn.REOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
+                            rec.EOH = jsn.EOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
+                            rec.AOH = jsn.AOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
+                            rec.RTR = jsn.RTR;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.RTR);
+                            rec.ROS = jsn.ROS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROS);
+                            rec.POD = jsn.POD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
 
 							if(rec.OpmID != null)
 								rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
