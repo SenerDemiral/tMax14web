@@ -1,5 +1,19 @@
 {
-	"Html": "/tMax14web/OphClientPage.html",
+  "Html": "/tMax14web/OphClientPage.html",
+  "Fmt": "DD.MM.YY",
+
+  "Columns": [ "aaaa", "bbb" ],
+
+  "Cols": [
+    {
+      "Fld": "",
+      "Hdr": "IslemTarihi",
+      "Ftr": "",
+      "Fmt": "DD.MM.YY"
+    }
+  ],
+
+
 
 	"Ophs": [
 		{
@@ -10,12 +24,18 @@
 			"nStu": "",
 			"pStu": "",
 			"Org": "",
-			"Dst": "",
+      "Dst": "",
+
 			"ShpAd": "",
 			"CneAd": "",
 			"AccAd": "",
+			"MnfAd": "",
+      "NfyAd": "",
+
 			"NOP": 0,
-			"GrW": 0.0,
+      "GrW": 0.0,
+      "VM3": 0.0,
+      "ChW": 0,
 			
 			"DTM": "",
 			"PTM": "",
@@ -23,16 +43,19 @@
 			"EXD_t": "",
 			"nStuTS_t": "",
 			"pStuTS_t": "",
+			"ROH_t": "",
 			"EOH_t": "",
 			"REOH_t": "",
 			"AOH_t": "",
 			"RTR_t": "",
 			"ROS_t": "",
 			"POD_t": "",
+			"DRBD_t": "",
 			"ETD_t": "",
 			"ATD_t": "",
 			"ETA_t": "",
 			"ATA_t": "",
+			"ACOT_t": "",
 			
 			"CntNoS": ""
 

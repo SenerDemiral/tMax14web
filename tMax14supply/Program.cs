@@ -20,9 +20,9 @@ namespace tMax14supply
 		private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
 		private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
 
-		private static WebSocketSharp.WebSocket wsFrt = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsFrtConnect");
-		private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsOpmConnect");
-		private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://masatenisi.online/wsOphConnect");
+		private static WebSocketSharp.WebSocket wsFrt = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsFrtConnect");
+		private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOpmConnect");
+		private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOphConnect");
 
 		static void Main(string[] args)
 		{
@@ -44,7 +44,8 @@ namespace tMax14supply
 			{
 				timer.Start();
 
-				timer.Interval = Convert.ToDouble(intrvlMinute) * 60 * 1000;	// 
+				//timer.Interval = Convert.ToDouble(intrvlMinute) * 60 * 1000;	// 
+				timer.Interval = Convert.ToDouble(intrvlMinute) * 1000;	// 
 				Console.WriteLine("Timer started. Interval ms: " + timer.Interval);
 				return "Timer started. Interval ms: "+timer.Interval;
 			});
@@ -120,7 +121,7 @@ namespace tMax14supply
 				if(typ == "X")
 					fta.Update(dts.WEB_FRT_MDFD);
 			}
-			wsFrt.Close();
+			//wsFrt.Close();
 		}
 
 		static void FrtCron2()
@@ -222,14 +223,16 @@ namespace tMax14supply
 						ATD = row.IsATDNull() ? "" : row.ATD.ToString(),
 						ETA = row.IsETANull() ? "" : row.ETA.ToString(),
 						ATA = row.IsATANull() ? "" : row.ATA.ToString(),
-					};
+                        ACOT = row.IsACOTNull() ? "" : row.ACOT.ToString(),
+                    };
 					wsOpm.Send(jsn.ToJson());
 					if(typ == "X")
 						row.Delete();
 				}
 				if(typ == "X")
-					fta.Update(dts.WEB_FRT_MDFD);
-				wsOpm.Close();
+					mta.Update(dts.WEB_OPM_MDFD);
+				
+				//wsOpm.Close();
 			}
 		}
 
@@ -254,34 +257,41 @@ namespace tMax14supply
 						ROT = row.ROT,
 						MOT = row.MOT,
 						Org = row.ORG,
-						Dst = row.ORG,
+						Dst = row.DST,
 						ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString(),
 						CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString(),
 						AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString(),
-						DTM = row.DTM,
+                        MnfID = row.IsMNFIDNull() ? "" : row.MNFID.ToString(),
+                        NfyID = row.IsNFYIDNull() ? "" : row.NFYID.ToString(),
+                        DTM = row.DTM,
 						PTM = row.PTM,
 						NOP = row.IsNOPNull() ? "" : row.NOP.ToString(),
 						GrW = row.IsGRWNull() ? "" : row.GRW.ToString(),
-						CntNoS = row.CNTNOS,
+                        VM3 = row.IsVM3Null() ? "" : row.VM3.ToString(),
+                        ChW = row.IsCHWNull() ? "" : row.CHW.ToString(),
+                        CntNoS = row.CNTNOS,
 
 						nStu = row.NSTU,
 						pStu = row.PSTU,
 						nStuTS = row.IsNSTUTSNull() ? "" : row.NSTUTS.ToString(),
 						pStuTS = row.IsPSTUTSNull() ? "" : row.PSTUTS.ToString(),
-						REOH = row.IsREOHNull() ? "" : row.REOH.ToString(),
-						EOH = row.IsEOHNull() ? "" : row.EOH.ToString(),
+                        ROH = row.IsROHNull() ? "" : row.ROH.ToString(),
+                        REOH = row.IsREOHNull() ? "" : row.REOH.ToString(),
+                        EOH = row.IsEOHNull() ? "" : row.EOH.ToString(),
 						AOH = row.IsAOHNull() ? "" : row.AOH.ToString(),
 						RTR = row.IsRTRNull() ? "" : row.RTR.ToString(),
 						ROS = row.IsROSNull() ? "" : row.ROS.ToString(),
 						POD = row.IsPODNull() ? "" : row.POD.ToString(),
+						DRBD = row.IsDRBDNull() ? "" : row.DRBD.ToString(),
 					};
-					wsOph.Send(jsn.ToJson());
+                    wsOph.Send(jsn.ToJson());
 					if(typ == "X")
 						row.Delete();
 				}
 				if(typ == "X")
-					fta.Update(dts.WEB_FRT_MDFD);
-				wsOph.Close();
+					hta.Update(dts.WEB_OPH_MDFD);
+				
+				//wsOph.Close();
 			}
 		}
 

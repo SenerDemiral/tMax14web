@@ -1,5 +1,6 @@
 using System;
 using Starcounter;
+using Starcounter.Advanced.XSON;
 
 namespace tMax14web
 {
@@ -18,8 +19,22 @@ namespace tMax14web
 			Ophs.Clear();
 			if(fpw != "can")
 				return;
-			   
-			Ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.ShpID = ? and h.EXD >= ?", fid, std);
+            
+            Columns.Clear();
+            //ColumnsElementJson c = new ColumnsElementJson();
+            Columns.Add("aaaa");
+
+            Cols.Clear();
+            ColsElementJson c = new ColsElementJson()
+            {
+                Fld = "FldA",
+                Hdr = "IslemTarihi",
+                Ftr = "Alan A tooltip",
+                Fmt = "YYYY.MM.DD"
+            };
+            Cols.Add(c);
+            
+			Ophs = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
 			/*
 			foreach(var h in ophs) 

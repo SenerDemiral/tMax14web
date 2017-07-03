@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tMax14supply", "tMax14suppl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronNET", "CronNET\CronNET.csproj", "{5E444E5B-DCF9-432A-9102-D34E9D15D2F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB2SCservice", "FB2SCservice\FB2SCservice.csproj", "{E545D228-9696-4041-8213-64900745E687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FbLibrary", "FbLibrary\FbLibrary.csproj", "{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,22 @@ Global
 		{5E444E5B-DCF9-432A-9102-D34E9D15D2F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E444E5B-DCF9-432A-9102-D34E9D15D2F6}.Release|x64.ActiveCfg = Release|Any CPU
 		{5E444E5B-DCF9-432A-9102-D34E9D15D2F6}.Release|x64.Build.0 = Release|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Debug|x64.Build.0 = Debug|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Release|x64.ActiveCfg = Release|Any CPU
+		{E545D228-9696-4041-8213-64900745E687}.Release|x64.Build.0 = Release|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{B203C9AC-E238-457E-A4BD-6F1E8B08D7FF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
