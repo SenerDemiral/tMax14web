@@ -119,9 +119,8 @@ namespace FbLibrary
                         jsn.Vhc = row.IsVHCNull() ? "" : row.VHC;
 
                         jsn.ETD = row["ETD"]; // Deneme
-                        String.IsNullOrEmpty
 
-                        //wsOpm.Send(JsonConvert.SerializeObject(jsn));
+                        wsOpm.Send(JsonConvert.SerializeObject(jsn));
                         Logs.WriteErrorLog(jsn.ToString());
 
                         dynamic json = JValue.Parse(jsn.ToString());

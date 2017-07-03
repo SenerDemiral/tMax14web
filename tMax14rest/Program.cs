@@ -148,8 +148,8 @@ namespace tMax14rest
 			Handle.WebSocket("wsOpm", (String s, WebSocket ws) =>
 			{
                 //OpmMsg jsn = new OpmMsg();
+                //jsn.PopulateFromJson(s);
                 dynamic jsn = JValue.Parse(s);
-                jsn.PopulateFromJson(s);
 				string rMsg = "OK";
 
 				Db.Transact(() =>
