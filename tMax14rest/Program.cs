@@ -154,7 +154,7 @@ namespace tMax14rest
 
 				Db.Transact(() =>
 				{
-					int OpmID = int.Parse(jsn.OpmID);
+					int OpmID = int.Parse((string)jsn.OpmID);
 
 					if(jsn.Evnt == "D")
 					{
