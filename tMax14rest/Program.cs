@@ -184,6 +184,8 @@ namespace tMax14rest
 							rec.Org = jsn.Org;
 							rec.Dst = jsn.Dst;
                             rec.Vhc = jsn.Vhc;
+                            rec.nStu = jsn.nStu;
+                            rec.pStu = jsn.pStu;
 
                             //rec.CntNoS = jsn.CntNoS;
 

@@ -99,6 +99,8 @@ namespace FbLibrary
                         jsn.OpmID = row["OPMID"]; // row.OPMID.ToString();
                         jsn.RefNo = row["REFNO"];
                         jsn.EXD = row["EXD"];// row.EXD.ToString();
+                        jsn.nStu = row["NSTU"];
+                        jsn.pStu = row["PSTU"];
 
                         jsn.ROT = row["ROT"];
                         jsn.MOT = row["MOT"];

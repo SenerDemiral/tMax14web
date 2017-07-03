@@ -4515,7 +4515,7 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
             this._commandCollection[0].CommandText = "\"WEB_OPM_MDFD\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             global::FirebirdSql.Data.FirebirdClient.FbParameter param = new global::FirebirdSql.Data.FirebirdClient.FbParameter();
-            param.ParameterName = "TRH";
+            param.ParameterName = "TYP";
             param.Size = 40;
             param.IsNullable = true;
             param.SourceColumn = null;
@@ -4526,13 +4526,13 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(tMax14DataSet.WEB_OPM_MDFDDataTable dataTable, string TRH) {
+        public virtual int Fill(tMax14DataSet.WEB_OPM_MDFDDataTable dataTable, string TYP) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((TRH == null)) {
+            if ((TYP == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(TRH));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(TYP));
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
