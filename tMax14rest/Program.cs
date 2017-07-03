@@ -183,6 +183,7 @@ namespace tMax14rest
 							rec.MOT = jsn.MOT;
 							rec.Org = jsn.Org;
 							rec.Dst = jsn.Dst;
+                            rec.Vhc = jsn.Vhc;
 
                             //rec.CntNoS = jsn.CntNoS;
 

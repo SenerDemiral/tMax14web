@@ -96,7 +96,7 @@ namespace FbLibrary
                     {
                         jsn.Tbl = "OPM";
                         jsn.Evnt = row["EVNT"];
-                        jsn.OpmID = row["OPMID"; // row.OPMID.ToString();
+                        jsn.OpmID = row["OPMID"]; // row.OPMID.ToString();
                         jsn.RefNo = row["REFNO"];
                         jsn.EXD = row["EXD"];// row.EXD.ToString();
 
@@ -116,7 +116,7 @@ namespace FbLibrary
                         jsn.ATA = row["ATA"]; //row.IsATANull() ? "" : row.ATA.ToString();
                         jsn.ACOT = row["ACOT"]; //row.IsACOTNull() ? "" : row.ACOT.ToString();
 
-                        jsn.Vhc = row.IsVHCNull() ? "" : row.VHC;
+                        jsn.Vhc = row["VHC"];// row.IsVHCNull() ? "" : row.VHC;
 
                         wsOpm.Send(JsonConvert.SerializeObject(jsn));
                         Logs.WriteErrorLog(jsn.ToString());
