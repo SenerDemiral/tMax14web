@@ -183,19 +183,19 @@ namespace tMax14rest
 							rec.Org = jsn.Org;
 							rec.Dst = jsn.Dst;
 
-							//rec.CntNoS = jsn.CntNoS;
+                            //rec.CntNoS = jsn.CntNoS;
 
-							rec.ShpID = jsn.ShpID == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
-							rec.CneID = jsn.CneID == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
-							rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
-							rec.CrrID = jsn.CrrID == "" ? (int?)null : Convert.ToInt32(jsn.CrrID);
+                            rec.ShpID = jsn.ShpID;// == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
+                            rec.CneID = jsn.CneID;// == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
+                            rec.AccID = jsn.AccID;// == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
+                            rec.CrrID = jsn.CrrID;// == "" ? (int?)null : Convert.ToInt32(jsn.CrrID);
 
-                            rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+                            rec.EXD = jsn.EXD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
                             rec.ETD = jsn.ETD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETD);
-							rec.ATD = jsn.ATD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
-							rec.ETA = jsn.ETA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
-                            rec.ATA = jsn.ATA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
-                            rec.ACOT = jsn.ACOT == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ACOT);
+                            rec.ATD = jsn.ATD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
+                            rec.ETA = jsn.ETA;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
+                            rec.ATA = jsn.ATA;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
+                            rec.ACOT = jsn.ACOT;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ACOT);
 
                             if (rec.ShpID != null)
 								rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;

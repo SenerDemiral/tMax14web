@@ -95,30 +95,28 @@ namespace FbLibrary
                     foreach (tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
                     {
                         jsn.Tbl = "OPM";
-                        jsn.Evnt = row.EVNT;
-                        jsn.OpmID = row.OPMID.ToString();
+                        jsn.Evnt = row["EVNT"];
+                        jsn.OpmID = row["OPMID"; // row.OPMID.ToString();
                         jsn.RefNo = row["REFNO"];
-                        jsn.EXD = row.EXD.ToString();
+                        jsn.EXD = row["EXD"];// row.EXD.ToString();
 
-                        jsn.ROT = row.ROT;
-                        jsn.MOT = row.MOT;
-                        jsn.Org = row.ORG;
-                        jsn.Dst = row.DST;
-                        
-                        jsn.ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString();
-                        jsn.CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString();
-                        jsn.AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString();
-                        jsn.CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString();
+                        jsn.ROT = row["ROT"];
+                        jsn.MOT = row["MOT"];
+                        jsn.Org = row["ORG"];
+                        jsn.Dst = row["DST"];
 
-                        //jsn.ETD = row.IsETDNull() ? "" : row.ETD.ToString();
-                        jsn.ATD = row.IsATDNull() ? "" : row.ATD.ToString();
-                        jsn.ETA = row.IsETANull() ? "" : row.ETA.ToString();
-                        jsn.ATA = row.IsATANull() ? "" : row.ATA.ToString();
-                        jsn.ACOT = row.IsACOTNull() ? "" : row.ACOT.ToString();
+                        jsn.ShpID = row["SHPID"]; // row.IsSHPIDNull() ? "" : row.SHPID.ToString();
+                        jsn.CneID = row["CNEID"]; //row.IsCNEIDNull() ? "" : row.CNEID.ToString();
+                        jsn.AccID = row["ACCID"]; //row.IsACCIDNull() ? "" : row.ACCID.ToString();
+                        jsn.CrrID = row["CRRID"]; //row.IsCRRIDNull() ? "" : row.CRRID.ToString();
+
+                        jsn.ETD = row["ETD"]; //row.IsETDNull() ? "" : row.ETD.ToString();
+                        jsn.ATD = row["ATD"]; //row.IsATDNull() ? "" : row.ATD.ToString();
+                        jsn.ETA = row["ETA"]; //row.IsETANull() ? "" : row.ETA.ToString();
+                        jsn.ATA = row["ATA"]; //row.IsATANull() ? "" : row.ATA.ToString();
+                        jsn.ACOT = row["ACOT"]; //row.IsACOTNull() ? "" : row.ACOT.ToString();
 
                         jsn.Vhc = row.IsVHCNull() ? "" : row.VHC;
-
-                        jsn.ETD = row["ETD"]; // Deneme
 
                         wsOpm.Send(JsonConvert.SerializeObject(jsn));
                         Logs.WriteErrorLog(jsn.ToString());
