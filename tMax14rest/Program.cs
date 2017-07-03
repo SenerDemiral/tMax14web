@@ -6,6 +6,7 @@ using Starcounter.XSON.Serializer;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
+using TMDB;
 
 namespace tMax14rest
 {
@@ -22,14 +23,34 @@ namespace tMax14rest
 		
 		static void Main()
 		{
+			Console.WriteLine("11111111111");
+			var aaa = Db.SQL("select count(f) FROM FRT f").First;
+			Console.WriteLine("22222222222 {0}", aaa);
+			// Removing existing objects from database.
+			/*
+			Db.Transact(() => {
+				Db.SlowSQL("DELETE FROM WebSocketId");
+			});
+			*/
 
-			Handle.PUT("/tMax14rest/ResetAll", (OphMsg hJ) =>
+			Handle.GET("/tMax14rest/DENEME", () =>
 			{
 				Db.Transact(() =>
 				{
-					Db.SQL("DELETE FROM OPH");
-					Db.SQL("DELETE FROM OPM");
-					Db.SQL("DELETE FROM FRT");
+					Db.SlowSQL("DELETE FROM TMDB.WebSocketId");
+				});
+
+				return "OK";
+			});
+
+
+			Handle.GET("/tMax14rest/ResetAll", (OphMsg hJ) =>
+			{
+				Db.Transact(() =>
+				{
+					Db.SlowSQL("DELETE FROM TMDB.OPH");
+					Db.SlowSQL("DELETE FROM TMDB.OPM");
+					Db.SlowSQL("DELETE FROM TMDB.FRT");
 				});
 
 				return "OK";
@@ -40,8 +61,8 @@ namespace tMax14rest
 				// Checking if its a WebSocket upgrade request.
 				if(req.WebSocketUpgrade)
 				{
-					WebSocket ws = req.SendUpgrade("wsFrt");
-					Console.WriteLine("ws Connected {0}", DateTime.Now);
+					Console.WriteLine("wsFRT Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+					req.SendUpgrade("wsFrt");
 					return HandlerStatus.Handled;
 				}
 
@@ -112,8 +133,8 @@ namespace tMax14rest
 			{
 				if(req.WebSocketUpgrade)
 				{
-					WebSocket ws = req.SendUpgrade("wsOpm");
-					Console.WriteLine("wsOpm Connected {0}", DateTime.Now);
+					Console.WriteLine("wsOPM Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+					req.SendUpgrade("wsOpm");
 					return HandlerStatus.Handled;
 				}
 				return new Response()
@@ -192,8 +213,8 @@ namespace tMax14rest
 			{
 				if(req.WebSocketUpgrade)
 				{
-					WebSocket ws = req.SendUpgrade("wsOph");
-					Console.WriteLine("wsOph Connected {0}", DateTime.Now);
+					Console.WriteLine("wsOPH Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+					req.SendUpgrade("wsOph");
 					return HandlerStatus.Handled;
 				}
 				return new Response()
@@ -273,7 +294,7 @@ namespace tMax14rest
 						}
 					}
 				});
-				ws.Send(rMsg);
+				//ws.Send(rMsg);
 			});
 
 			
@@ -603,11 +624,6 @@ namespace tMax14rest
 					};
 				});
 				return "OK";
-			});
-
-			// Removing existing objects from database.
-			Db.Transact(() => {
-				Db.SlowSQL("DELETE FROM WebSocketId");
 			});
 
 			WebSocketSessionsTimer = new Timer((state) => {
