@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using TMDB;
+using Newtonsoft.Json.Linq;
 
 namespace tMax14rest
 {
@@ -146,8 +147,9 @@ namespace tMax14rest
 
 			Handle.WebSocket("wsOpm", (String s, WebSocket ws) =>
 			{
-				OpmMsg jsn = new OpmMsg();
-				jsn.PopulateFromJson(s);
+                //OpmMsg jsn = new OpmMsg();
+                dynamic jsn = JValue.Parse(s);
+                jsn.PopulateFromJson(s);
 				string rMsg = "OK";
 
 				Db.Transact(() =>
@@ -188,7 +190,7 @@ namespace tMax14rest
 							rec.AccID = jsn.AccID == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
 							rec.CrrID = jsn.CrrID == "" ? (int?)null : Convert.ToInt32(jsn.CrrID);
 
-							rec.EXD = jsn.EXD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
+                            rec.EXD = jsn.EXD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
 							rec.ETD = jsn.ETD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETD);
 							rec.ATD = jsn.ATD == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATD);
 							rec.ETA = jsn.ETA == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);

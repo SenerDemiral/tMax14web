@@ -97,23 +97,36 @@ namespace FbLibrary
                         jsn.Tbl = "OPM";
                         jsn.Evnt = row.EVNT;
                         jsn.OpmID = row.OPMID.ToString();
-                        jsn.RefNo = row.REFNO;
+                        jsn.RefNo = row["REFNO"];
                         jsn.EXD = row.EXD.ToString();
+
                         jsn.ROT = row.ROT;
                         jsn.MOT = row.MOT;
                         jsn.Org = row.ORG;
                         jsn.Dst = row.DST;
+                        
                         jsn.ShpID = row.IsSHPIDNull() ? "" : row.SHPID.ToString();
                         jsn.CneID = row.IsCNEIDNull() ? "" : row.CNEID.ToString();
                         jsn.AccID = row.IsACCIDNull() ? "" : row.ACCID.ToString();
                         jsn.CrrID = row.IsCRRIDNull() ? "" : row.CRRID.ToString();
-                        jsn.ETD = row.IsETDNull() ? "" : row.ETD.ToString();
+
+                        //jsn.ETD = row.IsETDNull() ? "" : row.ETD.ToString();
                         jsn.ATD = row.IsATDNull() ? "" : row.ATD.ToString();
                         jsn.ETA = row.IsETANull() ? "" : row.ETA.ToString();
                         jsn.ATA = row.IsATANull() ? "" : row.ATA.ToString();
                         jsn.ACOT = row.IsACOTNull() ? "" : row.ACOT.ToString();
 
-                        wsOpm.Send(JsonConvert.SerializeObject(jsn));
+                        jsn.Vhc = row.IsVHCNull() ? "" : row.VHC;
+
+                        jsn.ETD = row["ETD"]; // Deneme
+                        String.IsNullOrEmpty
+
+                        //wsOpm.Send(JsonConvert.SerializeObject(jsn));
+                        Logs.WriteErrorLog(jsn.ToString());
+
+                        dynamic json = JValue.Parse(jsn.ToString());
+                        if (json.REFNO == null)
+                            Logs.WriteErrorLog("json.REFNO is null" + row["REFNO"]);
 
                         if (typ == "M")
                         {
