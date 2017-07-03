@@ -154,9 +154,10 @@ namespace tMax14rest
 
 				Db.Transact(() =>
 				{
-					int OpmID = int.Parse((string)jsn.OpmID);
+                    //int OpmID = int.Parse((string)jsn.OpmID);
+                    int OpmID = jsn.OpmID;
 
-					if(jsn.Evnt == "D")
+                    if (jsn.Evnt == "D")
 					{
 						var opms = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID);
 						foreach(var rec in opms)
