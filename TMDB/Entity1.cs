@@ -23,11 +23,11 @@ namespace TMDB
 	[Database]
 	public class FRT
 	{
-		public DateTime MdfdOn;
-		public int FrtID;
-		public string AdN;
-		public string LocID;
-		public string Pwd;
+		public DateTime MdfdOn { get; set; }
+		public int FrtID { get; set; }
+		public string AdN { get; set; }
+		public string LocID { get; set; }
+		public string Pwd { get; set; }
 
 		public FRT()
 		{

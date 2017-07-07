@@ -34,7 +34,7 @@ namespace FB2SCservice
 
         private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
         {
-            FbLibrary.Logs.WriteErrorLog("Timer ticked");
+            //FbLibrary.Logs.WriteErrorLog("Timer ticked");
             //Library.FrtCron("F");
             //FbLibrary.Logs.WriteErrorLog("Timer ticked");
 

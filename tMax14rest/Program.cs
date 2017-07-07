@@ -131,7 +131,7 @@ namespace tMax14rest
 					}
 				});
 
-				ws.Send(rMsg);
+				//ws.Send(rMsg);
 			});
 
 			Handle.GET("/wsOpmConnect", (Request req) =>
@@ -217,7 +217,7 @@ namespace tMax14rest
 					}
 				});
 
-				ws.Send(rMsg);
+				//ws.Send(rMsg);
 			});
 
 			Handle.GET("/wsOphConnect", (Request req) =>

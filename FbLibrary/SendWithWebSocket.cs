@@ -109,25 +109,27 @@ namespace FbLibrary
                         jsn.Dst = row["DST"];
 
                         jsn.ShpID = row["SHPID"]; // row.IsSHPIDNull() ? "" : row.SHPID.ToString();
-                        jsn.CneID = row["CNEID"]; //row.IsCNEIDNull() ? "" : row.CNEID.ToString();
-                        jsn.AccID = row["ACCID"]; //row.IsACCIDNull() ? "" : row.ACCID.ToString();
-                        jsn.CrrID = row["CRRID"]; //row.IsCRRIDNull() ? "" : row.CRRID.ToString();
+                        jsn.CneID = row["CNEID"];
+                        jsn.AccID = row["ACCID"];
+                        jsn.CrrID = row["CRRID"];
 
                         jsn.ETD = row["ETD"]; //row.IsETDNull() ? "" : row.ETD.ToString();
-                        jsn.ATD = row["ATD"]; //row.IsATDNull() ? "" : row.ATD.ToString();
-                        jsn.ETA = row["ETA"]; //row.IsETANull() ? "" : row.ETA.ToString();
-                        jsn.ATA = row["ATA"]; //row.IsATANull() ? "" : row.ATA.ToString();
-                        jsn.ACOT = row["ACOT"]; //row.IsACOTNull() ? "" : row.ACOT.ToString();
+                        jsn.ATD = row["ATD"];
+                        jsn.ETA = row["ETA"];
+                        jsn.ATA = row["ATA"];
+                        jsn.ACOT = row["ACOT"];
 
-                        jsn.Vhc = row["VHC"];// row.IsVHCNull() ? "" : row.VHC;
+                        jsn.Vhc = row["VHC"];
 
                         wsOpm.Send(JsonConvert.SerializeObject(jsn));
-                        Logs.WriteErrorLog(jsn.ToString());
 
+
+                        /*
+                        Logs.WriteErrorLog(jsn.ToString());
                         dynamic json = JValue.Parse(jsn.ToString());
                         if (json.REFNO == null)
                             Logs.WriteErrorLog("json.REFNO is null" + row["REFNO"]);
-
+                        */
                         if (typ == "M")
                         {
                             Logs.WriteErrorLog("OPM Modified: " + row.OPMID.ToString());
