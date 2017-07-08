@@ -250,7 +250,7 @@ namespace FbLibrary
                         jsn.OdmVde = row["ODMVDE"];
 
                         jsn.bDvz = row["BDVZ"];
-                        jsn.bTutbrt = row["BTUTBRT"];
+                        jsn.bTutBrt = row["BTUTBRT"];
 
                         jsn.DknFrtID = row["DKNFRTID"];
                         jsn.DknNo = row["DKNNO"];
