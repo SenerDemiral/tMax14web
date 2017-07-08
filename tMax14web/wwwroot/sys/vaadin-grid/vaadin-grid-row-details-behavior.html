@@ -40,6 +40,7 @@
        * An array containing references to expanded items.
        */
       expandedItems: {
+        type: Array,
         value: function() {
           return [];
         }
@@ -68,6 +69,7 @@
       var templatizer = new vaadin.elements.grid.Templatizer(this.dataHost);
       templatizer._instanceProps = {
         expanded: true,
+        index: true,
         item: true,
         selected: true
       };

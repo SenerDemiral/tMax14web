@@ -1,5 +1,5 @@
 {
-  "Html": "/tMax14web/OphClientPage.html",
+  "Html": "/tMax14web/OphClientPageVaadin.html",
   "Fmt": "DD.MM.YY",
 
   "Columns": [ "aaaa", "bbb" ],
@@ -22,6 +22,7 @@
 			"ROT": "",
 			"MOT": "",
 			"nStu": "",
+			"nStuAd": "",
 			"pStu": "",
 			"Org": "",
       "Dst": "",

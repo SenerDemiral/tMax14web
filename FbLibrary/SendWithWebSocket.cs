@@ -14,6 +14,7 @@ namespace FbLibrary
     public static class SendWithWebSocket
     {
         private static tMax14DataSet dts = new tMax14DataSet();
+
         private static tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter fta = new tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
@@ -274,7 +275,7 @@ namespace FbLibrary
                     if (typ == "M")
                         ata.Update(dts.WEB_AFB_MDFD);
 
-                    wsOpm.Close();
+                    wsAfb.Close();
                 }
                 else
                 {

@@ -20,7 +20,6 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/polymer/polymer.html"">
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
-					        <link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					<script src=""/sys/thenBy.js""></script>
 					
 					<!--<link rel=""import"" href=""/sys/bootstrap.html"">
@@ -30,11 +29,11 @@ namespace tMax14web
 					<link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"" integrity=""sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"" crossorigin=""anonymous"">
 					
 					<link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"" crossorigin=""anonymous"">
+					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
 					-->
 
 					<link rel=""import"" href=""/sys/github-browser-app.html"">
 					
-					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
 				
 				</head>
 				<body>
