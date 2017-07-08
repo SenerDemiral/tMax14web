@@ -41,32 +41,36 @@ namespace TMDB
 	[Database]
 	public class OPM
 	{
-		public DateTime MdfdOn;
-		public int OpmID;
-		public string RefNo;
-		public DateTime? EXD;
-		public string ROT;
-		public string MOT;
-		public string Org;
-		public string Dst;
-		public int? ShpID;
-		public int? CneID;
-		public int? AccID;
-		public int? CrrID;
-		public string nStu;
-		public string pStu;
-		public DateTime? ETD;
-		public DateTime? ATD;
-		public DateTime? ETA;
-		public DateTime? ATA;
-        public DateTime? ACOT;
-        public string Vhc;
-		public string CntNoS;
-		public FRT Shp;
-		public FRT Cne;
-		public FRT Acc;
-		public FRT Crr;
-		public string ShpAd => Shp == null ? "" : Shp.AdN;
+		public DateTime MdfdOn { get; set; }
+        public int OpmID { get; set; }
+        public string RefNo { get; set; }
+        public DateTime? EXD { get; set; }
+        public string ROT { get; set; }
+		public string MOT { get; set; }
+		public string Org { get; set; }
+		public string Dst { get; set; }
+
+		public int? ShpID { get; set; }
+		public int? CneID { get; set; }
+		public int? AccID { get; set; }
+		public int? CrrID { get; set; }
+
+        public FRT Shp { get; set; }
+        public FRT Cne { get; set; }
+        public FRT Acc { get; set; }
+        public FRT Crr { get; set; }
+
+        public string nStu { get; set; }
+        public string pStu { get; set; }
+        public DateTime? ETD { get; set; }
+		public DateTime? ATD { get; set; }
+		public DateTime? ETA { get; set; }
+		public DateTime? ATA { get; set; }
+        public DateTime? ACOT { get; set; }
+        public string Vhc { get; set; }
+        public string CntNoS { get; set; }
+
+        public string ShpAd => Shp == null ? "" : Shp.AdN;
 		public string CneAd => Cne == null ? "" : Cne.AdN;
 		public string AccAd => Acc == null ? "" : Acc.AdN;
 		public string CrrAd => Crr == null ? "" : Crr.AdN;
@@ -76,39 +80,52 @@ namespace TMDB
 	[Database]
 	public class OPH
 	{
-		public DateTime MdfdOn;
-		public int OphID;
-		public int? OpmID;
-		public string RefNo;
-		public DateTime? EXD;
-		public string ROT;
-		public string MOT;
-		public string Org;
-		public string Dst;
-		public int? ShpID;
-		public int? CneID;
-		public int? AccID;
-		public int? MnfID;
-		public int? NfyID;
-		public string nStu;
-		public string pStu;
-		public string DTM;
-		public string PTM;
-		public int? NOP;
-		public double? GrW;
-        public double? VM3;
-		public int? ChW;
-        public DateTime? nStuTS;
-		public DateTime? pStuTS;
-        public DateTime? ROH;
-        public DateTime? EOH;
-        public DateTime? REOH;
-		public DateTime? AOH;
-		public DateTime? RTR;
-		public DateTime? ROS;
-		public DateTime? POD;
-		public DateTime? DRBD;
-		public string CntNoS;
+		public DateTime MdfdOn { get; set; }
+        public int OphID { get; set; }
+        public int? OpmID { get; set; }
+        public string RefNo { get; set; }
+        public DateTime? EXD { get; set; }
+
+        public string ROT { get; set; }
+		public string MOT { get; set; }
+		public string Org { get; set; }
+		public string Dst { get; set; }
+
+        public int? ShpID { get; set; }
+		public int? CneID { get; set; }
+		public int? AccID { get; set; }
+		public int? MnfID { get; set; }
+		public int? NfyID { get; set; }
+
+        public OPM Opm { get; set; }
+        public FRT Shp { get; set; }
+        public FRT Cne { get; set; }
+        public FRT Acc { get; set; }
+        public FRT Mnf { get; set; }
+        public FRT Nfy { get; set; }
+
+        public string nStu { get; set; }
+		public string pStu { get; set; }
+        public string DTM { get; set; }
+        public string PTM { get; set; }
+        public string CntNoS { get; set; }
+
+        public int? NOP { get; set; }
+        public double? GrW { get; set; }
+        public double? VM3 { get; set; }
+        public int? ChW { get; set; }
+
+        public DateTime? nStuTS { get; set; }
+        public DateTime? pStuTS { get; set; }
+        public DateTime? ROH { get; set; }
+        public DateTime? EOH { get; set; }
+        public DateTime? REOH { get; set; }
+        public DateTime? AOH { get; set; }
+		public DateTime? RTR { get; set; }
+		public DateTime? ROS { get; set; }
+		public DateTime? POD { get; set; }
+        public DateTime? DRBD { get; set; }
+        public DateTime? CABW { get; set; }
 
         public string EXD_t => $"{EXD:s}";
 		public string nStuTS_t => $"{nStuTS:s}";
@@ -122,13 +139,7 @@ namespace TMDB
         public string POD_t => $"{POD:s}";
         public string DRBD_t => $"{DRBD:s}";
 
-        public OPM Opm;
-		public FRT Shp;
-		public FRT Cne;
-		public FRT Acc;
-		public FRT Mnf;
-		public FRT Nfy;
-		public string ShpAd => Shp == null ? "" : Shp.AdN;
+        public string ShpAd => Shp == null ? "" : Shp.AdN;
 		public string CneAd => Cne == null ? "" : Cne.AdN;
 		public string AccAd => Acc == null ? "" : Acc.AdN;
         public string MnfAd => Mnf == null ? "" : Mnf.AdN;
