@@ -23,5 +23,10 @@ namespace FB2SCfull
             FbLibrary.SendWithWebSocket.OpmSend("F");
             FbLibrary.SendWithWebSocket.OphSend("F");
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FbLibrary.SendWithWebSocket.AfbSend("F");
+        }
     }
 }

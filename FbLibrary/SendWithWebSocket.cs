@@ -17,10 +17,12 @@ namespace FbLibrary
         private static tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter fta = new tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
+        private static tMax14DataSetTableAdapters.WEB_AFB_MDFDTableAdapter ata = new tMax14DataSetTableAdapters.WEB_AFB_MDFDTableAdapter();
 
         private static WebSocketSharp.WebSocket wsFrt = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsFrtConnect");
         private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOpmConnect");
         private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOphConnect");
+        private static WebSocketSharp.WebSocket wsAfb = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsAfbConnect");
 
         // typ = F:Full else M:Modified 
         public static void FrtSend(string typ)
@@ -220,5 +222,66 @@ namespace FbLibrary
                 }
             }
         }
+
+        public static void AfbSend(string typ)
+        {
+            int nor = ata.Fill(dts.WEB_AFB_MDFD, typ);
+
+            if (nor > 0)
+            {
+                Logs.WriteErrorLog("AFB #Rec: " + nor.ToString());
+                if (wsAfb.ReadyState != WebSocketState.Open)
+                    wsAfb.Connect();
+
+                if (wsOpm.ReadyState == WebSocketState.Open)
+                {
+                    dynamic jsn = new JObject();
+
+                    foreach (tMax14DataSet.WEB_AFB_MDFDRow row in dts.WEB_AFB_MDFD.Rows)
+                    {
+                        jsn.Tbl = "OPM";
+                        jsn.Evnt = row["EVNT"];
+
+                        jsn.AfbID = row["AFBID"];
+                        jsn.Tur = row["TUR"];
+                        jsn.FrtID = row["FRTID"];
+                        jsn.FtrNo = row["FTRNO"];
+                        jsn.FtrTrh = row["FTRTRH"];
+                        jsn.OdmVde = row["ODMVDE"];
+
+                        jsn.bDvz = row["BDVZ"];
+                        jsn.bTutbrt = row["BTUTBRT"];
+
+                        jsn.DknFrtID = row["DKNFRTID"];
+                        jsn.DknNo = row["DKNNO"];
+                        jsn.DknDvz = row["DKNDVZ"];
+
+                        wsAfb.Send(JsonConvert.SerializeObject(jsn));
+
+
+                        /*
+                        Logs.WriteErrorLog(jsn.ToString());
+                        dynamic json = JValue.Parse(jsn.ToString());
+                        if (json.REFNO == null)
+                            Logs.WriteErrorLog("json.REFNO is null" + row["REFNO"]);
+                        */
+                        if (typ == "M")
+                        {
+                            Logs.WriteErrorLog("AFB Modified: " + row.AFBID.ToString());
+                            row.Delete();
+                        }
+                    }
+                    if (typ == "M")
+                        ata.Update(dts.WEB_AFB_MDFD);
+
+                    wsOpm.Close();
+                }
+                else
+                {
+                    Logs.WriteErrorLog("wsAFB can't connect");
+                }
+            }
+        }
+
     }
 }

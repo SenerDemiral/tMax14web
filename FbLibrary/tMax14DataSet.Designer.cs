@@ -30,6 +30,8 @@ namespace FbLibrary {
         
         private WEB_FRT_MDFDDataTable tableWEB_FRT_MDFD;
         
+        private WEB_AFB_MDFDDataTable tableWEB_AFB_MDFD;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -66,6 +68,9 @@ namespace FbLibrary {
                 }
                 if ((ds.Tables["WEB_FRT_MDFD"] != null)) {
                     base.Tables.Add(new WEB_FRT_MDFDDataTable(ds.Tables["WEB_FRT_MDFD"]));
+                }
+                if ((ds.Tables["WEB_AFB_MDFD"] != null)) {
+                    base.Tables.Add(new WEB_AFB_MDFDDataTable(ds.Tables["WEB_AFB_MDFD"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -112,6 +117,16 @@ namespace FbLibrary {
         public WEB_FRT_MDFDDataTable WEB_FRT_MDFD {
             get {
                 return this.tableWEB_FRT_MDFD;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public WEB_AFB_MDFDDataTable WEB_AFB_MDFD {
+            get {
+                return this.tableWEB_AFB_MDFD;
             }
         }
         
@@ -191,6 +206,9 @@ namespace FbLibrary {
                 if ((ds.Tables["WEB_FRT_MDFD"] != null)) {
                     base.Tables.Add(new WEB_FRT_MDFDDataTable(ds.Tables["WEB_FRT_MDFD"]));
                 }
+                if ((ds.Tables["WEB_AFB_MDFD"] != null)) {
+                    base.Tables.Add(new WEB_AFB_MDFDDataTable(ds.Tables["WEB_AFB_MDFD"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -242,6 +260,12 @@ namespace FbLibrary {
                     this.tableWEB_FRT_MDFD.InitVars();
                 }
             }
+            this.tableWEB_AFB_MDFD = ((WEB_AFB_MDFDDataTable)(base.Tables["WEB_AFB_MDFD"]));
+            if ((initTable == true)) {
+                if ((this.tableWEB_AFB_MDFD != null)) {
+                    this.tableWEB_AFB_MDFD.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +282,8 @@ namespace FbLibrary {
             base.Tables.Add(this.tableWEB_OPH_MDFD);
             this.tableWEB_FRT_MDFD = new WEB_FRT_MDFDDataTable();
             base.Tables.Add(this.tableWEB_FRT_MDFD);
+            this.tableWEB_AFB_MDFD = new WEB_AFB_MDFDDataTable();
+            base.Tables.Add(this.tableWEB_AFB_MDFD);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -275,6 +301,12 @@ namespace FbLibrary {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeWEB_FRT_MDFD() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeWEB_AFB_MDFD() {
             return false;
         }
         
@@ -341,6 +373,9 @@ namespace FbLibrary {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void WEB_FRT_MDFDRowChangeEventHandler(object sender, WEB_FRT_MDFDRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void WEB_AFB_MDFDRowChangeEventHandler(object sender, WEB_AFB_MDFDRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2071,6 +2106,456 @@ namespace FbLibrary {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "WEB_FRT_MDFDDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class WEB_AFB_MDFDDataTable : global::System.Data.TypedTableBase<WEB_AFB_MDFDRow> {
+            
+            private global::System.Data.DataColumn columnTBL;
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnEVNTTS;
+            
+            private global::System.Data.DataColumn columnEVNT;
+            
+            private global::System.Data.DataColumn columnAFBID;
+            
+            private global::System.Data.DataColumn columnTUR;
+            
+            private global::System.Data.DataColumn columnFRTID;
+            
+            private global::System.Data.DataColumn columnFTRNO;
+            
+            private global::System.Data.DataColumn columnFTRTRH;
+            
+            private global::System.Data.DataColumn columnODMVDE;
+            
+            private global::System.Data.DataColumn columnBDVZ;
+            
+            private global::System.Data.DataColumn columnBTUTBRT;
+            
+            private global::System.Data.DataColumn columnDKNFRTID;
+            
+            private global::System.Data.DataColumn columnDKNDVZ;
+            
+            private global::System.Data.DataColumn columnDKNNO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WEB_AFB_MDFDDataTable() {
+                this.TableName = "WEB_AFB_MDFD";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal WEB_AFB_MDFDDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected WEB_AFB_MDFDDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TBLColumn {
+                get {
+                    return this.columnTBL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EVNTTSColumn {
+                get {
+                    return this.columnEVNTTS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EVNTColumn {
+                get {
+                    return this.columnEVNT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AFBIDColumn {
+                get {
+                    return this.columnAFBID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TURColumn {
+                get {
+                    return this.columnTUR;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FRTIDColumn {
+                get {
+                    return this.columnFRTID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FTRNOColumn {
+                get {
+                    return this.columnFTRNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FTRTRHColumn {
+                get {
+                    return this.columnFTRTRH;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ODMVDEColumn {
+                get {
+                    return this.columnODMVDE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BDVZColumn {
+                get {
+                    return this.columnBDVZ;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BTUTBRTColumn {
+                get {
+                    return this.columnBTUTBRT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DKNFRTIDColumn {
+                get {
+                    return this.columnDKNFRTID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DKNDVZColumn {
+                get {
+                    return this.columnDKNDVZ;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DKNNOColumn {
+                get {
+                    return this.columnDKNNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WEB_AFB_MDFDRow this[int index] {
+                get {
+                    return ((WEB_AFB_MDFDRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WEB_AFB_MDFDRowChangeEventHandler WEB_AFB_MDFDRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WEB_AFB_MDFDRowChangeEventHandler WEB_AFB_MDFDRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WEB_AFB_MDFDRowChangeEventHandler WEB_AFB_MDFDRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WEB_AFB_MDFDRowChangeEventHandler WEB_AFB_MDFDRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddWEB_AFB_MDFDRow(WEB_AFB_MDFDRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WEB_AFB_MDFDRow AddWEB_AFB_MDFDRow(string TBL, int ID, System.DateTime EVNTTS, string EVNT, int AFBID, string TUR, int FRTID, string FTRNO, System.DateTime FTRTRH, System.DateTime ODMVDE, string BDVZ, decimal BTUTBRT, int DKNFRTID, string DKNDVZ, string DKNNO) {
+                WEB_AFB_MDFDRow rowWEB_AFB_MDFDRow = ((WEB_AFB_MDFDRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        TBL,
+                        ID,
+                        EVNTTS,
+                        EVNT,
+                        AFBID,
+                        TUR,
+                        FRTID,
+                        FTRNO,
+                        FTRTRH,
+                        ODMVDE,
+                        BDVZ,
+                        BTUTBRT,
+                        DKNFRTID,
+                        DKNDVZ,
+                        DKNNO};
+                rowWEB_AFB_MDFDRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowWEB_AFB_MDFDRow);
+                return rowWEB_AFB_MDFDRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                WEB_AFB_MDFDDataTable cln = ((WEB_AFB_MDFDDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new WEB_AFB_MDFDDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnTBL = base.Columns["TBL"];
+                this.columnID = base.Columns["ID"];
+                this.columnEVNTTS = base.Columns["EVNTTS"];
+                this.columnEVNT = base.Columns["EVNT"];
+                this.columnAFBID = base.Columns["AFBID"];
+                this.columnTUR = base.Columns["TUR"];
+                this.columnFRTID = base.Columns["FRTID"];
+                this.columnFTRNO = base.Columns["FTRNO"];
+                this.columnFTRTRH = base.Columns["FTRTRH"];
+                this.columnODMVDE = base.Columns["ODMVDE"];
+                this.columnBDVZ = base.Columns["BDVZ"];
+                this.columnBTUTBRT = base.Columns["BTUTBRT"];
+                this.columnDKNFRTID = base.Columns["DKNFRTID"];
+                this.columnDKNDVZ = base.Columns["DKNDVZ"];
+                this.columnDKNNO = base.Columns["DKNNO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnTBL = new global::System.Data.DataColumn("TBL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTBL);
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnEVNTTS = new global::System.Data.DataColumn("EVNTTS", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEVNTTS);
+                this.columnEVNT = new global::System.Data.DataColumn("EVNT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEVNT);
+                this.columnAFBID = new global::System.Data.DataColumn("AFBID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAFBID);
+                this.columnTUR = new global::System.Data.DataColumn("TUR", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUR);
+                this.columnFRTID = new global::System.Data.DataColumn("FRTID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFRTID);
+                this.columnFTRNO = new global::System.Data.DataColumn("FTRNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFTRNO);
+                this.columnFTRTRH = new global::System.Data.DataColumn("FTRTRH", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFTRTRH);
+                this.columnODMVDE = new global::System.Data.DataColumn("ODMVDE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnODMVDE);
+                this.columnBDVZ = new global::System.Data.DataColumn("BDVZ", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBDVZ);
+                this.columnBTUTBRT = new global::System.Data.DataColumn("BTUTBRT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBTUTBRT);
+                this.columnDKNFRTID = new global::System.Data.DataColumn("DKNFRTID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDKNFRTID);
+                this.columnDKNDVZ = new global::System.Data.DataColumn("DKNDVZ", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDKNDVZ);
+                this.columnDKNNO = new global::System.Data.DataColumn("DKNNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDKNNO);
+                this.columnTBL.MaxLength = 4;
+                this.columnEVNT.MaxLength = 1;
+                this.columnTUR.MaxLength = 2;
+                this.columnFTRNO.MaxLength = 20;
+                this.columnBDVZ.MaxLength = 3;
+                this.columnDKNDVZ.MaxLength = 3;
+                this.columnDKNNO.MaxLength = 20;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WEB_AFB_MDFDRow NewWEB_AFB_MDFDRow() {
+                return ((WEB_AFB_MDFDRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new WEB_AFB_MDFDRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(WEB_AFB_MDFDRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.WEB_AFB_MDFDRowChanged != null)) {
+                    this.WEB_AFB_MDFDRowChanged(this, new WEB_AFB_MDFDRowChangeEvent(((WEB_AFB_MDFDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.WEB_AFB_MDFDRowChanging != null)) {
+                    this.WEB_AFB_MDFDRowChanging(this, new WEB_AFB_MDFDRowChangeEvent(((WEB_AFB_MDFDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.WEB_AFB_MDFDRowDeleted != null)) {
+                    this.WEB_AFB_MDFDRowDeleted(this, new WEB_AFB_MDFDRowChangeEvent(((WEB_AFB_MDFDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.WEB_AFB_MDFDRowDeleting != null)) {
+                    this.WEB_AFB_MDFDRowDeleting(this, new WEB_AFB_MDFDRowChangeEvent(((WEB_AFB_MDFDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveWEB_AFB_MDFDRow(WEB_AFB_MDFDRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                tMax14DataSet ds = new tMax14DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "WEB_AFB_MDFDDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4117,6 +4602,441 @@ namespace FbLibrary {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class WEB_AFB_MDFDRow : global::System.Data.DataRow {
+            
+            private WEB_AFB_MDFDDataTable tableWEB_AFB_MDFD;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal WEB_AFB_MDFDRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableWEB_AFB_MDFD = ((WEB_AFB_MDFDDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TBL {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.TBLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TBL\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.TBLColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableWEB_AFB_MDFD.IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ID\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime EVNTTS {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_AFB_MDFD.EVNTTSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EVNTTS\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.EVNTTSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EVNT {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.EVNTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EVNT\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.EVNTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int AFBID {
+                get {
+                    try {
+                        return ((int)(this[this.tableWEB_AFB_MDFD.AFBIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AFBID\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.AFBIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TUR {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.TURColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TUR\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.TURColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int FRTID {
+                get {
+                    try {
+                        return ((int)(this[this.tableWEB_AFB_MDFD.FRTIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FRTID\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.FRTIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FTRNO {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.FTRNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FTRNO\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.FTRNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime FTRTRH {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_AFB_MDFD.FTRTRHColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FTRTRH\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.FTRTRHColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime ODMVDE {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_AFB_MDFD.ODMVDEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ODMVDE\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.ODMVDEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BDVZ {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.BDVZColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BDVZ\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.BDVZColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal BTUTBRT {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableWEB_AFB_MDFD.BTUTBRTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BTUTBRT\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.BTUTBRTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int DKNFRTID {
+                get {
+                    try {
+                        return ((int)(this[this.tableWEB_AFB_MDFD.DKNFRTIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DKNFRTID\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.DKNFRTIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DKNDVZ {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.DKNDVZColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DKNDVZ\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.DKNDVZColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DKNNO {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_AFB_MDFD.DKNNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DKNNO\' in table \'WEB_AFB_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_AFB_MDFD.DKNNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTBLNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.TBLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTBLNull() {
+                this[this.tableWEB_AFB_MDFD.TBLColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDNull() {
+                this[this.tableWEB_AFB_MDFD.IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEVNTTSNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.EVNTTSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEVNTTSNull() {
+                this[this.tableWEB_AFB_MDFD.EVNTTSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEVNTNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.EVNTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEVNTNull() {
+                this[this.tableWEB_AFB_MDFD.EVNTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAFBIDNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.AFBIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAFBIDNull() {
+                this[this.tableWEB_AFB_MDFD.AFBIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTURNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.TURColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTURNull() {
+                this[this.tableWEB_AFB_MDFD.TURColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFRTIDNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.FRTIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFRTIDNull() {
+                this[this.tableWEB_AFB_MDFD.FRTIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFTRNONull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.FTRNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFTRNONull() {
+                this[this.tableWEB_AFB_MDFD.FTRNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFTRTRHNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.FTRTRHColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFTRTRHNull() {
+                this[this.tableWEB_AFB_MDFD.FTRTRHColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsODMVDENull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.ODMVDEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetODMVDENull() {
+                this[this.tableWEB_AFB_MDFD.ODMVDEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBDVZNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.BDVZColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBDVZNull() {
+                this[this.tableWEB_AFB_MDFD.BDVZColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBTUTBRTNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.BTUTBRTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBTUTBRTNull() {
+                this[this.tableWEB_AFB_MDFD.BTUTBRTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDKNFRTIDNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.DKNFRTIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDKNFRTIDNull() {
+                this[this.tableWEB_AFB_MDFD.DKNFRTIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDKNDVZNull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.DKNDVZColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDKNDVZNull() {
+                this[this.tableWEB_AFB_MDFD.DKNDVZColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDKNNONull() {
+                return this.IsNull(this.tableWEB_AFB_MDFD.DKNNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDKNNONull() {
+                this[this.tableWEB_AFB_MDFD.DKNNOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4204,6 +5124,40 @@ namespace FbLibrary {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WEB_FRT_MDFDRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class WEB_AFB_MDFDRowChangeEvent : global::System.EventArgs {
+            
+            private WEB_AFB_MDFDRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WEB_AFB_MDFDRowChangeEvent(WEB_AFB_MDFDRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WEB_AFB_MDFDRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -4943,6 +5897,206 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
                     this.Adapter.DeleteCommand.Connection.Close();
                 }
             }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class WEB_AFB_MDFDTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::FirebirdSql.Data.FirebirdClient.FbDataAdapter _adapter;
+        
+        private global::FirebirdSql.Data.FirebirdClient.FbConnection _connection;
+        
+        private global::FirebirdSql.Data.FirebirdClient.FbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public WEB_AFB_MDFDTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private global::FirebirdSql.Data.FirebirdClient.FbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::FirebirdSql.Data.FirebirdClient.FbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::FirebirdSql.Data.FirebirdClient.FbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::FirebirdSql.Data.FirebirdClient.FbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::FirebirdSql.Data.FirebirdClient.FbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "WEB_AFB_MDFD";
+            tableMapping.ColumnMappings.Add("TBL", "TBL");
+            tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("EVNTTS", "EVNTTS");
+            tableMapping.ColumnMappings.Add("EVNT", "EVNT");
+            tableMapping.ColumnMappings.Add("AFBID", "AFBID");
+            tableMapping.ColumnMappings.Add("TUR", "TUR");
+            tableMapping.ColumnMappings.Add("FRTID", "FRTID");
+            tableMapping.ColumnMappings.Add("FTRNO", "FTRNO");
+            tableMapping.ColumnMappings.Add("FTRTRH", "FTRTRH");
+            tableMapping.ColumnMappings.Add("ODMVDE", "ODMVDE");
+            tableMapping.ColumnMappings.Add("BDVZ", "BDVZ");
+            tableMapping.ColumnMappings.Add("BTUTBRT", "BTUTBRT");
+            tableMapping.ColumnMappings.Add("DKNFRTID", "DKNFRTID");
+            tableMapping.ColumnMappings.Add("DKNDVZ", "DKNDVZ");
+            tableMapping.ColumnMappings.Add("DKNNO", "DKNNO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::FirebirdSql.Data.FirebirdClient.FbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "\"WEB_TH_DEL\"";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
+            global::FirebirdSql.Data.FirebirdClient.FbParameter param = new global::FirebirdSql.Data.FirebirdClient.FbParameter();
+            param.ParameterName = "TBL";
+            param.Size = 4;
+            param.IsNullable = true;
+            param.SourceColumn = "TBL";
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::FirebirdSql.Data.FirebirdClient.FbParameter();
+            param.ParameterName = "ID";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.Size = 4;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.DeleteCommand.Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::FirebirdSql.Data.FirebirdClient.FbConnection();
+            this._connection.ConnectionString = global::FbLibrary.Properties.Settings.Default.ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::FirebirdSql.Data.FirebirdClient.FbCommand[1];
+            this._commandCollection[0] = new global::FirebirdSql.Data.FirebirdClient.FbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "\"WEB_AFB_MDFD\"";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            global::FirebirdSql.Data.FirebirdClient.FbParameter param = new global::FirebirdSql.Data.FirebirdClient.FbParameter();
+            param.ParameterName = "TYP";
+            param.Size = 1;
+            param.IsNullable = true;
+            param.SourceColumn = null;
+            this._commandCollection[0].Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(tMax14DataSet.WEB_AFB_MDFDDataTable dataTable, string TYP) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((TYP == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(TYP));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(tMax14DataSet.WEB_AFB_MDFDDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(tMax14DataSet dataSet) {
+            return this.Adapter.Update(dataSet, "WEB_AFB_MDFD");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
         }
     }
 }

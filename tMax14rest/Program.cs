@@ -347,8 +347,75 @@ namespace tMax14rest
 				//ws.Send(rMsg);
 			});
 
-			
-			Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
+
+            Handle.GET("/wsAfbConnect", (Request req) =>
+            {
+                if (req.WebSocketUpgrade)
+                {
+                    Console.WriteLine("wsAFB Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    req.SendUpgrade("wsOpm");
+                    return HandlerStatus.Handled;
+                }
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
+
+            Handle.WebSocket("wsAfb", (string str, WebSocket ws) =>
+            {
+                dynamic jsn = JValue.Parse(str);
+
+                Db.Transact(() =>
+                {
+                    int AfbID = jsn.OpmID;
+
+                    if (jsn.Evnt == "D")
+                    {
+                        var afbs = Db.SQL<TMDB.AFB>("select m from OPM m where m.OpmID = ?", AfbID);
+                        foreach (var rec in afbs)
+                        {
+                            //Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
+                            rec.Delete();
+                        }
+                    }
+                    else
+                    {
+                        var rec = Db.SQL<TMDB.AFB>("select m from AFB m where m.AfbID = ?", AfbID).First;
+                        if (jsn.Evnt == "I" && rec == null)
+                        {
+                            rec = new TMDB.AFB();
+                        }
+
+                        if (rec != null)
+                        {
+                            rec.MdfdOn = DateTime.Now;
+                            rec.AfbID = AfbID;
+                            rec.Tur = jsn.Tur;
+                            rec.FrtID = jsn.FrtID;
+                            rec.FtrNo = jsn.FtrNo;
+                            rec.FtrTrh = jsn.FtrTrh;
+                            rec.OdmVde = jsn.OdmVde;
+                            rec.DknFrtID = jsn.DknFrtID;
+                            rec.DknNo = jsn.DknNo;
+                            rec.DknDvz = jsn.DknDvz;
+
+                            if (rec.FrtID != null)
+                                rec.Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.FrtID).First;
+                            if (rec.DknFrtID != null)
+                                rec.DknFrt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.DknFrtID).First;
+                        }
+                    }
+                });
+
+                //ws.Send(rMsg);
+            });
+
+
+
+
+            Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
 			{
 				Console.WriteLine("FRT: " + jsn.FrtID);
 				string rMsg = "OK";

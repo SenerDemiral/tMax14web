@@ -52,8 +52,32 @@ namespace TMDB
 		}
 	}
 
-	[Database]
-	public class OPM
+    [Database]
+    public class AFB
+    {
+		public DateTime MdfdOn { get; set; }
+        public int AfbID { get; set; }
+        public int? FrtID { get; set; }
+        public FRT Frt { get; set; }
+        public string Tur { get; set; }
+
+        public string FtrNo { get; set; }
+        public DateTime? FtrTrh { get; set; }
+        public DateTime? OdmVde { get; set; }
+        public string bDvz { get; set; }
+        public double? bTutBrt { get; set; }
+
+        public int? DknFrtID { get; set; }
+        public FRT DknFrt { get; set; }
+        public string DknNo { get; set; }
+        public string DknDvz { get; set; }
+
+        public string FrtAd => Frt == null ? "" : Frt.AdN;
+        public string DknFrtAd => DknFrt == null ? "" : DknFrt.AdN;
+    }
+
+    [Database]
+    public class OPM
 	{
 		public DateTime MdfdOn { get; set; }
         public int OpmID { get; set; }

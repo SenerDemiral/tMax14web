@@ -41,9 +41,10 @@ namespace FB2SCservice
             if (!sent)
             {
                 sent = true;
-                //FbLibrary.SendWithWebSocket.FrtSend("F");
+                FbLibrary.SendWithWebSocket.FrtSend("F");
                 FbLibrary.SendWithWebSocket.OpmSend("F");
-                //FbLibrary.SendWithWebSocket.OphSend("F");
+                FbLibrary.SendWithWebSocket.OphSend("F");
+                FbLibrary.SendWithWebSocket.AfbSend("F");
             }
         }
 
