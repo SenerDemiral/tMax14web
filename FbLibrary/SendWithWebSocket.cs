@@ -233,7 +233,7 @@ namespace FbLibrary
                 if (wsAfb.ReadyState != WebSocketState.Open)
                     wsAfb.Connect();
 
-                if (wsOpm.ReadyState == WebSocketState.Open)
+                if (wsAfb.ReadyState == WebSocketState.Open)
                 {
                     dynamic jsn = new JObject();
 

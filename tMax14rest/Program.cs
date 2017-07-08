@@ -397,6 +397,8 @@ namespace tMax14rest
                             rec.FtrNo = jsn.FtrNo;
                             rec.FtrTrh = jsn.FtrTrh;
                             rec.OdmVde = jsn.OdmVde;
+                            rec.bDvz = jsn.bDvz;
+                            rec.bTutBrt = jsn.bTutBrt;
                             rec.DknFrtID = jsn.DknFrtID;
                             rec.DknNo = jsn.DknNo;
                             rec.DknDvz = jsn.DknDvz;
