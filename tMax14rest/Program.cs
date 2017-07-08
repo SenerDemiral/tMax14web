@@ -74,9 +74,10 @@ namespace tMax14rest
 					Db.SlowSQL("DELETE FROM TMDB.OPH");
 					Db.SlowSQL("DELETE FROM TMDB.OPM");
 					Db.SlowSQL("DELETE FROM TMDB.FRT");
+					Db.SlowSQL("DELETE FROM TMDB.AFB");
 				});
 
-				return "OK";
+                return "OK";
 			});
 
 			Handle.GET("/wsFrtConnect", (Request req) =>
@@ -353,7 +354,7 @@ namespace tMax14rest
                 if (req.WebSocketUpgrade)
                 {
                     Console.WriteLine("wsAFB Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
-                    req.SendUpgrade("wsOpm");
+                    req.SendUpgrade("wsAfb");
                     return HandlerStatus.Handled;
                 }
                 return new Response()
