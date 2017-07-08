@@ -370,14 +370,13 @@ namespace tMax14rest
 
                 Db.Transact(() =>
                 {
-                    int AfbID = jsn.OpmID;
+                    int AfbID = jsn.AfbID;
 
                     if (jsn.Evnt == "D")
                     {
-                        var afbs = Db.SQL<TMDB.AFB>("select m from OPM m where m.OpmID = ?", AfbID);
+                        var afbs = Db.SQL<TMDB.AFB>("select m from AFB m where m.AfbID = ?", AfbID);
                         foreach (var rec in afbs)
                         {
-                            //Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
                             rec.Delete();
                         }
                     }
