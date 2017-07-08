@@ -94,7 +94,7 @@ namespace TMDB
             {
                 if (nStu == null)
                     return ""; 
-                var osn = Db.SQL<OSN>("select f from OSN f where f.Stu = ?", nStu).First;
+                var osn = Db.SQL<OSN>("select f from TMDB.OSN f where f.Stu = ?", this.nStu).First;
                 if (osn == null)
                     return "";
                 return osn.Ad;
@@ -182,6 +182,19 @@ namespace TMDB
 		public string ETA_t => Opm == null ? "" : $"{Opm.ETA:s}";
         public string ATA_t => Opm == null ? "" : $"{Opm.ATA:s}";
         public string ACOT_t => Opm == null ? "" : $"{Opm.ACOT:s}";
+
+        public string nStuAd
+        {
+            get
+            {
+                if (nStu == null)
+                    return "";
+                var osn = Db.SQL<OSN>("select f from TMDB.OSN f where f.Stu = ?", this.nStu).First;
+                if (osn == null)
+                    return "";
+                return osn.Ad;
+            }
+        }
 
         public OPH()
 		{

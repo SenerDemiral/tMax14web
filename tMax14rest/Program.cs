@@ -52,12 +52,12 @@ namespace tMax14rest
                     Db.SlowSQL("DELETE FROM TMDB.OSN");
                     OSN recA  = new OSN() {Stu = "A",  Ad = "AgentBooking"};
                     OSN recAB = new OSN() {Stu = "AB", Ad = "Aborted"};
-                    OSN recB  = new OSN() {Stu = "B",  Ad = "Booking"};
+                    OSN recB  = new OSN() {Stu = "B",  Ad = "Booked"};
                     OSN recC  = new OSN() {Stu = "C",  Ad = "Cancelled"};
-                    OSN recE  = new OSN() {Stu = "E",  Ad = "Cargo In Hand"};
-                    OSN recK  = new OSN() {Stu = "K",  Ad = "Cargo @ Carrier"};
-                    OSN recN  = new OSN() {Stu = "N",  Ad = "Cargo Departed"};
-                    OSN recP  = new OSN() {Stu = "E",  Ad = "Cargo @ Destination"};
+                    OSN recE  = new OSN() {Stu = "E",  Ad = "InHand"};
+                    OSN recK  = new OSN() {Stu = "K",  Ad = "@Carrier"};
+                    OSN recN  = new OSN() {Stu = "N",  Ad = "Departed"};
+                    OSN recP  = new OSN() {Stu = "P",  Ad = "@Destination"};
                     OSN recQC = new OSN() {Stu = "QC", Ad = "QC Failed"};
                     OSN recR  = new OSN() {Stu = "R",  Ad = "Custom Clearance in Process" };
                     OSN recRE = new OSN() {Stu = "RE", Ad = "Custom Cleared" };
