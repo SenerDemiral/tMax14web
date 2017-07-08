@@ -121,7 +121,8 @@ namespace TMDB
 		public int? CneID { get; set; }
 		public int? AccID { get; set; }
 		public int? MnfID { get; set; }
-		public int? NfyID { get; set; }
+        public int? NfyID { get; set; }
+        public int? CrrID { get; set; }
 
         public OPM Opm { get; set; }
         public FRT Shp { get; set; }
@@ -129,6 +130,7 @@ namespace TMDB
         public FRT Acc { get; set; }
         public FRT Mnf { get; set; }
         public FRT Nfy { get; set; }
+        public FRT Crr { get; set; }
 
         public string nStu { get; set; }
 		public string pStu { get; set; }
@@ -170,6 +172,7 @@ namespace TMDB
 		public string AccAd => Acc == null ? "" : Acc.AdN;
         public string MnfAd => Mnf == null ? "" : Mnf.AdN;
         public string NfyAd => Nfy == null ? "" : Nfy.AdN;
+        public string CrrAd => Crr == null ? "" : Crr.AdN;
 
         public DateTime? ETD => Opm == null ? null : Opm.ETD;
 		public DateTime? ATD => Opm == null ? null : Opm.ATD;

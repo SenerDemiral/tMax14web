@@ -170,15 +170,19 @@ namespace FbLibrary
                         jsn.OpmID = row["OPMID"];
                         jsn.RefNo = row["REFNO"];
                         jsn.EXD = row["EXD"];  // row.EXD.ToString();
+
                         jsn.ROT = row["ROT"];
                         jsn.MOT = row["MOT"];
                         jsn.Org = row["Org"];
                         jsn.Dst = row["Dst"];
+
                         jsn.ShpID = row["ShpID"];
                         jsn.CneID = row["CneID"];
                         jsn.AccID = row["AccID"];
                         jsn.MnfID = row["MnfID"];
                         jsn.NfyID = row["NfyID"];
+                        jsn.CrrID = row["CrrID"];
+
                         jsn.DTM = row["DTM"];
                         jsn.PTM = row["PTM"];
                         jsn.NOP = row["NOP"];

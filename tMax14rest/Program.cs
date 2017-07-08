@@ -312,6 +312,7 @@ namespace tMax14rest
                             rec.AccID = jsn.AccID;// == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
                             rec.MnfID = jsn.MnfID;// == "" ? (int?)null : Convert.ToInt32(jsn.MnfID);
                             rec.NfyID = jsn.NfyID;// == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
+                            rec.CrrID = jsn.CrrID;// == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
 
                             rec.EXD = jsn.EXD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
                             rec.nStuTS = jsn.nStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
@@ -338,6 +339,8 @@ namespace tMax14rest
                                 rec.Mnf = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).First;
                             if (rec.NfyID != null)
                                 rec.Nfy = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.NfyID).First;
+                            if (rec.CrrID != null)
+                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
                         }
                     }
 				});
