@@ -45,7 +45,29 @@ namespace tMax14rest
 			});
 
 
-			Handle.GET("/tMax14rest/ResetAll", (OphMsg hJ) =>
+            Handle.GET("/tMax14rest/InsStu", () =>
+            {
+                Db.Transact(() =>
+                {
+                    Db.SlowSQL("DELETE FROM TMDB.OSN");
+                    OSN recA  = new OSN() {Stu = "A",  Ad = "AgentBooking"};
+                    OSN recAB = new OSN() {Stu = "AB", Ad = "Aborted"};
+                    OSN recB  = new OSN() {Stu = "B",  Ad = "Booking"};
+                    OSN recC  = new OSN() {Stu = "C",  Ad = "Cancelled"};
+                    OSN recE  = new OSN() {Stu = "E",  Ad = "Cargo In Hand"};
+                    OSN recK  = new OSN() {Stu = "K",  Ad = "Cargo @ Carrier"};
+                    OSN recN  = new OSN() {Stu = "N",  Ad = "Cargo Departed"};
+                    OSN recP  = new OSN() {Stu = "E",  Ad = "Cargo @ Destination"};
+                    OSN recQC = new OSN() {Stu = "QC", Ad = "QC Failed"};
+                    OSN recR  = new OSN() {Stu = "R",  Ad = "Custom Clearance in Process" };
+                    OSN recRE = new OSN() {Stu = "RE", Ad = "Custom Cleared" };
+                    OSN recT  = new OSN() {Stu = "T",  Ad = "Closed"};
+                });
+
+                return "OK";
+            });
+
+            Handle.GET("/tMax14rest/ResetAll", (OphMsg hJ) =>
 			{
 				Db.Transact(() =>
 				{
@@ -99,7 +121,7 @@ namespace tMax14rest
 
                         if (jsn.Evnt == "D")
 						{
-							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where rec.FrtID = ?", FrtID);
+							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID);
 							foreach(var rec in frts)
 							{
 								rec.Delete();
@@ -295,14 +317,16 @@ namespace tMax14rest
                             rec.nStuTS = jsn.nStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
                             rec.pStuTS = jsn.pStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.pStuTS);
                             rec.ROH = jsn.ROH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROH);
-                            rec.REOH = jsn.REOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
                             rec.EOH = jsn.EOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
                             rec.AOH = jsn.AOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
                             rec.RTR = jsn.RTR;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.RTR);
                             rec.ROS = jsn.ROS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROS);
                             rec.POD = jsn.POD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
+                            rec.REOH = jsn.REOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
+                            rec.DRBD = jsn.DRBD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
+                            rec.CABW = jsn.CABW;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
 
-							if(rec.OpmID != null)
+                            if (rec.OpmID != null)
 								rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
 							if(rec.ShpID != null)
 								rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;

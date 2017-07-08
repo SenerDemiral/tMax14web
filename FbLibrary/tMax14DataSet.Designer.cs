@@ -1025,6 +1025,8 @@ namespace FbLibrary {
             
             private global::System.Data.DataColumn columnCNTNOS;
             
+            private global::System.Data.DataColumn columnCABW;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WEB_OPH_MDFDDataTable() {
@@ -1348,6 +1350,14 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CABWColumn {
+                get {
+                    return this.columnCABW;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1419,7 +1429,8 @@ namespace FbLibrary {
                         System.DateTime RTR, 
                         System.DateTime POD, 
                         System.DateTime DRBD, 
-                        string CNTNOS) {
+                        string CNTNOS, 
+                        System.DateTime CABW) {
                 WEB_OPH_MDFDRow rowWEB_OPH_MDFDRow = ((WEB_OPH_MDFDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TBL,
@@ -1457,7 +1468,8 @@ namespace FbLibrary {
                         RTR,
                         POD,
                         DRBD,
-                        CNTNOS};
+                        CNTNOS,
+                        CABW};
                 rowWEB_OPH_MDFDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWEB_OPH_MDFDRow);
                 return rowWEB_OPH_MDFDRow;
@@ -1516,6 +1528,7 @@ namespace FbLibrary {
                 this.columnPOD = base.Columns["POD"];
                 this.columnDRBD = base.Columns["DRBD"];
                 this.columnCNTNOS = base.Columns["CNTNOS"];
+                this.columnCABW = base.Columns["CABW"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1593,6 +1606,8 @@ namespace FbLibrary {
                 base.Columns.Add(this.columnDRBD);
                 this.columnCNTNOS = new global::System.Data.DataColumn("CNTNOS", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCNTNOS);
+                this.columnCABW = new global::System.Data.DataColumn("CABW", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCABW);
                 this.columnTBL.MaxLength = 4;
                 this.columnEVNT.MaxLength = 1;
                 this.columnREFNO.MaxLength = 20;
@@ -3360,6 +3375,22 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime CABW {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_OPH_MDFD.CABWColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CABW\' in table \'WEB_OPH_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPH_MDFD.CABWColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTBLNull() {
                 return this.IsNull(this.tableWEB_OPH_MDFD.TBLColumn);
             }
@@ -3788,6 +3819,18 @@ namespace FbLibrary {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCNTNOSNull() {
                 this[this.tableWEB_OPH_MDFD.CNTNOSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCABWNull() {
+                return this.IsNull(this.tableWEB_OPH_MDFD.CABWColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCABWNull() {
+                this[this.tableWEB_OPH_MDFD.CABWColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4507,6 +4550,7 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
             tableMapping.ColumnMappings.Add("POD", "POD");
             tableMapping.ColumnMappings.Add("DRBD", "DRBD");
             tableMapping.ColumnMappings.Add("CNTNOS", "CNTNOS");
+            tableMapping.ColumnMappings.Add("CABW", "CABW");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::FirebirdSql.Data.FirebirdClient.FbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;

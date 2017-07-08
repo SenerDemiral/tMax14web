@@ -20,7 +20,21 @@ namespace TMDB
 		public DateTime ToU;    // Time of Update
 	}
 
-	[Database]
+    [Database]
+    public class OSN    // OpsStuNormal
+    {
+        public string Stu { get; set; }
+        public string Ad { get; set; }
+    }
+
+    [Database]
+    public class OSP    // OpsStuProblem
+    {
+        public string Stu { get; set; }
+        public string Ad { get; set; }
+    }
+
+    [Database]
 	public class FRT
 	{
 		public DateTime MdfdOn { get; set; }
@@ -53,7 +67,7 @@ namespace TMDB
 		public int? ShpID { get; set; }
 		public int? CneID { get; set; }
 		public int? AccID { get; set; }
-		public int? CrrID { get; set; }
+        public int? CrrID { get; set; }
 
         public FRT Shp { get; set; }
         public FRT Cne { get; set; }
@@ -73,11 +87,23 @@ namespace TMDB
         public string ShpAd => Shp == null ? "" : Shp.AdN;
 		public string CneAd => Cne == null ? "" : Cne.AdN;
 		public string AccAd => Acc == null ? "" : Acc.AdN;
-		public string CrrAd => Crr == null ? "" : Crr.AdN;
+        public string CrrAd => Crr == null ? "" : Crr.AdN;
 
-	}
+        public string nStuAd {
+            get
+            {
+                if (nStu == null)
+                    return ""; 
+                var osn = Db.SQL<OSN>("select f from OSN f where f.Stu = ?", nStu).First;
+                if (osn == null)
+                    return "";
+                return osn.Ad;
+            }
+        }
+    }
 
-	[Database]
+
+    [Database]
 	public class OPH
 	{
 		public DateTime MdfdOn { get; set; }
