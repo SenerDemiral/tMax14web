@@ -1,0 +1,21 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <div class="wrapper">
+            <div class="header">
+                Id: <input type="text" name="fname" value="{{model.fID$::input}}" style="width:60px">
+                Pswd: <input type="password" name="fname" value="{{model.fPW$}}" style="width:60px">
+                <a href="/tMax14web/OphClient" style="color:white">House</a>
+
+            </div>
+            <div class="footer">Footer
+            </div>
+            <div class="main">
+                <div>
+                    <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

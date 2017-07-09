@@ -13,11 +13,11 @@
       font-size: small;
       -webkit-font-smoothing: antialiased;
       --divider-color: #d4d4d4;
-      height: 80vh;
+      /*height: 80vh;*/
 
       --vaadin-grid-cell: {
         padding: 0 8px;
-        height: 38px;
+        height: 30px;
         border-right: 1px solid #d4d4d4;
         box-sizing: border-box;
       };
@@ -113,12 +113,12 @@
 
 
 
-		<vaadin-grid id="valo-grid" items={{model.Ophs}} size="200">
+		<vaadin-grid id="valo-grid" items={{model.Ophs}} style="height:calc(100vh - 70px)">
 			<vaadin-grid-column-group resizable>
 				<template class="header">
 					<vaadin-grid-sorter path="OphID">ID</vaadin-grid-sorter>
 				</template>
-				<vaadin-grid-column>
+				<vaadin-grid-column width="60px">
 					<template class="header">
 						<vaadin-grid-filter path="OphID" value="[[_filterhID]]">
 							<input placeholder="ID" value="{{_filterhID::input}}" focus-target>
@@ -132,7 +132,7 @@
 				<template class="header">
 					<vaadin-grid-sorter path="ROT">ROT</vaadin-grid-sorter>
 				</template>
-				<vaadin-grid-column width="80px">
+				<vaadin-grid-column width="60px">
 					<template class="header">
 						<vaadin-grid-filter path="ROT" value="[[_filterROT]]">
 							<input placeholder="Route" value="{{_filterROT::input}}" focus-target>
@@ -146,7 +146,7 @@
 				<template class="header">
 					<vaadin-grid-sorter path="MOT">MOT</vaadin-grid-sorter>
 				</template>
-				<vaadin-grid-column width="80px">
+				<vaadin-grid-column width="60px">
 					<template class="header">
 						<vaadin-grid-filter path="MOT" value="[[_filterMOT]]">
 							<input placeholder="Mode" value="{{_filterMOT::input}}" focus-target>

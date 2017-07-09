@@ -31,6 +31,7 @@ namespace tMax14web
 					<link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"" crossorigin=""anonymous"">
 					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
 					-->
+					<link rel=""stylesheet"" href=""/sys/Stylesheet2.css"">
 
 					<link rel=""import"" href=""/sys/github-browser-app.html"">
 					

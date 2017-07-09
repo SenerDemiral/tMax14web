@@ -129,8 +129,10 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\tMax14web\MasterPage2.html" />
     <None Include="wwwroot\sys\github-browser-app.html" />
     <Content Include="wwwroot\sys\Stylesheet1.css" />
+    <Content Include="wwwroot\sys\Stylesheet2.css" />
     <Content Include="wwwroot\sys\thenBy.js" />
     <None Include="wwwroot\tMax14web\D2.html" />
     <None Include="wwwroot\tMax14web\OphClientPageVaadin.html" />
