@@ -4,12 +4,35 @@
     <template is="dom-bind">
         <div class="wrapper">
             <div class="header">
-                Id: <input type="text" name="fname" value="{{model.fID$::input}}" style="width:60px">
-                Pswd: <input type="password" name="fname" value="{{model.fPW$}}" style="width:60px">
-                <a href="/tMax14web/OphClient" style="color:white">House</a>
+                <div>
+                    Company Id <input type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
+                </div>
 
+                <div>[[model.fAdN]]</div>
+                
+                <div>
+                    Pswd <input type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
+                </div>
+
+                <div>
+                    Date > <input type="date" name="sd" value="{{model.StartDate$::input}}">
+                </div>
+
+                <div>
+                    <a href="/tMax14web/OphClient" style="color:white">House</a>
+                </div>
+                <!--
+                <div style="border-left: 10px solid transparent;">
+                    <a href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" style="color:white">Download</a>
+                </div>
+                <div>
+                    <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" on-tap="Download" value="Download Excel" />
+                </div>
+                -->
             </div>
-            <div class="footer">Footer
+            <div class="footer">
+                <div>[[model.fAd]]</div>
+                <div>Transorient ®</div>
             </div>
             <div class="main">
                 <div>
@@ -18,4 +41,22 @@
             </div>
         </div>
     </template>
+    <script>
+		(function () {
+			var script = document._currentScript || document.currentScript;
+			tmplt = script.previousElementSibling;
+			tmplt.Download = function (e, aaa, bbb) {
+			    console.log("Download.e", e);
+			    console.log("Download.aaa", aaa);
+			    console.log("Download.this", this);
+			    //console.log("Download.e.target", e.target);
+				//console.log("Download.e.target.dataset", e.target.dataset);
+				//console.log("Download.e.target.dataLink", e.target.dataLink);
+			    window.open(e.target.dataLink);
+			    //window.open(e.target.dataLink, "_blank");
+			}
+		})();
+
+    </script>
+
 </template>

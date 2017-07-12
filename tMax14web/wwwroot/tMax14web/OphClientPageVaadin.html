@@ -9,6 +9,7 @@
 <style is="custom-style">
     vaadin-grid#valo-grid {
       position: relative;
+      /*font-family: "Open Sans", sans-serif;*/
       /*font: 300 16px/2.55 "Open Sans", sans-serif;*/
       font-size: small;
       -webkit-font-smoothing: antialiased;
@@ -28,7 +29,11 @@
       };
 
       --vaadin-grid-footer-cell: {
-        background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);
+        /*background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);*/
+        background-color: darkgrey;
+        color:azure;
+        height: 40px;
+        font-size:x-small;
       };
 
       --vaadin-grid-cell-last-frozen: {
@@ -73,7 +78,7 @@
     }
 
     vaadin-grid#valo-grid .grouptitle {
-      text-align: center;
+      text-align: left;
       font-weight: bold;
     }
 
@@ -110,332 +115,484 @@
     }
 
   </style>
+        <div class="subheader">
+            <div>
+                <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="Download" value="Download Excel" />
+            </div>
+            <!--<button value="{{model.DownloadExcelTrigger$::click}}" onmousedown="++this.value">Download Excel</button>-->
+        </div>
 
+            <vaadin-grid id="valo-grid" items={{model.Ophs}} style="height:calc(100vh - 100px)">
 
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="OphID">ID</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="OphID" value="[[_filterOphID]]">
+                                <input placeholder="" value="{{_filterOphID::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.OphID]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        ID
+                    </template>
+                </vaadin-grid-column-group>
 
-		<vaadin-grid id="valo-grid" items={{model.Ophs}} style="height:calc(100vh - 70px)">
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="OphID">ID</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="60px">
-					<template class="header">
-						<vaadin-grid-filter path="OphID" value="[[_filterhID]]">
-							<input placeholder="ID" value="{{_filterhID::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.OphID]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ROT">ROT</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="ROT" value="[[_filterROT]]">
+                                <input placeholder="" value="{{_filterROT::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.ROT]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Route
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ROT">ROT</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="60px">
-					<template class="header">
-						<vaadin-grid-filter path="ROT" value="[[_filterROT]]">
-							<input placeholder="Route" value="{{_filterROT::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.ROT]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="MOT">MOT</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="MOT" value="[[_filterMOT]]">
+                                <input placeholder="" value="{{_filterMOT::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.MOT]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Mode
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="MOT">MOT</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="60px">
-					<template class="header">
-						<vaadin-grid-filter path="MOT" value="[[_filterMOT]]">
-							<input placeholder="Mode" value="{{_filterMOT::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.MOT]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="nStu">Statu</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template>
+                            [[item.nStu]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Status
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="nStu">Statu</vaadin-grid-sorter>
-				</template>	
-				<vaadin-grid-column>
-					<template>[[item.nStu]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="Org">Org</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="Org" value="[[_filterOrg]]">
+                                <input placeholder="" value="{{_filterOrg::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.Org]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Origin
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="Org">Org</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header">
-						<vaadin-grid-filter path="Org" value="[[_filterOrg]]">
-							<input placeholder="Org" value="{{_filterOrg::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.Org]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="Dst">Dst</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="Dst" value="[[_filterDst]]">
+                                <input placeholder="" value="{{_filterDst::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.Dst]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Destination
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="Dst">Dst</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header">
-						<vaadin-grid-filter path="Dst" value="[[_filterDst]]">
-							<input placeholder="Dst" value="{{_filterDst::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.Dst]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ShpAd">Shp</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template class="header">
+                            <vaadin-grid-filter path="ShpAd" value="[[_filterShp]]">
+                                <input placeholder="" value="{{_filterShp::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.ShpAd]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Shipper
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ShpAd">Shp</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-filter path="ShpAd" value="[[_filterShp]]">
-							<input placeholder="Shipper" value="{{_filterShp::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.ShpAd]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="CneAd">Cne</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template class="header">
+                            <vaadin-grid-filter path="CneAd" value="[[_filterCne]]">
+                                <input placeholder="" value="{{_filterCne::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.CneAd]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Consignee
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="CneAd">Cne</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-filter path="CneAd" value="[[_filterCne]]">
-							<input placeholder="Consignee" value="{{_filterCne::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.CneAd]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="AccAd">Acc</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template class="header">
+                            <vaadin-grid-filter path="AccAd" value="[[_filterAcc]]">
+                                <input placeholder="" value="{{_filterAcc::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.AccAd]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Account
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="AccAd">Acc</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-filter path="AccAd" value="[[_filterAcc]]">
-							<input placeholder="Account" value="{{_filterAcc::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.AccAd]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="MnfAd">Mnf</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template class="header">
+                            <vaadin-grid-filter path="MnfAd" value="[[_filterMnf]]">
+                                <input placeholder="" value="{{_filterMnf::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.MnfAd]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Manufacturer
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="MnfAd">Mnf</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-filter path="MnfAd" value="[[_filterMnf]]">
-							<input placeholder="Manufacturer" value="{{_filterMnf::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.MnfAd]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="NfyAd">Nfy</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template class="header">
+                            <vaadin-grid-filter path="MfyAd" value="[[_filterNfy]]">
+                                <input placeholder="" value="{{_filterNfy::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.NfyAd]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Notify
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="NfyAd">Nfy</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-filter path="MfyAd" value="[[_filterNfy]]">
-							<input placeholder="Notify" value="{{_filterNfy::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.NfyAd]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="NOP">NOP</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.NOP]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="NOP">NOP</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><span style="text-align:center">[[item.NOP]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="GrW">GrW</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.GrW]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="GrW">GrW</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><span style="text-align:center">[[item.GrW]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="DTM">DTM</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="DTM" value="[[_filterDTM]]">
+                                <input placeholder="" value="{{_filterDTM::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.DTM]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Delivery
+                        <br />Terms
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="DTM">DTM</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header">
-						<vaadin-grid-filter path="DTM" value="[[_filterDTM]]">
-							<input placeholder="DeliveryTerms" value="{{_filterDTM::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.DTM]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="PTM">PTM</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="PTM" value="[[_filterPTM]]">
+                                <input placeholder="" value="{{_filterPTM::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.PTM]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Payment
+                        <br />Terms
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="PTM">PTM</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header">
-						<vaadin-grid-filter path="PTM" value="[[_filterPTM]]">
-							<input placeholder="PaymentTerms" value="{{_filterPTM::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template><span style="text-align:center">[[item.PTM]]</span></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ROH_t">ROH</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ROH_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Request
+                        <br />OnHand
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ROH">ROH</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template>[[item.ROH_t]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="EOH_t">EOH</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Expected
+                        <br />OnHand
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="EOH_t">EOH</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="REOH_t">REOH</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Requested
+                        <br />Expected
+                        <br />OnHand
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="REOH_t">REOH</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="AOH_t">AOH</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Actual
+                        <br />OnHand
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="AOH_t">AOH</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="RTR_t">RTR</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Ready
+                        <br />ToRelease
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="RTR_t">RTR</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ROS_t">ROS</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Request
+                        <br />OnSite
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ROS_t">ROS</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="POD_t">POD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Proof
+                        <br />OfDelivery
+                    </template>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="POD_t">POD</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ETD_t">ETD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ETD_t">ETD</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ATD_t">ATD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ATD_t">ATD</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ETA_t">ETA</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ETA_t">ETA</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ATA_t">ATA</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="ATA_t">ATA</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column width="80px">
-					<template class="header"></template>
-					<template><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="CntNoS">Cnt#</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column>
+                        <template class="header">
+                            <vaadin-grid-filter path="CntNoS" value="[[_filterCntNoS]]">
+                                <input placeholder="" value="{{_filterCntNoS::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.CntNoS]]
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
 
-			<vaadin-grid-column-group resizable>
-				<template class="header">
-					<vaadin-grid-sorter path="CntNoS">Cnt#</vaadin-grid-sorter>
-				</template>
-				<vaadin-grid-column>
-					<template class="header">
-						<vaadin-grid-filter path="CntNoS" value="[[_filterCntNoS]]">
-							<input placeholder="CntNoS" value="{{_filterCntNoS::input}}" focus-target>
-						</vaadin-grid-filter>
-					</template>
-					<template>[[item.CntNoS]]</template>
-				</vaadin-grid-column>
-			</vaadin-grid-column-group>
-			
-			<!--</vaadin-grid-column-group>-->
-	    </vaadin-grid>
+                <!--</vaadin-grid-column-group>-->
+            </vaadin-grid>
     </template>
+    <script>
+		(function () {
+			var script = document._currentScript || document.currentScript;
+			tmplt = script.previousElementSibling;
+			tmplt.Download = function (e) {
+			    window.open(e.target.dataLink);
+			    //window.open(e.target.dataLink, "_blank");
+			}
+		})();
+    </script>
 </template>

@@ -48,6 +48,7 @@ namespace FbLibrary
                         jsn.Evnt = row["EVNT"];
                         jsn.FrtID = row["FRTID"];
                         jsn.AdN = row["ADN"];
+                        jsn.Ad = row["AD"];
                         jsn.LocID = row["LOCID"];
                         jsn.Pwd = row["PWD"];
                         /*
@@ -206,7 +207,7 @@ namespace FbLibrary
                         jsn.POD = row["POD"];
                         jsn.REOH = row["REOH"];
                         jsn.DRBD = row["DRBD"];
-                        jsn.DRBD = row["CABW"];
+                        jsn.CABW = row["CABW"];
 
                         wsOph.Send(JsonConvert.SerializeObject(jsn));
 

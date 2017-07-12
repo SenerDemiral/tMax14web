@@ -6,7 +6,12 @@ namespace tMax14web
 {
 	partial class OphClientPage : Json
 	{
-		[OphClientPage_json]
+        void Handle(Input.DownloadExcelTrigger action)
+        {
+            var aa = "dfadfad";
+        }
+
+        [OphClientPage_json]
 		protected override void OnData()
 		{
 			base.OnData();
@@ -16,10 +21,23 @@ namespace tMax14web
 			var fpw = parent.fPW;
 			var std = Convert.ToDateTime(parent.StartDate);
 
-			Ophs.Clear();
-			if(fpw != "can")
-				return;
-            
+            fID = parent.fID;
+            StartDate = parent.StartDate;
+
+
+            Ophs.Clear();
+            var Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", fid).First;
+            if (Frt == null || Frt.Pwd != fpw)
+            {
+                parent.fAdN = "Not Found";
+                return;
+            }
+
+            parent.fAdN = Frt.AdN;
+            parent.fAd = Frt.Ad;
+            //if (fpw != "can")
+            //	return;
+
             Columns.Clear();
             //ColumnsElementJson c = new ColumnsElementJson();
             Columns.Add("aaaa");

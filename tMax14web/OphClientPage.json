@@ -1,8 +1,11 @@
 {
   "Html": "/tMax14web/OphClientPageVaadin.html",
   "Fmt": "DD.MM.YY",
+  "fID": "",
+	"StartDate": "",
 
   "Columns": [ "aaaa", "bbb" ],
+  "DownloadExcelTrigger$": 0,
 
   "Cols": [
     {

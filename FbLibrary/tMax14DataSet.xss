@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:WEB_OPM_MDFD" ZOrder="4" X="281" Y="15" Height="305" Width="247" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:WEB_OPH_MDFD" ZOrder="3" X="556" Y="16" Height="305" Width="244" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:WEB_FRT_MDFD" ZOrder="2" X="11" Y="12" Height="229" Width="240" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
+    <Shape ID="DesignTable:WEB_FRT_MDFD" ZOrder="2" X="11" Y="12" Height="248" Width="240" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
     <Shape ID="DesignTable:WEB_AFB_MDFD" ZOrder="1" X="55" Y="422" Height="305" Width="241" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
   <Connectors />

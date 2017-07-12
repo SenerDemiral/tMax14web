@@ -1,11 +1,12 @@
 ﻿body
 {
+    font-family: "Open Sans", sans-serif;
 }
 
 .wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 32px 1fr 28px;
   height: calc(100vh - 20px);
   grid-gap: 5px;
 }
@@ -29,15 +30,90 @@
   background-color: teal;
   color: white;
   
-  /*
+  
   display: flex;
   align-items: center;
+  /*
   flex-wrap: wrap;
   justify-content: space-between;*/
+}
+
+.header > div{
+    border-left: 10px solid transparent;
+}
+
+.subheader {
+  grid-column: 1;
+  grid-row: 1;
+  overflow:auto;
+  background-color: cadetblue;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.subheader > div{
+    border-left: 10px solid transparent;
 }
 
 .footer {
   grid-column: 1;
   grid-row: 3;
   background-color: orange;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.footer > div{
+    border-left: 10px solid transparent;
+}
+
+.sener:hover {color:red;}
+
+.sener .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    
+    position: fixed;
+    top: 100px;
+    /*
+    z-index: 1;
+    top: -5px;
+    left: 105%;*/
+
+    /*
+    width: 120px;
+    top: 100%;
+    left: 50%; 
+    margin-left: -60px; */
+
+}
+
+.sener:hover .tooltiptex {
+    visibility:visible;
+
+}
+
+.footer .tooltiptext {
+    visibility: hidden;
+}
+*/
+
+.tooltipXX {
+    position:relative;
+}
+
+.tooltip .footer {
+    display:none;
+}
+
+.tooltip:hover .footer{ display:inline-block; }

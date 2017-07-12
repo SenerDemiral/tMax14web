@@ -60,11 +60,14 @@ namespace tMax14web
             Handle.GET("/tMax14web/init", () => {
                 Db.Transact(() =>
                 {
+                    var f57036 = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", 57036).First;
+                    f57036.Pwd = "57036";
+                    /*
                     foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h"))
                     {
                         h.VM3 = 1;
                         h.ChW = 2;
-                    }
+                    }*/
                 });
                 return "OK";
             });

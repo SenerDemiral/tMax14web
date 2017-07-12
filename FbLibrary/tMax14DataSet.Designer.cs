@@ -1819,6 +1819,8 @@ namespace FbLibrary {
             
             private global::System.Data.DataColumn columnPWD;
             
+            private global::System.Data.DataColumn columnAD;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WEB_FRT_MDFDDataTable() {
@@ -1918,6 +1920,14 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ADColumn {
+                get {
+                    return this.columnAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1953,7 +1963,7 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WEB_FRT_MDFDRow AddWEB_FRT_MDFDRow(string TBL, int ID, System.DateTime EVNTTS, string EVNT, int FRTID, string ADN, string LOCID, string PWD) {
+            public WEB_FRT_MDFDRow AddWEB_FRT_MDFDRow(string TBL, int ID, System.DateTime EVNTTS, string EVNT, int FRTID, string ADN, string LOCID, string PWD, string AD) {
                 WEB_FRT_MDFDRow rowWEB_FRT_MDFDRow = ((WEB_FRT_MDFDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TBL,
@@ -1963,7 +1973,8 @@ namespace FbLibrary {
                         FRTID,
                         ADN,
                         LOCID,
-                        PWD};
+                        PWD,
+                        AD};
                 rowWEB_FRT_MDFDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWEB_FRT_MDFDRow);
                 return rowWEB_FRT_MDFDRow;
@@ -1994,6 +2005,7 @@ namespace FbLibrary {
                 this.columnADN = base.Columns["ADN"];
                 this.columnLOCID = base.Columns["LOCID"];
                 this.columnPWD = base.Columns["PWD"];
+                this.columnAD = base.Columns["AD"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2015,11 +2027,14 @@ namespace FbLibrary {
                 base.Columns.Add(this.columnLOCID);
                 this.columnPWD = new global::System.Data.DataColumn("PWD", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPWD);
+                this.columnAD = new global::System.Data.DataColumn("AD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAD);
                 this.columnTBL.MaxLength = 4;
                 this.columnEVNT.MaxLength = 1;
                 this.columnADN.MaxLength = 20;
                 this.columnLOCID.MaxLength = 5;
                 this.columnPWD.MaxLength = 20;
+                this.columnAD.MaxLength = 80;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4506,6 +4521,22 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string AD {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_FRT_MDFD.ADColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AD\' in table \'WEB_FRT_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_FRT_MDFD.ADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTBLNull() {
                 return this.IsNull(this.tableWEB_FRT_MDFD.TBLColumn);
             }
@@ -4598,6 +4629,18 @@ namespace FbLibrary {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPWDNull() {
                 this[this.tableWEB_FRT_MDFD.PWDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsADNull() {
+                return this.IsNull(this.tableWEB_FRT_MDFD.ADColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetADNull() {
+                this[this.tableWEB_FRT_MDFD.ADColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5775,6 +5818,7 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
             tableMapping.ColumnMappings.Add("ADN", "ADN");
             tableMapping.ColumnMappings.Add("LOCID", "LOCID");
             tableMapping.ColumnMappings.Add("PWD", "PWD");
+            tableMapping.ColumnMappings.Add("AD", "AD");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::FirebirdSql.Data.FirebirdClient.FbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;

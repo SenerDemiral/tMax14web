@@ -40,14 +40,16 @@ namespace TMDB
 		public DateTime MdfdOn { get; set; }
 		public int FrtID { get; set; }
 		public string AdN { get; set; }
-		public string LocID { get; set; }
+        public string Ad { get; set; }
+        public string LocID { get; set; }
 		public string Pwd { get; set; }
 
 		public FRT()
 		{
 			FrtID = 0;
 			AdN = "";
-			LocID = "";
+			Ad = "";
+            LocID = "";
 			Pwd = "";
 		}
 	}
