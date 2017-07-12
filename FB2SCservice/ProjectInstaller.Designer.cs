@@ -39,6 +39,7 @@
             // 
             // serviceInstaller1
             // 
+            this.serviceInstaller1.Description = "tMax14 Firebird-Starcounter Scheduler";
             this.serviceInstaller1.ServiceName = "FB2SC Service";
             // 
             // ProjectInstaller

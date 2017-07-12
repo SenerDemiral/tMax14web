@@ -25,7 +25,7 @@ namespace FB2SCservice
         {
             timer1 = new Timer();
             //timer1.Interval = 30000;    // 30sec
-            timer1.Interval = 5000;    // 5sec
+            timer1.Interval = 1 * 60 * 1000;    // 15dak
             timer1.Elapsed += Timer1_Elapsed;
             timer1.Enabled = true;
             FbLibrary.Logs.WriteErrorLog("FB2SC Service started");
@@ -34,17 +34,15 @@ namespace FB2SCservice
 
         private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //FbLibrary.Logs.WriteErrorLog("Timer ticked");
-            //Library.FrtCron("F");
-            //FbLibrary.Logs.WriteErrorLog("Timer ticked");
+            FbLibrary.Logs.WriteErrorLog("Timer ticked");
 
             if (!sent)
             {
-                sent = true;
-                FbLibrary.SendWithWebSocket.FrtSend("F");
-                FbLibrary.SendWithWebSocket.OpmSend("F");
-                FbLibrary.SendWithWebSocket.OphSend("F");
-                FbLibrary.SendWithWebSocket.AfbSend("F");
+                //sent = true;  // Bir kerelik
+                FbLibrary.SendWithWebSocket.FrtSend("M");
+                FbLibrary.SendWithWebSocket.OpmSend("M");
+                FbLibrary.SendWithWebSocket.OphSend("M");
+                FbLibrary.SendWithWebSocket.AfbSend("M");
             }
         }
 
