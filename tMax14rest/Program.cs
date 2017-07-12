@@ -24,9 +24,6 @@ namespace tMax14rest
 		
 		static void Main()
 		{
-			Console.WriteLine("11111111111");
-			var aaa = Db.SQL("select count(f) FROM FRT f").First;
-			Console.WriteLine("22222222222 {0}", aaa);
 			// Removing existing objects from database.
 			/*
 			Db.Transact(() => {
@@ -143,6 +140,7 @@ namespace tMax14rest
 								rec.MdfdOn = DateTime.Now;
                                 rec.FrtID = FrtID; // Convert.ToInt32(jsn.FrtID);
 								rec.AdN = jsn.AdN;
+								rec.Ad = jsn.Ad;
 								rec.LocID = jsn.LocID;
 								rec.Pwd = jsn.Pwd;
 							}
