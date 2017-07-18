@@ -3,8 +3,10 @@
   "fID$": "57036",
   "fAdN": "",
   "fAd": "",
-	"fPW$": "can",
+  "fPW$": "can",
+  "fOnLine": false,
 	"StartDate$": "2015-12-31",
+	"LoginTrigger$": 0,
 	"DownloadTrigger$": 0,
 	"CurrentPage": {}
 }

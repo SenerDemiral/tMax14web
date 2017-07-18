@@ -145,6 +145,25 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
+                        <vaadin-grid-sorter path="RefNo">Ref#</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="RefNo" value="[[_filterRefNo]]">
+                                <input placeholder="" value="{{_filterRefNo::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
+                        <template>
+                            [[item.RefNo]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Ref#
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
                         <vaadin-grid-sorter path="ROT">ROT</vaadin-grid-sorter>
                     </template>
                     <vaadin-grid-column width="80px">
@@ -183,15 +202,38 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
-                        <vaadin-grid-sorter path="nStu">Statu</vaadin-grid-sorter>
+                        <vaadin-grid-sorter path="nStu">Status</vaadin-grid-sorter>
                     </template>
-                    <vaadin-grid-column>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                            <vaadin-grid-filter path="nStu" value="[[_filternStu]]">
+                                <input placeholder="" value="{{_filternStu::input}}" focus-target>
+                            </vaadin-grid-filter>
+                        </template>
                         <template>
-                            [[item.nStu]]
+                            [[item.nStuAd]]
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Current
+                        <br />Status
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="nStuTS_t">StuD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element>
                         </template>
                     </vaadin-grid-column>
                     <template class="footer">
                         Status
+                        <br />Date
                     </template>
                 </vaadin-grid-column-group>
 
@@ -525,6 +567,11 @@
                             <moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element>
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Estimated
+                        <br />Time of
+                        <br />Departure
+                    </template>
                 </vaadin-grid-column-group>
 
                 <vaadin-grid-column-group resizable>
@@ -538,6 +585,11 @@
                             <moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element>
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Estimated
+                        <br />Time of
+                        <br />Arrival
+                    </template>
                 </vaadin-grid-column-group>
 
                 <vaadin-grid-column-group resizable>
@@ -551,6 +603,11 @@
                             <moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element>
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Actual
+                        <br />Time of
+                        <br />Departure
+                    </template>
                 </vaadin-grid-column-group>
 
                 <vaadin-grid-column-group resizable>
@@ -564,6 +621,27 @@
                             <moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element>
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Actual
+                        <br />Time of
+                        <br />Arrival
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ACOT_t">ACOT</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.ACOT_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Actual<br />Cut-Off<br />Time
+                    </template>
                 </vaadin-grid-column-group>
 
                 <vaadin-grid-column-group resizable>
@@ -580,6 +658,10 @@
                             [[item.CntNoS]]
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Container
+                        <br />Number(s)
+                    </template>
                 </vaadin-grid-column-group>
 
                 <!--</vaadin-grid-column-group>-->

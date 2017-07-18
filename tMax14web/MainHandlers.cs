@@ -67,7 +67,7 @@ namespace tMax14web
 				master.CurrentPage = new OphClientPage();
 				master.CurrentPage.Data = null;
 
-                if (master.fAd == "Not Found")
+                if (master.fAdN == "Not Found")
                     master.CurrentPage = null;
 				return master;
 			});
@@ -95,8 +95,8 @@ namespace tMax14web
 						ws.Cells[cr, (int)hFlds.Dst].Value = h.Dst;
 						ws.Cells[cr, (int)hFlds.nStu].Value = h.nStu;
 						ws.Cells[cr, (int)hFlds.nStuTS].Value = h.nStuTS;
-						ws.Cells[cr, (int)hFlds.pStu].Value = h.pStu;
-						ws.Cells[cr, (int)hFlds.pStuTS].Value = h.pStuTS;
+						//ws.Cells[cr, (int)hFlds.pStu].Value = h.pStu;
+						//ws.Cells[cr, (int)hFlds.pStuTS].Value = h.pStuTS;
 						ws.Cells[cr, (int)hFlds.Shp].Value = h.ShpAd;
 						ws.Cells[cr, (int)hFlds.Cne].Value = h.CneAd;
 						ws.Cells[cr, (int)hFlds.Acc].Value = h.AccAd;

@@ -15,26 +15,33 @@ namespace tMax14web
 		protected override void OnData()
 		{
 			base.OnData();
-
-			var parent = (MasterPage)this.Parent;
-			var fid = Convert.ToInt32(parent.fID);
-			var fpw = parent.fPW;
+            var parent = (MasterPage)this.Parent;
+            var fid = Convert.ToInt32(parent.fID);
 			var std = Convert.ToDateTime(parent.StartDate);
-
             fID = parent.fID;
             StartDate = parent.StartDate;
+            /*
+			var fid = Convert.ToInt32(parent.fID);
+			var fpw = parent.fPW;
+
 
 
             Ophs.Clear();
             var Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", fid).First;
-            if (Frt == null || Frt.Pwd != fpw)
+            if (Frt == null || string.IsNullOrEmpty(fpw) || Frt.Pwd != fpw)
             {
                 parent.fAdN = "Not Found";
+                parent.fOnLine = false;
                 return;
             }
-
+            parent.fOnLine = true;
             parent.fAdN = Frt.AdN;
             parent.fAd = Frt.Ad;
+            */
+
+            if (!parent.fOnLine)
+                return;
+
             //if (fpw != "can")
             //	return;
 

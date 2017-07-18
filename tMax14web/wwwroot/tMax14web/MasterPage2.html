@@ -4,23 +4,34 @@
     <template is="dom-bind">
         <div class="wrapper">
             <div class="header">
+                <div>Company Id</div>
                 <div>
-                    Company Id <input type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
+                    <input type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
+                </div>
+                <div>Pwd</div>
+                <div>
+                    <input type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
+                </div>
+                <div>
+                    <button value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
                 </div>
 
-                <div>[[model.fAdN]]</div>
+                <template is="dom-if" if="{{model.fOnLine}}">
+                    <div>[[model.fAdN]]</div>
+                    <div>Date &gt;</div>
+                    <div>
+                        <input type="date" name="sd" value="{{model.StartDate$::input}}">
+                    </div>
+
+                    <div>
+                        <a href="/tMax14web/OphClient" style="color:white">House</a>
+                    </div>
+                </template>
+                <template is="dom-if" if="{{!model.fOnLine}}">
+                    <div style="color:red">Not Found</div>
+                </template>
                 
-                <div>
-                    Pswd <input type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
-                </div>
 
-                <div>
-                    Date > <input type="date" name="sd" value="{{model.StartDate$::input}}">
-                </div>
-
-                <div>
-                    <a href="/tMax14web/OphClient" style="color:white">House</a>
-                </div>
                 <!--
                 <div style="border-left: 10px solid transparent;">
                     <a href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" style="color:white">Download</a>
