@@ -24,7 +24,7 @@ namespace FbLibrary
         private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOpmConnect");
         private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOphConnect");
         private static WebSocketSharp.WebSocket wsAfb = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsAfbConnect");
-
+        
         // typ = F:Full else M:Modified 
         public static void FrtSend(string typ)
         {
@@ -63,7 +63,7 @@ namespace FbLibrary
                         dynamic json = JValue.Parse(str);
                         Logs.WriteErrorLog("From Json String :" + json.AdN);
                         */
-                        Logs.WriteErrorLog("Send " + jsn.ToString());
+                        Logs.WriteErrorLog("Send " + wsFrt.ReadyState.ToString());
                         wsFrt.Send(JsonConvert.SerializeObject(jsn));
                         Logs.WriteErrorLog("Sent ");
 

@@ -96,7 +96,12 @@ namespace tMax14rest
 				};
 			});
 
-			Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
+            Handle.WebSocketDisconnect("wsFrt", (WebSocket ws) =>
+            {
+                Console.WriteLine("wsFrt Disconnected");
+            });
+
+            Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
 			{
                 // Handle str and send response
                 //FrtMsg jsn = new FrtMsg();
