@@ -164,9 +164,9 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
-                        <vaadin-grid-sorter path="ROT">ROT</vaadin-grid-sorter>
+                        <vaadin-grid-sorter path="ROT">R</vaadin-grid-sorter>
                     </template>
-                    <vaadin-grid-column width="80px">
+                    <vaadin-grid-column width="60px">
                         <template class="header">
                             <vaadin-grid-filter path="ROT" value="[[_filterROT]]">
                                 <input placeholder="" value="{{_filterROT::input}}" focus-target>
@@ -183,9 +183,9 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
-                        <vaadin-grid-sorter path="MOT">MOT</vaadin-grid-sorter>
+                        <vaadin-grid-sorter path="MOT">M</vaadin-grid-sorter>
                     </template>
-                    <vaadin-grid-column width="80px">
+                    <vaadin-grid-column width="60px">
                         <template class="header">
                             <vaadin-grid-filter path="MOT" value="[[_filterMOT]]">
                                 <input placeholder="" value="{{_filterMOT::input}}" focus-target>
@@ -202,7 +202,7 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
-                        <vaadin-grid-sorter path="nStu">Status</vaadin-grid-sorter>
+                        <vaadin-grid-sorter path="nStu">Stu</vaadin-grid-sorter>
                     </template>
                     <vaadin-grid-column width="80px">
                         <template class="header">
@@ -381,6 +381,10 @@
                             <span style="text-align:center">[[item.NOP]]</span>
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Number of
+                        <br />Package
+                    </template>
                 </vaadin-grid-column-group>
 
                 <vaadin-grid-column-group resizable>
@@ -394,6 +398,11 @@
                             <span style="text-align:center">[[item.GrW]]</span>
                         </template>
                     </vaadin-grid-column>
+                    <template class="footer">
+                        Gross
+                        <br />Weight
+                        <br />Kg
+                    </template>
                 </vaadin-grid-column-group>
 
                 <vaadin-grid-column-group resizable>

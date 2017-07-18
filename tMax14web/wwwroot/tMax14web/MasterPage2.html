@@ -4,7 +4,7 @@
     <template is="dom-bind">
         <div class="wrapper">
             <div class="header">
-                <div>Company Id</div>
+                <div>CompanyId</div>
                 <div>
                     <input  type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
                 </div>
@@ -17,8 +17,8 @@
                 </div>
 
                 <template is="dom-if" if="{{model.fOnLine}}">
-                    <div>[[model.fAdN]]</div>
-                    <div>Date &gt;</div>
+                    <!--<div style="color:orange;">[[model.fAdN]]</div>-->
+                    <div>Date&gt;</div>
                     <div>
                         <input type="date" name="sd" value="{{model.StartDate$::input}}">
                     </div>
@@ -42,7 +42,7 @@
                 -->
             </div>
             <div class="footer">
-                <div>[[model.fAd]]</div>
+                <div>[[model.fAdN]]</div>
                 <div>Transorient ®</div>
             </div>
             <div class="main">

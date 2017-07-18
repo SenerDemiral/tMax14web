@@ -39,7 +39,8 @@
 }
 
 .header > div{
-    border-left: 10px solid transparent;
+    /*border-left: 10px solid transparent;*/
+    margin-left: 10px;  /*border=left ile ayni etki*/
 }
 
 .subheader {
