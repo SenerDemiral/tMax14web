@@ -98,17 +98,17 @@ namespace tMax14rest
 
             Handle.WebSocketDisconnect("wsFrt", (WebSocket ws) =>
             {
-                Console.WriteLine("wsFrt Disconnected");
+                Console.WriteLine("wsFrt DisConnected {0}", DateTime.Now);
             });
 
             Handle.WebSocketDisconnect("wsOph", (WebSocket ws) =>
             {
-                Console.WriteLine("wsOph Disconnected");
+                Console.WriteLine("wsOph DisConnected {0}", DateTime.Now);
             });
 
             Handle.WebSocketDisconnect("wsOpm", (WebSocket ws) =>
             {
-                Console.WriteLine("wsOpm Disconnected");
+                Console.WriteLine("wsOpm DisConnected {0}", DateTime.Now);
             });
 
             Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
