@@ -63,7 +63,9 @@ namespace FbLibrary
                         dynamic json = JValue.Parse(str);
                         Logs.WriteErrorLog("From Json String :" + json.AdN);
                         */
+                        Logs.WriteErrorLog("Send " + jsn.ToString());
                         wsFrt.Send(JsonConvert.SerializeObject(jsn));
+                        Logs.WriteErrorLog("Sent ");
 
                         if (typ == "M")
                         {

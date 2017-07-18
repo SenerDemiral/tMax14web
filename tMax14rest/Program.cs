@@ -116,10 +116,11 @@ namespace tMax14rest
 					{
                         //int FrtID = int.Parse(jsn.FrtID);
                         int FrtID = jsn.FrtID;
+                        Console.WriteLine(FrtID.ToString());
 
                         if (jsn.Evnt == "D")
 						{
-							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID);
+							var frts = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID);
 							foreach(var rec in frts)
 							{
 								rec.Delete();
@@ -127,7 +128,7 @@ namespace tMax14rest
 						}
 						else
 						{
-							TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
+							TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID).First;
 							if(jsn.Evnt == "I" && rec == null)
 							{
 								rec = new TMDB.FRT();
