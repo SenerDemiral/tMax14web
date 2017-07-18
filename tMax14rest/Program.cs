@@ -143,15 +143,16 @@ namespace tMax14rest
 								rec.Ad = jsn.Ad;
 								rec.LocID = jsn.LocID;
 								rec.Pwd = jsn.Pwd;
-							}
-						}
+                                Console.WriteLine(FrtID.ToString());
+                            }
+                        }
 					}
 					catch(Exception ex)
 					{
 						rMsg = ex.Message;
                         Console.WriteLine(rMsg);
-					}
-				});
+                    }
+                });
 
 				//ws.Send(rMsg);
 			});
