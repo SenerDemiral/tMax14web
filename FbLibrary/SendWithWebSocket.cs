@@ -81,7 +81,7 @@ namespace FbLibrary
                     Logs.WriteErrorLog("wsFRT can't connect");
                 }
 
-                wsFrt.Close();
+                //wsFrt.Close();
             }
         }
 

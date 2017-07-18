@@ -101,6 +101,16 @@ namespace tMax14rest
                 Console.WriteLine("wsFrt Disconnected");
             });
 
+            Handle.WebSocketDisconnect("wsOph", (WebSocket ws) =>
+            {
+                Console.WriteLine("wsOph Disconnected");
+            });
+
+            Handle.WebSocketDisconnect("wsOpm", (WebSocket ws) =>
+            {
+                Console.WriteLine("wsOpm Disconnected");
+            });
+
             Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
 			{
                 // Handle str and send response
