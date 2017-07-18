@@ -104,7 +104,7 @@ namespace tMax14rest
                 //var settings = new JsonSerializerSettings();
                 //settings.MissingMemberHandling = MissingMemberHandling.Ignore;
 
-                Console.WriteLine(str);
+                Console.WriteLine("DENEME");
                 dynamic jsn = JValue.Parse(str);
 
                 string rMsg = "OK";
