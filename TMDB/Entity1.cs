@@ -168,6 +168,7 @@ namespace TMDB
         public double? GrW { get; set; }
         public double? VM3 { get; set; }
         public int? ChW { get; set; }
+        public string CABW { get; set; }
 
         public DateTime? nStuTS { get; set; }
         public DateTime? pStuTS { get; set; }
@@ -179,7 +180,6 @@ namespace TMDB
 		public DateTime? ROS { get; set; }
 		public DateTime? POD { get; set; }
         public DateTime? DRBD { get; set; }
-        public DateTime? CABW { get; set; }
 
         public string EXD_t => $"{EXD:s}";
 		public string nStuTS_t => $"{nStuTS:s}";

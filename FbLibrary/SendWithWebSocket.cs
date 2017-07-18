@@ -194,6 +194,7 @@ namespace FbLibrary
                         jsn.VM3 = row["VM3"];
                         jsn.ChW = row["CHW"];
                         jsn.CntNoS = row["CNTNOS"];
+                        jsn.CABW = row["CABW"];
 
                         jsn.nStu = row["NSTU"]; // row.NSTU;
                         jsn.pStu = row["PSTU"];
@@ -207,7 +208,6 @@ namespace FbLibrary
                         jsn.POD = row["POD"];
                         jsn.REOH = row["REOH"];
                         jsn.DRBD = row["DRBD"];
-                        jsn.CABW = row["CABW"];
 
                         wsOph.Send(JsonConvert.SerializeObject(jsn));
 

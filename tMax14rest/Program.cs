@@ -149,6 +149,7 @@ namespace tMax14rest
 					catch(Exception ex)
 					{
 						rMsg = ex.Message;
+                        Console.WriteLine(rMsg);
 					}
 				});
 
@@ -305,6 +306,7 @@ namespace tMax14rest
                             rec.VM3 = jsn.VM3; // == "" ? (double?)null : Convert.ToDouble(jsn.VM3);
                             rec.ChW = jsn.ChW; // == "" ? (int?)null : Convert.ToInt32(jsn.ChW);
                             rec.CntNoS = jsn.CntNoS;
+                            rec.CABW = jsn.CABW;
 
                             rec.ShpID = jsn.ShpID;// == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
                             rec.CneID = jsn.CneID;// == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
@@ -324,7 +326,6 @@ namespace tMax14rest
                             rec.POD = jsn.POD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
                             rec.REOH = jsn.REOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
                             rec.DRBD = jsn.DRBD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
-                            rec.CABW = jsn.CABW;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
 
                             if (rec.OpmID != null)
 								rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
