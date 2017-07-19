@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,6 +12,30 @@ using WebSocketSharp;
 
 namespace FbLibrary
 {
+    public class Hlpr
+    {
+        public async Task<string> PostAsync(string uri, string data)
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.PostAsync(uri, new StringContent(data));
+
+            response.EnsureSuccessStatusCode();
+
+            string content = await response.Content.ReadAsStringAsync();
+            return content; // await Task.Run(() => JsonObject.Parse(content));
+        }
+
+        public void DenemeSend()
+        {
+            //string content = await PostAsync("", "");
+
+            //objectContent = new StringContent(content);
+            //objectContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+            //var response = await httpClient.PostAsync(request, objectContent);
+        }
+
+    }
+
     public static class SendWithWebSocket
     {
         private static tMax14DataSet dts = new tMax14DataSet();
@@ -25,6 +50,8 @@ namespace FbLibrary
         private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOphConnect");
         private static WebSocketSharp.WebSocket wsAfb = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsAfbConnect");
         
+        
+
         // typ = F:Full else M:Modified 
         public static void FrtSend(string typ)
         {

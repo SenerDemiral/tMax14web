@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,6 +28,21 @@ namespace FB2SCfull
         private void button2_Click(object sender, EventArgs e)
         {
             FbLibrary.SendWithWebSocket.AfbSend("F");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string data = "SENER";
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsync("http://rest.tMax.online/DenemePut", new StringContent(data)).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.Write("Success");
+                }
+                else
+                    Console.Write("Error");
+            }
         }
     }
 }

@@ -432,7 +432,11 @@ namespace tMax14rest
             });
 
 
-
+            Handle.POST("/tMax14rest/DenemePut", (string jsn) =>
+            {
+                Console.WriteLine("DenemePut: ", jsn);
+                return "OK";
+            });
 
             Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
 			{
