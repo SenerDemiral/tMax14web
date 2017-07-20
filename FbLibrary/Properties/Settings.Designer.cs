@@ -26,8 +26,8 @@ namespace FbLibrary.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("character set=WIN1254;data source=LOCALHOST;initial catalog=tMax14;user id=sysdba" +
-            ";password=masterkey")]
+        [global::System.Configuration.DefaultSettingValueAttribute("character set=WIN1254;data source=192.168.1.245;initial catalog=tMax14;user id=sy" +
+            "sdba;password=masterkey")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

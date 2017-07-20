@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,6 +28,20 @@ namespace FbLibrary
 
         public void DenemeSend()
         {
+            /*
+            using (var client = new HttpClient())
+            {
+                person p = new person { name = "Sourav", surname = "Kayal" };
+                client.BaseAddress = new Uri("http://localhost:1565/");
+                var response = client.PutAsJsonAsync("api/person", p).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.Write("Success");
+                }
+                else
+                    Console.Write("Error");
+            }   
+            */
             //string content = await PostAsync("", "");
 
             //objectContent = new StringContent(content);
@@ -49,8 +64,63 @@ namespace FbLibrary
         private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOpmConnect");
         private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOphConnect");
         private static WebSocketSharp.WebSocket wsAfb = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsAfbConnect");
-        
-        
+
+
+        public static void FrtSendWebClient(string typ)
+        {
+            int nor = fta.Fill(dts.WEB_FRT_MDFD, typ);
+
+            if (nor > 0)
+            {
+                Logs.WriteErrorLog("FRT #Rec: " + nor.ToString());
+
+                var cli = new WebClient();
+                cli.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+
+                //if (wsFrt.ReadyState == WebSocketState.Open)
+                {
+                    if (typ == "F")
+                        Logs.WriteErrorLog("FRT Full " + nor.ToString());
+
+                    dynamic jsn = new JObject();
+
+                    foreach (tMax14DataSet.WEB_FRT_MDFDRow row in dts.WEB_FRT_MDFD.Rows)
+                    {
+                        jsn.Evnt = row["EVNT"];
+                        jsn.FrtID = row["FRTID"];
+                        jsn.AdN = row["ADN"];
+                        jsn.Ad = row["AD"];
+                        jsn.LocID = row["LOCID"];
+                        jsn.Pwd = row["PWD"];
+                        /*
+                        //jsn.AdN = Regex.Replace(row.ADN.ToLower(), @"(^\w)|(\s\w)", m => m.Value.ToUpper());  // Word first char to Upper
+                        //Logs.WriteErrorLog(jsn.ToString());   // Formatted 
+
+                        string str = JsonConvert.SerializeObject(jsn);
+                        Logs.WriteErrorLog(str);
+
+                        // String to JSON
+                        //dynamic json = JValue.Parse(jsn.ToString());
+                        dynamic json = JValue.Parse(str);
+                        Logs.WriteErrorLog("From Json String :" + json.AdN);
+                        */
+                        //Uri u = new Uri("http://rest.tmax.online/tmax14rest/denemeput");
+                        //cli.UploadStringAsync(u, "PUT", JsonConvert.SerializeObject(jsn));
+                        string response = cli.UploadString("http://rest.tmax.online/tmax14rest/denemeput", "PUT", JsonConvert.SerializeObject(jsn));
+                        Logs.WriteErrorLog("FRT Modified ID: " + row.FRTID);
+
+                        if (typ == "M")
+                        {
+                            Logs.WriteErrorLog("FRT Modified ID: " + row.FRTID);
+                            row.Delete();
+                        }
+                    }
+                    if (typ == "M")
+                        fta.Update(dts.WEB_FRT_MDFD);
+                }
+            }
+        }
+
 
         // typ = F:Full else M:Modified 
         public static void FrtSend(string typ)
@@ -90,9 +160,9 @@ namespace FbLibrary
                         dynamic json = JValue.Parse(str);
                         Logs.WriteErrorLog("From Json String :" + json.AdN);
                         */
-                        Logs.WriteErrorLog("Send " + wsFrt.ReadyState.ToString());
+                        //Logs.WriteErrorLog("Send " + wsFrt.ReadyState.ToString());
                         wsFrt.Send(JsonConvert.SerializeObject(jsn));
-                        Logs.WriteErrorLog("Sent ");
+                        //Logs.WriteErrorLog("Sent ");
 
                         if (typ == "M")
                         {
