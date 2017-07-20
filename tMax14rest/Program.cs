@@ -432,7 +432,15 @@ namespace tMax14rest
             });
 
 
-            Handle.POST("/tMax14rest/DenemePut", (string jsn) =>
+            Handle.PUT("/tMax14rest/Denemeput", (Request request) =>
+            {
+                //Console.WriteLine("DenemePut: " + request.Body);
+                //dynamic jsn = JValue.Parse(request.Body);
+                //Console.WriteLine(jsn.FrtID);
+                return "OK";
+            });
+
+            Handle.PUT("/tMax14rest/Denemeput2", (FrtMsg jsn) =>
             {
                 Console.WriteLine("DenemePut: ", jsn);
                 return "OK";
