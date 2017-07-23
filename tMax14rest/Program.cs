@@ -68,11 +68,12 @@ namespace tMax14rest
 			{
 				Db.Transact(() =>
 				{
-					Db.SlowSQL("DELETE FROM TMDB.OPH");
+                    Db.SlowSQL("DELETE FROM TMDB.AFB");
+                    Db.SlowSQL("DELETE FROM TMDB.OPH");
 					Db.SlowSQL("DELETE FROM TMDB.OPM");
+					Db.SlowSQL("DELETE FROM TMDB.FRC");
 					Db.SlowSQL("DELETE FROM TMDB.FRT");
-					Db.SlowSQL("DELETE FROM TMDB.AFB");
-				});
+                });
 
                 return "OK";
 			});
@@ -174,7 +175,89 @@ namespace tMax14rest
 				//ws.Send(rMsg);
 			});
 
-			Handle.GET("/wsOpmConnect", (Request req) =>
+            Handle.GET("/wsFrcConnect", (Request req) =>
+            {
+                // Checking if its a WebSocket upgrade request.
+                if (req.WebSocketUpgrade)
+                {
+                    Console.WriteLine("wsFRC Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    req.SendUpgrade("wsFrc");
+                    return HandlerStatus.Handled;
+                }
+
+                // We only support WebSockets upgrades in this HTTP handler
+                // and not other ordinary HTTP requests.
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
+
+            Handle.WebSocket("wsFrc", (string str, WebSocket ws) =>
+            {
+                // Handle str and send response
+                //FrtMsg jsn = new FrtMsg();
+                //jsn.PopulateFromJson(str);
+                //var settings = new JsonSerializerSettings();
+                //settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+
+                dynamic jsn = JValue.Parse(str);
+
+                string rMsg = "OK";
+
+                Console.WriteLine(str);
+
+                Db.Transact(() =>
+                {
+                    try
+                    {
+                        //int FrtID = int.Parse(jsn.FrtID);
+                        int FrcID = jsn.FrcID;
+
+                        if (jsn.Evnt == "D")
+                        {
+                            var frcs = Db.SQL<TMDB.FRC>("select f from TMDB.FRC f where f.FrcID = ?", FrcID);
+                            foreach (var rec in frcs)
+                            {
+                                rec.Delete();
+                            }
+                        }
+                        else
+                        {
+                            TMDB.FRC rec = Db.SQL<TMDB.FRC>("select f from TMDB.FRC f where f.FrcID = ?", FrcID).First;
+                            if (jsn.Evnt == "I" && rec == null)
+                            {
+                                rec = new TMDB.FRC();
+                            }
+
+                            if (rec == null)
+                                rMsg = "NoFirmaContact2Update";
+                            else
+                            {
+                                rec.MdfdOn = DateTime.Now;
+                                rec.FrcID = FrcID; // Convert.ToInt32(jsn.FrtID);
+                                rec.FrtID = jsn.FrtID;
+                                rec.Ad = jsn.Ad;
+                                rec.eMail = jsn.eMail;
+                                rec.RptIDs = jsn.RptIDs;
+
+                                rec.Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.FrtID).First;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        rMsg = ex.Message;
+                        Console.WriteLine(rMsg);
+                    }
+                });
+
+                //ws.Send(rMsg);
+            });
+
+
+            Handle.GET("/wsOpmConnect", (Request req) =>
 			{
 				if(req.WebSocketUpgrade)
 				{

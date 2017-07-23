@@ -18,12 +18,16 @@ namespace tMax14web
 
 			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRT_FrtID").First == null)
 				Db.SQL("CREATE INDEX tmIndex_FRT_FrtID ON FRT(FrtID)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_OpmID").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRC_FrcID").First == null)
+                Db.SQL("CREATE INDEX tmIndex_FRC_FrcID ON FRC(FrcID)");
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_OpmID").First == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_OpmID ON OPM(OpmID)");
 			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_OphID").First == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_OphID ON OPH(OphID)");
 
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Shp").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRC_Frt").First == null)
+                Db.SQL("CREATE INDEX tmIndex_FRC_Frt ON FRC(Frt)");
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Shp").First == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_Shp ON OPM(Shp)");
 			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Cne").First == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_Cne ON OPM(Cne)");
@@ -41,9 +45,11 @@ namespace tMax14web
 			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Acc").First == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_Acc ON OPH(Acc)");
 
-		}
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_EXD").First == null)
+                Db.SQL("CREATE INDEX tmIndex_OPH_EXD ON OPH(EXD)");
+        }
 
-		public void Register() {
+        public void Register() {
 			Handle.GET("/tMax14web", (Request req) => {
 				return Db.Scope(() => {
 					//MasterPage master;

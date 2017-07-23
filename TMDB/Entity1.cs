@@ -55,6 +55,27 @@ namespace TMDB
 	}
 
     [Database]
+    public class FRC
+    {
+        public DateTime MdfdOn { get; set; }
+        public int FrcID { get; set; }
+        public int FrtID { get; set; }
+        public FRT Frt { get; set; }
+        public string Ad { get; set; }
+        public string eMail { get; set; }
+        public string RptIDs { get; set; }
+
+        public FRC()
+        {
+            FrcID = 0;
+            FrtID = 0;
+            Ad = "";
+            eMail = "";
+            RptIDs = "";
+        }
+    }
+
+    [Database]
     public class AFB
     {
 		public DateTime MdfdOn { get; set; }

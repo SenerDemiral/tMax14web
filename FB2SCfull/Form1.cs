@@ -25,6 +25,7 @@ namespace FB2SCfull
         private void button1_Click(object sender, EventArgs e)
         {
             FbLibrary.SendWithWebSocket.FrtSend("F");
+            FbLibrary.SendWithWebSocket.FrcSend("F");
             FbLibrary.SendWithWebSocket.OpmSend("F");
             FbLibrary.SendWithWebSocket.OphSend("F");
         }
@@ -32,6 +33,11 @@ namespace FB2SCfull
         private void button2_Click(object sender, EventArgs e)
         {
             FbLibrary.SendWithWebSocket.AfbSend("F");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            FbLibrary.SendWithWebSocket.FrcSend("F");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -98,6 +104,7 @@ namespace FB2SCfull
             FbLibrary.SendWithWebSocket.FrtSendWebClient("F");
 
         }
+
     }
 
     public class Person

@@ -56,14 +56,16 @@ namespace FbLibrary
         private static tMax14DataSet dts = new tMax14DataSet();
 
         private static tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter fta = new tMax14DataSetTableAdapters.WEB_FRT_MDFDTableAdapter();
+        private static tMax14DataSetTableAdapters.WEB_FRC_MDFDTableAdapter cta = new tMax14DataSetTableAdapters.WEB_FRC_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_AFB_MDFDTableAdapter ata = new tMax14DataSetTableAdapters.WEB_AFB_MDFDTableAdapter();
 
-        private static WebSocketSharp.WebSocket wsFrt = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsFrtConnect");
-        private static WebSocketSharp.WebSocket wsOpm = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOpmConnect");
-        private static WebSocketSharp.WebSocket wsOph = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsOphConnect");
-        private static WebSocketSharp.WebSocket wsAfb = new WebSocketSharp.WebSocket("ws://rest.tMax.online/wsAfbConnect");
+        private static WebSocket wsFrt = new WebSocket("ws://rest.tMax.online/wsFrtConnect");
+        private static WebSocket wsFrc = new WebSocket("ws://rest.tMax.online/wsFrcConnect");
+        private static WebSocket wsOpm = new WebSocket("ws://rest.tMax.online/wsOpmConnect");
+        private static WebSocket wsOph = new WebSocket("ws://rest.tMax.online/wsOphConnect");
+        private static WebSocket wsAfb = new WebSocket("ws://rest.tMax.online/wsAfbConnect");
 
 
         public static void FrtSendWebClient(string typ)
@@ -129,7 +131,7 @@ namespace FbLibrary
 
             if (nor > 0)
             {
-                Logs.WriteErrorLog("FRT #Rec: " + nor.ToString());
+                //Logs.WriteErrorLog("FRT #Rec: " + nor.ToString());
                 if (wsFrt.ReadyState != WebSocketState.Open)
                     wsFrt.Connect();
 
@@ -166,19 +168,64 @@ namespace FbLibrary
 
                         if (typ == "M")
                         {
-                            Logs.WriteErrorLog("FRT Modified ID: " + row.FRTID);
+                            Logs.WriteErrorLog("FRT " + row.FRTID);
                             row.Delete();
                         }
                     }
                     if (typ == "M")
                         fta.Update(dts.WEB_FRT_MDFD);
+
+                    wsFrt.Close();
                 }
                 else
                 {
-                    Logs.WriteErrorLog("wsFRT can't connect");
+                    Logs.WriteErrorLog("FRT can't connect");
                 }
+            }
+        }
 
-                //wsFrt.Close();
+        public static void FrcSend(string typ)
+        {
+            int nor = cta.Fill(dts.WEB_FRC_MDFD, typ);
+
+            if (nor > 0)
+            {
+                if (wsFrc.ReadyState != WebSocketState.Open)
+                    wsFrc.Connect();
+
+                if (wsFrc.ReadyState == WebSocketState.Open)
+                {
+                    if (typ == "F")
+                        Logs.WriteErrorLog("FRC Full " + nor.ToString());
+
+                    dynamic jsn = new JObject();
+
+                    foreach (tMax14DataSet.WEB_FRC_MDFDRow row in dts.WEB_FRC_MDFD.Rows)
+                    {
+                        jsn.Evnt = row["EVNT"];
+                        jsn.FrcID = row["FRCID"];
+                        jsn.FrtID = row["FRTID"];
+                        jsn.Ad = row["AD"];
+                        jsn.LocID = row["EMAIL"];
+                        jsn.Pwd = row["RPTIDS"];
+
+                        wsFrc.Send(JsonConvert.SerializeObject(jsn));
+
+                        if (typ == "M")
+                        {
+                            Logs.WriteErrorLog("FRC " + row.FRCID);
+                            row.Delete();
+                        }
+                    }
+                    if (typ == "M")
+                        cta.Update(dts.WEB_FRC_MDFD);
+
+                    wsFrt.Close();
+                }
+                else
+                {
+                    Logs.WriteErrorLog("FRC can't connect");
+                }
             }
         }
 
@@ -188,12 +235,15 @@ namespace FbLibrary
 
             if (nor > 0)
             {
-                Logs.WriteErrorLog("OPM #Rec: " + nor.ToString());
+                //Logs.WriteErrorLog("OPM #Rec: " + nor.ToString());
                 if (wsOpm.ReadyState != WebSocketState.Open)
                     wsOpm.Connect();
 
                 if (wsOpm.ReadyState == WebSocketState.Open)
                 {
+                    if (typ == "F")
+                        Logs.WriteErrorLog("OPM Full " + nor.ToString());
+
                     dynamic jsn = new JObject();
 
                     foreach (tMax14DataSet.WEB_OPM_MDFDRow row in dts.WEB_OPM_MDFD.Rows)
@@ -235,7 +285,7 @@ namespace FbLibrary
                         */
                         if (typ == "M")
                         {
-                            Logs.WriteErrorLog("OPM Modified: " + row.OPMID.ToString());
+                            Logs.WriteErrorLog("OPM " + row.OPMID.ToString());
                             row.Delete();
                         }
                     }
@@ -246,7 +296,7 @@ namespace FbLibrary
                 }
                 else
                 {
-                    Logs.WriteErrorLog("wsOPM can't connect");
+                    Logs.WriteErrorLog("OPM can't connect");
                 }
             }
         }
@@ -257,12 +307,15 @@ namespace FbLibrary
 
             if (nor > 0)
             {
-                Logs.WriteErrorLog("OPH #Rec: " + nor.ToString());
+                //Logs.WriteErrorLog("OPH #Rec: " + nor.ToString());
                 if (wsOph.ReadyState != WebSocketState.Open)
                     wsOph.Connect();
 
                 if (wsOph.ReadyState == WebSocketState.Open)
                 {
+                    if (typ == "F")
+                        Logs.WriteErrorLog("OPH Full " + nor.ToString());
+
                     dynamic jsn = new JObject();
 
                     foreach (tMax14DataSet.WEB_OPH_MDFDRow row in dts.WEB_OPH_MDFD.Rows)
@@ -312,7 +365,7 @@ namespace FbLibrary
 
                         if (typ == "M")
                         {
-                            Logs.WriteErrorLog("OPH Modified: " + row.OPHID.ToString());
+                            Logs.WriteErrorLog("OPH " + row.OPHID.ToString());
                             row.Delete();
                         }
                     }
@@ -320,6 +373,10 @@ namespace FbLibrary
                         hta.Update(dts.WEB_OPH_MDFD);
 
                     wsOph.Close();
+                }
+                else
+                {
+                    Logs.WriteErrorLog("OPH can't connect");
                 }
             }
         }
@@ -330,12 +387,15 @@ namespace FbLibrary
 
             if (nor > 0)
             {
-                Logs.WriteErrorLog("AFB #Rec: " + nor.ToString());
+                //Logs.WriteErrorLog("AFB #Rec: " + nor.ToString());
                 if (wsAfb.ReadyState != WebSocketState.Open)
                     wsAfb.Connect();
 
                 if (wsAfb.ReadyState == WebSocketState.Open)
                 {
+                    if (typ == "F")
+                        Logs.WriteErrorLog("AFB Full " + nor.ToString());
+
                     dynamic jsn = new JObject();
 
                     foreach (tMax14DataSet.WEB_AFB_MDFDRow row in dts.WEB_AFB_MDFD.Rows)
@@ -368,7 +428,7 @@ namespace FbLibrary
                         */
                         if (typ == "M")
                         {
-                            Logs.WriteErrorLog("AFB Modified: " + row.AFBID.ToString());
+                            Logs.WriteErrorLog("AFB " + row.AFBID.ToString());
                             row.Delete();
                         }
                     }
@@ -379,7 +439,7 @@ namespace FbLibrary
                 }
                 else
                 {
-                    Logs.WriteErrorLog("wsAFB can't connect");
+                    Logs.WriteErrorLog("AFB can't connect");
                 }
             }
         }
