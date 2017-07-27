@@ -407,6 +407,40 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
+                        <vaadin-grid-sorter path="VM3">VM3</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.VM3]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Volume
+                        <br />M3
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="ChW">ChW</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <span style="text-align:center">[[item.ChW]]</span>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Chargable
+                        <br />Weight
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
                         <vaadin-grid-sorter path="DTM">DTM</vaadin-grid-sorter>
                     </template>
                     <vaadin-grid-column width="80px">
@@ -650,6 +684,24 @@
                     </vaadin-grid-column>
                     <template class="footer">
                         Actual<br />Cut-Off<br />Time
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="DRBD_t">DRBD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Doc
+                        <br />Released to
+                        <br />Broker
                     </template>
                 </vaadin-grid-column-group>
 

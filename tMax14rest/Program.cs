@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using TMDB;
 using Newtonsoft.Json.Linq;
+using System.Net.Mail;
 
 namespace tMax14rest
 {
@@ -16,30 +17,42 @@ namespace tMax14rest
 		// NOTE: Timer should be static, otherwise its garbage collected.
 		static Timer WebSocketSessionsTimer = null;
 
-		/// <summary>
-		/// Rest'in 2 amaci var
-		/// 1. Supply'dan ws ile gelen bilgiler ile SC Database'i guncellemek
-		/// 2. SC deki bilgileri periyodik tarayip wsConnect olmus Clientlere ilgili bilgileri gondermek
-		/// </summary>
-		
-		static void Main()
-		{
-			// Removing existing objects from database.
-			/*
+        /// <summary>
+        /// Rest'in 2 amaci var
+        /// 1. Supply'dan ws ile gelen bilgiler ile SC Database'i guncellemek
+        /// 2. SC deki bilgileri periyodik tarayip wsConnect olmus Clientlere ilgili bilgileri gondermek
+        /// </summary>
+
+        static void Main()
+        {
+            // Removing existing objects from database.
+            /*
 			Db.Transact(() => {
 				Db.SlowSQL("DELETE FROM WebSocketId");
 			});
 			*/
 
-			Handle.GET("/tMax14rest/DENEME", () =>
-			{
-				Db.Transact(() =>
-				{
-					Db.SlowSQL("DELETE FROM TMDB.WebSocketId");
-				});
+            Hook<TMDB.OPH>.CommitInsert += (s, obj) =>
+            {
+                Console.WriteLine("OBH Inserted: ", obj.OphID);
+            };
 
-				return "OK";
-			});
+            Hook<TMDB.OPH>.CommitUpdate += (s, obj) =>
+            {
+
+                Console.WriteLine("OBH Updated: ", obj.OphID);
+            };
+
+
+            Handle.GET("/tMax14rest/DENEME", () =>
+            {
+                Db.Transact(() =>
+                {
+                    Db.SlowSQL("DELETE FROM TMDB.WebSocketId");
+                });
+
+                return "OK";
+            });
 
 
             Handle.GET("/tMax14rest/InsStu", () =>
@@ -47,55 +60,55 @@ namespace tMax14rest
                 Db.Transact(() =>
                 {
                     Db.SlowSQL("DELETE FROM TMDB.OSN");
-                    OSN recA  = new OSN() {Stu = "A",  Ad = "AgentBooking"};
-                    OSN recAB = new OSN() {Stu = "AB", Ad = "Aborted"};
-                    OSN recB  = new OSN() {Stu = "B",  Ad = "Booked"};
-                    OSN recC  = new OSN() {Stu = "C",  Ad = "Cancelled"};
-                    OSN recE  = new OSN() {Stu = "E",  Ad = "InHand"};
-                    OSN recK  = new OSN() {Stu = "K",  Ad = "@Carrier"};
-                    OSN recN  = new OSN() {Stu = "N",  Ad = "Departed"};
-                    OSN recP  = new OSN() {Stu = "P",  Ad = "@Destination"};
-                    OSN recQC = new OSN() {Stu = "QC", Ad = "QC Failed"};
-                    OSN recR  = new OSN() {Stu = "R",  Ad = "Custom Clearance in Process" };
-                    OSN recRE = new OSN() {Stu = "RE", Ad = "Custom Cleared" };
-                    OSN recT  = new OSN() {Stu = "T",  Ad = "Closed"};
+                    OSN recA = new OSN() { Stu = "A", Ad = "AgentBooking" };
+                    OSN recAB = new OSN() { Stu = "AB", Ad = "Aborted" };
+                    OSN recB = new OSN() { Stu = "B", Ad = "Booked" };
+                    OSN recC = new OSN() { Stu = "C", Ad = "Cancelled" };
+                    OSN recE = new OSN() { Stu = "E", Ad = "InHand" };
+                    OSN recK = new OSN() { Stu = "K", Ad = "@Carrier" };
+                    OSN recN = new OSN() { Stu = "N", Ad = "Departed" };
+                    OSN recP = new OSN() { Stu = "P", Ad = "@Destination" };
+                    OSN recQC = new OSN() { Stu = "QC", Ad = "QC Failed" };
+                    OSN recR = new OSN() { Stu = "R", Ad = "Custom Clearance in Process" };
+                    OSN recRE = new OSN() { Stu = "RE", Ad = "Custom Cleared" };
+                    OSN recT = new OSN() { Stu = "T", Ad = "Closed" };
                 });
 
                 return "OK";
             });
 
             Handle.GET("/tMax14rest/ResetAll", (OphMsg hJ) =>
-			{
-				Db.Transact(() =>
-				{
+            {
+                Db.Transact(() =>
+                {
                     Db.SlowSQL("DELETE FROM TMDB.AFB");
                     Db.SlowSQL("DELETE FROM TMDB.OPH");
-					Db.SlowSQL("DELETE FROM TMDB.OPM");
-					Db.SlowSQL("DELETE FROM TMDB.FRC");
-					Db.SlowSQL("DELETE FROM TMDB.FRT");
+                    Db.SlowSQL("DELETE FROM TMDB.OPM");
+                    Db.SlowSQL("DELETE FROM TMDB.FRC");
+                    Db.SlowSQL("DELETE FROM TMDB.FRT");
                 });
 
                 return "OK";
-			});
+            });
 
-			Handle.GET("/wsFrtConnect", (Request req) =>
-			{
-				// Checking if its a WebSocket upgrade request.
-				if(req.WebSocketUpgrade)
-				{
-					Console.WriteLine("wsFRT Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
-					req.SendUpgrade("wsFrt");
-					return HandlerStatus.Handled;
-				}
+            Handle.GET("/wsFrtConnect", (Request req) =>
+            {
+                // Checking if its a WebSocket upgrade request.
+                if (req.WebSocketUpgrade)
+                {
+                    Console.WriteLine("wsFRT Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    req.SendUpgrade("wsFrt");
+                    return HandlerStatus.Handled;
+                }
 
-				// We only support WebSockets upgrades in this HTTP handler
-				// and not other ordinary HTTP requests.
-				return new Response()
-				{
-					StatusCode = 500,
-					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
-				};
-			});
+                // We only support WebSockets upgrades in this HTTP handler
+                // and not other ordinary HTTP requests.
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
 
             Handle.WebSocketDisconnect("wsFrt", (WebSocket ws) =>
             {
@@ -113,7 +126,7 @@ namespace tMax14rest
             });
 
             Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
-			{
+            {
                 // Handle str and send response
                 //FrtMsg jsn = new FrtMsg();
                 //jsn.PopulateFromJson(str);
@@ -125,55 +138,56 @@ namespace tMax14rest
 
                 string rMsg = "OK";
 
-				Console.WriteLine(str);
+                Console.WriteLine(str);
 
-				Db.Transact(() =>
-				{
-					try
-					{
+                Db.Transact(() =>
+                {
+                    try
+                    {
                         //int FrtID = int.Parse(jsn.FrtID);
                         int FrtID = jsn.FrtID;
                         Console.WriteLine(FrtID.ToString());
 
                         if (jsn.Evnt == "D")
-						{
-							var frts = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID);
-							foreach(var rec in frts)
-							{
-								rec.Delete();
-							}
-						}
-						else
-						{
-							TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID).First;
-							if(jsn.Evnt == "I" && rec == null)
-							{
-								rec = new TMDB.FRT();
-							}
+                        {
+                            var frts = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID);
+                            foreach (var rec in frts)
+                            {
+                                rec.Delete();
+                            }
+                        }
+                        else
+                        {
+                            TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID).First;
+                            if (jsn.Evnt == "I" || rec == null)
+                            {
+                                rec = new TMDB.FRT();
+                            }
 
-							if(rec == null)
-								rMsg = "NoFirma2Update";
-							else
-							{
-								rec.MdfdOn = DateTime.Now;
+                            if (rec == null)
+                                rMsg = "NoFirma2Update";
+                            else
+                            {
+                                rec.MdfdOn = DateTime.Now;
                                 rec.FrtID = FrtID; // Convert.ToInt32(jsn.FrtID);
-								rec.AdN = jsn.AdN;
-								rec.Ad = jsn.Ad;
-								rec.LocID = jsn.LocID;
-								rec.Pwd = jsn.Pwd;
+                                rec.AdN = jsn.AdN;
+                                rec.Ad = jsn.Ad;
+                                rec.LocID = jsn.LocID;
+                                rec.Pwd = jsn.Pwd;
                                 Console.WriteLine(FrtID.ToString());
                             }
                         }
-					}
-					catch(Exception ex)
-					{
-						rMsg = ex.Message;
+                    }
+                    catch (Exception ex)
+                    {
+                        rMsg = ex.Message;
                         Console.WriteLine(rMsg);
                     }
                 });
 
-				//ws.Send(rMsg);
-			});
+                //ws.Send(rMsg);
+            });
+
 
             Handle.GET("/wsFrcConnect", (Request req) =>
             {
@@ -258,58 +272,58 @@ namespace tMax14rest
 
 
             Handle.GET("/wsOpmConnect", (Request req) =>
-			{
-				if(req.WebSocketUpgrade)
-				{
-					Console.WriteLine("wsOPM Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
-					req.SendUpgrade("wsOpm");
-					return HandlerStatus.Handled;
-				}
-				return new Response()
-				{
-					StatusCode = 500,
-					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
-				};
-			});
+            {
+                if (req.WebSocketUpgrade)
+                {
+                    Console.WriteLine("wsOPM Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    req.SendUpgrade("wsOpm");
+                    return HandlerStatus.Handled;
+                }
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
 
-			Handle.WebSocket("wsOpm", (string str, WebSocket ws) =>
-			{
+            Handle.WebSocket("wsOpm", (string str, WebSocket ws) =>
+            {
                 //OpmMsg jsn = new OpmMsg();
                 //jsn.PopulateFromJson(str);
                 dynamic jsn = JValue.Parse(str);
-				string rMsg = "OK";
+                string rMsg = "OK";
 
-				Db.Transact(() =>
-				{
+                Db.Transact(() =>
+                {
                     //int OpmID = int.Parse((string)jsn.OpmID);
                     int OpmID = jsn.OpmID;
 
                     if (jsn.Evnt == "D")
-					{
-						var opms = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID);
-						foreach(var rec in opms)
-						{
-							//Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
-							rec.Delete();
-						}
-					}
-					else
-					{
-						TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
-						if(jsn.Evnt == "I" && rec == null)
-						{
-							rec = new TMDB.OPM();
-						}
+                    {
+                        var opms = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID);
+                        foreach (var rec in opms)
+                        {
+                            //Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
+                            rec.Delete();
+                        }
+                    }
+                    else
+                    {
+                        TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
+                        if (jsn.Evnt == "I" || rec == null)
+                        {
+                            rec = new TMDB.OPM();
+                        }
 
-						if(rec != null)
-						{
-							rec.MdfdOn = DateTime.Now;
-							rec.OpmID = OpmID;
-							rec.RefNo = jsn.RefNo;
-							rec.ROT = jsn.ROT;
-							rec.MOT = jsn.MOT;
-							rec.Org = jsn.Org;
-							rec.Dst = jsn.Dst;
+                        if (rec != null)
+                        {
+                            rec.MdfdOn = DateTime.Now;
+                            rec.OpmID = OpmID;
+                            rec.RefNo = jsn.RefNo;
+                            rec.ROT = jsn.ROT;
+                            rec.MOT = jsn.MOT;
+                            rec.Org = jsn.Org;
+                            rec.Dst = jsn.Dst;
                             rec.Vhc = jsn.Vhc;
                             rec.nStu = jsn.nStu;
                             rec.pStu = jsn.pStu;
@@ -329,79 +343,80 @@ namespace tMax14rest
                             rec.ACOT = jsn.ACOT;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ACOT);
 
                             if (rec.ShpID != null)
-								rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
-							if(rec.CneID != null)
-								rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
-							if(rec.AccID != null)
-								rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
-							if(rec.CrrID != null)
-								rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
-						}
-					}
-				});
+                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+                            if (rec.CneID != null)
+                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+                            if (rec.AccID != null)
+                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+                            if (rec.CrrID != null)
+                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
+                        }
+                    }
+                });
 
-				//ws.Send(rMsg);
-			});
+                //ws.Send(rMsg);
+            });
 
-			Handle.GET("/wsOphConnect", (Request req) =>
-			{
-				if(req.WebSocketUpgrade)
-				{
-					Console.WriteLine("wsOPH Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
-					req.SendUpgrade("wsOph");
-					return HandlerStatus.Handled;
-				}
-				return new Response()
-				{
-					StatusCode = 500,
-					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
-				};
-			});
 
-			Handle.WebSocket("wsOph", (string str, WebSocket ws) =>
-			{
+            Handle.GET("/wsOphConnect", (Request req) =>
+            {
+                if (req.WebSocketUpgrade)
+                {
+                    Console.WriteLine("wsOPH Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    req.SendUpgrade("wsOph");
+                    return HandlerStatus.Handled;
+                }
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
+
+            Handle.WebSocket("wsOph", (string str, WebSocket ws) =>
+            {
                 //OphMsg jsn = new OphMsg();
                 //jsn.PopulateFromJson(s);
                 dynamic jsn = JValue.Parse(str);
 
                 string rMsg = "OK";
 
-				Db.Transact(() =>
-				{
+                Db.Transact(() =>
+                {
                     //int OphID = int.Parse(jsn.OphID);
                     int OphID = jsn.OphID;
 
                     if (jsn.Evnt == "D")
-					{
-						var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID);
-						foreach(var rec in ophs)
-						{
-							//Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
-							rec.Delete();
-						}
-					}
-					else
-					{
-						TMDB.OPH rec = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID).First;
-						if(jsn.Evnt == "I" && rec == null)
-						{
-							rec = new TMDB.OPH();
-						}
+                    {
+                        var ophs = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID);
+                        foreach (var rec in ophs)
+                        {
+                            //Db.SQL("delete from OPH h where rec.OphID = ?", OphID);	Boyle yapamiyor!!
+                            rec.Delete();
+                        }
+                    }
+                    else
+                    {
+                        TMDB.OPH rec = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID).First;
+                        if (jsn.Evnt == "I" || rec == null)
+                        {
+                            rec = new TMDB.OPH();
+                        }
 
-						if(rec != null)
-						{
-							rec.MdfdOn = DateTime.Now;
-							rec.OphID = OphID;
+                        if (rec != null)
+                        {
+                            rec.MdfdOn = DateTime.Now;
+                            rec.OphID = OphID;
                             rec.OpmID = jsn.OpmID;// == "" ? (int?)null : Convert.ToInt32(jsn.OpmID);
-							rec.RefNo = jsn.RefNo;
-							rec.ROT = jsn.ROT;
-							rec.MOT = jsn.MOT;
-							rec.Org = jsn.Org;
-							rec.Dst = jsn.Dst;
-							rec.nStu = jsn.nStu;
-							rec.pStu = jsn.pStu;
-							rec.DTM = jsn.DTM;
-							rec.PTM = jsn.PTM;
+                            rec.RefNo = jsn.RefNo;
+                            rec.ROT = jsn.ROT;
+                            rec.MOT = jsn.MOT;
+                            rec.Org = jsn.Org;
+                            rec.Dst = jsn.Dst;
+                            rec.nStu = jsn.nStu;
+                            rec.pStu = jsn.pStu;
+                            rec.DTM = jsn.DTM;
+                            rec.PTM = jsn.PTM;
                             rec.NOP = jsn.NOP; // == "" ? (int?)null : Convert.ToInt32(jsn.NOP);
                             rec.GrW = jsn.GrW; // == "" ? (double?)null : Convert.ToDouble(jsn.GrW);
                             rec.VM3 = jsn.VM3; // == "" ? (double?)null : Convert.ToDouble(jsn.VM3);
@@ -429,13 +444,13 @@ namespace tMax14rest
                             rec.DRBD = jsn.DRBD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
 
                             if (rec.OpmID != null)
-								rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
-							if(rec.ShpID != null)
-								rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
-							if(rec.CneID != null)
-								rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
-							if(rec.AccID != null)
-								rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+                                rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
+                            if (rec.ShpID != null)
+                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+                            if (rec.CneID != null)
+                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+                            if (rec.AccID != null)
+                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
                             if (rec.MnfID != null)
                                 rec.Mnf = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).First;
                             if (rec.NfyID != null)
@@ -444,9 +459,9 @@ namespace tMax14rest
                                 rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
                         }
                     }
-				});
-				//ws.Send(rMsg);
-			});
+                });
+                //ws.Send(rMsg);
+            });
 
 
             Handle.GET("/wsAfbConnect", (Request req) =>
@@ -483,7 +498,7 @@ namespace tMax14rest
                     else
                     {
                         var rec = Db.SQL<TMDB.AFB>("select m from AFB m where m.AfbID = ?", AfbID).First;
-                        if (jsn.Evnt == "I" && rec == null)
+                        if (jsn.Evnt == "I" || rec == null)
                         {
                             rec = new TMDB.AFB();
                         }
@@ -515,6 +530,8 @@ namespace tMax14rest
             });
 
 
+
+
             Handle.PUT("/tMax14rest/Denemeput", (Request request) =>
             {
                 //Console.WriteLine("DenemePut: " + request.Body);
@@ -530,58 +547,58 @@ namespace tMax14rest
             });
 
             Handle.PUT("/tMax14rest/FRT", (FrtMsg jsn) =>
-			{
-				Console.WriteLine("FRT: " + jsn.FrtID);
-				string rMsg = "OK";
-				// jsn'nin ilk field da FRT olmali, ikinci (Evnt) field bos olmamali
-				if(jsn[0].ToString() != "FRT" || jsn[1].ToString() == "")
-					return "!HATA-WrongMessageFormat";
+            {
+                Console.WriteLine("FRT: " + jsn.FrtID);
+                string rMsg = "OK";
+                // jsn'nin ilk field da FRT olmali, ikinci (Evnt) field bos olmamali
+                if (jsn[0].ToString() != "FRT" || jsn[1].ToString() == "")
+                    return "!HATA-WrongMessageFormat";
 
-				Db.Transact(() =>
-				{
-					try
-					{
-						int FrtID = int.Parse(jsn.FrtID);
+                Db.Transact(() =>
+                {
+                    try
+                    {
+                        int FrtID = int.Parse(jsn.FrtID);
 
-						if(jsn.Evnt == "D")
-						{
-							var frts = Db.SQL<TMDB.FRT>("select f from FRT f where rec.FrtID = ?", FrtID);
-							foreach(var rec in frts)
-							{
-								rec.Delete();
-							}
-						}
-						else
-						{
-							TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
-							if(jsn.Evnt == "I" && rec == null)
-							{
-								rec = new TMDB.FRT();
-							}
+                        if (jsn.Evnt == "D")
+                        {
+                            var frts = Db.SQL<TMDB.FRT>("select f from FRT f where rec.FrtID = ?", FrtID);
+                            foreach (var rec in frts)
+                            {
+                                rec.Delete();
+                            }
+                        }
+                        else
+                        {
+                            TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
+                            if (jsn.Evnt == "I" && rec == null)
+                            {
+                                rec = new TMDB.FRT();
+                            }
 
-							if(rec == null)
-								rMsg = "NoFirma2Update";
-							else
-							{
-								rec.MdfdOn = DateTime.Now;
-								rec.FrtID = Convert.ToInt32(jsn.FrtID);
-								rec.AdN = jsn.AdN;
-								rec.LocID = jsn.LocID;
-								rec.Pwd = jsn.Pwd;
-							}
-						}
-					}
-					catch(Exception ex)
-					{
-						rMsg = ex.Message;
-					}
-				});
-				return rMsg;
-			});
-			
-			Handle.PUT("/tMax14rest/OPM", (OpmMsg opmMsg) =>
-			{
-				/*
+                            if (rec == null)
+                                rMsg = "NoFirma2Update";
+                            else
+                            {
+                                rec.MdfdOn = DateTime.Now;
+                                rec.FrtID = Convert.ToInt32(jsn.FrtID);
+                                rec.AdN = jsn.AdN;
+                                rec.LocID = jsn.LocID;
+                                rec.Pwd = jsn.Pwd;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        rMsg = ex.Message;
+                    }
+                });
+                return rMsg;
+            });
+
+            Handle.PUT("/tMax14rest/OPM", (OpmMsg opmMsg) =>
+            {
+                /*
 				StringBuilder sb = new StringBuilder();
 				Console.WriteLine("/tMax14rest/OPM");
 				// jsn'nin ilk field da OPM olmali
@@ -647,12 +664,12 @@ namespace tMax14rest
 					}
 				});	  
 				return sb.ToString();*/
-				return "";
-			});
+                return "";
+            });
 
-			Handle.PUT("/tMax14rest/OPH", (OphMsg msg) =>
-			{
-				/*
+            Handle.PUT("/tMax14rest/OPH", (OphMsg msg) =>
+            {
+                /*
 				StringBuilder sb = new StringBuilder();
 				Console.WriteLine("/tMax14rest/OPH");
 				// jsn'nin ilk field da OPH olmali
@@ -726,154 +743,158 @@ namespace tMax14rest
 					}
 				});
 				return sb.ToString();*/
-				return "";
-			});
+                return "";
+            });
 
-			////DENEME////
-			int wsc1 = 0;
-			int wsc2 = 0;
-			ConcurrentDictionary<UInt64, string> cd = new ConcurrentDictionary<UInt64, string>();
+            ////DENEME////
+            int wsc1 = 0;
+            int wsc2 = 0;
+            ConcurrentDictionary<UInt64, string> cd = new ConcurrentDictionary<UInt64, string>();
 
-			Handle.GET("/wss", (Request req) =>
-			{
-				StringBuilder sb = new StringBuilder();
-				
-				var list = cd.Keys.ToList();
-				list.Sort();
+            Handle.GET("/wss", (Request req) =>
+            {
+                StringBuilder sb = new StringBuilder();
 
-				// Loop through keys.
-				foreach(var key in list)
-				{
-					sb.AppendLine($"{key} - {cd[key]}");
-					//Console.WriteLine("{0}: {1}", key, cd[key]);
-				}
-				/*
+                var list = cd.Keys.ToList();
+                list.Sort();
+
+                // Loop through keys.
+                foreach (var key in list)
+                {
+                    sb.AppendLine($"{key} - {cd[key]}");
+                    //Console.WriteLine("{0}: {1}", key, cd[key]);
+                }
+                /*
 				foreach(var pair in cd)
 				{
 					sb.AppendLine($"{pair.Key} - {pair.Value}");
 					//Console.WriteLine("{0}, {1}", pair.Key, pair.Value);
 				}*/
-				//return cd.Count.ToString();
-				//return $"{wsc1} - {wsc2}";
-				return sb.ToString();
-			});
+                //return cd.Count.ToString();
+                //return $"{wsc1} - {wsc2}";
+                return sb.ToString();
+            });
 
-			Handle.GET("/wsConnect/{?}", (string p1, Request req) =>
-			{
-				if(req.WebSocketUpgrade)
-				{
-					// Save wsIdlower, wsIdUpper in database.
-					Db.Transact(() => {
-						new TMDB.WebSocketId()
-						{
-							Id = req.GetWebSocketId(),  //ws.ToUInt64()
-							ToU = DateTime.Now
-						};
-					});
-
-
-					cd.TryAdd(req.GetWebSocketId(), p1);
-
-					var hd = req.HeadersDictionary;
-					string prm = string.Empty;
-					if(req.HeadersDictionary.ContainsKey("Sec-WebSocket-Protocol"))
-						prm = hd["Sec-WebSocket-Protocol"];
-					
-					wsc1++;
-
-					if(req.HeadersDictionary.TryGetValue("Sec-WebSocket-Protocol", out prm))
-					{
-						//cd.TryAdd(req.GetWebSocketId(), prm);
-						var id = req.GetWebSocketId();
-						// Use prm
-					}
-
-					//WebSocket ws = req.SendUpgrade("ws");
-					req.SendUpgrade("ws");
-					//Console.WriteLine("ws Connected {0}", DateTime.Now);
-					return HandlerStatus.Handled;
-				}
-				return new Response()
-				{
-					StatusCode = 500,
-					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
-				};
-			});
+            Handle.GET("/wsConnect/{?}", (string p1, Request req) =>
+            {
+                if (req.WebSocketUpgrade)
+                {
+                    // Save wsIdlower, wsIdUpper in database.
+                    Db.Transact(() =>
+                    {
+                        new TMDB.WebSocketId()
+                        {
+                            Id = req.GetWebSocketId(),  //ws.ToUInt64()
+                            ToU = DateTime.Now
+                        };
+                    });
 
 
-			Handle.WebSocket("ws", (String s, WebSocket ws) =>
-			{
-				//Console.WriteLine("ws received {0} {1}", s, DateTime.Now);
-				ws.Send("echo: " + s + "   " + ws.ToUInt64().ToString());
+                    cd.TryAdd(req.GetWebSocketId(), p1);
 
-			});
+                    var hd = req.HeadersDictionary;
+                    string prm = string.Empty;
+                    if (req.HeadersDictionary.ContainsKey("Sec-WebSocket-Protocol"))
+                        prm = hd["Sec-WebSocket-Protocol"];
 
-			Handle.GET("/wsConnect2", (Request req) =>
-			{
-				if(req.WebSocketUpgrade)
-				{
-					var hd = req.HeadersDictionary;
-					string prm = string.Empty;
-					if(req.HeadersDictionary.ContainsKey("Sec-WebSocket-Protocol"))
-						prm = hd["Sec-WebSocket-Protocol"];
+                    wsc1++;
 
-					if(req.HeadersDictionary.TryGetValue("Sec-WebSocket-Protocol", out prm))
-					{
-						//cd.TryAdd(req.GetWebSocketId(), prm);
-						wsc2++;
-						var id = req.GetWebSocketId();
-						// Use prm
-					}
+                    if (req.HeadersDictionary.TryGetValue("Sec-WebSocket-Protocol", out prm))
+                    {
+                        //cd.TryAdd(req.GetWebSocketId(), prm);
+                        var id = req.GetWebSocketId();
+                        // Use prm
+                    }
 
-					//WebSocket ws = req.SendUpgrade("ws");
-					req.SendUpgrade("ws2");
-					Console.WriteLine("ws Connected {0}", DateTime.Now);
-					return HandlerStatus.Handled;
-				}
-				return new Response()
-				{
-					StatusCode = 500,
-					StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
-				};
-			});
+                    //WebSocket ws = req.SendUpgrade("ws");
+                    req.SendUpgrade("ws");
+                    //Console.WriteLine("ws Connected {0}", DateTime.Now);
+                    return HandlerStatus.Handled;
+                }
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
 
-			Handle.WebSocket("ws2", (String s, WebSocket ws) =>
-			{
-				Console.WriteLine("ws2 received {0} {1}", s, DateTime.Now);
-				ws.Send("echo: " + s + "   " + ws.ToUInt64().ToString());
 
-			});
+            Handle.WebSocket("ws", (String s, WebSocket ws) =>
+            {
+                //Console.WriteLine("ws received {0} {1}", s, DateTime.Now);
+                ws.Send("echo: " + s + "   " + ws.ToUInt64().ToString());
 
-			Handle.GET("/wsMsg/{?}", (String msg) =>
-			{
-				Db.Transact(() =>
-				{
-					new TMDB.WsMsg()
-					{
-						Msg = msg,
-						ToU = DateTime.Now
-					};
-				});
-				return "OK";
-			});
+            });
 
-			WebSocketSessionsTimer = new Timer((state) => {
+            Handle.GET("/wsConnect2", (Request req) =>
+            {
+                if (req.WebSocketUpgrade)
+                {
+                    var hd = req.HeadersDictionary;
+                    string prm = string.Empty;
+                    if (req.HeadersDictionary.ContainsKey("Sec-WebSocket-Protocol"))
+                        prm = hd["Sec-WebSocket-Protocol"];
 
-				// Getting sessions for current scheduler.
-				Scheduling.ScheduleTask(() => {
+                    if (req.HeadersDictionary.TryGetValue("Sec-WebSocket-Protocol", out prm))
+                    {
+                        //cd.TryAdd(req.GetWebSocketId(), prm);
+                        wsc2++;
+                        var id = req.GetWebSocketId();
+                        // Use prm
+                    }
 
-					Db.Transact(() => {
-						foreach(TMDB.WebSocketId wsDb in Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w"))
-						{
-							foreach(TMDB.WsMsg wm in Db.SQL<TMDB.WsMsg>("select m from TMDB.WsMsg m where m.ToU > ?", wsDb.ToU))
-							{
-								WebSocket ws = new WebSocket(wsDb.Id);
-								ws.Send(wm.Msg);
+                    //WebSocket ws = req.SendUpgrade("ws");
+                    req.SendUpgrade("ws2");
+                    Console.WriteLine("ws Connected {0}", DateTime.Now);
+                    return HandlerStatus.Handled;
+                }
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
 
-								wsDb.ToU = DateTime.Now;
-							}
+            Handle.WebSocket("ws2", (String s, WebSocket ws) =>
+            {
+                Console.WriteLine("ws2 received {0} {1}", s, DateTime.Now);
+                ws.Send("echo: " + s + "   " + ws.ToUInt64().ToString());
 
-							/*
+            });
+
+            Handle.GET("/wsMsg/{?}", (String msg) =>
+            {
+                Db.Transact(() =>
+                {
+                    new TMDB.WsMsg()
+                    {
+                        Msg = msg,
+                        ToU = DateTime.Now
+                    };
+                });
+                return "OK";
+            });
+
+            WebSocketSessionsTimer = new Timer((state) =>
+            {
+
+                // Getting sessions for current scheduler.
+                Scheduling.ScheduleTask(() =>
+                {
+
+                    Db.Transact(() =>
+                    {
+                        foreach (TMDB.WebSocketId wsDb in Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w"))
+                        {
+                            foreach (TMDB.WsMsg wm in Db.SQL<TMDB.WsMsg>("select m from TMDB.WsMsg m where m.ToU > ?", wsDb.ToU))
+                            {
+                                WebSocket ws = new WebSocket(wsDb.Id);
+                                ws.Send(wm.Msg);
+
+                                wsDb.ToU = DateTime.Now;
+                            }
+
+                            /*
 								WebSocket ws = new WebSocket(wsDb.Id);
 
 							// Checking if ready to disconnect after certain amount of sends.
@@ -890,24 +911,62 @@ namespace tMax14rest
 							ws.Send(sendMsg+wsc1);
 							wsDb.NumBroadcasted++;
 							wsDb.ToU = DateTime.Now; */
-						}
-					});
+                        }
+                    });
 
-				});
+                });
 
-			}, null, 1000, 10000);
+            }, null, 1000, 10000);
 
-			Handle.WebSocketDisconnect("ws", (WebSocket ws) => {
+            Handle.WebSocketDisconnect("ws", (WebSocket ws) =>
+            {
 
-				Db.Transact(() => {
+                Db.Transact(() =>
+                {
 
-					TMDB.WebSocketId wsId = Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w WHERE w.Id=?", ws.ToUInt64()).First;
-					if(wsId != null)
-					{
-						wsId.Delete();
-					}
-				});
-			});
-		}
-	}
+                    TMDB.WebSocketId wsId = Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w WHERE w.Id=?", ws.ToUInt64()).First;
+                    if (wsId != null)
+                    {
+                        wsId.Delete();
+                    }
+                });
+            });
+
+            Handle.GET("/SendMail", () =>
+            {
+
+                sendMail("sener.demiral@gmail.com", "DENEME", "deneme");
+                return "OK";
+            });
+        }
+
+        public static void sendMail(string mailTo, string subject, string body)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+
+                mail.To.Add(mailTo);
+
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = false;
+
+                // gMail
+                mail.From = new MailAddress("sener.demiral@gmail.com", "Sener");  // gMail
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");   // gMail
+                smtp.Credentials = new System.Net.NetworkCredential("sener.demiral", "CanDilSen09");  // gMail
+                smtp.EnableSsl = true;    // gMail
+                smtp.Port = 587;
+
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+    }
 }

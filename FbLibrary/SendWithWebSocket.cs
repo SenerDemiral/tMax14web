@@ -206,8 +206,8 @@ namespace FbLibrary
                         jsn.FrcID = row["FRCID"];
                         jsn.FrtID = row["FRTID"];
                         jsn.Ad = row["AD"];
-                        jsn.LocID = row["EMAIL"];
-                        jsn.Pwd = row["RPTIDS"];
+                        jsn.eMail = row["EMAIL"];
+                        jsn.RptIDs = row["RPTIDS"];
 
                         wsFrc.Send(JsonConvert.SerializeObject(jsn));
 
