@@ -159,10 +159,8 @@ namespace tMax14rest
                         else
                         {
                             TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID).First;
-                            if (jsn.Evnt == "I" || rec == null)
-                            {
+                            if (rec == null)
                                 rec = new TMDB.FRT();
-                            }
 
                             if (rec == null)
                                 rMsg = "NoFirma2Update";
@@ -240,10 +238,8 @@ namespace tMax14rest
                         else
                         {
                             TMDB.FRC rec = Db.SQL<TMDB.FRC>("select f from TMDB.FRC f where f.FrcID = ?", FrcID).First;
-                            if (jsn.Evnt == "I" && rec == null)
-                            {
+                            if (rec == null)
                                 rec = new TMDB.FRC();
-                            }
 
                             if (rec == null)
                                 rMsg = "NoFirmaContact2Update";
@@ -310,10 +306,8 @@ namespace tMax14rest
                     else
                     {
                         TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
-                        if (jsn.Evnt == "I" || rec == null)
-                        {
+                        if (rec == null)
                             rec = new TMDB.OPM();
-                        }
 
                         if (rec != null)
                         {
@@ -398,10 +392,8 @@ namespace tMax14rest
                     else
                     {
                         TMDB.OPH rec = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID).First;
-                        if (jsn.Evnt == "I" || rec == null)
-                        {
+                        if (rec == null)
                             rec = new TMDB.OPH();
-                        }
 
                         if (rec != null)
                         {
@@ -498,10 +490,8 @@ namespace tMax14rest
                     else
                     {
                         var rec = Db.SQL<TMDB.AFB>("select m from AFB m where m.AfbID = ?", AfbID).First;
-                        if (jsn.Evnt == "I" || rec == null)
-                        {
+                        if (rec == null)
                             rec = new TMDB.AFB();
-                        }
 
                         if (rec != null)
                         {
