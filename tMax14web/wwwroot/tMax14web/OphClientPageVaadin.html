@@ -145,6 +145,24 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
+                        <vaadin-grid-sorter path="TPAD_t">TPAD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Transfer
+                        <br />Port
+                        <br />Arrival
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
                         <vaadin-grid-sorter path="RefNo">Ref#</vaadin-grid-sorter>
                     </template>
                     <vaadin-grid-column width="80px">
@@ -702,24 +720,6 @@
                         Doc
                         <br />Released to
                         <br />Broker
-                    </template>
-                </vaadin-grid-column-group>
-
-                <vaadin-grid-column-group resizable>
-                    <template class="header">
-                        <vaadin-grid-sorter path="TPAD_t">TPAD</vaadin-grid-sorter>
-                    </template>
-                    <vaadin-grid-column width="80px">
-                        <template class="header">
-                        </template>
-                        <template>
-                            <moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY"></moment-element>
-                        </template>
-                    </vaadin-grid-column>
-                    <template class="footer">
-                        Transfer
-                        <br />Port
-                        <br />Arrival
                     </template>
                 </vaadin-grid-column-group>
 
