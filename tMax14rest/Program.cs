@@ -335,6 +335,8 @@ namespace tMax14rest
                             rec.ETA = jsn.ETA;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ETA);
                             rec.ATA = jsn.ATA;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ATA);
                             rec.ACOT = jsn.ACOT;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ACOT);
+                            rec.TPAD = jsn.TPAD;
+                            rec.TPDD = jsn.TPDD;
 
                             if (rec.ShpID != null)
                                 rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;

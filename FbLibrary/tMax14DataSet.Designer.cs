@@ -467,6 +467,10 @@ namespace FbLibrary {
             
             private global::System.Data.DataColumn columnCNTNOS;
             
+            private global::System.Data.DataColumn columnTPAD;
+            
+            private global::System.Data.DataColumn columnTPDD;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WEB_OPM_MDFDDataTable() {
@@ -694,6 +698,22 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TPADColumn {
+                get {
+                    return this.columnTPAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TPDDColumn {
+                get {
+                    return this.columnTPDD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -753,7 +773,9 @@ namespace FbLibrary {
                         System.DateTime ATA, 
                         string VHC, 
                         System.DateTime ACOT, 
-                        string CNTNOS) {
+                        string CNTNOS, 
+                        System.DateTime TPAD, 
+                        System.DateTime TPDD) {
                 WEB_OPM_MDFDRow rowWEB_OPM_MDFDRow = ((WEB_OPM_MDFDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TBL,
@@ -779,7 +801,9 @@ namespace FbLibrary {
                         ATA,
                         VHC,
                         ACOT,
-                        CNTNOS};
+                        CNTNOS,
+                        TPAD,
+                        TPDD};
                 rowWEB_OPM_MDFDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWEB_OPM_MDFDRow);
                 return rowWEB_OPM_MDFDRow;
@@ -826,6 +850,8 @@ namespace FbLibrary {
                 this.columnVHC = base.Columns["VHC"];
                 this.columnACOT = base.Columns["ACOT"];
                 this.columnCNTNOS = base.Columns["CNTNOS"];
+                this.columnTPAD = base.Columns["TPAD"];
+                this.columnTPDD = base.Columns["TPDD"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -879,6 +905,10 @@ namespace FbLibrary {
                 base.Columns.Add(this.columnACOT);
                 this.columnCNTNOS = new global::System.Data.DataColumn("CNTNOS", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCNTNOS);
+                this.columnTPAD = new global::System.Data.DataColumn("TPAD", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPAD);
+                this.columnTPDD = new global::System.Data.DataColumn("TPDD", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTPDD);
                 this.columnTBL.MaxLength = 4;
                 this.columnEVNT.MaxLength = 1;
                 this.columnREFNO.MaxLength = 20;
@@ -3411,6 +3441,38 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime TPAD {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_OPM_MDFD.TPADColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TPAD\' in table \'WEB_OPM_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPM_MDFD.TPADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime TPDD {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_OPM_MDFD.TPDDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TPDD\' in table \'WEB_OPM_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPM_MDFD.TPDDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTBLNull() {
                 return this.IsNull(this.tableWEB_OPM_MDFD.TBLColumn);
             }
@@ -3695,6 +3757,30 @@ namespace FbLibrary {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCNTNOSNull() {
                 this[this.tableWEB_OPM_MDFD.CNTNOSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTPADNull() {
+                return this.IsNull(this.tableWEB_OPM_MDFD.TPADColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTPADNull() {
+                this[this.tableWEB_OPM_MDFD.TPADColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTPDDNull() {
+                return this.IsNull(this.tableWEB_OPM_MDFD.TPDDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTPDDNull() {
+                this[this.tableWEB_OPM_MDFD.TPDDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6037,6 +6123,8 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
             tableMapping.ColumnMappings.Add("VHC", "VHC");
             tableMapping.ColumnMappings.Add("ACOT", "ACOT");
             tableMapping.ColumnMappings.Add("CNTNOS", "CNTNOS");
+            tableMapping.ColumnMappings.Add("TPAD", "TPAD");
+            tableMapping.ColumnMappings.Add("TPDD", "TPDD");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::FirebirdSql.Data.FirebirdClient.FbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;

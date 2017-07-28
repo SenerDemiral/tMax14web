@@ -128,6 +128,8 @@ namespace TMDB
 		public DateTime? ETA { get; set; }
 		public DateTime? ATA { get; set; }
         public DateTime? ACOT { get; set; }
+        public DateTime? TPAD { get; set; }
+        public DateTime? TPDD { get; set; }
         public string Vhc { get; set; }
         public string CntNoS { get; set; }
 
@@ -226,12 +228,16 @@ namespace TMDB
 		public DateTime? ETA => Opm == null ? null : Opm.ETA;
 		public DateTime? ATA => Opm == null ? null : Opm.ATA;
         public DateTime? ACOT => Opm == null ? null : Opm.ACOT;
+        public DateTime? TPAD => Opm == null ? null : Opm.TPAD;
+        public DateTime? TPDD => Opm == null ? null : Opm.TPDD;
 
         public string ETD_t => Opm == null ? "" : $"{Opm.ETD:s}";
 		public string ATD_t => Opm == null ? "" : $"{Opm.ATD:s}";
 		public string ETA_t => Opm == null ? "" : $"{Opm.ETA:s}";
         public string ATA_t => Opm == null ? "" : $"{Opm.ATA:s}";
         public string ACOT_t => Opm == null ? "" : $"{Opm.ACOT:s}";
+        public string TPAD_t => Opm == null ? "" : $"{Opm.TPAD:s}";
+        public string TPDD_t => Opm == null ? "" : $"{Opm.TPDD:s}";
 
         public string nStuAd
         {
