@@ -707,37 +707,37 @@
 
                 <vaadin-grid-column-group resizable>
                     <template class="header">
-                        <vaadin-grid-sorter path="TPDD_t">TPDD</vaadin-grid-sorter>
-                    </template>
-                    <vaadin-grid-column width="80px">
-                        <template class="header">
-                        </template>
-                        <template>
-                            <moment-element datetime="[[item.TPDD_t]]" output-format="DD.MM.YY"></moment-element>
-                        </template>
-                    </vaadin-grid-column>
-                    <template class="footer">
-                        Transfer
-                        <br />Port
-                        <br />Departure
-                    </template>
-                </vaadin-grid-column-group>
-
-                <vaadin-grid-column-group resizable>
-                    <template class="header">
                         <vaadin-grid-sorter path="TPAD_t">TPAD</vaadin-grid-sorter>
                     </template>
                     <vaadin-grid-column width="80px">
                         <template class="header">
                         </template>
                         <template>
-                            <moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY"></moment-element>
+                            <moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY HH"></moment-element>
                         </template>
                     </vaadin-grid-column>
                     <template class="footer">
                         Transfer
                         <br />Port
                         <br />Arrival
+                    </template>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="TPDD_t">TPDD</vaadin-grid-sorter>
+                    </template>
+                    <vaadin-grid-column width="80px">
+                        <template class="header">
+                        </template>
+                        <template>
+                            <moment-element datetime="[[item.TPDD_t]]" output-format="DD.MM.YY HH"></moment-element>
+                        </template>
+                    </vaadin-grid-column>
+                    <template class="footer">
+                        Transfer
+                        <br />Port
+                        <br />Departure
                     </template>
                 </vaadin-grid-column-group>
 
