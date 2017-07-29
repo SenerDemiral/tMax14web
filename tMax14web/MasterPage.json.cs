@@ -18,9 +18,11 @@ namespace tMax14web
         void Handle(Input.LoginTrigger action)
         {
             fOnLine = false;
+            int FrtID = Convert.ToInt32(fID);
+
             if (!string.IsNullOrEmpty(fPW))
             {
-                var Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", Convert.ToInt32(fID)).First;
+                var Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
                 if (Frt != null && Frt.Pwd == fPW)
                 {
                     fOnLine = true;
@@ -29,6 +31,7 @@ namespace tMax14web
 
                 }
             }
+            TMDB.Hlpr.Insert2LogStat(FrtID, fPW, fOnLine);
         }
 
     }

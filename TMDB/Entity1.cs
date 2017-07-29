@@ -5,7 +5,22 @@ using Starcounter;
 namespace TMDB
 {
 
-	[Database]
+    [Database]
+    public class LogStat
+    {
+        public int FrtID { get; set; }
+        public string Pwd { get; set; }
+        public DateTime ToI { get; set; }    // Time of Insert
+        public bool OK { get; set; }
+
+        public LogStat()
+        {
+            OK = false;
+            ToI = DateTime.Now;
+        }
+    }
+
+    [Database]
 	public class WebSocketId
 	{
 		public UInt64 Id;
