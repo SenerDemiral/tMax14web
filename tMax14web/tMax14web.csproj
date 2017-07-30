@@ -70,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfbClientPage.json.cs">
+      <DependentUpon>AfbClientPage.json</DependentUpon>
+    </Compile>
     <Compile Include="D2.json.cs">
       <DependentUpon>D2.json</DependentUpon>
     </Compile>
@@ -92,6 +95,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <TypedJSON Include="AfbClientPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -129,6 +135,7 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\tMax14web\AfbClientPageVaadin.html" />
     <None Include="wwwroot\tMax14web\MasterPage2.html" />
     <None Include="wwwroot\sys\github-browser-app.html" />
     <Content Include="wwwroot\sys\Stylesheet1.css" />

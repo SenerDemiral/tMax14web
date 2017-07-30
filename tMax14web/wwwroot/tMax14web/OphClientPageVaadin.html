@@ -6,115 +6,116 @@
 
 <template>
     <template is="dom-bind">
-<style is="custom-style">
-    vaadin-grid#valo-grid {
-      position: relative;
-      /*font-family: "Open Sans", sans-serif;*/
-      /*font: 300 16px/2.55 "Open Sans", sans-serif;*/
-      font-size: small;
-      -webkit-font-smoothing: antialiased;
-      --divider-color: #d4d4d4;
-      /*height: 80vh;*/
+        <style is="custom-style">
+        vaadin-grid#valo-grid {
+            position: relative;
+            /*font-family: "Open Sans", sans-serif;*/
+            /*font: 300 16px/2.55 "Open Sans", sans-serif;*/
+            font-size: small;
+            -webkit-font-smoothing: antialiased;
+            --divider-color: #d4d4d4;
+            /*height: 80vh;*/
 
-      --vaadin-grid-cell: {
-        padding: 0 8px;
-        height: 30px;
-        border-right: 1px solid #d4d4d4;
-        box-sizing: border-box;
-      };
+            --vaadin-grid-cell: {
+                padding: 0 8px;
+                height: 30px;
+                border-right: 1px solid #d4d4d4;
+                box-sizing: border-box;
+            }
 
-      --vaadin-grid-header-cell: {
-        border-bottom: 1px solid #d4d4d4;
-        background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);
-      };
+            --vaadin-grid-header-cell: {
+                border-bottom: 1px solid #d4d4d4;
+                background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);
+            }
 
-      --vaadin-grid-footer-cell: {
-        /*background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);*/
-        background-color: darkgrey;
-        color:azure;
-        height: 40px;
-        font-size:x-small;
-      };
+            --vaadin-grid-footer-cell: {
+                /*background-image: linear-gradient(to bottom, #fafafa 2%, #efefef 98%);*/
+                background-color: darkgrey;
+                color:azure;
+                height: 40px;
+                font-size:x-small;
+            }
 
-      --vaadin-grid-cell-last-frozen: {
-        box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
-      };
+            --vaadin-grid-cell-last-frozen: {
+                box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
+            }
 
-      --vaadin-grid-body-row-active-cell: {
-        background-image: linear-gradient(to bottom, #1b87e3 2%, #166ed5 98%);
-        color: #c8dbed;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
-        border-right-color: #1d69b4;
-      };
+            --vaadin-grid-body-row-active-cell: {
+                background-image: linear-gradient(to bottom, #1b87e3 2%, #166ed5 98%);
+                color: #c8dbed;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+                border-right-color: #1d69b4;
+            }
 
-      --vaadin-grid-body-row-odd-cell: {
-        background-color: #f5f5f5;
-      };
+            --vaadin-grid-body-row-odd-cell: {
+                background-color: #f5f5f5;
+            }
 
-      --vaadin-grid-loading-spinner: {
-        display: none;
-      };
+            --vaadin-grid-loading-spinner: {
+                display: none;
+            }
 
-      --vaadin-grid-body-cell: {
-        transition: opacity 0.2s;
-      };
+            --vaadin-grid-body-cell: {
+                transition: opacity 0.2s;
+            }
 
-      --vaadin-grid-loading-body-cell: {
-        opacity: 0.2;
-      };
+            --vaadin-grid-loading-body-cell: {
+                opacity: 0.2;
+            }
 
-      --vaadin-grid-focused-cell: {
-        box-shadow: inset 0 0 0 2px rgba(27, 135, 227, 1);
-      };
-    }
+            --vaadin-grid-focused-cell: {
+                box-shadow: inset 0 0 0 2px rgba(27, 135, 227, 1);
+            }
+        }
 
-    vaadin-grid#valo-grid vaadin-grid-filter {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      padding: 5px;
-    }
+        vaadin-grid#valo-grid vaadin-grid-filter {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            padding: 5px;
+        }
 
-    vaadin-grid#valo-grid .grouptitle {
-      text-align: left;
-      font-weight: bold;
-    }
+        vaadin-grid#valo-grid .grouptitle {
+            text-align: left;
+            font-weight: bold;
+        }
 
-    vaadin-grid#valo-grid input {
-      width: 100%;
-      box-sizing: border-box;
-    }
+        vaadin-grid#valo-grid input {
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-    @keyframes loading-expand {
-      0% {
-        transform: scaleX(0);
-      }
+        @keyframes loading-expand {
+            0% {
+                transform: scaleX(0);
+            }
 
-      100% {
-        transform: scaleX(1);
-      }
-    }
+            100% {
+                transform: scaleX(1);
+            }
+        }
 
-    vaadin-grid#valo-grid::before {
-      content: "";
-      width: 100%;
-      position: absolute;
-      height: 4px;
-      background: var(--primary-color);
-      z-index: 1;
-      transform-origin: left;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
+        vaadin-grid#valo-grid::before {
+            content: "";
+            width: 100%;
+            position: absolute;
+            height: 4px;
+            background: var(--primary-color);
+            z-index: 1;
+            transform-origin: left;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
 
-    vaadin-grid#valo-grid[loading]::before {
-      opacity: 1;
-      animation: loading-expand 1s linear;
-    }
+        vaadin-grid#valo-grid[loading]::before {
+            opacity: 1;
+            animation: loading-expand 1s linear;
+        }
 
-  </style>
+    </style>
+    
         <div class="subheader">
             <div>
                 <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="Download" value="Download Excel" />

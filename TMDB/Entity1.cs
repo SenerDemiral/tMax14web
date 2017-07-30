@@ -112,6 +112,9 @@ namespace TMDB
 
         public string FrtAd => Frt == null ? "" : Frt.AdN;
         public string DknFrtAd => DknFrt == null ? "" : DknFrt.AdN;
+        public string FtrTrh_t => $"{FtrTrh:s}";
+        public string OdmVde_t => $"{OdmVde:s}";
+
     }
 
     [Database]

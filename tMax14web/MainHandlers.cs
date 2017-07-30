@@ -78,7 +78,17 @@ namespace tMax14web
 				return master;
 			});
 
-			Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) =>
+            Handle.GET("/tMax14web/AfbClient", () => {
+                var master = (MasterPage)Self.GET("/tMax14web");
+                master.CurrentPage = new AfbClientPage();
+                master.CurrentPage.Data = null;
+
+                if (master.fAdN == "Not Found")
+                    master.CurrentPage = null;
+                return master;
+            });
+
+            Handle.GET("/tMax14web/ophs2xlsx/{?}/{?}", (string frtID, string sDate) =>
 			{
 				using(OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage())
 				{

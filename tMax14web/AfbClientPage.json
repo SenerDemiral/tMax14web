@@ -1,0 +1,17 @@
+{
+  "Html": "/tMax14web/AfbClientPageVaadin.html",
+  "Fmt": "DD.MM.YY",
+  "fID": "",
+  "StartDate": "",
+
+  "Afbs": [
+    {
+      "AfbID": 0,
+      "FtrNo": "",
+      "FtrTrh_t": "",
+      "OdmVde_t": "",
+      "bDvz": "",
+      "bTutBrt": 0.0
+    }
+  ]
+}
