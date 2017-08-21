@@ -9,13 +9,18 @@ using System.Threading;
 using TMDB;
 using Newtonsoft.Json.Linq;
 using System.Net.Mail;
+using System.Net;
+using System.IO;
 
 namespace tMax14rest
 {
 	class Program
 	{
-		// NOTE: Timer should be static, otherwise its garbage collected.
-		static Timer WebSocketSessionsTimer = null;
+        enum DW3 { TrckID, Cmnd, Trh, GPS, Lat, Lon, Speed, Zmn, Direction, Alt, Star };
+        // NOTE: Timer should be static, otherwise its garbage collected.
+        static Timer WebSocketSessionsTimer = null;
+        static StreamWriter sw = null; // new StreamWriter(@"C:\Starcounter\MyLog\ScServerUDP-Log.txt", true);
+
 
         /// <summary>
         /// Rest'in 2 amaci var
@@ -25,6 +30,8 @@ namespace tMax14rest
 
         static void Main()
         {
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
+
             // Removing existing objects from database.
             /*
 			Db.Transact(() => {
@@ -50,6 +57,10 @@ namespace tMax14rest
                 {
                     Db.SlowSQL("DELETE FROM TMDB.WebSocketId");
                 });
+
+                WriteErrorLog("CAN ");
+                for (int i = 0; i < 10000; i++)
+                    WriteErrorLog("Sener DENEME " + i.ToString());
 
                 return "OK";
             });
@@ -930,6 +941,116 @@ namespace tMax14rest
                 sendMail("sener.demiral@gmail.com", "DENEME", "deneme");
                 return "OK";
             });
+
+            Handle.Tcp(8585, (TcpSocket tcpSocket, Byte[] incomingData) =>
+            {
+                UInt64 socketId = tcpSocket.ToUInt64();
+                //Console.WriteLine("socketId: {0}", socketId);
+
+                // Checking if we have socket disconnect here.
+                if (null == incomingData)
+                {
+                    // One can use "socketId" to dispose resources associated with this socket.
+                    return;
+                }
+
+                // One can check if there are any resources associated with "socketId" and otherwise create them.
+                // Db.SQL("...");
+
+                // Sending the echo back.
+                tcpSocket.Send(incomingData);
+
+                // Or even more data, if its needed: tcpSocket.Send(someMoreData);
+            });
+
+
+            Handle.Udp(6000, (IPAddress clientIp, UInt16 clientPort, Byte[] datagram) =>
+            {
+                string text = Encoding.ASCII.GetString(datagram);
+
+                WriteErrorLog("Received on: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
+
+                // One can update any resources associated with "clientIp" and "clientPort".
+                //UdpSocket.Send(clientIp, clientPort, 6000, Encoding.ASCII.GetBytes("ok"));
+                UdpSocket.Send(clientIp, clientPort, 6000, "ok");
+
+                if (text.StartsWith("(") && text.EndsWith(")"))
+                    processMessages(text);
+            });
+        }
+
+        static void processMessages(string txt)
+        {
+            string[] msgss = txt.Split(new char[] { ')' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string msg in msgss)
+            {
+                processSingleMessage(msg.Substring(1)); // Ilk karakter '(' gec
+            }
+        }
+
+        static void processSingleMessage(string msg)
+        {
+            string[] items = msg.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string trckID = items[0];
+            string cmnd = items[1];
+
+            if (cmnd == "DW30" || cmnd == "DW3B" || cmnd == "DW3C")
+            {
+                string Trh = items[(int)DW3.Trh];   // ddMMyy
+                string Zmn = items[(int)DW3.Zmn];   // HHmmss
+                DateTime EXD = new DateTime(Convert.ToInt32(Trh.Substring(4)), Convert.ToInt32(Trh.Substring(2, 2)), Convert.ToInt32(Trh.Substring(0, 2)), Convert.ToInt32(Zmn.Substring(0, 2)), Convert.ToInt32(Zmn.Substring(2, 2)), Convert.ToInt32(Zmn.Substring(4)));
+                string GPS = items[(int)DW3.GPS];   // A:GPS valid data, V:GPS invalid data
+                string LatDMC = items[(int)DW3.Lat];   // ddmm.mmmmC  C:N+/S-
+                double LatDD = LatDMCtoDD(LatDMC);
+                string LonDMC = items[(int)DW3.Lon];   // dddmm.mmmmC  C:E+/W-
+                double LonDD = LonDMCtoDD(LonDMC);
+
+                WriteErrorLog(string.Format("Cmnd:{0} TrckID:{1} EXD:{2} Lat,Lon:{3},{4}", cmnd, trckID, EXD, LatDD, LonDD));
+            }
+        }
+
+        static double LatDMCtoDD(string DMC)
+        {
+            // ddmm.mmmmC  C:N+/S-
+            double D = Convert.ToDouble(DMC.Substring(0, 2));
+            double M = Convert.ToDouble(DMC.Substring(2, 7));
+            double Sgn = DMC.EndsWith("N") ? 1 : -1;   // Nort+ South-
+            double DD = Math.Round(Sgn * (D + M / 60.0), 6);
+            return DD;
+        }
+
+        static double LonDMCtoDD(string DMC)
+        {
+            // dddmm.mmmmC  C:E+/W-
+            double D = Convert.ToDouble(DMC.Substring(0, 3));
+            double M = Convert.ToDouble(DMC.Substring(3, 7));
+            double Sgn = DMC.EndsWith("E") ? 1 : -1;   // East+ West-
+            double DD = Math.Round(Sgn * (D + M / 60.0), 6);
+            return DD;
+        }
+
+        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            if (sw != null)
+                sw.Close();
+        }
+
+        public static void WriteErrorLog(string Msg)
+        {
+            //StreamWriter sw = null;
+            if (sw == null)
+                sw = new StreamWriter(@"C:\Starcounter\MyLog\ScServerUDP-Log.txt", true);
+
+            try
+            {
+                //sw = new StreamWriter(@"C:\Starcounter\MyLog\ScServerUDP-Log.txt", true);
+                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ": " + Msg);
+                sw.Flush();
+                //sw.Close();
+            }
+            catch
+            {
+            }
         }
 
         public static void sendMail(string mailTo, string subject, string body)

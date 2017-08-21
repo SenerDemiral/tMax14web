@@ -1,0 +1,35 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+<link rel="import" href="/sys/paper-dialog/paper-dialog.html">
+<link rel="import" href="/sys/google-map/google-map.html">
+<link rel="import" href="/sys/google-map/google-map-marker.html">
+
+<template>
+    <template is="dom-bind">
+        <style>
+            google-map {
+                height: 400px;
+            }
+        </style>
+        <google-map map="{{map}}"
+                    fit-to-marker
+                    latitude="37.026835"
+                    longitude="27.563807"
+                    api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0">
+
+            <template is="dom-repeat" items="[[model.LatLons]]">
+                <google-map-marker map="{{map}}"
+                                   slot="markers"
+                                   latitude="[[item.Lat]]"
+                                   longitude="[[item.Lon]]"
+                                   title="[[item.Title]]">
+                    [[item.Info]]
+                </google-map-marker>
+            </template>
+        </google-map>
+
+        <template is="dom-repeat" items="[[model.LatLons]]">
+            <div>[[item.Lat]]-[[item.Lon]]</div>
+
+        </template>
+    </template>
+</template>

@@ -21,6 +21,7 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
 					<script src=""/sys/thenBy.js""></script>
+					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					
 					<!--<link rel=""import"" href=""/sys/bootstrap.html"">
 					<script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
@@ -70,6 +71,13 @@ namespace tMax14web
                     }*/
                 });
                 return "OK";
+            });
+
+            Handle.GET("/tMax14web/Map", () =>
+            {
+                var page = new MapPage();
+                page.Data = null;
+                return page; // new MapPage();
             });
 
             Handle.GET("/tMax14web/d2", () =>
