@@ -5,31 +5,71 @@
 
 <template>
     <template is="dom-bind">
+        
         <style>
             google-map {
-                height: 400px;
+                height: calc(100vh - 74px);
             }
         </style>
-        <google-map map="{{map}}"
-                    fit-to-marker
-                    latitude="37.026835"
-                    longitude="27.563807"
-                    api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0">
+        <div class="map-grid">
+            <div class="map-left">
+                <div>LEFT</div>
+                <div>LEFT</div>
+                <div>LEFT</div>
+                <div>LEFT</div>
+                <div>LEFT</div>
+                <ul>
+                    <template is="dom-repeat" items="[[model.MapList]]">
+                        <li>
+                            <button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]] - [[item.Lat]] - [[item.Lon]]</button>
+                        </li>
 
-            <template is="dom-repeat" items="[[model.LatLons]]">
-                <google-map-marker map="{{map}}"
-                                   slot="markers"
-                                   latitude="[[item.Lat]]"
-                                   longitude="[[item.Lon]]"
-                                   title="[[item.Title]]">
-                    [[item.Info]]
-                </google-map-marker>
-            </template>
-        </google-map>
+                    </template>
+                </ul>
+            </div>
+            <div class="map-right">
+                <google-map map={{map}}
+                            fit-to-markers
+                            latitude="37.026835"
+                            longitude="27.563807"
+                            api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0">
 
-        <template is="dom-repeat" items="[[model.LatLons]]">
-            <div>[[item.Lat]]-[[item.Lon]]</div>
+                    <template is="dom-repeat" items="{{model.Markers}}">
+                            <google-map-marker map="{{map}}"
+                                               click-events
+                                               on-google-map-marker-click="_markerClick"
+                                               on-google-map-marker-open="_markerClick"
+                                               slot="markers"
+                                               latitude="[[item.Lat]]"
+                                               longitude="[[item.Lon]]"
+                                               title="[[item.Title]]"
+                                               open="{{item.ShowInfo$}}"
+                                               >
+                                -[[item.Info]]
+                            </google-map-marker>
+                    </template>
+                </google-map>
+            </div>
+        </div>
 
-        </template>
     </template>
+    <script>
+        (function () {
+            var script = document._currentScript || document.currentScript;
+            tmplt = script.previousElementSibling;
+
+            tmplt._markerClick = function (e) {
+                // https://www.polymer-project.org/1.0/docs/devguide/templates
+                //console.log("e.model.item.Info: " + e.model.item.Info); // Asagidakiyle ayni sonuc
+                console.log("e.model.get('item.Info'): " + e.model.get('item.Info'));
+
+                //console.log(this.$.firstRepeat.modelForElement(e.target));
+
+                // Hepsi ayni sonuc (e ye model'i koyan polymer)
+                //e.target.innerHTML = e.model.__data__.item.Info;
+                e.target.innerHTML = e.model.get('item.Info');
+                //e.target.innerHTML = e.model.item.Info;
+            }
+        })();
+    </script>
 </template>

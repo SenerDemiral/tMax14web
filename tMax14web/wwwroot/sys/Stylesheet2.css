@@ -1,13 +1,32 @@
 ﻿body
 {
     font-family: "Open Sans", sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-gap: 5px;
+}
+
+.map-left {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.map-right {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 32px 1fr 28px;
-  height: calc(100vh - 20px);
+  grid-template-rows: 36px 1fr 28px;
+  height: 100vh;
   grid-gap: 5px;
 }
 
@@ -19,6 +38,7 @@
   /*min-width: 5000px;*/
   /*width: 500px;*/
   /*height: 400px;*/
+  /*height: calc(100vh - 20px);*/
   max-height:100%;
   /*overflow:auto;*/
 }
@@ -27,8 +47,8 @@
   grid-column: 1;
   grid-row: 1;
   overflow:auto;
-  background-color: teal;
-  color: white;
+  background-color: orange;/*teal;*/
+  /*color: white;*/
   
   
   display: flex;
@@ -49,13 +69,15 @@
 }
 
 .subheader {
+    /*
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 1;*/
   overflow:auto;
   background-color: cadetblue;
-  color: white;
+  /*color: white;*/
   display: flex;
   align-items: center;
+  height: 27px;
 }
 
 .subheader > div{

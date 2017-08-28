@@ -1,0 +1,49 @@
+{
+  "name": "paper-map-info",
+  "homepage": "https://github.com/mlisook/paper-map-info",
+  "authors": [
+    "Murray Lisook <murray@lisook.net>"
+  ],
+  "description": "Polymer element for Google Map infowindow when the infowindow must support events",
+  "main": "polymer-map-info.html",
+  "keywords": [
+    "polymer",
+    "polymer-ts",
+    "google-map",
+    "infowindow",
+    "web-components"
+  ],
+  "license": "BSD2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "google-map": "GoogleWebComponents/google-map#^1.1.10",
+    "polymer-ts": "^0.1.26",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.1.1",
+    "underscore": "^1.8.3",
+    "paper-material": "^1.0.6",
+    "resize-aware": "^1.0.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "syntax-highlight": "^1.0.0"
+  },
+  "version": "1.1.4",
+  "_release": "1.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.4",
+    "commit": "cdc22b3f6d895cbe073c61d5fbdc7da60dad9d84"
+  },
+  "_source": "https://github.com/mlisook/paper-map-info.git",
+  "_target": "^1.1.4",
+  "_originalSource": "mlisook/paper-map-info",
+  "_direct": true
+}
