@@ -6,18 +6,9 @@
 <template>
     <template is="dom-bind">
         
-        <style>
-            google-map {
-                height: calc(100vh - 74px);
-            }
-        </style>
         <div class="map-grid">
             <div class="map-left">
-                <div>LEFT</div>
-                <div>LEFT</div>
-                <div>LEFT</div>
-                <div>LEFT</div>
-                <div>LEFT</div>
+                <div>Trackers</div>
                 <ul>
                     <template is="dom-repeat" items="[[model.MapList]]">
                         <li>
@@ -27,8 +18,10 @@
                     </template>
                 </ul>
             </div>
+
             <div class="map-right">
                 <google-map map={{map}}
+                            style="height: calc(100vh - 74px);"
                             fit-to-markers
                             latitude="37.026835"
                             longitude="27.563807"
@@ -39,6 +32,7 @@
                                                click-events
                                                on-google-map-marker-click="_markerClick"
                                                on-google-map-marker-open="_markerClick"
+                                               on-google-map-marker-close="_markerClose"
                                                slot="markers"
                                                latitude="[[item.Lat]]"
                                                longitude="[[item.Lon]]"
@@ -61,7 +55,9 @@
             tmplt._markerClick = function (e) {
                 // https://www.polymer-project.org/1.0/docs/devguide/templates
                 //console.log("e.model.item.Info: " + e.model.item.Info); // Asagidakiyle ayni sonuc
-                console.log("e.model.get('item.Info'): " + e.model.get('item.Info'));
+                console.log("e.model.get('item.Info'): ", e.model.get('item.Info'));
+                e.model.set('item.ShowInfo$', true);
+                console.log(e.model.get('item.ShowInfo$'));
 
                 //console.log(this.$.firstRepeat.modelForElement(e.target));
 
@@ -70,6 +66,12 @@
                 e.target.innerHTML = e.model.get('item.Info');
                 //e.target.innerHTML = e.model.item.Info;
             }
+
+            tmplt._markerClose = function (e) {
+                e.model.set('item.ShowInfo$', false);
+                console.log("_markerClose:", e.model.get('item.ShowInfo$'));
+            }
+
         })();
     </script>
 </template>

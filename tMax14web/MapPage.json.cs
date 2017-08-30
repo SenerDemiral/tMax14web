@@ -132,7 +132,8 @@ namespace tMax14web
                     {
                         if (m.Idx == Idx)
                         {
-                            m.ShowInfo = ShowInfo;
+                            //m.ShowInfo = ShowInfo;
+                            m.ShowInfo = m.ShowInfo ? false : true;
                             break;
                         }
 
