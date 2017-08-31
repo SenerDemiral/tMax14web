@@ -57,7 +57,7 @@ namespace tMax14web
             //		< puppet - client ref= ""puppet - root"" remote - url = ""{ 1}"" use - web - socket = ""true"" ></ puppet - client >
 
             Application.Current.Use(new HtmlFromJsonProvider());
-			Application.Current.Use(new PartialToStandaloneHtmlProvider(html));
+			Application.Current.Use(new PartialToStandaloneHtmlProvider());
 
             Handle.GET("/tMax14web/init", () => {
                 Db.Transact(() =>

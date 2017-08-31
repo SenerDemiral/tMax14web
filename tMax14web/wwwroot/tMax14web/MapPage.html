@@ -20,18 +20,22 @@
             </div>
 
             <div class="map-right">
-                <google-map map={{map}}
+                <google-map id="gmap" map={{map}}
                             style="height: calc(100vh - 74px);"
                             fit-to-markers
                             latitude="37.026835"
                             longitude="27.563807"
-                            api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0">
+                            api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0"
+                            mouseEvents 
+                            on-google-map-ready="_mapReady"
+                            
+                            >
 
                     <template is="dom-repeat" items="{{model.Markers}}">
                             <google-map-marker map="{{map}}"
                                                click-events
                                                on-google-map-marker-click="_markerClick"
-                                               on-google-map-marker-open="_markerClick"
+                                               on-google-map-marker-open="_markerOpen"
                                                on-google-map-marker-close="_markerClose"
                                                slot="markers"
                                                latitude="[[item.Lat]]"
@@ -48,16 +52,59 @@
 
     </template>
     <script>
+        var ready = function () {
+            console.log('readyyyyy');
+        };
+
         (function () {
             var script = document._currentScript || document.currentScript;
             tmplt = script.previousElementSibling;
+            //console.log(window.google);
+            //window.google.Map.addListener('center_changed', function () {
+            //    console.log('center_changed');
+            //});
+
+            /*
+            
+
+            tmplt.ready = function () {
+                console.log('ready');
+
+                console.log(document.querySelector('#gmap'));
+                console.log(this.$);
+                window.tt = tmplt;
+                //var m = document.querySelector('#gmap');
+                //m.map.addListener('center-changed', function () {
+                //m.addListener('center-changed', function () {
+                //        console.log('center changed');
+                //});
+
+                gmap = this.$.gmap;
+                console.log(gmap);
+                gmap.ready = function () {
+                    console.log('gmap ready');
+
+                }
+
+                gmap.addEventListener('ready', function () {
+                    console.log('dom change');
+                    //console.log(this.$.gmap);
+                    //window.m = this.$.gmap;
+                    //console.log(window.m.map);
+
+                        gmap.map.addListener('center-changed', function () {
+                                    console.log('center changed');
+                        });
+                });
+            }
+            */
 
             tmplt._markerClick = function (e) {
                 // https://www.polymer-project.org/1.0/docs/devguide/templates
                 //console.log("e.model.item.Info: " + e.model.item.Info); // Asagidakiyle ayni sonuc
                 console.log("e.model.get('item.Info'): ", e.model.get('item.Info'));
                 e.model.set('item.ShowInfo$', true);
-                console.log(e.model.get('item.ShowInfo$'));
+                console.log('_markerClick -> item.ShowInfo$: ', e.model.get('item.ShowInfo$'));
 
                 //console.log(this.$.firstRepeat.modelForElement(e.target));
 
@@ -69,9 +116,26 @@
 
             tmplt._markerClose = function (e) {
                 e.model.set('item.ShowInfo$', false);
-                console.log("_markerClose:", e.model.get('item.ShowInfo$'));
+                console.log("_markerClose -> item.ShowInfo$:", e.model.get('item.ShowInfo$'));
             }
 
+            tmplt._markerOpen = function (e) {
+                //e.model.set('item.ShowInfo$', false);
+                e.target.innerHTML = e.model.get('item.Info');
+                console.log("_markerOpen -> item.ShowInfo$:", e.model.get('item.ShowInfo$'));
+            }
+
+            tmplt._mapReady = function (e) {
+                console.log("map Ready");
+                console.log(document.querySelector('#gmap'));
+                //gmap = this.$.gmap;
+                gmap = document.querySelector('#gmap');
+                console.log(gmap);
+                gmap.map.addListener('center_changed', function () {
+                    console.log('center changed');
+                });
+
+            }
         })();
     </script>
 </template>
