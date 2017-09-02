@@ -21,8 +21,8 @@ namespace tMax14web
                 //var a = new MarkersElementJson();
                 var a = new MarkersItem();
 
-                a.Lat = string.Format("{0}", LAT + (double)i / 100.0);
-                a.Lon = string.Format("{0}", LON + (double)i / 100.0);
+                a.lat = string.Format("{0}", LAT + (double)i / 100.0);
+                a.lng = string.Format("{0}", LON + (double)i / 100.0);
 
                 Markers.Add(a);
             }
@@ -40,8 +40,8 @@ namespace tMax14web
             MapList.Add(new MapListItem()
             {
                 Idx = 0,
-                Lat = "37.026835",
-                Lon = "27.563807",
+                lat = "37.026835",
+                lng = "27.563807",
                 Title = "Sener",
                 Info = "Demiral Ev"
             });
@@ -49,8 +49,8 @@ namespace tMax14web
             MapList.Add(new MapListItem()
             {
                 Idx = 1,
-                Lat = "37.033568",
-                Lon = "27.423496",
+                lat = "37.033568",
+                lng = "27.423496",
                 Title = "Marina",
                 Info = "<strong>Bodrum<br>Limani</strong>"
             });
@@ -58,8 +58,8 @@ namespace tMax14web
             MapList.Add(new MapListItem()
             {
                 Idx = 2,
-                Lat = "37.096046",
-                Lon = "27.270502",
+                lat = "37.096046",
+                lng = "27.270502",
                 Title = "Nil",
                 Info = "<strong>Pakyurek<br>Ev</strong>"
             });
@@ -117,8 +117,8 @@ namespace tMax14web
                     parent.Markers.Add(new MarkersItem()
                     {
                         Idx = this.Idx,
-                        Lat = this.Lat,
-                        Lon = this.Lon,
+                        lat = this.lat,
+                        lng = this.lng,
                         Title = this.Title,
                         Info = this.Info
                     });

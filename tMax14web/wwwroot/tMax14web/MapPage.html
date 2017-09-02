@@ -2,6 +2,7 @@
 <link rel="import" href="/sys/paper-dialog/paper-dialog.html">
 <link rel="import" href="/sys/google-map/google-map.html">
 <link rel="import" href="/sys/google-map/google-map-marker.html">
+<link rel="import" href="/sys/google-map-markerclusterer/google-map-markerclusterer.html">
 
 <template>
     <template is="dom-bind">
@@ -20,7 +21,7 @@
             </div>
 
             <div class="map-right">
-                <google-map id="gmap" map={{map}}
+                <google-map id="gmap" map="{{map}}"
                             style="height: calc(100vh - 74px);"
                             fit-to-markers
                             latitude="37.026835"
@@ -38,8 +39,8 @@
                                                on-google-map-marker-open="_markerOpen"
                                                on-google-map-marker-close="_markerClose"
                                                slot="markers"
-                                               latitude="[[item.Lat]]"
-                                               longitude="[[item.Lon]]"
+                                               latitude="[[item.lat]]"
+                                               longitude="[[item.lng]]"
                                                title="[[item.Title]]"
                                                open="{{item.ShowInfo$}}"
                                                >
@@ -47,14 +48,14 @@
                             </google-map-marker>
                     </template>
                 </google-map>
+                <google-map-markerclusterer map="{{map}}"></google-map-markerclusterer>
             </div>
         </div>
 
     </template>
     <script>
-        var ready = function () {
-            console.log('readyyyyy');
-        };
+        console.log('Script 1');
+
 
         (function () {
             var script = document._currentScript || document.currentScript;
@@ -63,10 +64,22 @@
             //window.google.Map.addListener('center_changed', function () {
             //    console.log('center_changed');
             //});
+            console.log('Script 2');
+
+            tmplt.ready = function () {
+                console.log('ready');
+                //var gmap = document.querySelector('google-map');
+                gmap2 = this.$.gmap;
+                /*
+                gmap2.addEventListener('google-map-ready', function (e) {
+                    console.log('this.map', this);
+                    this.map.addListener('center_changed', function () {
+                        console.log('center changed222222222');
+                    });
+                });*/
+            }
 
             /*
-            
-
             tmplt.ready = function () {
                 console.log('ready');
 

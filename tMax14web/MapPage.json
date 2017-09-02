@@ -4,8 +4,8 @@
   "Markers": [
     {
       "Idx": 0,
-      "Lat": "37.041987",
-      "Lon": "27.428861",
+      "lat": "37.041987",
+      "lng": "27.428861",
       "Title": "",
       "Info": "aaaaaaaaaaaaa",
       "ClickTrigger$": 0,
@@ -16,8 +16,8 @@
   "MapList": [
     {
       "Idx": 0,
-      "Lat": "",
-      "Lon": "",
+      "lat": "",
+      "lng": "",
       "Title": "",
       "Info": "bbbbbbb",
       "Show$": 0,

@@ -23,6 +23,7 @@
     "vaadin-date-picker": "vaadin/vaadin-date-picker#1.2.3",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
     "google-map": "GoogleWebComponents/google-map#^2.0.1",
-    "paper-map-info": "mlisook/paper-map-info#^1.1.4"
+    "paper-map-info": "mlisook/paper-map-info#^1.1.4",
+    "google-map-markerclusterer": "timeu/google-map-markerclusterer#^1.0.2"
   }
 }
