@@ -78,6 +78,16 @@ namespace tMax14web
 				return master;
 			});
 
+            Handle.GET("/tMax14web/OphClientTable", () => {
+                var master = (MasterPage)Self.GET("/tMax14web");
+                master.CurrentPage = new OphClientPageTable();
+                master.CurrentPage.Data = null;
+
+                if (master.fAdN == "Not Found")
+                    master.CurrentPage = null;
+                return master;
+            });
+
             Handle.GET("/tMax14web/AfbClient", () => {
                 var master = (MasterPage)Self.GET("/tMax14web");
                 master.CurrentPage = new AfbClientPage();

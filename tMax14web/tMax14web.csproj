@@ -89,6 +89,9 @@
     <Compile Include="OphClientPage.json.cs">
       <DependentUpon>OphClientPage.json</DependentUpon>
     </Compile>
+    <Compile Include="OphClientPageTable.json.cs">
+      <DependentUpon>OphClientPageTable.json</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -117,6 +120,9 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="MapPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="OphClientPageTable.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="packages.config" />

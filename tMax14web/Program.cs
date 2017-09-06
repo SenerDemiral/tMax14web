@@ -21,7 +21,6 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/polymer/polymer.html"">
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
-					<script src=""/sys/thenBy.js""></script>
 					
 					<!--
                     <link rel=""import"" href=""/sys/bootstrap.html"">
@@ -34,6 +33,9 @@ namespace tMax14web
 					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
 					<link rel=""import"" href=""/sys/github-browser-app.html"">
 					-->
+
+                    <script src=""/sys/thenBy.js""></script>
+					<link rel=""stylesheet"" href=""/sys/normalize.css"">
 					<link rel=""stylesheet"" href=""/sys/Stylesheet2.css"">
 
 					
@@ -57,7 +59,7 @@ namespace tMax14web
             //		< puppet - client ref= ""puppet - root"" remote - url = ""{ 1}"" use - web - socket = ""true"" ></ puppet - client >
 
             Application.Current.Use(new HtmlFromJsonProvider());
-			Application.Current.Use(new PartialToStandaloneHtmlProvider());
+			Application.Current.Use(new PartialToStandaloneHtmlProvider(html));
 
             Handle.GET("/tMax14web/init", () => {
                 Db.Transact(() =>

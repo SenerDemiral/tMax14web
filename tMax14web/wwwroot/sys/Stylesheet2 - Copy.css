@@ -1,19 +1,10 @@
-﻿:root {
-    font-family: "Open Sans", sans-serif;
-    margin: 0px;
-    padding: 0px;
-    --main-header-background-color: orange;
-    --main-footer-background-color: red;
-
-}
-/*
-body
+﻿body
 {
     font-family: "Open Sans", sans-serif;
     margin: 0px;
     padding: 0px;
 }
-*/
+
 .map-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -48,7 +39,7 @@ body
   /*width: 500px;*/
   /*height: 400px;*/
   /*height: calc(100vh - 20px);*/
-  /*max-height:100%;*/
+  max-height:100%;
   /*overflow:auto;*/
 }
 
@@ -56,7 +47,7 @@ body
   grid-column: 1;
   grid-row: 1;
   overflow:auto;
-  background-color: var(--main-header-background-color);  /*teal;*/
+  background-color: orange;/*teal;*/
   /*color: white;*/
   
   
@@ -82,7 +73,7 @@ body
   grid-column: 1;
   grid-row: 1;*/
   overflow:auto;
-  /*background-color: cadetblue;*/
+  background-color: cadetblue;
   /*color: white;*/
   display: flex;
   align-items: center;
@@ -90,14 +81,14 @@ body
 }
 
 .subheader > div{
-    /*border-left: 10px solid transparent;*/
+    border-left: 10px solid transparent;
 }
 
 .footer {
   grid-column: 1;
   grid-row: 3;
   
-  background-color: var(--main-footer-background-color);  /*teal;*/
+  background-color: orange;
   text-align: center;
 
   display: flex;

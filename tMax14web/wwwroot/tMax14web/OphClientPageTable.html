@@ -1,4 +1,5 @@
 ﻿<link rel="import" href="/sys/moment-element/moment-element.html">
+<link rel="stylesheet" href="/sys/Stylesheet1.css">
 
 <template>
     <template is="dom-bind">
@@ -7,77 +8,84 @@
 		<!--<div style="width:100%;overflow:hidden;box-sizing:border-box">-->
 		<!--<table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">-->
 		<!--<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">-->
-		<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
-		<!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
-			<thead>
-				<tr>
-					<th id="OphID">ID</th>
-					<th id="EXD_t">EXD</th>
-					<th id="ROT">R</th>
-					<th id="MOT">M</th>
-					<th id="Org">Org</th>
-					<th id="Dst">Dst</th>
-					<th id="nStu">Statu</th>
-					<th id="nStuTS_t"></th>
-					<th id="pStu">Problem</th>
-					<th id="pStuTS_t"></th>
-					
-					<th id="ShpAd">Shp</th>
-					<th id="CneAd">Cne</th>
-					<th id="AccAd">Acc</th>
-					<th id="DTM">DTM</th>
-					<th id="PTM">PTM</th>
-					<th id="NOP">NOP</th>
-					<th id="GrW">GrW</th>
-					<th id="EOH_t">EOH</th>
-					<th id="REOH_t">REOH</th>
-					<th id="AOH_t">AOH</th>
-					<th id="RTR_t">RTR</th>
-					<th id="POD_t">POD</th>
-					<th id="ETD_t">ETD</th>
-					<th id="ATD_t">ATD</th>
-					<th id="ETA_t">ETA</th>
-					<th id="ATA_t">ATA</th>
-					<th id="CntNoS">Cnt#</th>
-				</tr>
-			</thead>
-			<tbody>
-                <template is="dom-repeat" items="[[abcd]]">
+        <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
+            <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
+                <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
+                <thead>
                     <tr>
-                        <td>[[item.OphID]]</td>
-                        <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
-                        <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td>[[item.ROT]]</td>
-                        <td>[[item.MOT]]</td>
-                        <td>[[item.Org]]</td>
-                        <td>[[item.Dst]]</td>
-                        <td>[[item.nStu]]</td>
-                        <td class="trh"><moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td>[[item.pStu]]</td>
-                        <td>[[item.pStuD]]</td>
+                        <th id="OphID">ID</th>
+                        <th id="EXD_t">EXD</th>
+                        <th id="ROT">R</th>
+                        <th id="MOT">M</th>
+                        <th id="Org">Org</th>
+                        <th id="Dst">Dst</th>
+                        <th id="nStu">Statu</th>
+                        <th id="nStuTS_t"></th>
+                        <th id="pStu">Problem</th>
+                        <th id="pStuTS_t"></th>
 
-                        <td>[[item.ShpAd]]</td>
-                        <td>[[item.CneAd]]</td>
-                        <td>[[item.AccAd]]</td>
+                        <th id="ShpAd">Shp</th>
+                        <th id="CneAd">Cne</th>
+                        <th id="AccAd">Acc</th>
+                        <th id="MnfAd">Mnf</th>
+                        <th id="NfyAd">Ntf</th>
 
-                        <td>[[item.DTM]]</td>
-                        <td>[[item.PTM]]</td>
-                        <td>[[item.NOP]]</td>
-                        <td>[[item.GrW]]</td>
-                        <td class="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td class="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                        <td>[[item.CntNoS]]</td>
+                        <th id="DTM">DTM</th>
+                        <th id="PTM">PTM</th>
+                        <th id="NOP">NOP</th>
+                        <th id="GrW">GrW</th>
+                        <th id="EOH_t">EOH</th>
+                        <th id="REOH_t">REOH</th>
+                        <th id="AOH_t">AOH</th>
+                        <th id="RTR_t">RTR</th>
+                        <th id="POD_t">POD</th>
+                        <th id="ETD_t">ETD</th>
+                        <th id="ATD_t">ATD</th>
+                        <th id="ETA_t">ETA</th>
+                        <th id="ATA_t">ATA</th>
+                        <th id="CntNoS">Cnt#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template is="dom-repeat" items="[[abcd]]">
+                        <tr>
+                            <td>[[item.OphID]]</td>
+                            <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
+                            <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.ROT]]</td>
+                            <td>[[item.MOT]]</td>
+                            <td>[[item.Org]]</td>
+                            <td>[[item.Dst]]</td>
+                            <td>[[item.nStuAd]]</td>
+                            <td class="trh"><moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.pStu]]</td>
+                            <td>[[item.pStuD]]</td>
+
+                            <td>[[item.ShpAd]]</td>
+                            <td>[[item.CneAd]]</td>
+                            <td>[[item.AccAd]]</td>
+                            <td>[[item.MnfAd]]</td>
+                            <td>[[item.NfyAd]]</td>
+
+                            <td>[[item.DTM]]</td>
+                            <td>[[item.PTM]]</td>
+                            <td>[[item.NOP]]</td>
+                            <td>[[item.GrW]]</td>
+                            <td class="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.CntNoS]]</td>
                         </tr">
-                </template>
-			</tbody>	
-		</table>
+                    </template>
+                </tbody>
+            </table>
+        </div>
     </template>
 	
 	<script>

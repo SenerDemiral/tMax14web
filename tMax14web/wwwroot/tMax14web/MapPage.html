@@ -2,7 +2,7 @@
 <link rel="import" href="/sys/paper-dialog/paper-dialog.html">
 <link rel="import" href="/sys/google-map/google-map.html">
 <link rel="import" href="/sys/google-map/google-map-marker.html">
-<link rel="import" href="/sys/google-map-markerclusterer/google-map-markerclusterer.html">
+<!--<link rel="import" href="/sys/google-map-markerclusterer/google-map-markerclusterer.html">-->
 
 <template>
     <template is="dom-bind">
@@ -13,7 +13,7 @@
                 <ul>
                     <template is="dom-repeat" items="[[model.MapList]]">
                         <li>
-                            <button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]] - [[item.Lat]] - [[item.Lon]]</button>
+                            <button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]] - [[item.lat]] - [[item.lng]]</button>
                         </li>
 
                     </template>
