@@ -16,6 +16,52 @@
     }
   ],
 
+	"OphID": "House Id",
+	"RefNo": "Ref#",
+	"ROT": "Route: Export Import",
+	"MOT": "Mode: Air Sea Truck Rail",
+	"nStu": "Statu",
+	"nStuAd": "Statu",
+	"pStu": "Problem",
+	"Org": "Origin",
+  "Dst": "Destination",
+
+	"ShpAd": "Shipper",
+	"CneAd": "Consignee",
+	"AccAd": "Account",
+	"MnfAd": "Manufacturer",
+  "NfyAd": "Notify",
+
+	"NOP": "Number of Package",
+  "GrW": "Gross Weight Kg",
+  "VM3": "Volume M3",
+  "ChW": "Chargable Weight",
+			
+	"DTM": "Delivery Terms",
+  "PTM": "Payment Terms",
+  "CABW": "",
+
+	"EXD_t": "Execution Date",
+	"nStuTS_t": "Statu Date",
+	"pStuTS_t": "",
+	"ROH_t": "Request on Hand",
+	"EOH_t": "Expected on Hand",
+	"REOH_t": "Requested Expect on Hand",
+	"AOH_t": "Actual on Hand",
+	"RTR_t": "Ready to Release",
+	"ROS_t": "Request on Site",
+	"POD_t": "Proof of Delivery",
+	"DRBD_t": "Doc Release to Broker",
+	"ETD_t": "Expected Time of Departure",
+	"ATD_t": "Actual Time of Departure",
+	"ETA_t": "Expected Time of Arrival",
+	"ATA_t": "Actual Time of Arrival",
+	"ACOT_t": "Actual Cut-off Time",
+	"TPAD_t": "Transfer Port Arrival",
+	"TPDD_t": "Transfer Port Departure",
+			
+	"CntNoS": "Container Number(s)",
+
 	"Ophs": [
 		{
 			"OphID": 0,

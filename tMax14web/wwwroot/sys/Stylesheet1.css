@@ -9,7 +9,8 @@ table {
 	margin-right: auto;
 }
 thead {
-    display: table-row-group;
+    /*display: table-row-group;*/
+    background-color: lightblue;
 }
 
 td, th {

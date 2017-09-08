@@ -13,53 +13,53 @@
                 <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
                 <thead>
                     <tr>
-                        <th id="OphID" data-tooltip="House Id">ID</th>
-                        <th id="EXD_t" data-tooltip="Execution Date">EXD</th>
+                        <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
+                        <th id="EXD_t" data-tooltip$="[[model.EXD_t]]">EXD</th>
                         
-                        <th id="ROT" data-tooltip="Route">R</th>
-                        <th id="MOT" data-tooltip="Mode">M</th>
+                        <th id="ROT" data-tooltip$="[[model.ROT]]">R</th>
+                        <th id="MOT" data-tooltip$="[[model.MOT]]">M</th>
                         
-                        <th id="Org" data-tooltip="Origin">Org</th>
-                        <th id="Dst" data-tooltip="Destination">Dst</th>
+                        <th id="Org" data-tooltip$="[[model.Org]]">Org</th>
+                        <th id="Dst" data-tooltip$="[[model.Dst]]">Dst</th>
                         
-                        <th id="nStu">Statu</th>
-                        <th id="nStuTS_t"></th>
-                        <th id="pStu">Problem</th>
-                        <th id="pStuTS_t"></th>
+                        <th id="nStu" data-tooltip$="[[model.nStu]]">Statu</th>
+                        <th id="nStuTS_t" data-tooltip$="[[model.nStuTS_t]]"></th>
+                        <th id="pStu" data-tooltip$="[[model.pStu]]">Problem</th>
+                        <th id="pStuTS_t" data-tooltip$="[[model.pStuTS_t]]"></th>
 
-                        <th id="ShpAd" abbr="frm" data-tooltip="Shipper">Shp</th>
-                        <th id="CneAd" abbr="frm" data-tooltip="Cnsignee">Cne</th>
-                        <th id="AccAd" abbr="frm" data-tooltip="Account">Acc</th>
-                        <th id="MnfAd" abbr="frm" data-tooltip="Manufacturer">Mnf</th>
-                        <th id="NfyAd" abbr="frm" data-tooltip="Notify">Ntf</th>
+                        <th id="ShpAd" abbr="frm" data-tooltip$="[[model.ShpAd]]">Shp</th>
+                        <th id="CneAd" abbr="frm" data-tooltip$="[[model.CneAd]]">Cne</th>
+                        <th id="AccAd" abbr="frm" data-tooltip$="[[model.AccAd]]">Acc</th>
+                        <th id="MnfAd" abbr="frm" data-tooltip$="[[model.MnfAd]]">Mnf</th>
+                        <th id="NfyAd" abbr="frm" data-tooltip$="[[model.NfyAd]]">Ntf</th>
 
-                        <th id="NOP" data-tooltip="Number of Packages">NOP</th>
-                        <th id="GrW" data-tooltip="Gross Weight Kg">GrW</th>
-                        <th id="VM3" data-tooltip="Volume M3">GrW</th>
-                        <th id="ChW" data-tooltip="Chargable Weight Kg">GrW</th>
+                        <th id="NOP" data-tooltip$="[[model.NOP]]">NOP</th>
+                        <th id="GrW" data-tooltip$="[[model.GrW]]">GrW</th>
+                        <th id="VM3" data-tooltip$="[[model.VM3]]">VM3</th>
+                        <th id="ChW" data-tooltip$="[[model.ChW]]">ChW</th>
 
-                        <th id="DTM" data-tooltip="Delivery Terms">DTM</th>
-                        <th id="PTM" data-tooltip="Payment Terms">PTM</th>
+                        <th id="DTM" data-tooltip$="[[model.DTM]]">DTM</th>
+                        <th id="PTM" data-tooltip$="[[model.PTM]]">PTM</th>
 
-                        <th id="ROH_t" data-tooltip="Requested on Hand">ROH</th>
-                        <th id="EOH_t" data-tooltip="Expected on Hand">EOH</th>
-                        <th id="REOH_t" data-tooltip="Requested Expect on Hand">REOH</th>
-                        <th id="AOH_t" data-tooltip="Actual on Hand">AOH</th>
-                        <th id="RTR_t" data-tooltip="Ready to Release">RTR</th>
-                        <th id="ROS_t" data-tooltip="Request on Site">ROS</th>
-                        <th id="POD_t" data-tooltip="Proof of Delivery">POD</th>
+                        <th id="ROH_t" data-tooltip$="[[model.ROH_t]]">ROH</th>
+                        <th id="EOH_t" data-tooltip$="[[model.EOH_t]]">EOH</th>
+                        <th id="REOH_t" data-tooltip$="[[model.REOH_t]]">REOH</th>
+                        <th id="AOH_t" data-tooltip$="[[model.AOH_t]]">AOH</th>
+                        <th id="RTR_t" data-tooltip$="[[model.RTR_t]]">RTR</th>
+                        <th id="ROS_t" data-tooltip$="[[model.ROS_t]]">ROS</th>
+                        <th id="POD_t" data-tooltip$="[[model.POD_t]]">POD</th>
                         
-                        <th id="ETD_t" data-tooltip="Expected Time of Departure">ETD</th>
-                        <th id="ATD_t" data-tooltip="Actual Time of Departure">ATD</th>
-                        <th id="ETA_t" data-tooltip="Expected Time of Arrival">ETA</th>
-                        <th id="ATA_t" data-tooltip="Actual Time of Arrival">ATA</th>
+                        <th id="ETD_t" data-tooltip$="[[model.ETD_t]]">ETD</th>
+                        <th id="ATD_t" data-tooltip$="[[model.ATD_t]]">ATD</th>
+                        <th id="ETA_t" data-tooltip$="[[model.ETA_t]]">ETA</th>
+                        <th id="ATA_t" data-tooltip$="[[model.ATA_t]]">ATA</th>
                         
-                        <th id="ACOT_t" data-tooltip="Actual Cut-off Time">ACOT</th>
-                        <th id="DRBD_t" data-tooltip="Doc Release to Broker">DRBD</th>
-                        <th id="TPAD_t" data-tooltip="ransfer Port Arrival">TPAD</th>
-                        <th id="TPDD_t" data-tooltip="Transfer Port Departure">TPDD</th>
+                        <th id="ACOT_t" data-tooltip$="[[model.ACOT_t]]">ACOT</th>
+                        <th id="DRBD_t" data-tooltip$="[[model.DRBD_t]]">DRBD</th>
+                        <th id="TPAD_t" data-tooltip$="[[model.TPAD_t]]">TPAD</th>
+                        <th id="TPDD_t" data-tooltip$="[[model.TPDD_t]]">TPDD</th>
                         
-                        <th id="CntNoS" data-tooltip="Container Number(s)">Cnt#</th>
+                        <th id="CntNoS" data-tooltip$="[[model.CntNoS]]">Cnt#</th>
                     </tr>
                 </thead>
                 <tbody>
