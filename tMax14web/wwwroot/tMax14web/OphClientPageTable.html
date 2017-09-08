@@ -13,37 +13,53 @@
                 <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
                 <thead>
                     <tr>
-                        <th id="OphID">ID</th>
-                        <th id="EXD_t">EXD</th>
-                        <th id="ROT" class="tooltip">R<span class="tooltiptext">Route</span></th>
-                        <th id="MOT" class="tooltip">M<span class="tooltiptext">Mode</span></th>
-                        <th id="Org">Org</th>
-                        <th id="Dst">Dst</th>
+                        <th id="OphID" data-tooltip="House Id">ID</th>
+                        <th id="EXD_t" data-tooltip="Execution Date">EXD</th>
+                        
+                        <th id="ROT" data-tooltip="Route">R</th>
+                        <th id="MOT" data-tooltip="Mode">M</th>
+                        
+                        <th id="Org" data-tooltip="Origin">Org</th>
+                        <th id="Dst" data-tooltip="Destination">Dst</th>
+                        
                         <th id="nStu">Statu</th>
                         <th id="nStuTS_t"></th>
                         <th id="pStu">Problem</th>
                         <th id="pStuTS_t"></th>
 
-                        <th id="ShpAd" class="tooltip">Shp<span class="tooltiptext">Shipper</span></th>
-                        <th id="CneAd">Cne</th>
-                        <th id="AccAd">Acc</th>
-                        <th id="MnfAd">Mnf</th>
-                        <th id="NfyAd" data-tooltip="Notify">Ntf</th>
+                        <th id="ShpAd" abbr="frm" data-tooltip="Shipper">Shp</th>
+                        <th id="CneAd" abbr="frm" data-tooltip="Cnsignee">Cne</th>
+                        <th id="AccAd" abbr="frm" data-tooltip="Account">Acc</th>
+                        <th id="MnfAd" abbr="frm" data-tooltip="Manufacturer">Mnf</th>
+                        <th id="NfyAd" abbr="frm" data-tooltip="Notify">Ntf</th>
+
+                        <th id="NOP" data-tooltip="Number of Packages">NOP</th>
+                        <th id="GrW" data-tooltip="Gross Weight Kg">GrW</th>
+                        <th id="VM3" data-tooltip="Volume M3">GrW</th>
+                        <th id="ChW" data-tooltip="Chargable Weight Kg">GrW</th>
 
                         <th id="DTM" data-tooltip="Delivery Terms">DTM</th>
                         <th id="PTM" data-tooltip="Payment Terms">PTM</th>
-                        <th id="NOP" data-tooltip="Number of Packages">NOP</th>
-                        <th id="GrW" data-tooltip="Gross Weight Kg">GrW</th>
+
+                        <th id="ROH_t" data-tooltip="Requested on Hand">ROH</th>
                         <th id="EOH_t" data-tooltip="Expected on Hand">EOH</th>
-                        <th id="REOH_t">REOH</th>
+                        <th id="REOH_t" data-tooltip="Requested Expect on Hand">REOH</th>
                         <th id="AOH_t" data-tooltip="Actual on Hand">AOH</th>
                         <th id="RTR_t" data-tooltip="Ready to Release">RTR</th>
+                        <th id="ROS_t" data-tooltip="Request on Site">ROS</th>
                         <th id="POD_t" data-tooltip="Proof of Delivery">POD</th>
-                        <th id="ETD_t">ETD</th>
-                        <th id="ATD_t">ATD</th>
-                        <th id="ETA_t">ETA</th>
-                        <th id="ATA_t">ATA</th>
-                        <th id="CntNoS">Cnt#</th>
+                        
+                        <th id="ETD_t" data-tooltip="Expected Time of Departure">ETD</th>
+                        <th id="ATD_t" data-tooltip="Actual Time of Departure">ATD</th>
+                        <th id="ETA_t" data-tooltip="Expected Time of Arrival">ETA</th>
+                        <th id="ATA_t" data-tooltip="Actual Time of Arrival">ATA</th>
+                        
+                        <th id="ACOT_t" data-tooltip="Actual Cut-off Time">ACOT</th>
+                        <th id="DRBD_t" data-tooltip="Doc Release to Broker">DRBD</th>
+                        <th id="TPAD_t" data-tooltip="ransfer Port Arrival">TPAD</th>
+                        <th id="TPDD_t" data-tooltip="Transfer Port Departure">TPDD</th>
+                        
+                        <th id="CntNoS" data-tooltip="Container Number(s)">Cnt#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,19 +83,30 @@
                             <td>[[item.MnfAd]]</td>
                             <td>[[item.NfyAd]]</td>
 
-                            <td>[[item.DTM]]</td>
-                            <td>[[item.PTM]]</td>
                             <td>[[item.NOP]]</td>
                             <td>[[item.GrW]]</td>
+                            <td>[[item.VM3]]</td>
+                            <td>[[item.ChW]]</td>
+
+                            <td>[[item.DTM]]</td>
+                            <td>[[item.PTM]]</td>
+
+                            <td class="trh"><moment-element datetime="[[item.ROH_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.ACOT_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td class="trh"><moment-element datetime="[[item.TPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            
                             <td>[[item.CntNoS]]</td>
                         </tr">
                     </template>

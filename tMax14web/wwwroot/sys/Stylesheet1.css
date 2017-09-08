@@ -1,18 +1,6 @@
-﻿[abbr="NOP"] {
-	background-color: orange;
-	color: white;
+﻿[abbr="frm"] {
+    min-width: 200px;
 }
-
-#NOP {
-	background-color: orange;
-	color: white;
-}
-
-#NOP:hover {
-	background-color: red;
-	color: white;
-}
-
 
 table {
 	border-collapse: collapse;
@@ -25,13 +13,15 @@ thead {
 }
 
 td, th {
-  	line-height: 1em;
+  	line-height: 1.5em;
 	padding: 0.2em 0.2em;
 	border: 1px solid #CBCBCB;
 }
 
 th {
+  	line-height: 2em;
 	text-align:center;
+	border: 2px solid #CBCBCB;
 }
 
 td.nw {

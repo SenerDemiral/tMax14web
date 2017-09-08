@@ -155,18 +155,18 @@ body
 /* Position tooltip above the element */
 [data-tooltip]:before {
   position: absolute;
-  bottom: -250%;
+  bottom: -150%;
   left: 50%;
   margin-bottom: 5px;
   margin-left: -80px;
   padding: 7px;
   width: 100px;
   background-color: #000;
-  background-color: hsla(0, 0%, 20%, 0.9);
+  /*background-color: hsla(0, 0%, 20%, 0.9);*/
   color: #fff;
   content: attr(data-tooltip);
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.2;
 }
 
