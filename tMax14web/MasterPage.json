@@ -1,12 +1,12 @@
 {
-	"Html": "/tMax14web/MasterPage2.html",
+  "Html": "/tMax14web/MasterPage2.html",
   "fID$": "53353",
   "fAdN": "",
   "fAd": "",
   "fPW$": "KHT01",
   "fOnLine": false,
-	"StartDate$": "2015-12-31",
-	"LoginTrigger$": 0,
-	"DownloadTrigger$": 0,
-	"CurrentPage": {}
+  "StartDate$": "2015-12-31",
+  "LoginTrigger$": 0,
+  "DownloadTrigger$": 0,
+  "CurrentPage": { }
 }

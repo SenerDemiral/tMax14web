@@ -1,0 +1,28 @@
+{
+	"Html": "/tMax14web/MapPage.html",
+  "MapOpened$": true,
+  "Markers": [
+    {
+      "Idx": 0,
+      "lat": "37.041987",
+      "lng": "27.428861",
+      "Title": "",
+      "Info": "aaaaaaaaaaaaa",
+      "ClickTrigger$": 0,
+      "ShowInfo$": false,
+      "IsVisible": true
+    }
+  ],
+  "MapList": [
+    {
+      "Idx": 0,
+      "lat": "",
+      "lng": "",
+      "Title": "",
+      "Info": "bbbbbbb",
+      "Show$": 0,
+      "ShowInfo$": false
+    }
+  ]
+
+}

@@ -3,7 +3,7 @@ using System;
 
 namespace tMax14web
 {
-    public partial class MapPage : Json
+    public partial class MapPage2 : Json
     {
         protected override void OnData()
         {
@@ -102,7 +102,7 @@ namespace tMax14web
             });
             */
 
-            
+            /*
             MapPage.MapListElementJson mapList;
 
             mapList = this.MapList.Add();
@@ -125,8 +125,8 @@ namespace tMax14web
             mapList.lng = "27.270502";
             mapList.Title = "Nil";
             mapList.Info = "<strong>Pakyurek<br>Ev</strong>";
-            
-            /*
+            */
+
             MapList.Add(new MapListItem()
             {
                 Idx = 0,
@@ -153,7 +153,6 @@ namespace tMax14web
                 Title = "Nil",
                 Info = "<strong>Pakyurek<br>Ev</strong>"
             });
-            */
             /*
                         Markers.Add(new MarkersItem()
                         {
@@ -171,8 +170,8 @@ namespace tMax14web
                         });*/
         }
 
-        [MapPage_json.Markers]
-        public partial class MarkersElementJson : Json
+        [MapPage2_json.Markers]
+        public partial class MarkersItem : Json
         {
             protected override void OnData()
             {
@@ -197,26 +196,26 @@ namespace tMax14web
 
         }
 
-        [MapPage_json.MapList]
-        public partial class MapListElementJson : Json
+        [MapPage2_json.MapList]
+        public partial class MapListItem : Json
         {
             void Handle(Input.Show Action)
             {
                 var parent = (MapPage)this.Parent.Parent;
                 if (Show == 0)
                 {
-                    
-                    parent.Markers.Add(new MarkersElementJson()
+                    /*
+                    parent.Markers.Add(new MarkersItem()
                     {
                         Idx = this.Idx,
                         lat = this.lat,
                         lng = this.lng,
                         Title = this.Title,
                         Info = this.Info
-                    });
+                    });*/
                 }
                 else
-                {   
+                {   /*
                     ShowInfo = ShowInfo ? false : true;
                     //parent.Markers[0].ShowInfo = ShowInfo;
                     var ms = parent.Markers;
@@ -229,7 +228,7 @@ namespace tMax14web
                             break;
                         }
 
-                    }
+                    }*/
                 }
             }
         }

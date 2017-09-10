@@ -61,9 +61,9 @@ namespace tMax14web
 					else
 					{
 						var master = new MasterPage();
-						var cv = Starcounter.Internal.CurrentVersion.Version;
-						master.Session = new Session(Session.Flags.PatchVersioning);
-						return master;
+                        master.Session = new Session(Session.Flags.PatchVersioning);
+						/*var cv = Starcounter.Internal.CurrentVersion.Version;*/
+                        return master;
 					}
 				});
 			});
