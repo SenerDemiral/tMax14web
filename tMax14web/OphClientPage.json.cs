@@ -39,8 +39,8 @@ namespace tMax14web
             parent.fAd = Frt.Ad;
             */
 
-    //        if (!parent.fOnLine)
-    //            return;
+            if (!parent.fOnLine)
+                return;
 
             //if (fpw != "can")
             //	return;

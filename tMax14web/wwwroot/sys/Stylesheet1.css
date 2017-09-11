@@ -1,5 +1,8 @@
 ﻿[abbr="frm"] {
-    min-width: 200px;
+	/*max-width: 200px;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 table {
@@ -25,8 +28,7 @@ th {
 	border: 2px solid #CBCBCB;
 }
 
-td.nw {
-	max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+td {
 }
 
 td.trh {

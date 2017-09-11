@@ -5,33 +5,38 @@
     <template is="dom-bind">
 		<div>[[processInit(model.Html)]]</div>
 
-		<!--<div style="width:100%;overflow:hidden;box-sizing:border-box">-->
-		<!--<table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">-->
-		<!--<table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">-->
-        <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
+        <!--
+		    <div style="width:100%;overflow:hidden;box-sizing:border-box">
+		    <table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">
+		    <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">
             <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
+            <table id="tblOphs" style="table-layout:fixed;font-size:small; width:100%" on-click="MyFnc">
+            <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
+        -->
+        <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
+            <table id="tblOphs" style="font-size:small;" on-click="MyFnc">
                 <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
                 <thead>
                     <tr>
                         <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
                         <th id="EXD_t" data-tooltip$="[[model.EXD_t]]">EXD</th>
-                        
+
                         <th id="ROT" data-tooltip$="[[model.ROT]]">R</th>
                         <th id="MOT" data-tooltip$="[[model.MOT]]">M</th>
-                        
+
                         <th id="Org" data-tooltip$="[[model.Org]]">Org</th>
                         <th id="Dst" data-tooltip$="[[model.Dst]]">Dst</th>
-                        
+
                         <th id="nStu" data-tooltip$="[[model.nStu]]">Statu</th>
                         <th id="nStuTS_t" data-tooltip$="[[model.nStuTS_t]]"></th>
                         <th id="pStu" data-tooltip$="[[model.pStu]]">Problem</th>
                         <th id="pStuTS_t" data-tooltip$="[[model.pStuTS_t]]"></th>
 
-                        <th id="ShpAd" abbr="frm" data-tooltip$="[[model.ShpAd]]">Shp</th>
-                        <th id="CneAd" abbr="frm" data-tooltip$="[[model.CneAd]]">Cne</th>
-                        <th id="AccAd" abbr="frm" data-tooltip$="[[model.AccAd]]">Acc</th>
-                        <th id="MnfAd" abbr="frm" data-tooltip$="[[model.MnfAd]]">Mnf</th>
-                        <th id="NfyAd" abbr="frm" data-tooltip$="[[model.NfyAd]]">Ntf</th>
+                        <th id="ShpAd" data-tooltip$="[[model.ShpAd]]">Shp</th>
+                        <th id="CneAd" data-tooltip$="[[model.CneAd]]">Cne</th>
+                        <th id="AccAd" data-tooltip$="[[model.AccAd]]">Acc</th>
+                        <th id="MnfAd" data-tooltip$="[[model.MnfAd]]">Mnf</th>
+                        <th id="NfyAd" data-tooltip$="[[model.NfyAd]]">Ntf</th>
 
                         <th id="NOP" data-tooltip$="[[model.NOP]]">NOP</th>
                         <th id="GrW" data-tooltip$="[[model.GrW]]">GrW</th>
@@ -48,17 +53,17 @@
                         <th id="RTR_t" data-tooltip$="[[model.RTR_t]]">RTR</th>
                         <th id="ROS_t" data-tooltip$="[[model.ROS_t]]">ROS</th>
                         <th id="POD_t" data-tooltip$="[[model.POD_t]]">POD</th>
-                        
+
                         <th id="ETD_t" data-tooltip$="[[model.ETD_t]]">ETD</th>
                         <th id="ATD_t" data-tooltip$="[[model.ATD_t]]">ATD</th>
                         <th id="ETA_t" data-tooltip$="[[model.ETA_t]]">ETA</th>
                         <th id="ATA_t" data-tooltip$="[[model.ATA_t]]">ATA</th>
-                        
+
                         <th id="ACOT_t" data-tooltip$="[[model.ACOT_t]]">ACOT</th>
                         <th id="DRBD_t" data-tooltip$="[[model.DRBD_t]]">DRBD</th>
                         <th id="TPAD_t" data-tooltip$="[[model.TPAD_t]]">TPAD</th>
                         <th id="TPDD_t" data-tooltip$="[[model.TPDD_t]]">TPDD</th>
-                        
+
                         <th id="CntNoS" data-tooltip$="[[model.CntNoS]]">Cnt#</th>
                     </tr>
                 </thead>
@@ -77,11 +82,11 @@
                             <td>[[item.pStu]]</td>
                             <td>[[item.pStuD]]</td>
 
-                            <td>[[item.ShpAd]]</td>
-                            <td>[[item.CneAd]]</td>
-                            <td>[[item.AccAd]]</td>
-                            <td>[[item.MnfAd]]</td>
-                            <td>[[item.NfyAd]]</td>
+                            <td abbr="frm">[[item.ShpAd]]</td>
+                            <td abbr="frm">[[item.CneAd]]</td>
+                            <td abbr="frm">[[item.AccAd]]</td>
+                            <td abbr="frm">[[item.MnfAd]]</td>
+                            <td abbr="frm">[[item.NfyAd]]</td>
 
                             <td>[[item.NOP]]</td>
                             <td>[[item.GrW]]</td>
@@ -106,14 +111,14 @@
                             <td class="trh"><moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td class="trh"><moment-element datetime="[[item.TPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            
+
                             <td>[[item.CntNoS]]</td>
-                        </tr">
+                            </tr">
                     </template>
                 </tbody>
             </table>
         </div>
-    </template>
+</template>
 	
 	<script>
 		(function ()

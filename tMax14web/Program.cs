@@ -119,8 +119,8 @@ namespace tMax14web
             Handle.GET("/tMax14web/partial/MainPage", () => new MainPage());
             Handle.GET("/tMax14web/MainPage", () => WrapPage<MainPage>("/tMax14web/partial/MainPage"));
 
-            Handle.GET("/tMax14web/partial/MasterPage", () => new MasterPage());
-            Handle.GET("/tMax14web/MasterPage", () => WrapPage<MasterPage>("/tMax14web/partial/MasterPage"));
+            //Handle.GET("/tMax14web/partial/MasterPage", () => new MasterPage());
+            //Handle.GET("/tMax14web/MasterPage", () => WrapPage<MasterPage>("/tMax14web/partial/MasterPage"));
 
 
             //Handle.GET("/tMax14web", () => { return Self.GET("/tMax14web/MasterPage"); });
