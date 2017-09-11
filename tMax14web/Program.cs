@@ -114,7 +114,11 @@ namespace tMax14web
 			//mh.CreateIndex();
             //mh.Register();
 
-            Handle.GET("/tMax14web", () => { return Self.GET("/tMax14web/OphClientTable"); });
+            Handle.GET("/tMax14web", () => { return Self.GET("/tMax14web/MainPage"); });
+
+            Handle.GET("/tMax14web/partial/MainPage", () => new MainPage());
+            Handle.GET("/tMax14web/MainPage", () => WrapPage<MainPage>("/tMax14web/partial/MainPage"));
+
             Handle.GET("/tMax14web/partial/MasterPage", () => new MasterPage());
             Handle.GET("/tMax14web/MasterPage", () => WrapPage<MasterPage>("/tMax14web/partial/MasterPage"));
 

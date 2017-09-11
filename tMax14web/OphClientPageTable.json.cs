@@ -15,8 +15,8 @@ namespace tMax14web
             fID = parent.fID;
             StartDate = parent.StartDate;
 
-            //if (!parent.fOnLine)
-            //    return;
+            if (!parent.fOnLine)
+                return;
 
             Ophs = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 

@@ -77,6 +77,9 @@
       <DependentUpon>D2.json</DependentUpon>
     </Compile>
     <Compile Include="MainHandlers.cs" />
+    <Compile Include="MainPage.json.cs">
+      <DependentUpon>MainPage.json</DependentUpon>
+    </Compile>
     <Compile Include="MapPage.json.cs">
       <DependentUpon>MapPage.json</DependentUpon>
     </Compile>
@@ -131,6 +134,9 @@
     <TypedJSON Include="MapPage2.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
+    <TypedJSON Include="MainPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -153,6 +159,7 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\tMax14web\MainPage.html" />
     <None Include="wwwroot\tMax14web\MapPage2.html" />
     <None Include="wwwroot\tMax14web\MapPage.html" />
     <None Include="wwwroot\tMax14web\AfbClientPageVaadin.html" />
