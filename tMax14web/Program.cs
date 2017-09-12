@@ -160,14 +160,15 @@ namespace tMax14web
         {
             var master = GetMasterPageFromSession();
 
+            /*
             if (master.CurrentPage != null && master.CurrentPage.GetType().Equals(typeof(T)))
             {
                 return master;
             }
-
+            */
             master.CurrentPage = Self.GET(partialPath);
 
-            if (master.CurrentPage.Data == null)
+            //if (master.CurrentPage.Data == null)
             {
                 master.CurrentPage.Data = null; //trick to invoke OnData in partial
             }
