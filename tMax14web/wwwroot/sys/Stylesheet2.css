@@ -1,19 +1,30 @@
 ﻿:root {
-    font-family: "Open Sans", sans-serif;
-    margin: 0px;
-    padding: 0px;
+    --grid-gap: 2px;
+    --header-height: 36px;
+    --footer-height: 28px;
+    --grid-height: calc(100vh - 4px);
+    --main-height: calc(100vh - var(--header-height) - var(--footer-height) - 8px);
+    --main-width: calc(100vw - 4px);
     --main-header-background-color: orange;
     --main-footer-background-color: red;
 
 }
-/*
+
 body
 {
     font-family: "Open Sans", sans-serif;
-    margin: 0px;
+    margin: 2px;
     padding: 0px;
 }
-*/
+
+
+.oph-table {
+    max-height: var(--main-height); 
+    width: var(--main-width); 
+    overflow: auto;
+    font-size: small;
+}
+
 .map-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -35,8 +46,8 @@ body
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 36px 1fr 28px;
-  height: 100vh;
-  grid-gap: 5px;
+  height: var(--grid-height);
+  grid-gap: 2px;
 }
 
 .main {

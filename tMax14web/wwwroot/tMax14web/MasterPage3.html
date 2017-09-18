@@ -1,0 +1,78 @@
+﻿<template>
+    <template is="dom-bind">
+        <style>
+            .tm-header--item {
+                margin-left: 10px;
+            }
+        </style>
+        <div slot="tm/head">
+            CompanyId:
+            <input class="tm-header--item" type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
+            Password:
+            <input class="tm-header--item" type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
+            <button class="tm-header--item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
+            
+            <template is="dom-if" if="{{model.fOnLine}}">
+                Date &gt;=
+                <input type="date" name="sd" value="{{model.StartDate$::input}}">
+                <a class="tm-header--item" href="/tMax14web/OphClient">Houses/Grid</a>
+                <a class="tm-header--item" href="/tMax14web/OphClientTable">Houses/Table</a>
+            </template>
+            <template is="dom-if" if="{{!model.fOnLine}}">
+                <span style="color:red">Not Found</span>
+            </template>
+        </div>
+
+        <starcounter-include slot="tm/current" partial="{{model.CurrentPage}}"></starcounter-include>  
+        
+        <div slot="tm/footer">[[model.fAdN]]  Transorient ®</div>  
+    </template>
+
+    <template is="declarative-shadow-dom">
+        
+        <style>
+            .tm-layout {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: var(--header-height) 1fr var(--footer-height);
+                height: var(--grid-height);
+                grid-gap: var(--grid-gap);
+            }
+            .tm-header {
+                grid-column: 1;
+                grid-row: 1;
+                overflow:auto;
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                background-color: orange;
+            }
+            .tm-footer {
+                grid-column: 1;
+                grid-row: 3;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: orangered;
+            }
+            .tm-main {
+                grid-column: 1;
+                grid-row: 2;
+            }
+        </style>
+            
+        <div class="tm-layout">
+            <div class="tm-header">
+                <slot name="tm/head"></slot>
+            </div>
+            <div class="tm-main">
+                <slot name="tm/current"></slot>
+            </div>
+            <div class="tm-footer">
+                <slot name="tm/footer"></slot>
+            </div>
+        </div>
+    </template>
+
+</template>

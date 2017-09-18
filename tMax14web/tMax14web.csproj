@@ -159,6 +159,7 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\tMax14web\MasterPage3.html" />
     <None Include="wwwroot\tMax14web\MainPage.html" />
     <None Include="wwwroot\tMax14web\MapPage2.html" />
     <None Include="wwwroot\tMax14web\MapPage.html" />
