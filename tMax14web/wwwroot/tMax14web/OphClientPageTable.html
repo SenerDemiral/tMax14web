@@ -240,6 +240,11 @@
 			    console.log("processInit", tmplt.abcd.length);
 			}*/
             
+            // Chrom'dan baskasinda calismiyor (observers Polymer'den geliyor)
+			tmplt.messageChanged = function (newMessageValue) {
+			    console.log("Message was changed", newMessageValue);
+			};
+			tmplt.observers = ["messageChanged(model.sener)"];
 
 			tmplt.MyFilter = function (e) {
 			    var nor = tblOphs.rows.length - 1;
