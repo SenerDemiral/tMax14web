@@ -21,6 +21,13 @@
         <div class="oph-table">
             <table id="tblOphs" on-click="MyFnc">
                 <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
+                <caption>
+                    <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" />
+                </caption>
+                <colgroup>
+                    <col style="background-color: #eeeeee;">
+                    <col />
+                </colgroup>
                 <thead>
                     <tr>
                         <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
@@ -162,7 +169,11 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="37" style="text-align:left"><input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="Download" value="Download Excel" /></th>
+                        <th colspan="37">
+                            <span> #Rec: [[NOR]]</span>
+                            <span>asdfasdfa</span>
+                            <span>Deneme</span>
+                        </th>
                     </tr>
                 </tfoot>
             </table>
@@ -181,6 +192,32 @@
 
 			console.log("Script run");
 
+			tmplt.addEventListener('dom-change', function () {
+			    console.log('dom-change');
+			});
+
+
+		    // FF: bu event'i hic gormuyor
+			tmplt.ready = function () {
+			    console.log('readyyyyyyyyyyyyyyy');
+			    //this.processInit("dummy");
+			};
+
+		    // Herzaman ready oldugu icin asagidakinin burda hicbir faydasi yok
+			document.addEventListener('readystatechange', function () {
+			    console.log("document.readyState", document.readyState);
+			    if (document.readyState === 'complete') {
+			        console.log("document.readyState: complete");
+			    }
+			});
+
+		    // Chrom'dan baskasinda calismiyor (observers Polymer'den geliyor)
+			tmplt.messageChanged = function (newMessageValue) {
+			    console.log("Message was changed", newMessageValue);
+			};
+			tmplt.observers = ["messageChanged(model.sener)"];
+
+
 		    // FF: Ilk giriste processInit'i gormuyor
 			tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
 
@@ -198,134 +235,23 @@
 			    curCellIndex = -1;
 			    //console.log("tmplt", tmplt.model);
 			    tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			    console.log("processInit", tmplt.abcd.length);
 
+			    tmplt.NOR = tmplt.abcd.length
+			    console.log("processInit", tmplt.NOR);
+
+			    setTimeout(function () {
+			        tmplt.MyFilter();
+			    });
 			};
 
-			tmplt.Download = function (e) {
+			tmplt.MyDownload = function (e) {
 			    window.open(e.target.dataLink, '_self');
 			}
 
-            // FF: bu event'i hic gormuyor
-			tmplt.ready = function () {
-			    console.log('readyyyyyyyyyyyyyyy');
-			    //this.processInit("dummy");
-			};
-
-            /*
-			console.log('init-start');
-			if (curCellIndex != -1) {
-			    this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			}
-			if (curRowIndex != -1) {
-			    this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			}
-			curRowIndex = -1;
-			curCellIndex = -1;
-			tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			console.log("init-end arrayLength", tmplt.abcd.length);
-            */
-		    /*
-			tmplt.ready = function () {
-			    console.log('ready');
-			    if (curCellIndex != -1) {
-			        this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			    }
-			    if (curRowIndex != -1) {
-			        this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			    }
-			    curRowIndex = -1;
-			    curCellIndex = -1;
-			    tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			    console.log("processInit", tmplt.abcd.length);
-			}*/
-            
-            // Chrom'dan baskasinda calismiyor (observers Polymer'den geliyor)
-			tmplt.messageChanged = function (newMessageValue) {
-			    console.log("Message was changed", newMessageValue);
-			};
-			tmplt.observers = ["messageChanged(model.sener)"];
-
-			tmplt.MyFilter = function (e) {
-			    var nor = tblOphs.rows.length - 1;
-			    var noc = tblOphs.rows[0].cells.length;
-			    var tbl = document.querySelector('#tblOphs');
-			    //console.log('NOR', nor, 'NOC', noc);
-
-			    var svs = tblOphs.querySelectorAll('thead tr input[type=text]');
-			    //console.log(svs);
-			    var sva = [];
-			    for (var j = 0; j < svs.length; j++) {
-			        sva.push(svs[j].value);
-
-			    }
-			    //console.log(sva);
-
-			    var sv, cv;
-			    for (var i = 2; i < nor; i++) {
-                    
-			        var show = sva.every(function (input, index) {
-			            if (input === '') {
-			                return true;
-			            }
-			            //console.log(index, input, tblOphs.rows[i].cells[index].childElementCount);
-			            if (tblOphs.rows[i].cells[index].childElementCount == 0)
-			                cv = tbl.rows[i].cells[index].innerText;
-			            else
-			                cv = tbl.rows[i].cells[index].firstChild.__data__.output;
-			            //console.log(index, input, cv);
-
-			            return cv.indexOf(input) != -1;
-			        });
-                    
-			        //console.log('show', show);
-			        if (show)
-			            tbl.rows[i].style.display = '';
-			        else
-			            tbl.rows[i].style.display = 'none';
-
-
-                    /*
-
-			        for (var j = 0; j < 2; j++) {
-			            //sv = tblOphs.rows[1].cells[j].value;
-			            //cv = tblOphs.rows[i].cells[j].value;
-			            //console.log(sv, cv);
-			            console.log(tblOphs.rows[1].cells[j]);
-			        }*/
-			    }
-
-			}
-            /*
-			tmplt.MyFilter2 = function (e) {
-			    console.log(e);
-			    var suche = e.target.value; //.toLowerCase();
-			    console.log("suche", e.target.value);
-			    //suche = e.target.parentNode.cellIndex;
-			    var table = document.getElementById('tblOphs');
-			    var ele;
-			    for (var r = 2; r < table.rows.length; r++) {
-			        if (table.rows[r].style.display != 'none') {
-			            //ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML.replace(/<[^>]+>/g, "");
-			            //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild);
-			            //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output);
-			            if (table.rows[r].cells[e.target.parentNode.cellIndex].childElementCount == 0)
-			                ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML;
-			            else
-			                ele = table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output;
-
-			            if (ele.indexOf(suche) >= 0)
-			                table.rows[r].style.display = '';
-			            else table.rows[r].style.display = 'none';
-			        }
-			    }
-			}
-            */
 			tmplt.MyFnc = function (e) {
 			    //console.log("e.target", e.target.closest("tr"));
 			    var tr = e.target.closest("tr");
-			    if (tr.rowIndex == 0) {
-                    // Sort
+			    if (tr.rowIndex == 0) {     // Sort
 			        //console.log("target ID", e.target.id.substring(e.target.id.length - 2));
 			        if (curCellIndex != -1) {
 			            this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
@@ -355,9 +281,8 @@
 			            tmplt.MyFilter();
 			        });
 
-                }
-			    else if (tr.rowIndex > 1) {
-                    // Mark current Row
+			    }
+			    else if (tr.rowIndex > 1) {     // Mark current Row
 			        if (curRowIndex != -1) {
 			            tblOphs.rows[curRowIndex].classList.remove("curRow"); //this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
 			        }
@@ -374,6 +299,111 @@
 			        //console.log("curRowIndex", curRowIndex);
 			    }
 			}
+
+			tmplt.MyFilter = function (e) {
+			    var nor = tblOphs.rows.length - 1;
+			    var noc = tblOphs.rows[0].cells.length;
+			    var tbl = document.querySelector('#tblOphs');
+			    //console.log('NOR', nor, 'NOC', noc);
+			    var fnor = 0;   // Filtered NOR
+			    var svs = tblOphs.querySelectorAll('thead tr input[type=text]');
+			    //console.log(svs);
+			    var sva = [];
+			    for (var j = 0; j < svs.length; j++) {
+			        sva.push(svs[j].value);
+
+			    }
+			    //console.log(sva);
+
+			    var sv, cv;
+			    for (var i = 2; i < nor; i++) {
+
+			        var show = sva.every(function (input, index) {
+			            if (input === '') {
+			                return true;
+			            }
+			            //console.log(index, input, tblOphs.rows[i].cells[index].childElementCount);
+			            if (tblOphs.rows[i].cells[index].childElementCount == 0)
+			                cv = tbl.rows[i].cells[index].innerText;
+			            else
+			                cv = tbl.rows[i].cells[index].firstChild.__data__.output;
+			            //console.log(index, input, cv);
+
+			            return cv.indexOf(input) != -1;
+			        });
+
+			        //console.log('show', show);
+			        if (show) {
+			            tbl.rows[i].style.display = '';
+			            fnor++;
+			        }
+			        else
+			            tbl.rows[i].style.display = 'none';
+			        /*
+			        for (var j = 0; j < 2; j++) {
+			            //sv = tblOphs.rows[1].cells[j].value;
+			            //cv = tblOphs.rows[i].cells[j].value;
+			            //console.log(sv, cv);
+			            console.log(tblOphs.rows[1].cells[j]);
+			        }*/
+			    }
+			    tmplt.NOR = fnor;
+			}
+
+
+            /*
+			console.log('init-start');
+			if (curCellIndex != -1) {
+			    this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+			}
+			if (curRowIndex != -1) {
+			    this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+			}
+			curRowIndex = -1;
+			curCellIndex = -1;
+			tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+			console.log("init-end arrayLength", tmplt.abcd.length);
+            */
+		    /*
+			tmplt.ready = function () {
+			    console.log('ready');
+			    if (curCellIndex != -1) {
+			        this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+			    }
+			    if (curRowIndex != -1) {
+			        this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+			    }
+			    curRowIndex = -1;
+			    curCellIndex = -1;
+			    tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+			    console.log("processInit", tmplt.abcd.length);
+			}*/
+            
+            /*
+			tmplt.MyFilter2 = function (e) {
+			    console.log(e);
+			    var suche = e.target.value; //.toLowerCase();
+			    console.log("suche", e.target.value);
+			    //suche = e.target.parentNode.cellIndex;
+			    var table = document.getElementById('tblOphs');
+			    var ele;
+			    for (var r = 2; r < table.rows.length; r++) {
+			        if (table.rows[r].style.display != 'none') {
+			            //ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML.replace(/<[^>]+>/g, "");
+			            //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild);
+			            //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output);
+			            if (table.rows[r].cells[e.target.parentNode.cellIndex].childElementCount == 0)
+			                ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML;
+			            else
+			                ele = table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output;
+
+			            if (ele.indexOf(suche) >= 0)
+			                table.rows[r].style.display = '';
+			            else table.rows[r].style.display = 'none';
+			        }
+			    }
+			}
+            */
             /*
 			tmplt.MyFnc2 = function (e) {
 			    console.log("e.target", e.target.closest("tr"));

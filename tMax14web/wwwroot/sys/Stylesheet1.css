@@ -7,13 +7,33 @@
 
 table {
 	border-collapse: collapse;
-	border-spacing: 0px;
+	/*border-spacing: 0px;*/
+    border: 1px;
 	margin-left: auto;
 	margin-right: auto;
 }
+table > caption {
+    text-align: left;
+    background-color: azure;
+    border: 1px solid lightgray;
+    margin-bottom: var(--grid-gap);
+}
+
 thead {
     /*display: table-row-group;*/
     background-color: lightblue;
+}
+
+tfoot {
+    border: 1px solid lightgray;
+}
+
+tfoot th {
+    text-align: left;
+}
+
+tfoot th *{
+    padding-left: 1em;
 }
 
 td {
@@ -25,7 +45,7 @@ td {
 th {
   	line-height: 2em;
 	text-align:center;
-	border: 2px solid #CBCBCB;
+	/*border: 2px solid #CBCBCB;*/
 }
 
 
