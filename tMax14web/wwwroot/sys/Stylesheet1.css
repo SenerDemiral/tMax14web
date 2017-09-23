@@ -107,9 +107,10 @@ tr:nth-child(even) {
     border-style:none;
     text-align:center;
     line-height:unset;
+    background-color: honeydew;
 }
 .searchInput:valid {
-    background-color: honeydew;
+    background-color: #c4f1c4;
 }
 /*
 thead {

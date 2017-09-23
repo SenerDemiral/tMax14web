@@ -1,12 +1,37 @@
-﻿<link rel="import" href="/sys/paper-dialog/paper-dialog.html">
+﻿<link rel="import" href="/sys/moment-element/moment-element.html">
 <link rel="import" href="/sys/google-map/google-map.html">
 <link rel="import" href="/sys/google-map/google-map-marker.html">
-<!--<link rel="import" href="/sys/google-map-markerclusterer/google-map-markerclusterer.html">-->
+<!--
+<link rel="import" href="/sys/paper-dialog/paper-dialog.html">
+<link rel="import" href="/sys/google-map-markerclusterer/google-map-markerclusterer.html">
+-->
 
 <template>
     <template is="dom-bind">
         <div class="map-grid">
             <div class="map-left">
+                <table id="tblMap" on-click="MyFnc">
+                    <thead>
+                        <tr>
+                            <th>Cntnr#</th>
+                            <th>LST</th>
+                            <th>Lat</th>
+                            <th>Lng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="{{model.MapList}}">
+                            <tr>
+                                <td><button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]]</button></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.LST_t]]" output-format="DD.MM.YY HH:MM"></moment-element></td>
+                                <td>[[item.lat]]</td>
+                                <td>[[item.lng]]</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                                           
+                </table>
+                <!--
                 <div>Trackers</div>
                 <ul>
                     <template is="dom-repeat" items="[[model.MapList]]">
@@ -16,7 +41,8 @@
 
                     </template>
                 </ul>
-            </div>
+                -->
+           </div>
 
             <div class="map-right">
                 <google-map id="gmap" map="{{map}}"

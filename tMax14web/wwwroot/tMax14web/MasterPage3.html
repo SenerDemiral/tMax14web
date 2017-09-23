@@ -3,15 +3,28 @@
         <style>
             .tm-header--item {
                 margin-left: 10px;
+                flex: 0 0 auto; 
             }
         </style>
-        <div slot="tm/head">
-            CompanyId:
+        <label slot="tm/head-fid-label" class="tm-header--item">Company Id:</label>
+        <input slot="tm/head-fid" type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
+        <label slot="tm/head-fpw-label" class="tm-header--item">Password:</label>
+        <input slot="tm/head-fpw"  type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
+        <button slot="tm/head-lgn" class="tm-header--item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
+        <template is="dom-if" if="{{model.fOnLine}}">
+            <label slot="tm/head-std-label" class="tm-header--item">Date &gt;=</label>
+            <input slot="tm/head-std" type="date" name="sd" value="{{model.StartDate$::input}}">
+            <a slot="tm/head-oph" class="tm-header--item" href="/tMax14web/OphClientTable">Houses</a>
+
+        </template>
+            <!--
+        <div slot="tm/head-label">
+            <div>CompanyId:</div>
             <input class="tm-header--item" type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
-            Password:
+            <div>Password:</div>
             <input class="tm-header--item" type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
             <button class="tm-header--item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
-            
+
             <template is="dom-if" if="{{model.fOnLine}}">
                 Date &gt;=
                 <input type="date" name="sd" value="{{model.StartDate$::input}}">
@@ -20,13 +33,13 @@
             </template>
             <template is="dom-if" if="{{!model.fOnLine}}">
                 <span style="color:red">Not Found</span>
-            </template>
-        </div>
+            </template>-->
+            </div>
 
-        <starcounter-include slot="tm/current" partial="{{model.CurrentPage}}"></starcounter-include>  
-        
-        <div slot="tm/footer">[[model.fAdN]]  Transorient ®</div>  
-    </template>
+            <starcounter-include slot="tm/current" partial="{{model.CurrentPage}}"></starcounter-include>
+
+            <div slot="tm/footer">[[model.fAdN]]  Transorient ®</div>
+        </template>
 
     <template is="declarative-shadow-dom">
         
@@ -38,24 +51,28 @@
                 height: var(--grid-height);
                 grid-gap: var(--grid-gap);
             }
+
             .tm-header {
                 grid-column: 1;
                 grid-row: 1;
-                overflow:auto;
+                overflow: auto;
                 display: flex;
-                flex-wrap: nowrap;
+                flex-flow: row nowrap;
                 align-items: center;
                 background-color: orange;
             }
+
             .tm-footer {
                 grid-column: 1;
                 grid-row: 3;
                 text-align: center;
                 display: flex;
+                flex-flow: row nowrap;
                 align-items: center;
                 justify-content: center;
                 background-color: orangered;
             }
+
             .tm-main {
                 grid-column: 1;
                 grid-row: 2;
@@ -64,7 +81,14 @@
             
         <div class="tm-layout">
             <div class="tm-header">
-                <slot name="tm/head"></slot>
+                <slot name="tm/head-fid-label"></slot>
+                <slot name="tm/head-fid"></slot>
+                <slot name="tm/head-fpw-label"></slot>
+                <slot name="tm/head-fpw"></slot>
+                <slot name="tm/head-lgn"></slot>
+                <slot name="tm/head-std-label"></slot>
+                <slot name="tm/head-std"></slot>
+                <slot name="tm/head-oph"></slot>
             </div>
             <div class="tm-main">
                 <slot name="tm/current"></slot>

@@ -109,23 +109,28 @@ namespace tMax14web
             mapList.Idx = 0;
             mapList.lat = "37.026835";
             mapList.lng = "27.563807";
-            mapList.Title = "Sener";
-            mapList.Info = "Demiral Ev";
+            mapList.LST_t = "2017-09-01 16:22:33";
+            mapList.Title = "ECBU4620750";
+            //mapList.Info = "Demiral Ev";
+            mapList.Info = "<strong>ECBU4620750</strong><br>LST: 01.09.17 16:22";
 
             mapList = this.MapList.Add();
             mapList.Idx = 1;
             mapList.lat = "37.033568";
             mapList.lng = "27.423496";
-            mapList.Title = "Marina";
-            mapList.Info = "<strong>Bodrum<br>Limani</strong>";
+            mapList.LST_t = "2017-09-01 17:43:33";
+            mapList.Title = "ECBU5012836";
+            //mapList.Info = "<strong>Bodrum<br>Limani</strong>";
+            mapList.Info = "<strong>ECBU5012836</strong><br>LST: 01.09.17 17:43";
 
             mapList = this.MapList.Add();
             mapList.Idx = 2;
             mapList.lat = "37.096046";
             mapList.lng = "27.270502";
-            mapList.Title = "Nil";
-            mapList.Info = "<strong>Pakyurek<br>Ev</strong>";
-            
+            mapList.LST_t = "2017-09-01 18:45:33";
+            mapList.Title = "ECBU4615820";
+            mapList.Info = "<strong>ECBU4615820</strong><br>LST: 01.09.17 18:45";
+
             /*
             MapList.Add(new MapListItem()
             {

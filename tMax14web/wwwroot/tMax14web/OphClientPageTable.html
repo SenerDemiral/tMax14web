@@ -2,7 +2,7 @@
 <!--<link rel="stylesheet" href="/sys/Stylesheet1.css">-->
 
 <template>
-    <template is="dom-bind" id="oph-tmp">
+    <template is="dom-bind" id="tmpOphs">
         <!--<div>[[processInit(model.Html)]]</div>-->
         <div>[[processInit(model.Html)]]</div>
 
@@ -23,6 +23,7 @@
                 <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
                 <caption>
                     <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" />
+                    <!--<input type="button" data-link="ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" /> Bu da calisiyor-->
                 </caption>
                 <thead>
                     <tr>
@@ -117,7 +118,7 @@
                 <tbody>
                     <template is="dom-repeat" items="{{abcd}}">
                         <tr>
-                            <td data-tpy="nmr">[[item.OphID]]</td>
+                            <td data-typ="nmr">[[item.OphID]]</td>
                             <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
                             <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td>[[item.ROT]]</td>
@@ -167,8 +168,6 @@
                     <tr>
                         <th colspan="37">
                             <span> #Rec: [[NOR]]</span>
-                            <span>asdfasdfa</span>
-                            <span>Deneme</span>
                         </th>
                     </tr>
                 </tfoot>
@@ -242,8 +241,7 @@
 
 			tmplt.MyDownload = function (e) {
 			    e.stopImmediatePropagation(); //stopPropagation();
-			    console.log(e);
-			    //window.open(e.target.dataLink, '_self');
+			    window.open(e.target.dataLink, '_self');
 			}
 
 			tmplt.MyFnc = function (e) {
@@ -310,7 +308,7 @@
 			    var fnor = 0;   // Filtered NOR
 
                 // Search values
-			    var svs = tblOphs.querySelectorAll('thead tr input[type=text]');
+			    var svs = tblOphs.querySelectorAll('thead tr input');
 			    //console.log(svs);
 			    var sva = [];
 			    for (var j = 0; j < svs.length; j++) {
@@ -321,27 +319,25 @@
 
 			    var sv, cv;
 			    for (var i = 2; i < nor; i++) {     // Header'i gec
-
 			        var show = sva.every(function (input, index) {
 			            if (input === '') {
 			                return true;
 			            }
-			            //console.dir(tblOphs.rows[i].cells[index]);
+
 			            if (tblOphs.rows[i].cells[index].childElementCount == 0)
-			                cv = tbl.rows[i].cells[index].innerText;
+			                cv = tblOphs.rows[i].cells[index].innerText;
 			            else
-			                cv = tbl.rows[i].cells[index].firstChild.__data__.output;   // moment-element'in koydugu deger
-			            //console.log(index, input, cv);
+			                cv = tblOphs.rows[i].cells[index].firstChild.__data__.output;   // moment-element'in koydugu deger
 
 			            return cv.indexOf(input) != -1;
 			        });
 
 			        if (show) {
-			            tbl.rows[i].style.display = '';
+			            tblOphs.rows[i].style.display = '';
 			            fnor++;
 			        }
 			        else
-			            tbl.rows[i].style.display = 'none';
+			            tblOphs.rows[i].style.display = 'none';
 			    }
 			    tmplt.NOR = fnor;
 			}
