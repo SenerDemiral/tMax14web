@@ -154,3 +154,27 @@ body
   opacity: 1;
 }
 
+
+.InputAddOn {
+  display: flex;
+  align-items: center;
+  /*margin-bottom: 1.5em;*/
+}
+
+.InputAddOn-field {
+  flex: 1;
+}
+
+.InputAddOn-item {
+  background-color: rgba(147, 128, 108, 0.1);
+  color: #666666;
+  font: inherit;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+.InputAddOn-field,
+.InputAddOn-item {
+  border: 1px solid rgba(147, 128, 108, 0.25);
+  padding: 0.1em 0.3em;
+}
