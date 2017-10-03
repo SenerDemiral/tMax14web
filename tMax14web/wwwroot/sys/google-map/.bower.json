@@ -1,13 +1,10 @@
 {
   "name": "google-map",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Google Maps web components",
   "homepage": "https://elements.polymer-project.org/elements/google-map",
   "main": [
-    "google-map.html",
-    "google-map-search.html",
-    "google-map-marker.html",
-    "google-map-directions.html"
+    "google-map-elements.html"
   ],
   "authors": [
     "Frankie Fu <ffu@google.com>",
@@ -35,7 +32,7 @@
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0",
-    "iron-component-page": "PolymerElements/iron-component-page#^1 - 2"
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2"
   },
   "variants": {
     "1.x": {
@@ -51,13 +48,13 @@
       }
     }
   },
-  "_release": "2.0.1",
+  "_release": "2.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.1",
-    "commit": "6ce580c582a35d62c43ad71c20c88ac30d2941c1"
+    "tag": "v2.0.2",
+    "commit": "5ad36c9db6292a7f82831df59ead17802165ae7c"
   },
   "_source": "https://github.com/GoogleWebComponents/google-map.git",
   "_target": "^2.0.1",
-  "_originalSource": "GoogleWebComponents/google-map"
+  "_originalSource": "google-map"
 }
