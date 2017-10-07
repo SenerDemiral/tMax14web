@@ -28,8 +28,33 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/polymer/polymer.html"">
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
+					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					
+
+                    <script src=""/sys/redips-drag-min.js""></script>
+                    <script src=""/sys/thenBy.js""></script>
+					<link rel=""stylesheet"" href=""/sys/normalize.css"">
+					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
+					<link rel=""stylesheet"" href=""/sys/Stylesheet2.css"">
+					<link rel=""stylesheet"" href=""/sys/redips-style.css"">
+				
+				</head>
+
+
+<body>
+    <template is=""dom-bind"" id=""puppet-root"">
+        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
+    </template>
+    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
+    <starcounter-debug-aid></starcounter-debug-aid>
+</body>
+
+				</html>";
+
+            /*
 					<!--
+                    <script src=""/sys/redips-drag-min.js""></script>
+                    <script src=""/sys/redips-script.js""></script>
                     <link rel=""import"" href=""/sys/bootstrap.html"">
 					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
 					<script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
@@ -41,33 +66,35 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/github-browser-app.html"">
 					-->
 
-                    <script src=""/sys/thenBy.js""></script>
-					<link rel=""stylesheet"" href=""/sys/normalize.css"">
-					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
-					<link rel=""stylesheet"" href=""/sys/Stylesheet2.css"">
-				
-				</head>
-
+<body>
+    <template is=""dom-bind"" id=""puppet-root"">
+        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
+    </template>
+    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
+    <starcounter-debug-aid></starcounter-debug-aid>
+</body>
+                <body>
+                    <template is=""dom-bind"" id=""puppet-root"">
+                        <template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
+                    </template>
+                    <palindrom-client ref=""puppet-root"" remote-url=""{1}""></palindrom-client>
+                    <starcounter-debug-aid></starcounter-debug-aid>
+                </body>
                 <body>
 					<template is=""dom-bind"" id=""puppet-root"">
             		<starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
                     </template>
 					<palindrom-client ref=""puppet-root"" remote-url=""{1}""></palindrom-client>
+					<starcounter-debug-aid></starcounter-debug-aid>
 				</body>
 
-				</html>";
-            //
-            //		< puppet-client ref=""puppet-root"" remote-url=""{1}"" use-web-socket=""true"" ></ puppet-client >
-            /*
+                    < puppet-client ref=""puppet-root"" remote-url=""{1}"" use-web-socket=""true"" ></ puppet-client >
             		<template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
             		<starcounter-include view-model=""{{{{model}}}}"" partial-id$=""{{{{model.Html}}}}""></starcounter-include>
-					<!--
 					<starcounter-debug-aid></starcounter-debug-aid>
 					<script src=""https://code.jquery.com/jquery-3.1.1.slim.min.js"" integrity=""sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"" crossorigin=""anonymous""></script>
 					<script src=""https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"" integrity=""sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"" crossorigin=""anonymous""></script>
 					<script src=""https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"" integrity=""sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"" crossorigin=""anonymous""></script>
-					-->
-            
             */
 
             Application.Current.Use(new HtmlFromJsonProvider());
@@ -133,6 +160,9 @@ namespace tMax14web
 
             Handle.GET("/tMax14web/partial/gMap", () => new MapPage());
             Handle.GET("/tMax14web/gMap", () => WrapPage<MapPage>("/tMax14web/partial/gMap"));
+
+            Handle.GET("/tMax14web/partial/deneme", () => new Deneme());
+            Handle.GET("/tMax14web/deneme", () => WrapPage<Deneme>("/tMax14web/partial/deneme"));
 
             // Asagidaki gibi calismiyor (/tMax14web/Map), /tMax14web/MapX yapinca oluyor
             //Handle.GET("/tMax14web/partial/Map", () => new MapPage());

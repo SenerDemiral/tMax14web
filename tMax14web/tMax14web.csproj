@@ -76,6 +76,9 @@
     <Compile Include="D2.json.cs">
       <DependentUpon>D2.json</DependentUpon>
     </Compile>
+    <Compile Include="Deneme.json.cs">
+      <DependentUpon>Deneme.json</DependentUpon>
+    </Compile>
     <Compile Include="MainHandlers.cs" />
     <Compile Include="MainPage.json.cs">
       <DependentUpon>MainPage.json</DependentUpon>
@@ -137,6 +140,9 @@
     <TypedJSON Include="MainPage.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
+    <TypedJSON Include="Deneme.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -159,6 +165,7 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\tMax14web\Deneme.html" />
     <None Include="wwwroot\tMax14web\MasterPage3.html" />
     <None Include="wwwroot\tMax14web\MainPage.html" />
     <None Include="wwwroot\tMax14web\MapPage2.html" />
@@ -166,6 +173,9 @@
     <None Include="wwwroot\tMax14web\AfbClientPageVaadin.html" />
     <None Include="wwwroot\tMax14web\MasterPage2.html" />
     <None Include="wwwroot\sys\github-browser-app.html" />
+    <Content Include="wwwroot\sys\redips-drag-min.js" />
+    <Content Include="wwwroot\sys\redips-script.js" />
+    <Content Include="wwwroot\sys\redips-style.css" />
     <Content Include="wwwroot\sys\Stylesheet1.css" />
     <Content Include="wwwroot\sys\Stylesheet2.css" />
     <Content Include="wwwroot\sys\thenBy.js" />
