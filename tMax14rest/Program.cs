@@ -1031,7 +1031,8 @@ namespace tMax14rest
                             ID = trckID,
                             Lat = LatDD.ToString(),
                             Lng = LonDD.ToString(),
-                            LTS = EXD
+                            LTS = EXD,
+                            CntNo = "ECBU 500112 7"
                         };
                     }
                     else
@@ -1039,6 +1040,7 @@ namespace tMax14rest
                         th.Lat = LatDD.ToString();
                         th.Lng = LonDD.ToString();
                         th.LTS = EXD;
+                        th.CntNo = "ECBU 500112 7";
 
                     }
                 });
