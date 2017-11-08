@@ -169,7 +169,7 @@ namespace tMax14rest
                         }
                         else
                         {
-                            TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID).First;
+                            TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from TMDB.FRT f where f.FrtID = ?", FrtID).FirstOrDefault();
                             if (rec == null)
                                 rec = new TMDB.FRT();
 
@@ -248,7 +248,7 @@ namespace tMax14rest
                         }
                         else
                         {
-                            TMDB.FRC rec = Db.SQL<TMDB.FRC>("select f from TMDB.FRC f where f.FrcID = ?", FrcID).First;
+                            TMDB.FRC rec = Db.SQL<TMDB.FRC>("select f from TMDB.FRC f where f.FrcID = ?", FrcID).FirstOrDefault();
                             if (rec == null)
                                 rec = new TMDB.FRC();
 
@@ -263,7 +263,7 @@ namespace tMax14rest
                                 rec.eMail = jsn.eMail;
                                 rec.RptIDs = jsn.RptIDs;
 
-                                rec.Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.FrtID).First;
+                                rec.Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.FrtID).FirstOrDefault();
                             }
                         }
                     }
@@ -350,13 +350,13 @@ namespace tMax14rest
                             rec.TPDD = jsn.TPDD;
 
                             if (rec.ShpID != null)
-                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).FirstOrDefault();
                             if (rec.CneID != null)
-                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).FirstOrDefault();
                             if (rec.AccID != null)
-                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).FirstOrDefault();
                             if (rec.CrrID != null)
-                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
+                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).FirstOrDefault();
                         }
                     }
                 });
@@ -449,19 +449,19 @@ namespace tMax14rest
                             rec.DRBD = jsn.DRBD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
 
                             if (rec.OpmID != null)
-                                rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).First;
+                                rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).FirstOrDefault();
                             if (rec.ShpID != null)
-                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).First;
+                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).FirstOrDefault();
                             if (rec.CneID != null)
-                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).First;
+                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).FirstOrDefault();
                             if (rec.AccID != null)
-                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).First;
+                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).FirstOrDefault();
                             if (rec.MnfID != null)
-                                rec.Mnf = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).First;
+                                rec.Mnf = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).FirstOrDefault();
                             if (rec.NfyID != null)
-                                rec.Nfy = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.NfyID).First;
+                                rec.Nfy = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.NfyID).FirstOrDefault();
                             if (rec.CrrID != null)
-                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).First;
+                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).FirstOrDefault();
                         }
                     }
                 });
@@ -502,7 +502,7 @@ namespace tMax14rest
                     }
                     else
                     {
-                        var rec = Db.SQL<TMDB.AFB>("select m from AFB m where m.AfbID = ?", AfbID).First;
+                        var rec = Db.SQL<TMDB.AFB>("select m from AFB m where m.AfbID = ?", AfbID).FirstOrDefault();
                         if (rec == null)
                             rec = new TMDB.AFB();
 
@@ -522,9 +522,9 @@ namespace tMax14rest
                             rec.DknDvz = jsn.DknDvz;
 
                             if (rec.FrtID != null)
-                                rec.Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.FrtID).First;
+                                rec.Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.FrtID).FirstOrDefault();
                             if (rec.DknFrtID != null)
-                                rec.DknFrt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.DknFrtID).First;
+                                rec.DknFrt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.DknFrtID).FirstOrDefault();
                         }
                     }
                 });
@@ -573,7 +573,7 @@ namespace tMax14rest
                         }
                         else
                         {
-                            TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
+                            TMDB.FRT rec = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).FirstOrDefault();
                             if (jsn.Evnt == "I" && rec == null)
                             {
                                 rec = new TMDB.FRT();
@@ -963,7 +963,7 @@ namespace tMax14rest
                 // Or even more data, if its needed: tcpSocket.Send(someMoreData);
             });
 
-
+            /*
             Handle.Udp(6000, (IPAddress clientIp, UInt16 clientPort, Byte[] datagram) =>
             {
                 string text = Encoding.ASCII.GetString(datagram);
@@ -976,6 +976,18 @@ namespace tMax14rest
 
                 if (text.StartsWith("(") && text.EndsWith(")"))
                     processMessages(text);
+            });
+            */
+            Handle.GET("/tmax14rest/denemeMsj", () => {
+                string msg = "(864768011110084,DW3C,291017,A,4104.1572N,02852.2621E,0.65,100155,0.00,193.00,11,0)";
+                processMessages(msg);
+                msg = "(864768011110084,DW3C,291017,A,4104.1656N,02852.4349E,0.06,052805,0.00,1.00,13,0)";
+                processMessages(msg);
+                msg = "(864768011110084,DW3C,291017,A,4104.1565N,02852.3095E,0.41,075052,0.00,161.40,11,0)";
+                processMessages(msg);
+                msg = "(864768011110084,DW3C,291017,A,4104.1456N,02852.3263E,0.01,095159,0.00,145.30,11,0)";
+                processMessages(msg);
+                return "OK";
             });
         }
 
@@ -998,7 +1010,7 @@ namespace tMax14rest
             {
                 string Trh = items[(int)DW3.Trh];   // ddMMyy
                 string Zmn = items[(int)DW3.Zmn];   // HHmmss
-                DateTime EXD = new DateTime(Convert.ToInt32(Trh.Substring(4)), Convert.ToInt32(Trh.Substring(2, 2)), Convert.ToInt32(Trh.Substring(0, 2)), Convert.ToInt32(Zmn.Substring(0, 2)), Convert.ToInt32(Zmn.Substring(2, 2)), Convert.ToInt32(Zmn.Substring(4)));
+                DateTime EXD = new DateTime(Convert.ToInt32(Trh.Substring(4)) + 2000, Convert.ToInt32(Trh.Substring(2, 2)), Convert.ToInt32(Trh.Substring(0, 2)), Convert.ToInt32(Zmn.Substring(0, 2)), Convert.ToInt32(Zmn.Substring(2, 2)), Convert.ToInt32(Zmn.Substring(4)));
                 string GPS = items[(int)DW3.GPS];   // A:GPS valid data, V:GPS invalid data
                 string LatDMC = items[(int)DW3.Lat];   // ddmm.mmmmC  C:N+/S-
                 double LatDD = LatDMCtoDD(LatDMC);
@@ -1006,6 +1018,29 @@ namespace tMax14rest
                 double LonDD = LonDMCtoDD(LonDMC);
 
                 WriteErrorLog(string.Format("Cmnd:{0} TrckID:{1} EXD:{2} Lat,Lon:{3},{4}", cmnd, trckID, EXD, LatDD, LonDD));
+
+                Db.Transact(() =>
+                {
+                    //var th = Db.FromId<TMDB.TH>(ulong.Parse(trckID));
+                    var th = Db.SQL<TMDB.TH>("select h from TMDB.TH h where h.ID = ?", trckID).FirstOrDefault();
+                    if (th == null)
+                    {
+                        new TMDB.TH
+                        {
+                            ID = trckID,
+                            Lat = LatDD.ToString(),
+                            Lng = LonDD.ToString(),
+                            LTS = EXD
+                        };
+                    }
+                    else
+                    {
+                        th.Lat = LatDD.ToString();
+                        th.Lng = LonDD.ToString();
+                        th.LTS = EXD;
+
+                    }
+                });
             }
         }
 

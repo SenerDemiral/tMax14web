@@ -1,5 +1,6 @@
 using Starcounter;
 using System;
+using System.Linq;
 
 namespace tMax14web
 {
@@ -22,7 +23,7 @@ namespace tMax14web
 
             if (!string.IsNullOrEmpty(fPW))
             {
-                var Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).First;
+                var Frt = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", FrtID).FirstOrDefault();
                 if (Frt != null && Frt.Pwd == fPW)
                 {
                     fOnLine = true;
@@ -32,6 +33,7 @@ namespace tMax14web
                 }
             }
             TMDB.Hlpr.Insert2LogStat(FrtID, fPW, fOnLine);
+            TMDB.Hlpr.WriteLoginLog($"{FrtID} {fPW} {fOnLine}");
         }
 
     }

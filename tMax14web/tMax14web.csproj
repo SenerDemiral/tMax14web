@@ -89,6 +89,9 @@
     <Compile Include="MapPage2.json.cs">
       <DependentUpon>MapPage2.json</DependentUpon>
     </Compile>
+    <Compile Include="MapPage3.json.cs">
+      <DependentUpon>MapPage3.json</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage.json.cs">
       <DependentUpon>MasterPage.json</DependentUpon>
     </Compile>
@@ -141,6 +144,9 @@
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <TypedJSON Include="Deneme.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="MapPage3.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
     <None Include="packages.config" />

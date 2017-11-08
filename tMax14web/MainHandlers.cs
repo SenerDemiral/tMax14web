@@ -16,36 +16,36 @@ namespace tMax14web
 			//Db.SQL("DROP INDEX tmIndex_OPH_Cne ON OPH");
 			//Db.SQL("DROP INDEX tmIndex_OPH_Acc ON OPH");
 
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRT_FrtID").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRT_FrtID").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_FRT_FrtID ON FRT(FrtID)");
-            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRC_FrcID").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRC_FrcID").FirstOrDefault() == null)
                 Db.SQL("CREATE INDEX tmIndex_FRC_FrcID ON FRC(FrcID)");
-            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_OpmID").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_OpmID").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_OpmID ON OPM(OpmID)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_OphID").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_OphID").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_OphID ON OPH(OphID)");
 
-            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRC_Frt").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_FRC_Frt").FirstOrDefault() == null)
                 Db.SQL("CREATE INDEX tmIndex_FRC_Frt ON FRC(Frt)");
-            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Shp").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Shp").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_Shp ON OPM(Shp)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Cne").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Cne").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_Cne ON OPM(Cne)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Acc").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Acc").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_Acc ON OPM(Acc)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Crr").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPM_Crr").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPM_Crr ON OPM(Crr)");
 
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Opm").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Opm").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_Opm ON OPH(Opm)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Shp").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Shp").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_Shp ON OPH(Shp)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Cne").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Cne").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_Cne ON OPH(Cne)");
-			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Acc").First == null)
+			if(Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_Acc").FirstOrDefault() == null)
 				Db.SQL("CREATE INDEX tmIndex_OPH_Acc ON OPH(Acc)");
 
-            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_EXD").First == null)
+            if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "tmIndex_OPH_EXD").FirstOrDefault() == null)
                 Db.SQL("CREATE INDEX tmIndex_OPH_EXD ON OPH(EXD)");
         }
 

@@ -1,9 +1,27 @@
 ﻿
 using System;
+using System.Linq;
 using Starcounter;
 
 namespace TMDB
 {
+    [Database]
+    public class TH
+    {
+        public string ID { get; set; }
+        public string CntNo { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
+        public DateTime LTS { get; set; }
+
+        public TH()
+        {
+            ID = "864768011110084";
+            CntNo = "ECBU5012836";
+            Lat = "37.041987";
+            Lng = "27.428861";
+        }
+    }
 
     [Database]
     public class LogStat
@@ -161,7 +179,7 @@ namespace TMDB
             {
                 if (nStu == null)
                     return ""; 
-                var osn = Db.SQL<OSN>("select f from TMDB.OSN f where f.Stu = ?", this.nStu).First;
+                var osn = Db.SQL<OSN>("select f from TMDB.OSN f where f.Stu = ?", this.nStu).FirstOrDefault();
                 if (osn == null)
                     return "";
                 return osn.Ad;
@@ -263,7 +281,7 @@ namespace TMDB
             {
                 if (nStu == null)
                     return "";
-                var osn = Db.SQL<OSN>("select f from TMDB.OSN f where f.Stu = ?", this.nStu).First;
+                var osn = Db.SQL<OSN>("select f from TMDB.OSN f where f.Stu = ?", this.nStu).FirstOrDefault();
                 if (osn == null)
                     return "";
                 return osn.Ad;

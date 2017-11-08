@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System;
+using System.Linq;
 using Starcounter;
 
 
@@ -103,7 +104,7 @@ namespace tMax14web
             Handle.GET("/tMax14web/init", () => {
                 Db.Transact(() =>
                 {
-                    var f57036 = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", 57036).First;
+                    var f57036 = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", 57036).FirstOrDefault();
                     f57036.Pwd = "57036";
                     /*
                     foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h"))
@@ -329,6 +330,13 @@ namespace tMax14web
                     return r;
                 }
             });
+
+            Hook<TMDB.TH>.CommitUpdate += (s, obj) =>
+            {
+                var o = obj;
+                TMDB.Hlpr.WriteLoginLog(obj.ID);
+
+            };
 
         }
         enum hFlds : int
