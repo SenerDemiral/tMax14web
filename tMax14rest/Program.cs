@@ -963,7 +963,7 @@ namespace tMax14rest
                 // Or even more data, if its needed: tcpSocket.Send(someMoreData);
             });
 
-            /*
+            
             Handle.Udp(6000, (IPAddress clientIp, UInt16 clientPort, Byte[] datagram) =>
             {
                 string text = Encoding.ASCII.GetString(datagram);
@@ -977,7 +977,7 @@ namespace tMax14rest
                 if (text.StartsWith("(") && text.EndsWith(")"))
                     processMessages(text);
             });
-            */
+            
             Handle.GET("/tmax14rest/denemeMsj", () => {
                 string msg = "(864768011110084,DW3C,081117,A,4105.4317N,02830.1093E,0.75,132043,0.00,80.00,12,0)";
                 /*
