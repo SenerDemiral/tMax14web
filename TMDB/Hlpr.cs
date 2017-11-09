@@ -47,7 +47,7 @@ namespace TMDB
         {
             try
             {
-                StreamWriter sw = new StreamWriter(@"C:\Starcounter\MyLog\TrackingLog.txt", true);
+                StreamWriter sw = new StreamWriter($@"C:\Starcounter\MyLog\TrackingLog.txt", true);
                 sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ": " + Msg);
                 sw.Flush();
                 sw.Close();

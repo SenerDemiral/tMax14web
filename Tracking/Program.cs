@@ -91,7 +91,8 @@ namespace Tracking
                 string LonDMC = items[(int)DW3.Lon];   // dddmm.mmmmC  C:E+/W-
                 double LonDD = LonDMCtoDD(LonDMC);
 
-                Hlpr.WriteTrackingLog(string.Format("Cmnd:{0} TrckID:{1} EXD:{2} Lat,Lon:{3},{4}", cmnd, trckID, EXD, LatDD, LonDD));
+                //Hlpr.WriteTrackingLog(string.Format("Cmnd:{0} TrckID:{1} EXD:{2} Lat,Lon:{3},{4}", cmnd, trckID, EXD, LatDD, LonDD));
+                Hlpr.WriteTrackingLog($"Cmnd:{cmnd} EXD:{EXD} Lat,Lon:{LatDD},{LonDD}");
 
                 Db.Transact(() =>
                 {
@@ -104,7 +105,8 @@ namespace Tracking
                             ID = trckID,
                             Lat = LatDD.ToString(),
                             Lng = LonDD.ToString(),
-                            LTS = EXD
+                            LTS = EXD,
+                            CntNo = "ECBU5001127"
                         };
                     }
                     else
@@ -112,7 +114,7 @@ namespace Tracking
                         th.Lat = LatDD.ToString();
                         th.Lng = LonDD.ToString();
                         th.LTS = EXD;
-
+                        th.CntNo = "ECBU5001127";
                     }
                 });
             }

@@ -15,7 +15,7 @@ namespace tMax14web
             fID = parent.fID;
             StartDate = parent.StartDate;
 
-            Afbs = Db.SQL<TMDB.AFB>("select a from AFB a where a.FrtID = ? and a.FtrTrh >= ?", fid, std);
+            Afbs.Data = Db.SQL<TMDB.AFB>("select a from AFB a where a.FrtID = ? and a.FtrTrh >= ?", fid, std);
         }
     }
 }

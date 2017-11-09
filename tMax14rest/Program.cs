@@ -57,11 +57,11 @@ namespace tMax14rest
                 {
                     Db.SlowSQL("DELETE FROM TMDB.WebSocketId");
                 });
-
+                /*
                 WriteErrorLog("CAN ");
                 for (int i = 0; i < 10000; i++)
                     WriteErrorLog("Sener DENEME " + i.ToString());
-
+                */
                 return "OK";
             });
 
@@ -316,7 +316,7 @@ namespace tMax14rest
                     }
                     else
                     {
-                        TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).First;
+                        TMDB.OPM rec = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", OpmID).FirstOrDefault();
                         if (rec == null)
                             rec = new TMDB.OPM();
 
@@ -404,7 +404,7 @@ namespace tMax14rest
                     }
                     else
                     {
-                        TMDB.OPH rec = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID).First;
+                        TMDB.OPH rec = Db.SQL<TMDB.OPH>("select h from OPH h where h.OphID = ?", OphID).FirstOrDefault();
                         if (rec == null)
                             rec = new TMDB.OPH();
 
@@ -927,7 +927,7 @@ namespace tMax14rest
                 Db.Transact(() =>
                 {
 
-                    TMDB.WebSocketId wsId = Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w WHERE w.Id=?", ws.ToUInt64()).First;
+                    TMDB.WebSocketId wsId = Db.SQL<TMDB.WebSocketId>("SELECT w FROM TMDB.WebSocketId w WHERE w.Id=?", ws.ToUInt64()).FirstOrDefault();
                     if (wsId != null)
                     {
                         wsId.Delete();
@@ -968,7 +968,7 @@ namespace tMax14rest
             {
                 string text = Encoding.ASCII.GetString(datagram);
 
-                WriteErrorLog("Received on: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
+                Hlpr.WriteTrackingLog("Received on: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
 
                 // One can update any resources associated with "clientIp" and "clientPort".
                 //UdpSocket.Send(clientIp, clientPort, 6000, Encoding.ASCII.GetBytes("ok"));
@@ -1018,7 +1018,7 @@ namespace tMax14rest
                 string LonDMC = items[(int)DW3.Lon];   // dddmm.mmmmC  C:E+/W-
                 double LonDD = LonDMCtoDD(LonDMC);
 
-                WriteErrorLog(string.Format("Cmnd:{0} TrckID:{1} EXD:{2} Lat,Lon:{3},{4}", cmnd, trckID, EXD, LatDD, LonDD));
+                Hlpr.WriteTrackingLog(string.Format("Cmnd:{0} TrckID:{1} EXD:{2} Lat,Lon:{3},{4}", cmnd, trckID, EXD, LatDD, LonDD));
 
                 Db.Transact(() =>
                 {
@@ -1072,7 +1072,7 @@ namespace tMax14rest
             if (sw != null)
                 sw.Close();
         }
-
+        /*
         public static void WriteErrorLog(string Msg)
         {
             //StreamWriter sw = null;
@@ -1090,7 +1090,7 @@ namespace tMax14rest
             {
             }
         }
-
+        */
         public static void sendMail(string mailTo, string subject, string body)
         {
             try
