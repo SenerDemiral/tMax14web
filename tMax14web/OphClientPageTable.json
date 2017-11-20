@@ -20,6 +20,7 @@
 
 	"OphID": "House Id",
 	"RefNo": "Ref#",
+	"mRefNo": "mRef#",
 	"ROT": "Route: Export Import",
 	"MOT": "Mode: Air Sea Truck Rail",
 	"nStu": "Statu",
@@ -69,6 +70,7 @@
 		{
 			"OphID": 0,
 			"RefNo": "",
+			"mRefNo": "",
 			"ROT": "",
 			"MOT": "",
 			"nStu": "",

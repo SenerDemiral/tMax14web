@@ -267,6 +267,7 @@ namespace TMDB
         public DateTime? TPAD => Opm?.TPAD;
         public DateTime? TPDD => Opm?.TPDD;
         public string Vhc => Opm?.Vhc ?? "";
+        public string mRefNo => Opm?.RefNo ?? "";
 
         public string ETD_t => $"{Opm?.ETD:s}";// Opm == null ? "" : $"{Opm.ETD:s}";
 		public string ATD_t => $"{Opm?.ATD:s}";// Opm == null ? "" : $"{Opm.ATD:s}";
