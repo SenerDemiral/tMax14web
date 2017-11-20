@@ -29,6 +29,8 @@
                     <tr>
                         <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
                         <th id="EXD_t" data-tooltip$="[[model.EXD_t]]">EXD</th>
+                        <th id="RefNo" data-tooltip$="[[model.RefNo]]">EXD</th>
+                        <th id="Vhc" data-tooltip$="[[model.Vhc]]">Vehicle</th>
 
                         <th id="ROT" data-tooltip$="[[model.ROT]]">R</th>
                         <th id="MOT" data-tooltip$="[[model.MOT]]">M</th>
@@ -113,6 +115,8 @@
                         <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
                         <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
                         <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,6 +125,8 @@
                             <td data-typ="nmr">[[item.OphID]]</td>
                             <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
                             <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.RefNo]]</td>
+                            <td>[[item.Vhc]]</td>
                             <td>[[item.ROT]]</td>
                             <td>[[item.MOT]]</td>
                             <td>[[item.Org]]</td>

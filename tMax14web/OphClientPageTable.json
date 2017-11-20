@@ -63,6 +63,7 @@
 	"TPDD_t": "Transfer Port Departure",
 			
 	"CntNoS": "Container Number(s)",
+  "Vhc": "Vehicle Info",
 
 	"Ophs": [
 		{
@@ -109,8 +110,9 @@
 			"ACOT_t": "",
 			"TPAD_t": "",
 			"TPDD_t": "",
-			
-			"CntNoS": ""
+
+      "CntNoS": "",
+      "Vhc": ""
 
 		}
 	]
