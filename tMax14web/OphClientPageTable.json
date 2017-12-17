@@ -71,6 +71,7 @@
 		{
 			"OphID": 0,
 			"RefNo": "",
+      "mVhc": "",
 			"ROT": "",
 			"MOT": "",
 			"nStu": "",
@@ -105,7 +106,6 @@
 			"ROS_t": "",
 			"POD_t": "",
       "DRBD_t": "",
-      "CntNoS": "",
 
 			"mETD_t": "",
 			"mATD_t": "",
@@ -116,9 +116,7 @@
 			"mACOT_t": "",
 			"mTPAD_t": "",
 			"mTPDD_t": "",
-
-      "mVhc": ""
-
+      "CntNoS": ""
 		}
 	]
 
