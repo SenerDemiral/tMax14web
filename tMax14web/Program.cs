@@ -138,8 +138,8 @@ namespace tMax14web
                 return master;
             });
 
-            //MainHandlers mh = new MainHandlers();
-			//mh.CreateIndex();
+            MainHandlers mh = new MainHandlers();
+			mh.CreateIndex();
             //mh.Register();
 
             Handle.GET("/tMax14web", () => { return Self.GET("/tMax14web/MainPage"); });
