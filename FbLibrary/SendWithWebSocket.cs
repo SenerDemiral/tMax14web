@@ -270,6 +270,8 @@ namespace FbLibrary
                         jsn.ATD = row["ATD"];
                         jsn.ETA = row["ETA"];
                         jsn.ATA = row["ATA"];
+                        jsn.RETD = row["RETD"];
+                        jsn.RETA = row["RETA"];
                         jsn.ACOT = row["ACOT"];
                         jsn.TPAD = row["TPAD"];
                         jsn.TPDD = row["TPDD"];

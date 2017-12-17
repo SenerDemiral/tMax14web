@@ -162,10 +162,13 @@ namespace TMDB
         public DateTime? ETD { get; set; }
 		public DateTime? ATD { get; set; }
 		public DateTime? ETA { get; set; }
-		public DateTime? ATA { get; set; }
+        public DateTime? ATA { get; set; }
+        public DateTime? RETD { get; set; }
+        public DateTime? RETA{ get; set; }
         public DateTime? ACOT { get; set; }
         public DateTime? TPAD { get; set; }
         public DateTime? TPDD { get; set; }
+        public DateTime? ROH { get; set; }
         public string Vhc { get; set; }
         public string CntNoS { get; set; }
 
@@ -259,22 +262,26 @@ namespace TMDB
         public string NfyAd => Nfy?.AdN ?? ""; //Nfy == null ? "" : Nfy.AdN;
         public string CrrAd => Crr?.AdN ?? ""; // Crr == null ? "" : Crr.AdN;
 
-        public DateTime? ETD => Opm?.ETD;
-		public DateTime? ATD => Opm?.ATD;
-		public DateTime? ETA => Opm?.ETA;
-		public DateTime? ATA => Opm?.ATA;
-        public DateTime? ACOT => Opm?.ACOT;
-        public DateTime? TPAD => Opm?.TPAD;
-        public DateTime? TPDD => Opm?.TPDD;
-        public string Vhc => Opm?.Vhc ?? "";
+        public DateTime? mETD => Opm?.ETD;
+		public DateTime? mATD => Opm?.ATD;
+		public DateTime? mETA => Opm?.ETA;
+		public DateTime? mATA => Opm?.ATA;
+        public DateTime? mRETD => Opm?.RETD;
+        public DateTime? mRETA => Opm?.RETA;
+        public DateTime? mACOT => Opm?.ACOT;
+        public DateTime? mTPAD => Opm?.TPAD;
+        public DateTime? mTPDD => Opm?.TPDD;
+        public string mVhc => Opm?.Vhc ?? "";
 
-        public string ETD_t => $"{Opm?.ETD:s}";// Opm == null ? "" : $"{Opm.ETD:s}";
-		public string ATD_t => $"{Opm?.ATD:s}";// Opm == null ? "" : $"{Opm.ATD:s}";
-		public string ETA_t => $"{Opm?.ETA:s}";// Opm == null ? "" : $"{Opm.ETA:s}";
-        public string ATA_t => $"{Opm?.ATA:s}";// Opm == null ? "" : $"{Opm.ATA:s}";
-        public string ACOT_t => $"{Opm?.ACOT:s}";// Opm == null ? "" : $"{Opm.ACOT:s}";
-        public string TPAD_t => $"{Opm?.TPAD:s}";// Opm == null ? "" : $"{Opm.TPAD:s}";
-        public string TPDD_t => $"{Opm?.TPDD:s}";// Opm == null ? "" : $"{Opm.TPDD:s}";
+        public string mETD_t => $"{Opm?.ETD:s}";
+		public string mATD_t => $"{Opm?.ATD:s}";
+		public string mETA_t => $"{Opm?.ETA:s}";
+        public string mATA_t => $"{Opm?.ATA:s}";
+        public string mRETD_t => $"{Opm?.RETD:s}";
+        public string mRETA_t => $"{Opm?.RETA:s}";
+        public string mACOT_t => $"{Opm?.ACOT:s}";
+        public string mTPAD_t => $"{Opm?.TPAD:s}";
+        public string mTPDD_t => $"{Opm?.TPDD:s}";
 
         public string nStuAd
         {

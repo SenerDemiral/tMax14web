@@ -30,7 +30,7 @@
                         <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
                         <th id="EXD_t" data-tooltip$="[[model.EXD_t]]">EXD</th>
                         <th id="RefNo" data-tooltip$="[[model.RefNo]]">Ref#</th>
-                        <th id="Vhc" data-tooltip$="[[model.Vhc]]">Vehicle</th>
+                        <th id="mVhc" data-tooltip$="[[model.mVhc]]">Vehicle</th>
 
                         <th id="ROT" data-tooltip$="[[model.ROT]]">R</th>
                         <th id="MOT" data-tooltip$="[[model.MOT]]">M</th>
@@ -65,19 +65,23 @@
                         <th id="ROS_t" data-tooltip$="[[model.ROS_t]]">ROS</th>
                         <th id="POD_t" data-tooltip$="[[model.POD_t]]">POD</th>
 
-                        <th id="ETD_t" data-tooltip$="[[model.ETD_t]]">ETD</th>
-                        <th id="ATD_t" data-tooltip$="[[model.ATD_t]]">ATD</th>
-                        <th id="ETA_t" data-tooltip$="[[model.ETA_t]]">ETA</th>
-                        <th id="ATA_t" data-tooltip$="[[model.ATA_t]]">ATA</th>
+                        <th id="mETD_t" data-tooltip$="[[model.mETD_t]]">ETD</th>
+                        <th id="mATD_t" data-tooltip$="[[model.mATD_t]]">ATD</th>
+                        <th id="mETA_t" data-tooltip$="[[model.mETA_t]]">ETA</th>
+                        <th id="mATA_t" data-tooltip$="[[model.mATA_t]]">ATA</th>
+                        <th id="mRETD_t" data-tooltip$="[[model.mRETD_t]]">RETD</th>
+                        <th id="mRETA_t" data-tooltip$="[[model.mRETA_t]]">RETD</th>
 
-                        <th id="ACOT_t" data-tooltip$="[[model.ACOT_t]]">ACOT</th>
-                        <th id="DRBD_t" data-tooltip$="[[model.DRBD_t]]">DRBD</th>
-                        <th id="TPAD_t" data-tooltip$="[[model.TPAD_t]]">TPAD</th>
-                        <th id="TPDD_t" data-tooltip$="[[model.TPDD_t]]">TPDD</th>
+                        <th id="mACOT_t" data-tooltip$="[[model.mACOT_t]]">ACOT</th>
+                        <th id="mDRBD_t" data-tooltip$="[[model.mDRBD_t]]">DRBD</th>
+                        <th id="mTPAD_t" data-tooltip$="[[model.mTPAD_t]]">TPAD</th>
+                        <th id="mTPDD_t" data-tooltip$="[[model.mTPDD_t]]">TPDD</th>
 
                         <th id="CntNoS" data-tooltip$="[[model.CntNoS]]">Cnt#</th>
                     </tr>
                     <tr>
+                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
                         <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
                         <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
                         <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>

@@ -56,6 +56,9 @@
               <Mapping SourceColumn="CNTNOS" DataSetColumn="CNTNOS" />
               <Mapping SourceColumn="TPAD" DataSetColumn="TPAD" />
               <Mapping SourceColumn="TPDD" DataSetColumn="TPDD" />
+              <Mapping SourceColumn="RETD" DataSetColumn="RETD" />
+              <Mapping SourceColumn="RETA" DataSetColumn="RETA" />
+              <Mapping SourceColumn="ROH" DataSetColumn="ROH" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -337,6 +340,9 @@
               </xs:element>
               <xs:element name="TPAD" msprop:Generator_ColumnVarNameInTable="columnTPAD" msprop:Generator_ColumnPropNameInRow="TPAD" msprop:Generator_ColumnPropNameInTable="TPADColumn" msprop:Generator_UserColumnName="TPAD" type="xs:dateTime" minOccurs="0" />
               <xs:element name="TPDD" msprop:Generator_ColumnVarNameInTable="columnTPDD" msprop:Generator_ColumnPropNameInRow="TPDD" msprop:Generator_ColumnPropNameInTable="TPDDColumn" msprop:Generator_UserColumnName="TPDD" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RETD" msprop:Generator_ColumnVarNameInTable="columnRETD" msprop:Generator_ColumnPropNameInRow="RETD" msprop:Generator_ColumnPropNameInTable="RETDColumn" msprop:Generator_UserColumnName="RETD" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RETA" msprop:Generator_ColumnVarNameInTable="columnRETA" msprop:Generator_ColumnPropNameInRow="RETA" msprop:Generator_ColumnPropNameInTable="RETAColumn" msprop:Generator_UserColumnName="RETA" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ROH" msprop:Generator_ColumnVarNameInTable="columnROH" msprop:Generator_ColumnPropNameInRow="ROH" msprop:Generator_ColumnPropNameInTable="ROHColumn" msprop:Generator_UserColumnName="ROH" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

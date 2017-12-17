@@ -18,7 +18,7 @@ namespace tMax14web
 					<title>{0}</title>
 					
                     <script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
-					<script src=""/sys/document-register-element/build/document-register-element.js""></script>
+					<!--script src=""/sys/document-register-element/build/document-register-element.js""></script-->
 
                     <script>
                         window.Polymer = {{
@@ -29,26 +29,25 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/polymer/polymer.html"">
 					<link rel=""import"" href=""/sys/starcounter.html"">
 					<link rel=""import"" href=""/sys/starcounter-include/starcounter-include.html"">
-					<link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html"">
+					<!--link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html""-->
 					
 
-                    <script src=""/sys/redips-drag-min.js""></script>
+                    <!--script src=""/sys/redips-drag-min.js""></script-->
                     <script src=""/sys/thenBy.js""></script>
 					<link rel=""stylesheet"" href=""/sys/normalize.css"">
 					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
 					<link rel=""stylesheet"" href=""/sys/Stylesheet2.css"">
-					<link rel=""stylesheet"" href=""/sys/redips-style.css"">
+					<!--link rel=""stylesheet"" href=""/sys/redips-style.css""-->
 				
 				</head>
 
-
-<body>
-    <template is=""dom-bind"" id=""puppet-root"">
-        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
-    </template>
-    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
-    <starcounter-debug-aid></starcounter-debug-aid>
-</body>
+                <body>
+                    <template is=""dom-bind"" id=""puppet-root"">
+                        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
+                    </template>
+                    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
+                    <!--starcounter-debug-aid></starcounter-debug-aid-->
+                </body>
 
 				</html>";
 
@@ -67,13 +66,13 @@ namespace tMax14web
 					<link rel=""import"" href=""/sys/github-browser-app.html"">
 					-->
 
-<body>
-    <template is=""dom-bind"" id=""puppet-root"">
-        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
-    </template>
-    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
-    <starcounter-debug-aid></starcounter-debug-aid>
-</body>
+                <body>
+                    <template is=""dom-bind"" id=""puppet-root"">
+                        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
+                    </template>
+                    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
+                    <starcounter-debug-aid></starcounter-debug-aid>
+                </body>
                 <body>
                     <template is=""dom-bind"" id=""puppet-root"">
                         <template is=""imported-template"" content$=""{{{{model.Html}}}}"" model=""{{{{model}}}}""></template>
@@ -185,6 +184,7 @@ namespace tMax14web
 
                         ws.Cells[cr, (int)hFlds.OphID].Value = h.OphID;
                         ws.Cells[cr, (int)hFlds.RefNo].Value = h.RefNo;
+                        ws.Cells[cr, (int)hFlds.mVhc].Value = h.mVhc;
                         ws.Cells[cr, (int)hFlds.EXD].Value = h.EXD;
                         ws.Cells[cr, (int)hFlds.ROT].Value = h.ROT;
                         ws.Cells[cr, (int)hFlds.MOT].Value = h.MOT;
@@ -212,11 +212,15 @@ namespace tMax14web
                         ws.Cells[cr, (int)hFlds.RTR].Value = h.RTR;
                         ws.Cells[cr, (int)hFlds.ROS].Value = h.ROS;
                         ws.Cells[cr, (int)hFlds.POD].Value = h.POD;
-                        ws.Cells[cr, (int)hFlds.ETD].Value = h.ETD;
-                        ws.Cells[cr, (int)hFlds.ATD].Value = h.ATD;
-                        ws.Cells[cr, (int)hFlds.ETA].Value = h.ETA;
-                        ws.Cells[cr, (int)hFlds.ATA].Value = h.ATA;
-                        ws.Cells[cr, (int)hFlds.ACOT].Value = h.ACOT;
+                        ws.Cells[cr, (int)hFlds.mETD].Value = h.mETD;
+                        ws.Cells[cr, (int)hFlds.mATD].Value = h.mATD;
+                        ws.Cells[cr, (int)hFlds.mETA].Value = h.mETA;
+                        ws.Cells[cr, (int)hFlds.mATA].Value = h.mATA;
+                        ws.Cells[cr, (int)hFlds.mRETD].Value = h.mRETD;
+                        ws.Cells[cr, (int)hFlds.mRETA].Value = h.mRETA;
+                        ws.Cells[cr, (int)hFlds.mACOT].Value = h.mACOT;
+                        ws.Cells[cr, (int)hFlds.mTPAD].Value = h.mTPAD;
+                        ws.Cells[cr, (int)hFlds.mTPDD].Value = h.mTPDD;
                         ws.Cells[cr, (int)hFlds.CntNoS].Value = h.CntNoS;
 
                         cr++;
@@ -224,6 +228,7 @@ namespace tMax14web
                     // Header (first row)
                     ws.Cells[1, (int)hFlds.OphID].Value = "ID";
                     ws.Cells[1, (int)hFlds.RefNo].Value = "RefNo";
+                    ws.Cells[1, (int)hFlds.mVhc].Value = "mVhc";
                     ws.Cells[1, (int)hFlds.EXD].Value = "EXD";
                     ws.Cells[1, (int)hFlds.ROT].Value = "ROT";
                     ws.Cells[1, (int)hFlds.MOT].Value = "MOT";
@@ -251,11 +256,13 @@ namespace tMax14web
                     ws.Cells[1, (int)hFlds.RTR].Value = "RTR";
                     ws.Cells[1, (int)hFlds.ROS].Value = "ROS";
                     ws.Cells[1, (int)hFlds.POD].Value = "POD";
-                    ws.Cells[1, (int)hFlds.ETD].Value = "ETD";
-                    ws.Cells[1, (int)hFlds.ATD].Value = "ATD";
-                    ws.Cells[1, (int)hFlds.ETA].Value = "ETA";
-                    ws.Cells[1, (int)hFlds.ATA].Value = "ATA";
-                    ws.Cells[1, (int)hFlds.ACOT].Value = "ACOT";
+                    ws.Cells[1, (int)hFlds.mETD].Value = "mETD";
+                    ws.Cells[1, (int)hFlds.mATD].Value = "mATD";
+                    ws.Cells[1, (int)hFlds.mETA].Value = "mETA";
+                    ws.Cells[1, (int)hFlds.mATA].Value = "mATA";
+                    ws.Cells[1, (int)hFlds.mACOT].Value = "mACOT";
+                    ws.Cells[1, (int)hFlds.mTPAD].Value = "mTPAD";
+                    ws.Cells[1, (int)hFlds.mTPDD].Value = "mTPDD";
                     ws.Cells[1, (int)hFlds.CntNoS].Value = "Cnt#";
 
                     //var values = Enum.GetValues(typeof(hFlds));		// Array of values
@@ -271,11 +278,15 @@ namespace tMax14web
                         (int)hFlds.RTR,
                         (int)hFlds.ROS,
                         (int)hFlds.POD,
-                        (int)hFlds.ETD,
-                        (int)hFlds.ATD,
-                        (int)hFlds.ETA,
-                        (int)hFlds.ATA,
-                        (int)hFlds.ACOT
+                        (int)hFlds.mETD,
+                        (int)hFlds.mATD,
+                        (int)hFlds.mETA,
+                        (int)hFlds.mATA,
+                        (int)hFlds.mRETD,
+                        (int)hFlds.mRETA,
+                        (int)hFlds.mACOT,
+                        (int)hFlds.mTPAD,
+                        (int)hFlds.mTPDD,
                     };
 
                     foreach (int c in df)
@@ -341,7 +352,7 @@ namespace tMax14web
         }
         enum hFlds : int
         {
-            None, OphID, RefNo, EXD, ROT, MOT, Org, Dst, nStu, nStuTS, pStu, pStuTS, Shp, Cne, Acc, Mnf, Nfy, DTM, PTM, NOP, GrW, VM3, ChW, ROH, EOH, REOH, AOH, RTR, ROS, POD, ETD, ATD, ETA, ATA, ACOT, CntNoS
+            None, OphID, RefNo, mVhc, EXD, ROT, MOT, Org, Dst, nStu, nStuTS, pStu, pStuTS, Shp, Cne, Acc, Mnf, Nfy, DTM, PTM, NOP, GrW, VM3, ChW, ROH, EOH, REOH, AOH, RTR, ROS, POD, mETD, mATD, mETA, mATA, mRETD, mRETA, mACOT, mTPAD, mTPDD, CntNoS
         };
 
         public static MasterPage GetMasterPageFromSession()

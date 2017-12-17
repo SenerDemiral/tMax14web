@@ -80,6 +80,7 @@
     <None Include="tMax14DataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tMax14DataSet1.Designer.cs</LastGenOutput>
     </None>
     <None Include="tMax14DataSet.xss">
       <DependentUpon>tMax14DataSet.xsd</DependentUpon>

@@ -20,6 +20,7 @@
 
 	"OphID": "House Id",
 	"RefNo": "Ref#",
+	"mVhc": "Vehicle",
 	"ROT": "Route: Export Import",
 	"MOT": "Mode: Air Sea Truck Rail",
 	"nStu": "Statu",
@@ -54,13 +55,15 @@
 	"ROS_t": "Request on Site",
 	"POD_t": "Proof of Delivery",
 	"DRBD_t": "Doc Release to Broker",
-	"ETD_t": "Expected Time of Departure",
-	"ATD_t": "Actual Time of Departure",
-	"ETA_t": "Expected Time of Arrival",
-	"ATA_t": "Actual Time of Arrival",
-	"ACOT_t": "Actual Cut-off Time",
-	"TPAD_t": "Transfer Port Arrival",
-	"TPDD_t": "Transfer Port Departure",
+	"mETD_t": "Expected Time of Departure",
+	"mATD_t": "Actual Time of Departure",
+	"mETA_t": "Expected Time of Arrival",
+	"mATA_t": "Actual Time of Arrival",
+	"mRETD_t": "Revised ETD",
+	"mRETA_t": "Revised ETA",
+	"mACOT_t": "Actual Cut-off Time",
+	"mTPAD_t": "Transfer Port Arrival",
+	"mTPDD_t": "Transfer Port Departure",
 			
 	"CntNoS": "Container Number(s)",
   "Vhc": "Vehicle Info",
@@ -102,17 +105,20 @@
 			"RTR_t": "",
 			"ROS_t": "",
 			"POD_t": "",
-			"DRBD_t": "",
-			"ETD_t": "",
-			"ATD_t": "",
-			"ETA_t": "",
-			"ATA_t": "",
-			"ACOT_t": "",
-			"TPAD_t": "",
-			"TPDD_t": "",
-
+      "DRBD_t": "",
       "CntNoS": "",
-      "Vhc": ""
+
+			"mETD_t": "",
+			"mATD_t": "",
+			"mETA_t": "",
+			"mATA_t": "",
+			"mRETD_t": "",
+			"mRETA_t": "",
+			"mACOT_t": "",
+			"mTPAD_t": "",
+			"mTPDD_t": "",
+
+      "mVhc": ""
 
 		}
 	]
