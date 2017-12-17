@@ -64,6 +64,7 @@
                         <th id="RTR_t" data-tooltip$="[[model.RTR_t]]">RTR</th>
                         <th id="ROS_t" data-tooltip$="[[model.ROS_t]]">ROS</th>
                         <th id="POD_t" data-tooltip$="[[model.POD_t]]">POD</th>
+                        <th id="mDRBD_t" data-tooltip$="[[model.mDRBD_t]]">DRBD</th>
 
                         <th id="mETD_t" data-tooltip$="[[model.mETD_t]]">ETD</th>
                         <th id="mATD_t" data-tooltip$="[[model.mATD_t]]">ATD</th>
@@ -73,7 +74,6 @@
                         <th id="mRETA_t" data-tooltip$="[[model.mRETA_t]]">RETD</th>
 
                         <th id="mACOT_t" data-tooltip$="[[model.mACOT_t]]">ACOT</th>
-                        <th id="mDRBD_t" data-tooltip$="[[model.mDRBD_t]]">DRBD</th>
                         <th id="mTPAD_t" data-tooltip$="[[model.mTPAD_t]]">TPAD</th>
                         <th id="mTPDD_t" data-tooltip$="[[model.mTPDD_t]]">TPDD</th>
 
@@ -130,7 +130,7 @@
                             <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
                             <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td>[[item.RefNo]]</td>
-                            <td>[[item.Vhc]]</td>
+                            <td>[[item.mVhc]]</td>
                             <td>[[item.ROT]]</td>
                             <td>[[item.MOT]]</td>
                             <td>[[item.Org]]</td>
@@ -161,14 +161,14 @@
                             <td data-typ="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td data-typ="trh"><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td data-typ="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.ETD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.ATD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.ETA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.ATA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.ACOT_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td data-typ="trh"><moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.TPAD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.TPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mETD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mATD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mACOT_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mTPAD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td data-typ="trh"><moment-element datetime="[[item.mTPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
 
                             <td>[[item.CntNoS]]</td>
                         </tr">
