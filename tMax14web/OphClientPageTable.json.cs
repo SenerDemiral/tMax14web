@@ -21,6 +21,7 @@ namespace tMax14web
             Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
             //sener.NoR = DateTime.Now.Ticks;
+            int NOP = Ophs.Count;
         }
     }
 }

@@ -17,8 +17,7 @@ namespace tMax14web
 				    <meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=yes"">
 					<title>{0}</title>
 					
-                    <script src=""/sys/webcomponentsjs/webcomponents.min.js""></script>
-					<!--script src=""/sys/document-register-element/build/document-register-element.js""></script-->
+                    <script src=""/sys/webcomponentsjs/webcomponents-lite.js""></script>
 
                     <script>
                         window.Polymer = {{
@@ -32,21 +31,20 @@ namespace tMax14web
 					<!--link rel=""import"" href=""/sys/starcounter-debug-aid/src/starcounter-debug-aid.html""-->
 					
 
-                    <!--script src=""/sys/redips-drag-min.js""></script-->
                     <script src=""/sys/thenBy.js""></script>
 					<link rel=""stylesheet"" href=""/sys/normalize.css"">
 					<link rel=""stylesheet"" href=""/sys/Stylesheet1.css"">
 					<link rel=""stylesheet"" href=""/sys/Stylesheet2.css"">
-					<!--link rel=""stylesheet"" href=""/sys/redips-style.css""-->
 				
 				</head>
 
                 <body>
-                    <template is=""dom-bind"" id=""puppet-root"">
-                        <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
-                    </template>
-                    <puppet-client ref=""puppet-root"" remote-url=""{1}""></puppet-client>
-                    <!--starcounter-debug-aid></starcounter-debug-aid-->
+                    <dom-bind id=""palindrom-root"">
+                        <template is=""dom-bind"">
+                            <starcounter-include view-model=""{{{{model}}}}""></starcounter-include>
+                        </template>
+                    </dom-bind>
+                    <palindrom-client ref=""palindrom-root"" remote-url=""{1}""></palindrom-client>
                 </body>
 
 				</html>";
@@ -363,10 +361,12 @@ namespace tMax14web
                 Session.Current = new Session(Session.Flags.PatchVersioning);
             }
             */
-            Session.Ensure();
+            //Session.Ensure();
 
-            //MasterPage master = Session.Current.Data as MasterPage;
-            MasterPage master = Session.Current.Store["App"] as MasterPage;
+            ////MasterPage master = Session.Current.Data as MasterPage;
+            //MasterPage master = Session.Current.Store["App"] as MasterPage;
+
+            var master = Session.Ensure().Store["App"] as MasterPage;
 
             if (master == null)
             {
@@ -390,7 +390,7 @@ namespace tMax14web
             */
             master.CurrentPage = Self.GET(partialPath);
 
-            //if (master.CurrentPage.Data == null)
+            if (master.CurrentPage.Data == null)
             {
                 master.CurrentPage.Data = null; //trick to invoke OnData in partial
             }
