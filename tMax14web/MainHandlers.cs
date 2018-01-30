@@ -50,6 +50,7 @@ namespace tMax14web
         }
 
         public void Register() {
+            /*
 			Handle.GET("/tMax14web", (Request req) => {
 				return Db.Scope(() => {
 					//MasterPage master;
@@ -62,12 +63,12 @@ namespace tMax14web
 					{
 						var master = new MasterPage();
                         master.Session = new Session(Session.Flags.PatchVersioning);
-						/*var cv = Starcounter.Internal.CurrentVersion.Version;*/
+						//var cv = Starcounter.Internal.CurrentVersion.Version;
                         return master;
 					}
 				});
 			});
-
+*/
 			Handle.GET("/tMax14web/OphClient", () => {
 				var master = (MasterPage)Self.GET("/tMax14web");
 				master.CurrentPage = new OphClientPage();

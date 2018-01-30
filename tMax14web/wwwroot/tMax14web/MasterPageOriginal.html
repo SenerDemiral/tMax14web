@@ -19,89 +19,94 @@
 <link rel="import" href="/sys/app-layout/demo/sample-content.html">
 
 <template>
-    <template is="dom-bind">
-	<style is="custom-style">
-		body {
-			margin: 0;
-			font-family: 'Roboto', 'Noto', sans-serif;
-			/*background-color: #eee;*/
-	    }
-/*
-    app-toolbar {
-      background-color: #00897B;
-      color: #fff;
-    }
-*/
-    app-drawer {
-      --app-drawer-content-container: {
-        background-color: white;
-		padding: 120px 10px;
-      }
-    }
-    .drawer-contents {
-      background-color: white;
-      height: 100%;
-      overflow-y: auto;
-    }
+    <dom-bind>
+        <template is="dom-bind">
+            <style is="custom-style">
+                                body {
+                                    margin: 0;
+                                    font-family: 'Roboto', 'Noto', sans-serif;
+                                    /*background-color: #eee;*/
+                                }
+                                /*
+                    app-toolbar {
+                      background-color: #00897B;
+                      color: #fff;
+                    }
+                */
+                                app-drawer {
+                                    --app-drawer-content-container: {
+                        background-color: white;
+                        padding: 120px 10px;
+                      }
+                                }
 
-      app-header {
-        background-color: #00897B;
-        color: #fff;
-      }
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }									   
+                                .drawer-contents {
+                                    background-color: white;
+                                    height: 100%;
+                                    overflow-y: auto;
+                                }
 
-	paper-button {
-		margin: 10px 0px;
-	}
-    </style>
+                                app-header {
+                                    background-color: #00897B;
+                                    color: #fff;
+                                }
 
-	<app-header reveals>
-		<app-toolbar id="toolbar">
-			<paper-icon-button icon="menu" on-click="drawerToggle"></paper-icon-button>
-			<paper-icon-button icon="menu" onclick="drawer2.toggle()"></paper-icon-button>
-			<paper-icon-button icon="menu" onclick$="myFunc({{model.StartDate$}})"></paper-icon-button>
-			<div main-title>tMax14web</div>
-			<paper-icon-button icon="file-download"></paper-icon-button>
-			<paper-icon-button icon="search"></paper-icon-button>
-			<paper-icon-button icon="close"></paper-icon-button>
-			<input value="{{model.fID$::input}}">
-		</app-toolbar>
-	</app-header>
+                                    app-header paper-icon-button {
+                                        --paper-icon-button-ink-color: white;
+                                    }
 
-			<div>
-		        <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
-			</div>
+                                paper-button {
+                                    margin: 10px 0px;
+                                }
+            </style>
 
-			<app-drawer id="drawer2" swipe-open>
-				<!--<div class="drawer-contents">-->
-						<paper-input label="Firma ID" value="{{model.fID$}}"></paper-input>
-						<paper-input type="password" label="Password" value="{{model.fPW$}}"></paper-input>
-						<paper-input type="date" label="Tarih >=" value="{{model.StartDate$}}"></paper-input>
-					<div>
-					<a tabindex="-1" href="/tMax14web/OphClient">
-						<paper-button raised>House</paper-button>
-					</a>
-					</div>
-					<div>
-					<paper-button raised>
-						<a tabindex="-1" title="MouseSağClick->OpenNewTab" target="_blank" href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]">Download
-						<paper-icon-button  tabindex="-1" icon="file-download"></paper-icon-button>
-						</a>
-					
-					</paper-button>
-					<!--ilki FF da calismiyor-->
-					<button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" onclick="tmplt.Download(event)">Download</button>
-					<button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" on-click="Download">D3</button>
-					<button type="button" on-click="D1">D1</button>
-					<button type="button" onclick="myFunc(event)">D2</button>
-					</div>
-				<!--</div>-->
-			</app-drawer>
+            <app-header reveals>
+                <app-toolbar id="toolbar">
+                    <paper-icon-button icon="menu" on-click="drawerToggle"></paper-icon-button>
+                    <paper-icon-button icon="menu" onclick="drawer2.toggle()"></paper-icon-button>
+                    <paper-icon-button icon="menu" onclick$="myFunc({{model.StartDate$}})"></paper-icon-button>
+                    <div main-title>tMax14web</div>
+                    <paper-icon-button icon="file-download"></paper-icon-button>
+                    <paper-icon-button icon="search"></paper-icon-button>
+                    <paper-icon-button icon="close"></paper-icon-button>
+                    <input value="{{model.fID$::input}}">
+                </app-toolbar>
+            </app-header>
+
+            <div>
+                <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
+            </div>
+
+            <app-drawer id="drawer2" swipe-open>
+                <!--<div class="drawer-contents">-->
+                <paper-input label="Firma ID" value="{{model.fID$}}"></paper-input>
+                <paper-input type="password" label="Password" value="{{model.fPW$}}"></paper-input>
+                <paper-input type="date" label="Tarih >=" value="{{model.StartDate$}}"></paper-input>
+                <div>
+                    <a tabindex="-1" href="/tMax14web/OphClient">
+                        <paper-button raised>House</paper-button>
+                    </a>
+                </div>
+                <div>
+                    <paper-button raised>
+                        <a tabindex="-1" title="MouseSağClick->OpenNewTab" target="_blank" href="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]">
+                            Download
+                            <paper-icon-button tabindex="-1" icon="file-download"></paper-icon-button>
+                        </a>
+
+                    </paper-button>
+                    <!--ilki FF da calismiyor-->
+                    <button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" onclick="tmplt.Download(event)">Download</button>
+                    <button type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID$]]/[[model.StartDate$]]" on-click="Download">D3</button>
+                    <button type="button" on-click="D1">D1</button>
+                    <button type="button" onclick="myFunc(event)">D2</button>
+                </div>
+                <!--</div>-->
+            </app-drawer>
 
 
-</template>
+        </template>
+    </dom-bind>
 	<script>
 		window.addEventListener('WebComponentsReady', function (e) {
 			// imports are loaded and elements have been registered

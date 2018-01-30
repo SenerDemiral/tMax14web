@@ -1,22 +1,23 @@
 ﻿<template>
-    <template is="dom-bind">
-        <style>
-            .tm-header--item {
-                margin-left: 10px;
-                flex: 0 0 auto; 
-            }
-        </style>
-        <div slot="tm/head-fid" class="InputAddOn">
-            <label class="InputAddOn-item">Company Id</label>
-            <input class="InputAddOn-field" type="text" name="fid" value="{{model.fID$::input}}" style="max-width:60px">
-        </div>
-        <div slot="tm/head-fid" class="InputAddOn">
-            <label class="InputAddOn-item">Password</label>
-            <input class="InputAddOn-field" type="password" name="fpw" value="{{model.fPW$::input}}" style="max-width:60px">
-        </div>
-        <div slot="tm/head-lgn" class="InputAddOn">
-            <button class="InputAddOn-item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
-        </div>
+    <dom-bind>
+        <template is="dom-bind">
+            <style>
+                .tm-header--item {
+                    margin-left: 10px;
+                    flex: 0 0 auto;
+                }
+            </style>
+            <div slot="tm/head-fid" class="InputAddOn">
+                <label class="InputAddOn-item">Company Id</label>
+                <input class="InputAddOn-field" type="text" name="fid" value="{{model.fID$::input}}" style="max-width:60px">
+            </div>
+            <div slot="tm/head-fid" class="InputAddOn">
+                <label class="InputAddOn-item">Password</label>
+                <input class="InputAddOn-field" type="password" name="fpw" value="{{model.fPW$::input}}" style="max-width:60px">
+            </div>
+            <div slot="tm/head-lgn" class="InputAddOn">
+                <button class="InputAddOn-item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
+            </div>
 
             <!--
         <label slot="tm/head-fid-label" class="tm-header--item">Company Id:</label>
@@ -50,13 +51,13 @@
             <template is="dom-if" if="{{!model.fOnLine}}">
                 <span style="color:red">Not Found</span>
             </template>-->
-        </div>
+            </div>
 
             <starcounter-include slot="tm/current" partial="{{model.CurrentPage}}"></starcounter-include>
 
             <div slot="tm/footer">[[model.fAdN]]  Transorient ®</div>
         </template>
-
+    </dom-bind>
     <template is="declarative-shadow-dom">
         
         <style>

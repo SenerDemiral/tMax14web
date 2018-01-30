@@ -2,14 +2,15 @@
 <!--<link rel="stylesheet" href="/sys/Stylesheet1.css">-->
 
 <template>
-    <template is="dom-bind" id="tmpOphs">
-        <!--<div>[[processInit(model.Html)]]</div>-->
-        <div>[[processInit(model.Html)]]</div>
+    <dom-bind>
+        <template is="dom-bind" id="tmpOphs">
+            <!--<div>[[processInit(model.Html)]]</div>-->
+            <div>[[processInit(model.Html)]]</div>
 
-        <!--
-		    <div style="width:100%;overflow:hidden;box-sizing:border-box">
-		    <table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">
-		    <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">
+            <!--
+            <div style="width:100%;overflow:hidden;box-sizing:border-box">
+            <table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">
+            <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">
             <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
             <table id="tblOphs" style="table-layout:fixed;font-size:small; width:100%" on-click="MyFnc">
             <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
@@ -17,178 +18,178 @@
         <div class="oph-table">
             <table id="tblOphs" style="font-size:small;" on-click="MyFnc">
         -->
-        
-        <div class="oph-table">
-            <table id="tblOphs" on-click="MyFnc">
-                <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
-                <caption>
-                    <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" />
-                    <!--<input type="button" data-link="ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" /> Bu da calisiyor-->
-                </caption>
-                <thead>
-                    <tr>
-                        <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
-                        <th id="EXD_t" data-tooltip$="[[model.EXD_t]]">EXD</th>
-                        <th id="RefNo" data-tooltip$="[[model.RefNo]]">Ref#</th>
-                        <th id="mVhc" data-tooltip$="[[model.mVhc]]">Vehicle</th>
 
-                        <th id="ROT" data-tooltip$="[[model.ROT]]">R</th>
-                        <th id="MOT" data-tooltip$="[[model.MOT]]">M</th>
-
-                        <th id="Org" data-tooltip$="[[model.Org]]">Org</th>
-                        <th id="Dst" data-tooltip$="[[model.Dst]]">Dst</th>
-
-                        <th id="nStu" data-tooltip$="[[model.nStu]]">Statu</th>
-                        <th id="nStuTS_t" data-tooltip$="[[model.nStuTS_t]]"></th>
-                        <th id="pStu" data-tooltip$="[[model.pStu]]">Problem</th>
-                        <th id="pStuTS_t" data-tooltip$="[[model.pStuTS_t]]"></th>
-
-                        <th id="ShpAd" data-tooltip$="[[model.ShpAd]]">Shp</th>
-                        <th id="CneAd" data-tooltip$="[[model.CneAd]]">Cne</th>
-                        <th id="AccAd" data-tooltip$="[[model.AccAd]]">Acc</th>
-                        <th id="MnfAd" data-tooltip$="[[model.MnfAd]]">Mnf</th>
-                        <th id="NfyAd" data-tooltip$="[[model.NfyAd]]">Ntf</th>
-
-                        <th id="NOP" data-tooltip$="[[model.NOP]]">NOP</th>
-                        <th id="GrW" data-tooltip$="[[model.GrW]]">GrW</th>
-                        <th id="VM3" data-tooltip$="[[model.VM3]]">VM3</th>
-                        <th id="ChW" data-tooltip$="[[model.ChW]]">ChW</th>
-
-                        <th id="DTM" data-tooltip$="[[model.DTM]]">DTM</th>
-                        <th id="PTM" data-tooltip$="[[model.PTM]]">PTM</th>
-
-                        <th id="ROH_t" data-tooltip$="[[model.ROH_t]]">ROH</th>
-                        <th id="EOH_t" data-tooltip$="[[model.EOH_t]]">EOH</th>
-                        <th id="REOH_t" data-tooltip$="[[model.REOH_t]]">REOH</th>
-                        <th id="AOH_t" data-tooltip$="[[model.AOH_t]]">AOH</th>
-                        <th id="RTR_t" data-tooltip$="[[model.RTR_t]]">RTR</th>
-                        <th id="ROS_t" data-tooltip$="[[model.ROS_t]]">ROS</th>
-                        <th id="POD_t" data-tooltip$="[[model.POD_t]]">POD</th>
-                        <th id="DRBD_t" data-tooltip$="[[model.DRBD_t]]">DRBD</th>
-
-                        <th id="mETD_t" data-tooltip$="[[model.mETD_t]]">ETD</th>
-                        <th id="mATD_t" data-tooltip$="[[model.mATD_t]]">ATD</th>
-                        <th id="mETA_t" data-tooltip$="[[model.mETA_t]]">ETA</th>
-                        <th id="mATA_t" data-tooltip$="[[model.mATA_t]]">ATA</th>
-                        <th id="mRETD_t" data-tooltip$="[[model.mRETD_t]]">RETD</th>
-                        <th id="mRETA_t" data-tooltip$="[[model.mRETA_t]]">RETD</th>
-
-                        <th id="mACOT_t" data-tooltip$="[[model.mACOT_t]]">ACOT</th>
-                        <th id="mTPAD_t" data-tooltip$="[[model.mTPAD_t]]">TPAD</th>
-                        <th id="mTPDD_t" data-tooltip$="[[model.mTPDD_t]]">TPDD</th>
-
-                        <th id="CntNoS" data-tooltip$="[[model.CntNoS]]">Cnt#</th>
-                    </tr>
-                    <tr>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                        <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template is="dom-repeat" items="{{abcd}}">
+            <div class="oph-table">
+                <table id="tblOphs" on-click="MyFnc">
+                    <!--<table id="tblOphs" class="print t1" on-click="MyFnc">-->
+                    <caption>
+                        <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" />
+                        <!--<input type="button" data-link="ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" /> Bu da calisiyor-->
+                    </caption>
+                    <thead>
                         <tr>
-                            <td data-typ="nmr">[[item.OphID]]</td>
-                            <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
-                            <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td>[[item.RefNo]]</td>
-                            <td>[[item.mVhc]]</td>
-                            <td>[[item.ROT]]</td>
-                            <td>[[item.MOT]]</td>
-                            <td>[[item.Org]]</td>
-                            <td>[[item.Dst]]</td>
-                            <td>[[item.nStuAd]]</td>
-                            <td class="trh"><moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td>[[item.pStu]]</td>
-                            <td>[[item.pStuD]]</td>
+                            <th id="OphID" data-tooltip$="[[model.OphID]]">ID</th>
+                            <th id="EXD_t" data-tooltip$="[[model.EXD_t]]">EXD</th>
+                            <th id="RefNo" data-tooltip$="[[model.RefNo]]">Ref#</th>
+                            <th id="mVhc" data-tooltip$="[[model.mVhc]]">Vehicle</th>
 
-                            <td data-typ="frm">[[item.ShpAd]]</td>
-                            <td data-typ="frm">[[item.CneAd]]</td>
-                            <td data-typ="frm">[[item.AccAd]]</td>
-                            <td data-typ="frm">[[item.MnfAd]]</td>
-                            <td data-typ="frm">[[item.NfyAd]]</td>
+                            <th id="ROT" data-tooltip$="[[model.ROT]]">R</th>
+                            <th id="MOT" data-tooltip$="[[model.MOT]]">M</th>
 
-                            <td data-typ="nmr">[[item.NOP]]</td>
-                            <td data-typ="nmr">[[item.GrW]]</td>
-                            <td data-typ="nmr">[[item.VM3]]</td>
-                            <td data-typ="nmr">[[item.ChW]]</td>
+                            <th id="Org" data-tooltip$="[[model.Org]]">Org</th>
+                            <th id="Dst" data-tooltip$="[[model.Dst]]">Dst</th>
 
-                            <td>[[item.DTM]]</td>
-                            <td>[[item.PTM]]</td>
+                            <th id="nStu" data-tooltip$="[[model.nStu]]">Statu</th>
+                            <th id="nStuTS_t" data-tooltip$="[[model.nStuTS_t]]"></th>
+                            <th id="pStu" data-tooltip$="[[model.pStu]]">Problem</th>
+                            <th id="pStuTS_t" data-tooltip$="[[model.pStuTS_t]]"></th>
 
-                            <td data-typ="trh"><moment-element datetime="[[item.ROH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mETD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mATD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mETA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mATA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mRETD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mRETA_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mACOT_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mTPAD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td data-typ="trh"><moment-element datetime="[[item.mTPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <th id="ShpAd" data-tooltip$="[[model.ShpAd]]">Shp</th>
+                            <th id="CneAd" data-tooltip$="[[model.CneAd]]">Cne</th>
+                            <th id="AccAd" data-tooltip$="[[model.AccAd]]">Acc</th>
+                            <th id="MnfAd" data-tooltip$="[[model.MnfAd]]">Mnf</th>
+                            <th id="NfyAd" data-tooltip$="[[model.NfyAd]]">Ntf</th>
 
-                            <td>[[item.CntNoS]]</td>
-                        </tr">
-                    </template>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="37">
-                            <span> #Rec: [[NOR]]</span>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+                            <th id="NOP" data-tooltip$="[[model.NOP]]">NOP</th>
+                            <th id="GrW" data-tooltip$="[[model.GrW]]">GrW</th>
+                            <th id="VM3" data-tooltip$="[[model.VM3]]">VM3</th>
+                            <th id="ChW" data-tooltip$="[[model.ChW]]">ChW</th>
 
-</template>
-	
-	<script>
+                            <th id="DTM" data-tooltip$="[[model.DTM]]">DTM</th>
+                            <th id="PTM" data-tooltip$="[[model.PTM]]">PTM</th>
+
+                            <th id="ROH_t" data-tooltip$="[[model.ROH_t]]">ROH</th>
+                            <th id="EOH_t" data-tooltip$="[[model.EOH_t]]">EOH</th>
+                            <th id="REOH_t" data-tooltip$="[[model.REOH_t]]">REOH</th>
+                            <th id="AOH_t" data-tooltip$="[[model.AOH_t]]">AOH</th>
+                            <th id="RTR_t" data-tooltip$="[[model.RTR_t]]">RTR</th>
+                            <th id="ROS_t" data-tooltip$="[[model.ROS_t]]">ROS</th>
+                            <th id="POD_t" data-tooltip$="[[model.POD_t]]">POD</th>
+                            <th id="DRBD_t" data-tooltip$="[[model.DRBD_t]]">DRBD</th>
+
+                            <th id="mETD_t" data-tooltip$="[[model.mETD_t]]">ETD</th>
+                            <th id="mATD_t" data-tooltip$="[[model.mATD_t]]">ATD</th>
+                            <th id="mETA_t" data-tooltip$="[[model.mETA_t]]">ETA</th>
+                            <th id="mATA_t" data-tooltip$="[[model.mATA_t]]">ATA</th>
+                            <th id="mRETD_t" data-tooltip$="[[model.mRETD_t]]">RETD</th>
+                            <th id="mRETA_t" data-tooltip$="[[model.mRETA_t]]">RETD</th>
+
+                            <th id="mACOT_t" data-tooltip$="[[model.mACOT_t]]">ACOT</th>
+                            <th id="mTPAD_t" data-tooltip$="[[model.mTPAD_t]]">TPAD</th>
+                            <th id="mTPDD_t" data-tooltip$="[[model.mTPDD_t]]">TPDD</th>
+
+                            <th id="CntNoS" data-tooltip$="[[model.CntNoS]]">Cnt#</th>
+                        </tr>
+                        <tr>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="{{model.Ophs}}">
+                            <tr>
+                                <td data-typ="nmr">[[item.OphID]]</td>
+                                <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
+                                <td><moment-element datetime="[[item.EXD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td>[[item.RefNo]]</td>
+                                <td>[[item.mVhc]]</td>
+                                <td>[[item.ROT]]</td>
+                                <td>[[item.MOT]]</td>
+                                <td>[[item.Org]]</td>
+                                <td>[[item.Dst]]</td>
+                                <td>[[item.nStuAd]]</td>
+                                <td class="trh"><moment-element datetime="[[item.nStuTS_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td>[[item.pStu]]</td>
+                                <td>[[item.pStuD]]</td>
+
+                                <td data-typ="frm">[[item.ShpAd]]</td>
+                                <td data-typ="frm">[[item.CneAd]]</td>
+                                <td data-typ="frm">[[item.AccAd]]</td>
+                                <td data-typ="frm">[[item.MnfAd]]</td>
+                                <td data-typ="frm">[[item.NfyAd]]</td>
+
+                                <td data-typ="nmr">[[item.NOP]]</td>
+                                <td data-typ="nmr">[[item.GrW]]</td>
+                                <td data-typ="nmr">[[item.VM3]]</td>
+                                <td data-typ="nmr">[[item.ChW]]</td>
+
+                                <td>[[item.DTM]]</td>
+                                <td>[[item.PTM]]</td>
+
+                                <td data-typ="trh"><moment-element datetime="[[item.ROH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.REOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mETD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mATD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mRETD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mRETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mACOT_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mTPAD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                                <td data-typ="trh"><moment-element datetime="[[item.mTPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
+
+                                <td>[[item.CntNoS]]</td>
+                                </tr">
+                        </template>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="37">
+                                <span> #Rec: [[NOR]]</span>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </template>
+    </dom-bind>
+	<script>/*
 		(function ()
 		{
 			var curRowIndex = -1;
@@ -452,7 +453,7 @@
 			}
             */
 		})();
-
+        */
 	</script>
 
 </template>

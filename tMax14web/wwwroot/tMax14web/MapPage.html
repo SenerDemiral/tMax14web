@@ -3,36 +3,33 @@
 <link rel="import" href="/sys/google-map/google-map-marker.html">
 
 <template>
-    <template is="dom-bind">
-        <div class="map-grid">
-            <div class="map-left">
-                <table id="tblMap" on-click="MyFnc">
-                    <thead>
-                        <tr>
-                            <th>Cntnr#</th>
-                            <th>LastSeen GMT</th>
-                            <th>Lat</th>
-                            <th>Lng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template is="dom-repeat" items="{{model.MapList}}">
+    <dom-bind>
+        <template is="dom-bind">
+            <div class="map-grid">
+                <div class="map-left">
+                    <table id="tblMap" on-click="MyFnc">
+                        <thead>
                             <tr>
-                                <td><button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]]</button></td>
-                                <!--
-                                <td data-typ="trh"><moment-element datetime="[[item.LST_t]]" output-format="DD.MM.YY HH:MM"></moment-element></td>
-                                -->
-                                <td>[[item.LST_t]]</td>
-                                <td>[[item.lat]]</td>
-                                <td>[[item.lng]]</td>
+                                <th>Cntnr#</th>
+                                <th>LastSeen GMT</th>
+                                <th>Lat</th>
+                                <th>Lng</th>
                             </tr>
-                        </template>
-                    </tbody>
-                                           
-                </table>
-                <!--button value="{{model.DnmTrigger$::click}}" onmousedown="++this.value">Deneme</button-->
+                        </thead>
+                        <tbody>
+                            <template is="dom-repeat" items="{{model.MapList}}">
+                                <tr>
+                                    <td><button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]]</button></td>
+                                    <td data-typ="trh"><moment-element datetime="[[item.LST_t]]" output-format="DD.MM.YY HH:MM"></moment-element></td>
+                                    <td>[[item.lat]]</td>
+                                    <td>[[item.lng]]</td>
+                                </tr>
+                            </template>
+                        </tbody>
 
-                <!--
+                    </table>
+                    <!--button value="{{model.DnmTrigger$::click}}" onmousedown="++this.value">Deneme</button-->
+                    <!--
                 <div>Trackers</div>
                 <ul>
                     <template is="dom-repeat" items="[[model.MapList]]">
@@ -43,38 +40,39 @@
                     </template>
                 </ul>
                 -->
-           </div>
+                </div>
 
-            <div class="map-right">
-                <google-map id="gmap" map="{{map}}"
-                            style="height: calc(100vh - 74px);"
-                            fit-to-markers
-                            latitude="37.026835"
-                            longitude="27.563807"
-                            api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0"
-                            mouseEvents
-                            on-google-map-ready="_mapReady">
+                <div class="map-right">
+                    <google-map id="gmap" map="{{map}}"
+                                style="height: calc(100vh - 74px);"
+                                fit-to-markers
+                                latitude="37.026835"
+                                longitude="27.563807"
+                                api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0"
+                                mouseEvents
+                                on-google-map-ready="_mapReady">
 
-                    <template is="dom-repeat" items="{{model.Markers}}">
-                        <google-map-marker map="{{map}}"
-                                           click-events
-                                           on-google-map-marker-click="_markerClick"
-                                           on-google-map-marker-open="_markerOpen"
-                                           on-google-map-marker-close="_markerClose"
-                                           slot="markers"
-                                           latitude="[[item.lat]]"
-                                           longitude="[[item.lng]]"
-                                           title="[[item.Title]]"
-                                           open="{{item.ShowInfo$}}">
-                            -[[item.Info]]
-                        </google-map-marker>
-                    </template>
-                </google-map>
-                <google-map-markerclusterer map="{{map}}"></google-map-markerclusterer>
+                        <template is="dom-repeat" items="{{model.Markers}}">
+                            <google-map-marker map="{{map}}"
+                                               click-events
+                                               on-google-map-marker-click="_markerClick"
+                                               on-google-map-marker-open="_markerOpen"
+                                               on-google-map-marker-close="_markerClose"
+                                               slot="markers"
+                                               latitude="[[item.lat]]"
+                                               longitude="[[item.lng]]"
+                                               title="[[item.Title]]"
+                                               open="{{item.ShowInfo$}}">
+                                -[[item.Info]]
+                            </google-map-marker>
+                        </template>
+                    </google-map>
+                    <google-map-markerclusterer map="{{map}}"></google-map-markerclusterer>
+                </div>
             </div>
-        </div>
 
-    </template>
+        </template>
+    </dom-bind>
     <script>
         console.log('Script 1');
 
