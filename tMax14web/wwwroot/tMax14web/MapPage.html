@@ -20,7 +20,7 @@
                             <template is="dom-repeat" items="{{model.MapList}}">
                                 <tr>
                                     <td><button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]]</button></td>
-                                    <td data-typ="trh"><moment-element datetime="[[item.LST_t]]" output-format="DD.MM.YY HH:MM"></moment-element></td>
+                                    <td>[[item.LST_t]]</td>
                                     <td>[[item.lat]]</td>
                                     <td>[[item.lng]]</td>
                                 </tr>
@@ -73,102 +73,5 @@
 
         </template>
     </dom-bind>
-    <script>
-        console.log('Script 1');
 
-
-        (function () {
-            var script = document._currentScript || document.currentScript;
-            tmplt = script.previousElementSibling;
-            //console.log(window.google);
-            //window.google.Map.addListener('center_changed', function () {
-            //    console.log('center_changed');
-            //});
-            console.log('Script 2');
-
-            tmplt.ready = function () {
-                console.log('ready');
-                //var gmap = document.querySelector('google-map');
-                gmap2 = this.$.gmap;
-                /*
-                gmap2.addEventListener('google-map-ready', function (e) {
-                    console.log('this.map', this);
-                    this.map.addListener('center_changed', function () {
-                        console.log('center changed222222222');
-                    });
-                });*/
-            }
-
-            /*
-            tmplt.ready = function () {
-                console.log('ready');
-
-                console.log(document.querySelector('#gmap'));
-                console.log(this.$);
-                window.tt = tmplt;
-                //var m = document.querySelector('#gmap');
-                //m.map.addListener('center-changed', function () {
-                //m.addListener('center-changed', function () {
-                //        console.log('center changed');
-                //});
-
-                gmap = this.$.gmap;
-                console.log(gmap);
-                gmap.ready = function () {
-                    console.log('gmap ready');
-
-                }
-
-                gmap.addEventListener('ready', function () {
-                    console.log('dom change');
-                    //console.log(this.$.gmap);
-                    //window.m = this.$.gmap;
-                    //console.log(window.m.map);
-
-                        gmap.map.addListener('center-changed', function () {
-                                    console.log('center changed');
-                        });
-                });
-            }
-            */
-
-            tmplt._markerClick = function (e) {
-                // https://www.polymer-project.org/1.0/docs/devguide/templates
-                //console.log("e.model.item.Info: " + e.model.item.Info); // Asagidakiyle ayni sonuc
-                console.log("e.model.get('item.Info'): ", e.model.get('item.Info'));
-                e.model.set('item.ShowInfo$', true);
-                console.log('_markerClick -> item.ShowInfo$: ', e.model.get('item.ShowInfo$'));
-
-                //console.log(this.$.firstRepeat.modelForElement(e.target));
-
-                // Hepsi ayni sonuc (e ye model'i koyan polymer)
-                //e.target.innerHTML = e.model.__data__.item.Info;
-                e.target.innerHTML = e.model.get('item.Info');
-                //e.target.innerHTML = e.model.item.Info;
-            }
-
-            tmplt._markerClose = function (e) {
-                e.model.set('item.ShowInfo$', false);
-                console.log("_markerClose -> item.ShowInfo$:", e.model.get('item.ShowInfo$'));
-            }
-
-            tmplt._markerOpen = function (e) {
-                //e.model.set('item.ShowInfo$', false);
-                e.target.innerHTML = e.model.get('item.Info');
-                console.log("_markerOpen -> item.ShowInfo$:", e.model.get('item.ShowInfo$'));
-            }
-
-            tmplt._mapReady = function (e) {
-                console.log("map Ready");
-                console.log(document.querySelector('#gmap'));
-                //gmap = this.$.gmap;
-                gmap = document.querySelector('#gmap');
-                console.log(gmap);
-                gmap.map.addListener('center_changed', function () {
-                    console.log('center changed');
-                });
-
-            }
-        })();
-    </script>
 </template>

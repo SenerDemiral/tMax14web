@@ -15,56 +15,20 @@
 <link rel="import" href="/sys/app-layout/demo/sample-content.html">
 
 <template>
+	<dom-bind>
     <template is="dom-bind">
-	<style is="custom-style">
-		body {
-			margin: 0;
-			font-family: 'Roboto', 'Noto', sans-serif;
-			/*background-color: #eee;*/
-	    }
-/*
-    app-toolbar {
-      background-color: #00897B;
-      color: #fff;
-    }
-*/
-    app-drawer {
-      --app-drawer-content-container: {
-        background-color: white;
-		padding: 120px 10px;
-      }
-    }
-    .drawer-contents {
-      background-color: white;
-      height: 100%;
-      overflow-y: auto;
-    }
-
-      app-header {
-        background-color: #00897B;
-        color: #fff;
-      }
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }									   
-
-	paper-button {
-		margin: 10px 0px;
-	}
-    </style>
-
-	<app-header reveals>
-		<app-toolbar id="toolbar">
-			<paper-icon-button icon="menu" on-click="drawerToggle"></paper-icon-button>	<!--Hepsinde calisiyor-->
-			<paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> <!--FF+Edge de calismiyor Shoadow olunca calismiyor wc-lite olursa calisiyor Shady ama bu seferde sc calismiyor-->
-			<paper-icon-button icon="menu" onclick$="myFunc('{{model.StartDate$}}')"></paper-icon-button>
-			<div main-title>tMax14web</div>
-			<paper-icon-button icon="file-download"></paper-icon-button>
-			<paper-icon-button icon="search"></paper-icon-button>
-			<paper-icon-button icon="close"></paper-icon-button>
-			<input value="{{model.fID$::input}}">
-		</app-toolbar>
-	</app-header>
+		<app-header reveals>
+			<app-toolbar id="toolbar">
+				<paper-icon-button icon="menu" on-click="drawerToggle"></paper-icon-button>	<!--Hepsinde calisiyor-->
+				<paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button> <!--FF+Edge de calismiyor Shoadow olunca calismiyor wc-lite olursa calisiyor Shady ama bu seferde sc calismiyor-->
+				<paper-icon-button icon="menu" onclick$="myFunc('{{model.StartDate$}}')"></paper-icon-button>
+				<div main-title>tMax14web</div>
+				<paper-icon-button icon="file-download"></paper-icon-button>
+				<paper-icon-button icon="search"></paper-icon-button>
+				<paper-icon-button icon="close"></paper-icon-button>
+				<input value="{{model.fID$::input}}">
+			</app-toolbar>
+		</app-header>
 
 			<div>
 		        <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
@@ -96,9 +60,9 @@
 					</div>
 				<!--</div>-->
 			</app-drawer>
+	</template>
+	</dom-bind>
 
-
-    </template>
 	<script>
 		document.addEventListener('WebComponentsReady', function (e) {
 			// imports are loaded and elements have been registered

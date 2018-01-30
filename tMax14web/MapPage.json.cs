@@ -34,6 +34,7 @@ namespace tMax14web
 
         public void PushChanges()
         {
+            /*
             Session.ForAll((s, sId) => {
                 var cp = (s.Store["App"] as MasterPage).CurrentPage;
                 if (cp is MapPage)
@@ -42,6 +43,7 @@ namespace tMax14web
                     s.CalculatePatchAndPushOnWebSocket();
                 }
             });
+            */
         }
 
         protected override void OnData()
@@ -64,14 +66,16 @@ namespace tMax14web
                 mapList.lng = t.Lng;
                 mapList.LST_t = $"{t.LTS:dd.MM.yy HH:mm}"; // t.LTS.ToString("s");
                 mapList.Title = t.CntNo;
-                mapList.Info = $"<strong>{t.CntNo}</strong><br>{t.LTS:dd.MM.yy HH:mm}";
+                mapList.Info = $"{t.CntNo} @{t.LTS:dd.MM.yy HH:mm}";
+                //mapList.Info = $"<strong>{t.CntNo}</strong><br>{t.LTS:dd.MM.yy HH:mm}";
 
                 marker = Markers.Add();
                 marker.Idx = i;
                 marker.lat = t.Lat;
                 marker.lng = t.Lng;
                 marker.Title = t.CntNo;
-                marker.Info = $"<strong>{t.CntNo}</strong><br>{t.LTS:dd.MM.yy HH:mm}";
+                marker.Info = $"{t.CntNo} @{t.LTS:dd.MM.yy HH:mm}";
+                //marker.Info = $"<strong>{t.CntNo}</strong><br>{t.LTS:dd.MM.yy HH:mm}";
 
                 i++;
             }
