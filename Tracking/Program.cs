@@ -17,7 +17,7 @@ namespace Tracking
             {
                 string text = Encoding.ASCII.GetString(datagram);
 
-                TMDB.Hlpr.WriteTrackingLog("Received 6002/UDP: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
+                TMDB.Hlpr.WriteTrackingLog("Received 6000/UDP: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
 
                 // One can update any resources associated with "clientIp" and "clientPort".
                 //UdpSocket.Send(clientIp, clientPort, 6000, Encoding.ASCII.GetBytes("ok"));
@@ -26,7 +26,7 @@ namespace Tracking
                 {
                     // Login Packet received ##,imei:864180034846423,A;
                     TMDB.Hlpr.WriteTrackingLog("Login packet received, sending LOAD");
-                    UdpSocket.Send(clientIp, clientPort, 6002, "LOAD");
+                    UdpSocket.Send(clientIp, clientPort, 6000, "LOAD");
                 }
                 else if (text.StartsWith("imei:"))
                 {
