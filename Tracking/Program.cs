@@ -17,29 +17,65 @@ namespace Tracking
             {
                 string text = Encoding.ASCII.GetString(datagram);
 
-                TMDB.Hlpr.WriteTrackingLog("Received on: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
+                TMDB.Hlpr.WriteTrackingLog("Received 6002/UDP: " + clientIp.ToString() + " " + clientPort.ToString() + " " + text);
 
                 // One can update any resources associated with "clientIp" and "clientPort".
                 //UdpSocket.Send(clientIp, clientPort, 6000, Encoding.ASCII.GetBytes("ok"));
-                UdpSocket.Send(clientIp, clientPort, 6000, "ok");
 
-                if (text.StartsWith("(") && text.EndsWith(")"))
-                    processMessages(text);
-            });
+                if (text.StartsWith("##,imei:"))
+                {
+                    // Login Packet received ##,imei:864180034846423,A;
+                    TMDB.Hlpr.WriteTrackingLog("Login packet received, sending LOAD");
+                    UdpSocket.Send(clientIp, clientPort, 6002, "LOAD");
+                }
+                else if (text.StartsWith("imei:"))
+                {
+                    // Position received
+                    // imei:864180034846423,work notify,180108164145,,F,084144.000,A,3701.6108,N,02733.8299,E,0.00,0;
+                    TMDB.Hlpr.WriteTrackingLog("Position received");
+                    string[] msgss = text.Split(new char[] { ':', ',', ';' });
+                    if (msgss[5] == "F")    // Valid GPS data
+                    {
+                        string id = msgss[1];
+                        double lat = LatDMCtoDD(msgss[8]+msgss[9]);
+                        double lon = LonDMCtoDD(msgss[10]+msgss[11]);
 
-            Handle.GET("/bodved/IndexCreate", () =>
-            {
-                if (Db.SQL("SELECT i FROM Starcounter.Metadata.\"Index\" i WHERE Name = ?", "IdxTH_ID").FirstOrDefault() == null)
-                    Db.SQL("CREATE INDEX IdxTH_ID ON TH (UNIQUE ID )");
+                        Db.Transact(() =>
+                        {
+                            //var th = Db.FromId<TMDB.TH>(ulong.Parse(trckID));
+                            var th = Db.SQL<TMDB.TH>("select h from TMDB.TH h where h.ID = ?", id).FirstOrDefault();
+                            if (th == null)
+                            {
+                                new TMDB.TH
+                                {
+                                    ID = id,
+                                    Lat = lat.ToString(),
+                                    Lng = lon.ToString(),
+                                    LTS = DateTime.Now,
+                                    CntNo = "ECBU XXXXXX Z"
+                                };
+                            }
+                            else
+                            {
+                                th.Lat = lat.ToString();
+                                th.Lng = lon.ToString();
+                                th.LTS = DateTime.Now;
+                                th.CntNo = "ECBU XXXXXX Z";
 
-                return "OK IndexCreate";
-            });
+                            }
+                        });
 
-            Handle.GET("/bodved/IndexDrop", () =>
-            {
-                Db.SQL("DROP INDEX IdxTH_ID ON TH");
+                    }
 
-                return "OK IndexDrop";
+                    // UdpSocket.Send(clientIp, clientPort, 6002, "LOAD");
+                }
+                else
+                {
+                    // Heartbeat Pocket received
+                    TMDB.Hlpr.WriteTrackingLog("Heartbeat received, sending ON");
+                    UdpSocket.Send(clientIp, clientPort, 6002, "ON");
+                }
+
             });
 
             Handle.GET("/Tracking/initTH", () =>

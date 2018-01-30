@@ -62,7 +62,7 @@ namespace tMax14web
                 mapList.Idx = i;
                 mapList.lat = t.Lat;
                 mapList.lng = t.Lng;
-                mapList.LST_t = t.LTS.ToString("s");
+                mapList.LST_t = $"{t.LTS:dd.MM.yy HH:mm}"; // t.LTS.ToString("s");
                 mapList.Title = t.CntNo;
                 mapList.Info = $"<strong>{t.CntNo}</strong><br>{t.LTS:dd.MM.yy HH:mm}";
 

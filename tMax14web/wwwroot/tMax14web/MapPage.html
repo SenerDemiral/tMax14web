@@ -19,7 +19,10 @@
                         <template is="dom-repeat" items="{{model.MapList}}">
                             <tr>
                                 <td><button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]]</button></td>
+                                <!--
                                 <td data-typ="trh"><moment-element datetime="[[item.LST_t]]" output-format="DD.MM.YY HH:MM"></moment-element></td>
+                                -->
+                                <td>[[item.LST_t]]</td>
                                 <td>[[item.lat]]</td>
                                 <td>[[item.lng]]</td>
                             </tr>
