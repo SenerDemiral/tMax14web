@@ -73,7 +73,7 @@ namespace Tracking
                 {
                     // Heartbeat Pocket received
                     TMDB.Hlpr.WriteTrackingLog("Heartbeat received, sending ON");
-                    UdpSocket.Send(clientIp, clientPort, 6002, "ON");
+                    UdpSocket.Send(clientIp, clientPort, 6000, "ON");
                 }
 
             });
