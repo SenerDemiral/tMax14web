@@ -204,6 +204,14 @@
             });
 
 
+            // Herzaman ready oldugu icin asagidakinin burda hicbir faydasi yok
+            document.addEventListener('readystatechange', function () {
+                console.log("document.readyState", document.readyState);
+                if (document.readyState === 'complete') {
+                    console.log("document.readyState: complete");
+                }
+            });
+
             // FF: bu event'i hic gormuyor, bu olursa calismiyor zaten
             /*
             tmplt.ready = function () {
@@ -212,14 +220,6 @@
                 console.log("tmplt4", tmplt.model.Ophs);
             };
             */
-
-            // Herzaman ready oldugu icin asagidakinin burda hicbir faydasi yok
-            document.addEventListener('readystatechange', function () {
-                console.log("document.readyState", document.readyState);
-                if (document.readyState === 'complete') {
-                    console.log("document.readyState: complete");
-                }
-            });
 
             // Chrom'dan baskasinda calismiyor (observers Polymer'den geliyor)
             //tmplt.messageChanged = function (newMessageValue) {
