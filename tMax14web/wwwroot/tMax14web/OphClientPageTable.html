@@ -4,20 +4,19 @@
 <template>
     <dom-bind>
         <template is="dom-bind" id="tmpOphs">
-            <!--<div>[[processInit(model.Html)]]</div>-->
             <div>[[processInit(model.Html)]]</div>
-
+            <!--<div>[[processInit(model.Html)]]</div>-->
             <!--
-            <div style="width:100%;overflow:hidden;box-sizing:border-box">
-            <table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">
-            <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">
-            <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
-            <table id="tblOphs" style="table-layout:fixed;font-size:small; width:100%" on-click="MyFnc">
-            <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
-        <div style="max-height: calc(100vh - 76px); width: calc(100vw - 4px); overflow: auto;">
-        <div class="oph-table">
-            <table id="tblOphs" style="font-size:small;" on-click="MyFnc">
-        -->
+        <div style="width:100%;overflow:hidden;box-sizing:border-box">
+        <table  id="tblOphs" style="table-layout:fixed;font-family:Arial, Helvetica, sans-serif;font-size:small" onclick="tmplt.MyFnc(event, this)">
+        <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc"  dene="[[processInit(model.Html)]]">
+        <table id="tblOphs" style="table-layout:auto;font-family:Arial, Helvetica, sans-serif;font-size:small" on-click="MyFnc">
+        <table id="tblOphs" style="table-layout:fixed;font-size:small; width:100%" on-click="MyFnc">
+        <div style="height: calc(100vh - 76px); width: 100vw; overflow: auto;">
+    <div style="max-height: calc(100vh - 76px); width: calc(100vw - 4px); overflow: auto;">
+    <div class="oph-table">
+        <table id="tblOphs" style="font-size:small;" on-click="MyFnc">
+    -->
 
             <div class="oph-table">
                 <table id="tblOphs" on-click="MyFnc">
@@ -125,7 +124,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template is="dom-repeat" items="{{model.Ophs}}">
+                        <template is="dom-repeat" items="{{abcd}}">
                             <tr>
                                 <td data-typ="nmr">[[item.OphID]]</td>
                                 <!--<td style="max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">[[item.EXD]]</td>-->
@@ -174,7 +173,7 @@
                                 <td data-typ="trh"><moment-element datetime="[[item.mTPDD_t]]" output-format="DD.MM.YY"></moment-element></td>
 
                                 <td>[[item.CntNoS]]</td>
-                                </tr">
+                            </tr>
                         </template>
                     </tbody>
                     <tfoot>
@@ -189,271 +188,276 @@
 
         </template>
     </dom-bind>
-	<script>/*
-		(function ()
-		{
-			var curRowIndex = -1;
-			var curCellIndex = -1;
 
-			var script = document._currentScript || document.currentScript;
-			tmplt = script.previousElementSibling;
+    <script>
+        (function () {
+            var curRowIndex = -1;
+            var curCellIndex = -1;
 
-			console.log("Script run");
+            var script = document._currentScript || document.currentScript;
+            //tmplt = script.previousElementSibling;
+            tmplt = Polymer.Element ? script.previousElementSibling : script.previousElementSibling.firstElementChild;
+            console.log("Script run", tmplt);
 
-			tmplt.addEventListener('dom-change', function () {
-			    console.log('dom-change');
-			});
-
-
-		    // FF: bu event'i hic gormuyor
-			tmplt.ready = function () {
-			    console.log('readyyyyyyyyyyyyyyy');
-			    //this.processInit("dummy");
-			};
-
-		    // Herzaman ready oldugu icin asagidakinin burda hicbir faydasi yok
-			document.addEventListener('readystatechange', function () {
-			    console.log("document.readyState", document.readyState);
-			    if (document.readyState === 'complete') {
-			        console.log("document.readyState: complete");
-			    }
-			});
-
-		    // Chrom'dan baskasinda calismiyor (observers Polymer'den geliyor)
-			tmplt.messageChanged = function (newMessageValue) {
-			    console.log("Message was changed", newMessageValue);
-			};
-			tmplt.observers = ["messageChanged(model.sener)"];
+            tmplt.addEventListener('dom-change', function () {
+                console.log('dom-change');
+            });
 
 
-		    // FF: Ilk giriste processInit'i gormuyor
-			tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+            // FF: bu event'i hic gormuyor, bu olursa calismiyor zaten
+            /*
+            tmplt.ready = function () {
+                console.log('readyyyyyyyyyyyyyyy');
+                //this.processInit("dummy");
+                console.log("tmplt4", tmplt.model.Ophs);
+            };
+            */
 
-		    // model degisikliginde calisiyor <div>[[processInit(model.Html)]]</div>
-			tmplt.processInit = function (val) {
-			    //console.log("processInit this1", this.$.tblOphs);
-			    //console.log("processInit this2", this.$["EXD"]);
-			    if (curCellIndex != -1) {
-			        this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			    }
-			    if (curRowIndex != -1) {
-			        this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			    }
-			    curRowIndex = -1;
-			    curCellIndex = -1;
-			    //console.log("tmplt", tmplt.model);
-			    tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+            // Herzaman ready oldugu icin asagidakinin burda hicbir faydasi yok
+            document.addEventListener('readystatechange', function () {
+                console.log("document.readyState", document.readyState);
+                if (document.readyState === 'complete') {
+                    console.log("document.readyState: complete");
+                }
+            });
 
-			    tmplt.NOR = tmplt.abcd.length
-			    console.log("processInit", tmplt.NOR);
+            // Chrom'dan baskasinda calismiyor (observers Polymer'den geliyor)
+            //tmplt.messageChanged = function (newMessageValue) {
+            //    console.log("Message was changed", newMessageValue);
+            //};
+            //tmplt.observers = ["messageChanged(model.sener)"];
 
-			    setTimeout(function () {
-			        tmplt.MyFilter();
-			    });
-			};
 
-			tmplt.MyDownload = function (e) {
-			    e.stopImmediatePropagation(); //stopPropagation();
-			    window.open(e.target.dataLink, '_self');
-			}
+            // FF: Ilk giriste processInit'i gormuyor
+            console.log("tmplt2", tmplt.model);
+            tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+            console.log("abcd3", tmplt.abcd);
 
-			tmplt.MyFnc = function (e) {
-			    console.log(e);
-			    var tr = e.target.closest("tr");
-			    console.log("tr", tr);
-			    if (tr == null) // Input Table'da oldugu icin oradan da gelebilit
-			        return;
+            // model degisikliginde calisiyor <div>[[processInit(model.Html)]]</div>
+            tmplt.processInit = function (val) {
+                console.log("processInit this1", this.$.tblOphs);
+                //console.log("processInit this2", this.$["EXD"]);
+                if (curCellIndex != -1) {
+                    this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+                }
+                if (curRowIndex != -1) {
+                    this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+                }
+                curRowIndex = -1;
+                curCellIndex = -1;
+                console.log("tmplt", tmplt.model);
+                tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
 
-			    if (tr.rowIndex == 0) {     // Sort
-			        //console.log("target ID", e.target.id.substring(e.target.id.length - 2));
-			        if (curCellIndex != -1) {
-			            tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			            //this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			        }
-			        //console.log("TableMyFnc2", this);
-			        curCellIndex = e.target.cellIndex;
-			        e.target.classList.add("curSort");
+                tmplt.NOR = tmplt.abcd.length
+                console.log("processInit", tmplt.NOR);
 
-			        var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			        //if (e.target.id.substring(e.target.id.length - 2) == "_t")
-			        if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
-			            tmplt.abcd = sener.sort(firstBy(e.target.id, -1));
-			        else
-			            tmplt.abcd = sener.sort(firstBy(e.target.id));
+                setTimeout(function () {
+                    tmplt.MyFilter();
+                });
+            };
 
-			        //console.log("tmplt.model.Ophs1", tmplt.model.Ophs[0].ChW$);
-			        //tmplt.model.Ophs[0].ChW$ = 11;
-			        //tmplt.model.Ophs.Clear();// = sener.sort(firstBy(e.target.id));
-			        //console.log("tmplt.model.Ophs2", tmplt.model.Ophs);
+            tmplt.MyDownload = function (e) {
+                e.stopImmediatePropagation(); //stopPropagation();
+                window.open(e.target.dataLink, '_self');
+            }
 
-			        if (curRowIndex != -1)
-			            tblOphs.rows[curRowIndex].classList.remove("curRow");
+            tmplt.MyFnc = function (e) {
+                console.log("MyFunc", e);
+                var tr = e.target.closest("tr");
+                console.log("tr", tr);
+                if (tr == null) // Input Table'da oldugu icin oradan da gelebilit
+                    return;
 
-			        // Table refresh olduktan sonra MyFilter calismali
-			        setTimeout(function () {
-			            tmplt.MyFilter();
-			        });
+                if (tr.rowIndex == 0) {     // Sort
+                    //console.log("target ID", e.target.id.substring(e.target.id.length - 2));
+                    if (curCellIndex != -1) {
+                        tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+                        //this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+                    }
+                    //console.log("TableMyFnc2", this);
+                    curCellIndex = e.target.cellIndex;
+                    e.target.classList.add("curSort");
 
-			    }
-			    else if (tr.rowIndex > 1) {     // Mark current Row
-			        if (curRowIndex != -1) {
-			            tblOphs.rows[curRowIndex].classList.remove("curRow"); //this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			        }
-			        //console.log("e.target", e);
-			        //var curTr = e.target.closest("tr");
-			        //console.log("e.target.closest(tr)", curTr.rowIndex);
+                    var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+                    //if (e.target.id.substring(e.target.id.length - 2) == "_t")
+                    if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
+                        tmplt.abcd = sener.sort(firstBy(e.target.id, -1));
+                    else
+                        tmplt.abcd = sener.sort(firstBy(e.target.id));
 
-			        curRowIndex = tr.rowIndex; //curTr.rowIndex;
-			        tr.classList.add("curRow"); //curTr.classList.add("curRow");
+                    //console.log("tmplt.model.Ophs1", tmplt.model.Ophs[0].ChW$);
+                    //tmplt.model.Ophs[0].ChW$ = 11;
+                    //tmplt.model.Ophs.Clear();// = sener.sort(firstBy(e.target.id));
+                    //console.log("tmplt.model.Ophs2", tmplt.model.Ophs);
 
-			        //curRowIndex = e.target.parentNode.rowIndex;
-			        //e.target.parentNode.classList.add("curRow");
+                    if (curRowIndex != -1)
+                        tblOphs.rows[curRowIndex].classList.remove("curRow");
 
-			        //console.log("curRowIndex", curRowIndex);
-			    }
-			}
+                    // Table refresh olduktan sonra MyFilter calismali
+                    setTimeout(function () {
+                        tmplt.MyFilter();
+                    });
 
-			tmplt.MyFilter = function (e) {
-			    var nor = tblOphs.rows.length - 1;  // Footer'i sayma
-			    var noc = tblOphs.rows[0].cells.length;
-			    //var tbl = document.querySelector('#tblOphs');
-			    //console.log('NOR', nor, 'NOC', noc);
-			    var fnor = 0;   // Filtered NOR
+                }
+                else if (tr.rowIndex > 1) {     // Mark current Row
+                    if (curRowIndex != -1) {
+                        tblOphs.rows[curRowIndex].classList.remove("curRow"); //this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+                    }
+                    //console.log("e.target", e);
+                    //var curTr = e.target.closest("tr");
+                    //console.log("e.target.closest(tr)", curTr.rowIndex);
+
+                    curRowIndex = tr.rowIndex; //curTr.rowIndex;
+                    tr.classList.add("curRow"); //curTr.classList.add("curRow");
+
+                    //curRowIndex = e.target.parentNode.rowIndex;
+                    //e.target.parentNode.classList.add("curRow");
+
+                    //console.log("curRowIndex", curRowIndex);
+                }
+            }
+
+            tmplt.MyFilter = function (e) {
+                var nor = tblOphs.rows.length - 1;  // Footer'i sayma
+                var noc = tblOphs.rows[0].cells.length;
+                //var tbl = document.querySelector('#tblOphs');
+                //console.log('NOR', nor, 'NOC', noc);
+                var fnor = 0;   // Filtered NOR
 
                 // Search values
-			    var svs = tblOphs.querySelectorAll('thead tr input');
-			    //console.log(svs);
-			    var sva = [];
-			    for (var j = 0; j < svs.length; j++) {
-			        sva.push(svs[j].value);
+                var svs = tblOphs.querySelectorAll('thead tr input');
+                //console.log(svs);
+                var sva = [];
+                for (var j = 0; j < svs.length; j++) {
+                    sva.push(svs[j].value);
 
-			    }
-			    //console.log(sva);
+                }
+                //console.log(sva);
 
-			    var sv, cv;
-			    for (var i = 2; i < nor; i++) {     // Header'i gec
-			        var show = sva.every(function (input, index) {
-			            if (input === '') {
-			                return true;
-			            }
+                var sv, cv;
+                for (var i = 2; i < nor; i++) {     // Header'i gec
+                    var show = sva.every(function (input, index) {
+                        if (input === '') {
+                            return true;
+                        }
 
-			            if (tblOphs.rows[i].cells[index].childElementCount == 0)
-			                cv = tblOphs.rows[i].cells[index].innerText;
-			            else
-			                cv = tblOphs.rows[i].cells[index].firstChild.__data__.output;   // moment-element'in koydugu deger
+                        if (tblOphs.rows[i].cells[index].childElementCount == 0)
+                            cv = tblOphs.rows[i].cells[index].innerText;
+                        else
+                            cv = tblOphs.rows[i].cells[index].firstChild.__data__.output;   // moment-element'in koydugu deger
 
-			            return cv.indexOf(input) != -1;
-			        });
+                        return cv.indexOf(input) != -1;
+                    });
 
-			        if (show) {
-			            tblOphs.rows[i].style.display = '';
-			            fnor++;
-			        }
-			        else
-			            tblOphs.rows[i].style.display = 'none';
-			    }
-			    tmplt.NOR = fnor;
-			}
+                    if (show) {
+                        tblOphs.rows[i].style.display = '';
+                        fnor++;
+                    }
+                    else
+                        tblOphs.rows[i].style.display = 'none';
+                }
+                tmplt.NOR = fnor;
+            }
 
 
             /*
-			console.log('init-start');
-			if (curCellIndex != -1) {
-			    this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			}
-			if (curRowIndex != -1) {
-			    this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			}
-			curRowIndex = -1;
-			curCellIndex = -1;
-			tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			console.log("init-end arrayLength", tmplt.abcd.length);
-            */
-		    /*
-			tmplt.ready = function () {
-			    console.log('ready');
-			    if (curCellIndex != -1) {
-			        this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			    }
-			    if (curRowIndex != -1) {
-			        this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			    }
-			    curRowIndex = -1;
-			    curCellIndex = -1;
-			    tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			    console.log("processInit", tmplt.abcd.length);
-			}*/
-            
-            /*
-			tmplt.MyFilter2 = function (e) {
-			    console.log(e);
-			    var suche = e.target.value; //.toLowerCase();
-			    console.log("suche", e.target.value);
-			    //suche = e.target.parentNode.cellIndex;
-			    var table = document.getElementById('tblOphs');
-			    var ele;
-			    for (var r = 2; r < table.rows.length; r++) {
-			        if (table.rows[r].style.display != 'none') {
-			            //ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML.replace(/<[^>]+>/g, "");
-			            //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild);
-			            //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output);
-			            if (table.rows[r].cells[e.target.parentNode.cellIndex].childElementCount == 0)
-			                ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML;
-			            else
-			                ele = table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output;
-
-			            if (ele.indexOf(suche) >= 0)
-			                table.rows[r].style.display = '';
-			            else table.rows[r].style.display = 'none';
-			        }
-			    }
-			}
+            console.log('init-start');
+            if (curCellIndex != -1) {
+                this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+            }
+            if (curRowIndex != -1) {
+                this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+            }
+            curRowIndex = -1;
+            curCellIndex = -1;
+            tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+            console.log("init-end arrayLength", tmplt.abcd.length);
             */
             /*
-			tmplt.MyFnc2 = function (e) {
-			    console.log("e.target", e.target.closest("tr"));
-			    if (e.target.parentNode.rowIndex == 0) {
-			        console.log("target ID", e.target.id.substring(e.target.id.length - 2));
-			        if (curCellIndex != -1) {
-			            this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
-			            //x.rows[0].cells[curCellIndex].classList.remove("curSort");
-			        }
-			        //console.log("TableMyFnc2", this);
-			        curCellIndex = e.target.cellIndex;
-			        e.target.classList.add("curSort");
+            tmplt.ready = function () {
+                console.log('ready');
+                if (curCellIndex != -1) {
+                    this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+                }
+                if (curRowIndex != -1) {
+                    this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+                }
+                curRowIndex = -1;
+                curCellIndex = -1;
+                tmplt.abcd = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+                console.log("processInit", tmplt.abcd.length);
+            }*/
 
-			        var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
-			        //if (e.target.id.substring(e.target.id.length - 2) == "_t")
-			        if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
-			            tmplt.abcd = sener.sort(firstBy(e.target.id, -1));
-			        else
-			            tmplt.abcd = sener.sort(firstBy(e.target.id));
+            /*
+            tmplt.MyFilter2 = function (e) {
+                console.log(e);
+                var suche = e.target.value; //.toLowerCase();
+                console.log("suche", e.target.value);
+                //suche = e.target.parentNode.cellIndex;
+                var table = document.getElementById('tblOphs');
+                var ele;
+                for (var r = 2; r < table.rows.length; r++) {
+                    if (table.rows[r].style.display != 'none') {
+                        //ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML.replace(/<[^>]+>/g, "");
+                        //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild);
+                        //console.log("ele", table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output);
+                        if (table.rows[r].cells[e.target.parentNode.cellIndex].childElementCount == 0)
+                            ele = table.rows[r].cells[e.target.parentNode.cellIndex].innerHTML;
+                        else
+                            ele = table.rows[r].cells[e.target.parentNode.cellIndex].firstChild.__data__.output;
 
-			        //console.log("tmplt.model.Ophs1", tmplt.model.Ophs[0].ChW$);
-			        //tmplt.model.Ophs[0].ChW$ = 11;
-			        //tmplt.model.Ophs.Clear();// = sener.sort(firstBy(e.target.id));
-			        //console.log("tmplt.model.Ophs2", tmplt.model.Ophs);
-			    }
-			    else if (e.target.parentNode.rowIndex > 1) {
-			        if (curRowIndex != -1) {
-			            this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
-			        }
-			        console.log("e.target", e);
-			        var curTr = e.target.closest("tr");
-			        console.log("e.target.closest(tr)", curTr.rowIndex);
-
-			        curRowIndex = curTr.rowIndex;
-			        curTr.classList.add("curRow");
-
-			        //curRowIndex = e.target.parentNode.rowIndex;
-			        //e.target.parentNode.classList.add("curRow");
-
-			        console.log("curRowIndex", curRowIndex);
-			    }
-			}
+                        if (ele.indexOf(suche) >= 0)
+                            table.rows[r].style.display = '';
+                        else table.rows[r].style.display = 'none';
+                    }
+                }
+            }
             */
-		})();
-        */
-	</script>
+            /*
+            tmplt.MyFnc2 = function (e) {
+                console.log("e.target", e.target.closest("tr"));
+                if (e.target.parentNode.rowIndex == 0) {
+                    console.log("target ID", e.target.id.substring(e.target.id.length - 2));
+                    if (curCellIndex != -1) {
+                        this.$.tblOphs.rows[0].cells[curCellIndex].classList.remove("curSort");
+                        //x.rows[0].cells[curCellIndex].classList.remove("curSort");
+                    }
+                    //console.log("TableMyFnc2", this);
+                    curCellIndex = e.target.cellIndex;
+                    e.target.classList.add("curSort");
+
+                    var sener = JSON.parse(JSON.stringify(tmplt.model.Ophs));
+                    //if (e.target.id.substring(e.target.id.length - 2) == "_t")
+                    if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
+                        tmplt.abcd = sener.sort(firstBy(e.target.id, -1));
+                    else
+                        tmplt.abcd = sener.sort(firstBy(e.target.id));
+
+                    //console.log("tmplt.model.Ophs1", tmplt.model.Ophs[0].ChW$);
+                    //tmplt.model.Ophs[0].ChW$ = 11;
+                    //tmplt.model.Ophs.Clear();// = sener.sort(firstBy(e.target.id));
+                    //console.log("tmplt.model.Ophs2", tmplt.model.Ophs);
+                }
+                else if (e.target.parentNode.rowIndex > 1) {
+                    if (curRowIndex != -1) {
+                        this.$.tblOphs.rows[curRowIndex].classList.remove("curRow");
+                    }
+                    console.log("e.target", e);
+                    var curTr = e.target.closest("tr");
+                    console.log("e.target.closest(tr)", curTr.rowIndex);
+
+                    curRowIndex = curTr.rowIndex;
+                    curTr.classList.add("curRow");
+
+                    //curRowIndex = e.target.parentNode.rowIndex;
+                    //e.target.parentNode.classList.add("curRow");
+
+                    console.log("curRowIndex", curRowIndex);
+                }
+            }
+            */
+        })();
+
+    </script>
 
 </template>
