@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Starcounter;
 using System.Net;
 using System.Text;
+using Starcounter;
 using TMDB;
 
 namespace Tracking
@@ -52,7 +52,7 @@ namespace Tracking
                                     Lat = lat.ToString(),
                                     Lng = lon.ToString(),
                                     LTS = DateTime.Now,
-                                    CntNo = "ECBU XXXXXX Z"
+                                    CntNo = "ECBU5018958"
                                 };
                             }
                             else
@@ -60,7 +60,7 @@ namespace Tracking
                                 th.Lat = lat.ToString();
                                 th.Lng = lon.ToString();
                                 th.LTS = DateTime.Now;
-                                th.CntNo = "ECBU XXXXXX Z";
+                                th.CntNo = "ECBU5018958";
 
                             }
                         });
