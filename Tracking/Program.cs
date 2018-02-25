@@ -13,6 +13,29 @@ namespace Tracking
 
         static void Main()
         {
+            Handle.Tcp(6002, (TcpSocket tcpSocket, Byte[] incomingData) =>
+            {
+                UInt64 socketId = tcpSocket.ToUInt64();
+                // Checking if we have socket disconnect here.
+                if (null == incomingData)
+                {
+                    // One can use "socketId" to dispose resources associated with this socket.
+                    return;
+                }
+                //byte[] bytes = Encoding.ASCII.GetBytes(someString);
+                string text = Encoding.ASCII.GetString(incomingData);
+                TMDB.Hlpr.WriteTrackingLog($"Received 6002/TCP: {text}");
+
+                /// One can check if there are any resources associated with "socketId" and otherwise create them.
+                /// Db.SQL("...");
+
+                /// Sending the echo back.
+                //tcpSocket.Send(incomingData);
+
+                /// Or even more data, if its needed: tcpSocket.Send(someMoreData);
+            });
+
+
             Handle.Udp(6000, (IPAddress clientIp, UInt16 clientPort, Byte[] datagram) =>
             {
                 string text = Encoding.ASCII.GetString(datagram);
