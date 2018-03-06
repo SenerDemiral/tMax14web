@@ -80,6 +80,18 @@
     <Compile Include="Deneme.json.cs">
       <DependentUpon>Deneme.json</DependentUpon>
     </Compile>
+    <Compile Include="EcsNbcPage.json.cs">
+      <DependentUpon>EcsNbcPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="EcsNbiPage.json.cs">
+      <DependentUpon>EcsNbiPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="EcsSbcPage.json.cs">
+      <DependentUpon>EcsSbcPage.json</DependentUpon>
+    </Compile>
+    <Compile Include="EcsSbiPage.json.cs">
+      <DependentUpon>EcsSbiPage.json</DependentUpon>
+    </Compile>
     <Compile Include="MainHandlers.cs" />
     <Compile Include="MainPage.json.cs">
       <DependentUpon>MainPage.json</DependentUpon>
@@ -150,6 +162,18 @@
     <TypedJSON Include="MapPage3.json">
       <Generator>MsBuild:Compile</Generator>
     </TypedJSON>
+    <TypedJSON Include="EcsSbcPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="EcsSbiPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="EcsNbcPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
+    <TypedJSON Include="EcsNbiPage.json">
+      <Generator>MsBuild:Compile</Generator>
+    </TypedJSON>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -172,6 +196,10 @@
     <None Include="wwwroot\tMax14web\OphClientPage.html" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\tMax14web\EcsSbiPage.html" />
+    <None Include="wwwroot\tMax14web\EcsSbcPage.html" />
+    <None Include="wwwroot\tMax14web\EcsNbiPage.html" />
+    <None Include="wwwroot\tMax14web\EcsNbcPage.html" />
     <None Include="wwwroot\tMax14web\Deneme.html" />
     <None Include="wwwroot\tMax14web\MasterPage3.html" />
     <None Include="wwwroot\tMax14web\MainPage.html" />

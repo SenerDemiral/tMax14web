@@ -260,6 +260,7 @@ namespace FbLibrary
                         jsn.MOT = row["MOT"];
                         jsn.Org = row["ORG"];
                         jsn.Dst = row["DST"];
+                        jsn.POU = row["POU"];
 
                         jsn.ShpID = row["SHPID"]; // row.IsSHPIDNull() ? "" : row.SHPID.ToString();
                         jsn.CneID = row["CNEID"];
@@ -275,8 +276,14 @@ namespace FbLibrary
                         jsn.ACOT = row["ACOT"];
                         jsn.TPAD = row["TPAD"];
                         jsn.TPDD = row["TPDD"];
+                        jsn.RTD = row["RTD"];
 
                         jsn.Vhc = row["VHC"];
+                        jsn.Inf = row["INF"];
+                        jsn.HndInf = row["HNDINF"];
+                        jsn.CntNoS = row["CNTNOS"];
+                        jsn.SealNoS = row["SEALNOS"];
+                        jsn.pInfoS = row["PINFOS"];
 
                         wsOpm.Send(JsonConvert.SerializeObject(jsn));
 
@@ -362,8 +369,11 @@ namespace FbLibrary
                         jsn.RTR = row["RTR"];
                         jsn.ROS = row["ROS"];
                         jsn.POD = row["POD"];
+                        jsn.PODinf = row["PODINF"];
                         jsn.REOH = row["REOH"];
                         jsn.DRBD = row["DRBD"];
+                        jsn.DRCD = row["DRCD"];
+                        jsn.CusLoc = row["CUSLOC"];
 
                         wsOph.Send(JsonConvert.SerializeObject(jsn));
 

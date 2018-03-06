@@ -57,7 +57,7 @@ namespace tMax14web
             MapPage.MarkersElementJson marker;
 
             int i = 0;
-            var th = Db.SQL<TMDB.TH>("select h from TH h");
+            var th = Db.SQL<TMDB.TH>("select h from TH h order by h.LTS DESC");
             foreach (var t in th)
             {
                 mapList = this.MapList.Add();

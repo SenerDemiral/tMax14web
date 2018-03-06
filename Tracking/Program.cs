@@ -154,6 +154,15 @@ namespace Tracking
 
                 Db.Transact(() =>
                 {
+                    new TMDB.TH
+                    {
+                        ID = trckID,
+                        Lat = LatDD.ToString(),
+                        Lng = LonDD.ToString(),
+                        LTS = EXD,
+                        CntNo = "ECBU5001127"
+                    };
+                    /*
                     //var th = Db.FromId<TMDB.TH>(ulong.Parse(trckID));
                     var th = Db.SQL<TMDB.TH>("select h from TMDB.TH h where h.ID = ?", trckID).FirstOrDefault();
                     if (th == null)
@@ -173,7 +182,7 @@ namespace Tracking
                         th.Lng = LonDD.ToString();
                         th.LTS = EXD;
                         th.CntNo = "ECBU5001127";
-                    }
+                    }*/
                 });
             }
         }

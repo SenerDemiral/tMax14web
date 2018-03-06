@@ -96,7 +96,7 @@ namespace tMax14web
             */
 
             Application.Current.Use(new HtmlFromJsonProvider());
-            Application.Current.Use(new PartialToStandaloneHtmlProvider(HTML));
+            Application.Current.Use(new PartialToStandaloneHtmlProvider());
 
             Handle.GET("/tMax14web/init", () => {
                 Db.Transact(() =>
@@ -109,6 +109,20 @@ namespace tMax14web
                         h.VM3 = 1;
                         h.ChW = 2;
                     }*/
+                });
+                return "OK";
+            });
+
+            Handle.GET("/tMax14web/ECBU5018958", () => {
+                TMDB.Hlpr.ECBU5018958();
+                return "OK";
+            });
+
+            Handle.GET("/tMax14web/ECS", () => {
+                Db.Transact(() =>
+                {
+                    var fECS = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", 29651).FirstOrDefault();
+                    fECS.Pwd = "29651";
                 });
                 return "OK";
             });
@@ -137,7 +151,7 @@ namespace tMax14web
             });
 
             MainHandlers mh = new MainHandlers();
-			mh.CreateIndex();
+			//mh.CreateIndex();
             //mh.Register();
 
             Handle.GET("/tMax14web", () => { return Self.GET("/tMax14web/MainPage"); });
@@ -155,6 +169,20 @@ namespace tMax14web
 
             Handle.GET("/tMax14web/partial/OphClient", () => new OphClientPage());
             Handle.GET("/tMax14web/OphClient", () => WrapPage<OphClientPage>("/tMax14web/partial/OphClient"));
+
+
+            Handle.GET("/tMax14web/partial/EcsNbcPage", () => new EcsNbcPage());
+            Handle.GET("/tMax14web/EcsNbcPage", () => WrapPage<EcsNbcPage>("/tMax14web/partial/EcsNbcPage"));
+
+            Handle.GET("/tMax14web/partial/EcsNbiPage", () => new EcsNbiPage());
+            Handle.GET("/tMax14web/EcsNbiPage", () => WrapPage<EcsNbiPage>("/tMax14web/partial/EcsNbiPage"));
+
+            Handle.GET("/tMax14web/partial/EcsSbcPage", () => new EcsSbcPage());
+            Handle.GET("/tMax14web/EcsSbcPage", () => WrapPage<EcsSbcPage>("/tMax14web/partial/EcsSbcPage"));
+
+            Handle.GET("/tMax14web/partial/EcsSbiPage", () => new EcsSbiPage());
+            Handle.GET("/tMax14web/EcsSbiPage", () => WrapPage<EcsSbiPage>("/tMax14web/partial/EcsSbiPage"));
+
 
             Handle.GET("/tMax14web/partial/gMap", () => new MapPage());
             Handle.GET("/tMax14web/gMap", () => WrapPage<MapPage>("/tMax14web/partial/gMap"));

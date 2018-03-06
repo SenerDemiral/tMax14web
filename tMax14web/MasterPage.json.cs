@@ -16,6 +16,10 @@ namespace tMax14web
             fOnLine = false;
         }
 
+        void Handle(Input.LeaveTrigger action)
+        {
+        }
+
         void Handle(Input.LoginTrigger action)
         {
             fOnLine = false;
@@ -30,6 +34,8 @@ namespace tMax14web
                     fAdN = Frt.AdN;
                     fAd = Frt.Ad;
 
+                    if (Frt.FrtID == 29651)  // ECS menu: NBC, NBI, SBC, SBI
+                        fECS = true;
                 }
             }
             TMDB.Hlpr.Insert2LogStat(FrtID, fPW, fOnLine);

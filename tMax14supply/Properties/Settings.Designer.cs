@@ -26,8 +26,8 @@ namespace tMax14supply.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("character set=WIN1254;data source=localhost;initial catalog=tMax14;user id=sysdba" +
-            ";password=masterkey")]
+        [global::System.Configuration.DefaultSettingValueAttribute("character set=WIN1254;data source=localhost;initial catalog=D:\\DataYedek\\Transori" +
+            "ent\\TMAX14-180119.FDB;user id=sysdba;password=masterkey")]
         public string tMax14ConnectionString {
             get {
                 return ((string)(this["tMax14ConnectionString"]));

@@ -145,9 +145,10 @@ namespace TMDB
         public string ROT { get; set; }
 		public string MOT { get; set; }
 		public string Org { get; set; }
-		public string Dst { get; set; }
+        public string Dst { get; set; }
+        public string POU { get; set; }
 
-		public int? ShpID { get; set; }
+        public int? ShpID { get; set; }
 		public int? CneID { get; set; }
 		public int? AccID { get; set; }
         public int? CrrID { get; set; }
@@ -169,8 +170,14 @@ namespace TMDB
         public DateTime? TPAD { get; set; }
         public DateTime? TPDD { get; set; }
         public DateTime? ROH { get; set; }
+        public DateTime? RTD { get; set; }
+
         public string Vhc { get; set; }
+        public string Inf { get; set; }
+        public string HndInf { get; set; }
         public string CntNoS { get; set; }
+        public string SealNoS { get; set; }
+        public string pInfoS { get; set; }
 
         public string ShpAd => Shp?.AdN ?? "";
         public string CneAd => Cne?.AdN ?? ""; // Cne == null ? "" : Cne.AdN;
@@ -241,7 +248,10 @@ namespace TMDB
 		public DateTime? RTR { get; set; }
 		public DateTime? ROS { get; set; }
 		public DateTime? POD { get; set; }
+        public string PODinf { get; set; }
         public DateTime? DRBD { get; set; }
+        public DateTime? DRCD { get; set; }
+        public string CusLoc { get; set; }
 
         public string EXD_t => $"{EXD:s}";
 		public string nStuTS_t => $"{nStuTS:s}";
@@ -271,7 +281,13 @@ namespace TMDB
         public DateTime? mACOT => Opm?.ACOT;
         public DateTime? mTPAD => Opm?.TPAD;
         public DateTime? mTPDD => Opm?.TPDD;
+
         public string mVhc => Opm?.Vhc ?? "";
+        public string mInf => Opm?.Inf ?? "";
+        public string mHndInf => Opm?.HndInf ?? "";
+        public string mCntNoS => Opm?.CntNoS ?? "";
+        public string mSealNoS => Opm?.SealNoS ?? "";
+        public string mpInfoS => Opm?.pInfoS ?? "";
 
         public string mETD_t => $"{Opm?.ETD:s}";
 		public string mATD_t => $"{Opm?.ATD:s}";

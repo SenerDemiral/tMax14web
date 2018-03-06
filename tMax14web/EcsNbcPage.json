@@ -1,0 +1,128 @@
+{
+  "Html": "/tMax14web/EcsNbcPage.html",
+  "Fmt": "DD.MM.YY",
+
+  "Fields": [
+    {
+      "fN": "mRefNo",   // FieldName
+      "fC": "Ref#",     // FieldCaption
+      "fT": "ECS Ref#"  // FieldTooltip
+    },
+    {
+      "fN": "OpmID",
+      "fC": "mID",
+      "fT": "Transorient Ref#"
+    },
+    {
+      "fN": "mCntNoS",
+      "fC": "Container#",
+      "fT": "Container#"
+    },
+    {
+      "fN": "Org",
+      "fC": "Origin",
+      "fT": "Loading Place"
+    },
+    {
+      "fN": "EOH_t",
+      "fC": "RLD",
+      "fT": "Requested Loading Date"
+    },
+    {
+      "fN": "EOH2_t",
+      "fC": "BLD",
+      "fT": "Booked Loading Date"
+    },
+    {
+      "fN": "AOH_t",
+      "fC": "AOH",
+      "fT": "Actual On Hand"
+    },
+    {
+      "fN": "mSealNoS",
+      "fC": "Seal#",
+      "fT": "Seal#"
+    },
+    {
+      "fN": "NOP",
+      "fC": "NOP",
+      "fT": "Amount of Package"
+    },
+    {
+      "fN": "GrW",
+      "fC": "GrW",
+      "fT": "Gross Weight"
+    },
+    {
+      "fN": "mInfoS",
+      "fC": "Info",
+      "fT": "Reason for Change/Delay"
+    },
+    {
+      "fN": "CuslocAd",
+      "fC": "Cusloc",
+      "fT": "Customs Location"
+    },
+    {
+      "fN": "mRTD_t",
+      "fC": "RTD",
+      "fT": "Arrival Date Time to Unloading Point/Customer"
+    },
+    {
+      "fN": "RTR_t",
+      "fC": "RTR",
+      "fT": "Customs Clearance Finished"
+    },
+    {
+      "fN": "mATD_t",
+      "fC": "ATD",
+      "fT": "Rail Departure Date"
+    },
+    {
+      "fN": "mHndInf",
+      "fC": "HndInf",
+      "fT": "Extra Cost Description and Amount"
+    }
+  ],
+
+  "Captions": {
+    "mRefNo": "ECS Ref#",
+    "OpmID": "Transorient Ref#",
+    "mCntNoS": "Container#",
+    "Org": "Loading Place",
+    "EOH_t": "Requested Loading Date",
+    "EOH2_t": "Booked Loading Date",
+    "AOH_t": "Actual On Hand",
+    "mSealNoS": "Seal#",
+    "NOP": "Amount of Package",
+    "GrW": "Brutto Weight",
+    "mInfoS": "Reason for Change/Delay",
+    "CusLocAd": "Customs Location",
+    "mRTD_t": "Arrival Date Time to Unloading Point/Customer",
+    "RTR_t": "Customs Clearance Finished",
+    "mATD_t": "Rail Departure Date",
+    "mHndInf": "Extra Cost Description and Amount",
+  },
+
+  "Ophs": [
+    {
+      "mRefNo": "",
+      "OpmID": 0,
+      "mCntNoS": "",
+      "Org": "",
+      "EOH_t": "",
+      "EOH2_t": "",
+      "AOH_t": "",
+      "mSealNoS": "",
+
+      "NOP": 0,
+      "GrW": 0.0,
+      "mpInfoS": "",
+      "CusLocAd": "",
+      "mRTD_t": "",
+      "RTR_t": "",
+      "mATD_t": "",
+      "mHndInf": ""
+    }
+  ]
+}

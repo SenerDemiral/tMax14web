@@ -1,6 +1,6 @@
 ﻿<template>
     <dom-bind>
-        <template is="dom-bind">
+        <template>
             <style>
                 .tm-header--item {
                     margin-left: 10px;
@@ -20,11 +20,11 @@
             </div>
 
             <!--
-        <label slot="tm/head-fid-label" class="tm-header--item">Company Id:</label>
-        <input slot="tm/head-fid" type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
-            <label slot="tm/head-fpw-label" class="tm-header--item">Password:</label>
-            <input slot="tm/head-fpw" type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
-            -->
+    <label slot="tm/head-fid-label" class="tm-header--item">Company Id:</label>
+    <input slot="tm/head-fid" type="text" name="fid" value="{{model.fID$::input}}" style="width:60px">
+        <label slot="tm/head-fpw-label" class="tm-header--item">Password:</label>
+        <input slot="tm/head-fpw" type="password" name="fpw" value="{{model.fPW$::input}}" style="width:60px">
+        -->
             <template is="dom-if" if="{{model.fOnLine}}">
                 <div slot="tm/head-std" class="InputAddOn">
                     <label class="InputAddOn-item">Date &gt;=</label>
@@ -33,25 +33,33 @@
                 <div slot="tm/head-oph" class="InputAddOn">
                     <a class="InputAddOn-item" href="/tMax14web/OphClientTable">Houses</a>
                 </div>
+                <template is="dom-if" if="{{model.fECS}}">
+                    <div slot="tm/head-oph" class="InputAddOn">
+                        <a class="InputAddOn-item" href="/tMax14web/EcsNbcPage">NBCustemer</a>
+                        <a class="InputAddOn-item" href="/tMax14web/EcsNbiPage">NBIntermodal</a>
+                        <a class="InputAddOn-item" href="/tMax14web/EcsSbcPage">SBCustemer</a>
+                        <a class="InputAddOn-item" href="/tMax14web/EcsSbiPage">SBIntermodal</a>
+                    </div>
+                </template>
             </template>
             <!--
-        <div slot="tm/head-label">
-            <div>CompanyId:</div>
-            <input class="tm-header--item" type="text" name="fid" value="{{model.fID$::input}}" style="max-width:60px">
-            <div>Password:</div>
-            <input class="tm-header--item" type="password" name="fpw" value="{{model.fPW$::input}}" style="max-width:60px">
-            <button class="tm-header--item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
+    <div slot="tm/head-label">
+        <div>CompanyId:</div>
+        <input class="tm-header--item" type="text" name="fid" value="{{model.fID$::input}}" style="max-width:60px">
+        <div>Password:</div>
+        <input class="tm-header--item" type="password" name="fpw" value="{{model.fPW$::input}}" style="max-width:60px">
+        <button class="tm-header--item" value="{{model.LoginTrigger$::click}}" onmousedown="++this.value">Login</button>
 
-            <template is="dom-if" if="{{model.fOnLine}}">
-                Date &gt;=
-                <input type="date" name="sd" value="{{model.StartDate$::input}}">
-                <a class="tm-header--item" href="/tMax14web/OphClient">Houses/Grid</a>
-                <a class="tm-header--item" href="/tMax14web/OphClientTable">Houses/Table</a>
-            </template>
-            <template is="dom-if" if="{{!model.fOnLine}}">
-                <span style="color:red">Not Found</span>
-            </template>-->
-            </div>
+        <template is="dom-if" if="{{model.fOnLine}}">
+            Date &gt;=
+            <input type="date" name="sd" value="{{model.StartDate$::input}}">
+            <a class="tm-header--item" href="/tMax14web/OphClient">Houses/Grid</a>
+            <a class="tm-header--item" href="/tMax14web/OphClientTable">Houses/Table</a>
+        </template>
+        <template is="dom-if" if="{{!model.fOnLine}}">
+            <span style="color:red">Not Found</span>
+        </template>
+            </div>-->
 
             <starcounter-include slot="tm/current" partial="{{model.CurrentPage}}"></starcounter-include>
 
