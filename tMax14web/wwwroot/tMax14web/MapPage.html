@@ -1,12 +1,11 @@
-﻿<link rel="import" href="/sys/moment-element/moment-element.html">
-<link rel="import" href="/sys/google-map/google-map.html">
+﻿<link rel="import" href="/sys/google-map/google-map.html">
 <link rel="import" href="/sys/google-map/google-map-marker.html">
 
 <template>
     <dom-bind>
-        <template is="dom-bind">
+        <template>
             <div class="map-grid">
-                <div class="map-left">
+                <div class="map-left" style="height: calc(100vh - 74px);overflow:auto">
                     <table id="tblMap" on-click="MyFnc">
                         <thead>
                             <tr>
@@ -21,27 +20,44 @@
                                 <tr>
                                     <td><button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]]</button></td>
                                     <td>[[item.LST_t]]</td>
-                                    <td>[[item.lat]]</td>
+                                    <td>xx[[item.lat]]</td>
                                     <td>[[item.lng]]</td>
                                 </tr>
                             </template>
                         </tbody>
-
                     </table>
-                    <!--button value="{{model.DnmTrigger$::click}}" onmousedown="++this.value">Deneme</button-->
-                    <!--
-                <div>Trackers</div>
-                <ul>
-                    <template is="dom-repeat" items="[[model.MapList]]">
-                        <li>
-                            <button value="{{item.Show$::click}}" onmousedown="++this.value">[[item.Title]] - [[item.lat]] - [[item.lng]]</button>
-                        </li>
-
-                    </template>
-                </ul>
-                -->
                 </div>
 
+                <div class="map-right">
+                    <google-map id="gmap" map="{{map}}"
+                                style="height: calc(100vh - 74px);"
+                                fit-to-markers
+                                latitude="37.026835"
+                                longitude="27.563807"
+                                api-key="AIzaSyDPkEs-_HJWKejZ5qLXTmXXfVFnAXJmnt0"
+                                mouseEvents>
+
+                        <template is="dom-repeat" items="{{model.Markers}}">
+                            <google-map-marker map="{{map}}"
+                                               click-events
+                                               slot="markers"
+                                               latitude="[[item.lat]]"
+                                               longitude="[[item.lng]]"
+                                               title="[[item.Title]]"
+                                               open="{{item.ShowInfo$}}">
+                                [[item.Info]]
+                            </google-map-marker>
+                        </template>
+                    </google-map>
+                </div>
+            </div>
+
+        </template>
+    </dom-bind>
+
+</template>
+
+<!--
                 <div class="map-right">
                     <google-map id="gmap" map="{{map}}"
                                 style="height: calc(100vh - 74px);"
@@ -62,16 +78,10 @@
                                                latitude="[[item.lat]]"
                                                longitude="[[item.lng]]"
                                                title="[[item.Title]]"
-                                               open="{{item.ShowInfo$}}">
-                                -[[item.Info]]
+                                               open="{{item.ShowInfo$}}">[[item.Info]]
                             </google-map-marker>
                         </template>
                     </google-map>
-                    <google-map-markerclusterer map="{{map}}"></google-map-markerclusterer>
                 </div>
-            </div>
 
-        </template>
-    </dom-bind>
-
-</template>
+-->

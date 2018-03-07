@@ -4,84 +4,9 @@
 
   "Fields": [
     {
-      "fN": "mRefNo",   // FieldName
-      "fC": "Ref#",     // FieldCaption
-      "fT": "ECS Ref#"  // FieldTooltip
-    },
-    {
-      "fN": "OpmID",
-      "fC": "mID",
-      "fT": "Transorient Ref#"
-    },
-    {
-      "fN": "mCntNoS",
-      "fC": "Container#",
-      "fT": "Container#"
-    },
-    {
-      "fN": "Org",
-      "fC": "Origin",
-      "fT": "Loading Place"
-    },
-    {
-      "fN": "EOH_t",
-      "fC": "RLD",
-      "fT": "Requested Loading Date"
-    },
-    {
-      "fN": "EOH2_t",
-      "fC": "BLD",
-      "fT": "Booked Loading Date"
-    },
-    {
-      "fN": "AOH_t",
-      "fC": "AOH",
-      "fT": "Actual On Hand"
-    },
-    {
-      "fN": "mSealNoS",
-      "fC": "Seal#",
-      "fT": "Seal#"
-    },
-    {
-      "fN": "NOP",
-      "fC": "NOP",
-      "fT": "Amount of Package"
-    },
-    {
-      "fN": "GrW",
-      "fC": "GrW",
-      "fT": "Gross Weight"
-    },
-    {
-      "fN": "mInfoS",
-      "fC": "Info",
-      "fT": "Reason for Change/Delay"
-    },
-    {
-      "fN": "CuslocAd",
-      "fC": "Cusloc",
-      "fT": "Customs Location"
-    },
-    {
-      "fN": "mRTD_t",
-      "fC": "RTD",
-      "fT": "Arrival Date Time to Unloading Point/Customer"
-    },
-    {
-      "fN": "RTR_t",
-      "fC": "RTR",
-      "fT": "Customs Clearance Finished"
-    },
-    {
-      "fN": "mATD_t",
-      "fC": "ATD",
-      "fT": "Rail Departure Date"
-    },
-    {
-      "fN": "mHndInf",
-      "fC": "HndInf",
-      "fT": "Extra Cost Description and Amount"
+      "fN": "",
+      "fC": "",
+      "fT": ""
     }
   ],
 
@@ -118,7 +43,7 @@
       "NOP": 0,
       "GrW": 0.0,
       "mpInfoS": "",
-      "CusLocAd": "",
+      "CusLoc": "",
       "mRTD_t": "",
       "RTR_t": "",
       "mATD_t": "",
