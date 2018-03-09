@@ -77,7 +77,7 @@ namespace Tracking
                 }
 
             });
-            /*
+            
             Handle.Tcp(6002, (TcpSocket tcpSocket, Byte[] incomingData) =>
             {
                 UInt64 socketId = tcpSocket.ToUInt64();
@@ -89,7 +89,8 @@ namespace Tracking
                 }
                 //byte[] bytes = Encoding.ASCII.GetBytes(someString);
                 string text = Encoding.ASCII.GetString(incomingData);
-                TMDB.Hlpr.WriteTrackingLog($"Received 6002/TCP: {text}");
+                
+                TMDB.Hlpr.AS5000Log($"Received 6002/TCP {socketId}: {text}");
 
                 /// One can check if there are any resources associated with "socketId" and otherwise create them.
                 /// Db.SQL("...");
@@ -99,7 +100,7 @@ namespace Tracking
 
                 /// Or even more data, if its needed: tcpSocket.Send(someMoreData);
             });
-            */
+            
             Handle.GET("/Tracking/initTH", () =>
             {
                 Db.Transact(() =>

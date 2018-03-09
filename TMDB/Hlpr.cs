@@ -105,5 +105,18 @@ namespace TMDB
             {
             }
         }
+        public static void AS5000Log(string Msg)
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter($@"C:\Starcounter\MyLog\AS5000.txt", true);
+                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ": " + Msg);
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+            }
+        }
     }
 }
