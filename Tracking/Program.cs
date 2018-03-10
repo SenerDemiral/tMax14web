@@ -85,18 +85,21 @@ namespace Tracking
                 if (null == incomingData)
                 {
                     // One can use "socketId" to dispose resources associated with this socket.
+                    //var aaa = tcpSocket.IsDead();
                     return;
                 }
                 //byte[] bytes = Encoding.ASCII.GetBytes(someString);
                 string text = Encoding.ASCII.GetString(incomingData);
                 
-                TMDB.Hlpr.AS5000Log($"Received 6002/TCP {socketId}: {text}");
+                TMDB.Hlpr.AS5000Log($"Received 6002/TCP: {text}");
 
                 /// One can check if there are any resources associated with "socketId" and otherwise create them.
                 /// Db.SQL("...");
 
                 /// Sending the echo back.
-                //tcpSocket.Send(incomingData);
+                var bbb = tcpSocket.IsDead();
+                tcpSocket.Send(incomingData);
+                //tcpSocket.Disconnect();
 
                 /// Or even more data, if its needed: tcpSocket.Send(someMoreData);
             });
