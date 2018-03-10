@@ -114,10 +114,10 @@ namespace tMax14web
                 return;
             OphsElementJson oph;
             //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
-            foreach(var h in Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ? and ROT = ? and MOT = ?", fid, fid, fid, std, "E", "R"))
+            foreach(var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.EXD >= ? and ROT = ? and MOT = ?", std, "E", "R"))
             {
                 oph = Ophs.Add();
-                oph.mRefNo = h.Opm.RefNo;
+                oph.mRefNo = h.Opm?.RefNo;
                 oph.OpmID = (long)h.OpmID;
                 oph.mCntNoS = h.CntNoS;
                 oph.Org = h.Org;
