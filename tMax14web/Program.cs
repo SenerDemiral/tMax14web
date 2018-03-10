@@ -29,6 +29,17 @@ namespace tMax14web
                 return "OK";
             });
 
+            Handle.GET("/tMax14web/service/delFMH", () => {
+                Db.Transact(() =>
+                {
+                    Db.SQL("DELETE FROM TMDB.OPH");
+                    Db.SQL("DELETE FROM TMDB.OPM");
+                    Db.SQL("DELETE FROM TMDB.FRT");
+                });
+
+                return "OK";
+            });
+
             Handle.GET("/tMax14web/ECBU5018958", () => {
                 TMDB.Hlpr.ECBU5018958();
                 return "OK";
