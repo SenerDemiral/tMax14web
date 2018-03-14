@@ -92,6 +92,20 @@ namespace TMDB
             }
         }
 
+        public static void WriteRestLog(string Msg)
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter($@"C:\Starcounter\MyLog\RestLog.txt", true);
+                sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ": " + Msg);
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+            }
+        }
+
         public static void WriteTrackingLog(string Msg)
         {
             try

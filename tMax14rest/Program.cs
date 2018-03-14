@@ -102,25 +102,6 @@ namespace tMax14rest
                 return "OK";
             });
 
-            Handle.GET("/wsFrtConnect", (Request req) =>
-            {
-                // Checking if its a WebSocket upgrade request.
-                if (req.WebSocketUpgrade)
-                {
-                    Console.WriteLine("wsFRT Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
-                    req.SendUpgrade("wsFrt");
-                    return HandlerStatus.Handled;
-                }
-
-                // We only support WebSockets upgrades in this HTTP handler
-                // and not other ordinary HTTP requests.
-                return new Response()
-                {
-                    StatusCode = 500,
-                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
-                };
-            });
-
             Handle.WebSocketDisconnect("wsFrt", (WebSocket ws) =>
             {
                 Console.WriteLine("wsFrt DisConnected {0}", DateTime.Now);
@@ -134,6 +115,26 @@ namespace tMax14rest
             Handle.WebSocketDisconnect("wsOpm", (WebSocket ws) =>
             {
                 Console.WriteLine("wsOpm DisConnected {0}", DateTime.Now);
+            });
+
+            Handle.GET("/wsFrtConnect", (Request req) =>
+            {
+                // Checking if its a WebSocket upgrade request.
+                if (req.WebSocketUpgrade)
+                {
+                    Hlpr.WriteRestLog("wsFRT Connected");
+                    req.SendUpgrade("wsFrt");
+                    return HandlerStatus.Handled;
+                }
+                Hlpr.WriteRestLog("wsFRT Not Connected");
+
+                // We only support WebSockets upgrades in this HTTP handler
+                // and not other ordinary HTTP requests.
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
             });
 
             Handle.WebSocket("wsFrt", (string str, WebSocket ws) =>
@@ -203,10 +204,11 @@ namespace tMax14rest
                 // Checking if its a WebSocket upgrade request.
                 if (req.WebSocketUpgrade)
                 {
-                    Console.WriteLine("wsFRC Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    Hlpr.WriteRestLog("wsFRC Connected");
                     req.SendUpgrade("wsFrc");
                     return HandlerStatus.Handled;
                 }
+                Hlpr.WriteRestLog("wsFRC Not Connected");
 
                 // We only support WebSockets upgrades in this HTTP handler
                 // and not other ordinary HTTP requests.
@@ -282,10 +284,11 @@ namespace tMax14rest
             {
                 if (req.WebSocketUpgrade)
                 {
-                    Console.WriteLine("wsOPM Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    Hlpr.WriteRestLog("wsOPM Connected");
                     req.SendUpgrade("wsOpm");
                     return HandlerStatus.Handled;
                 }
+                Hlpr.WriteRestLog("wsOPM Not Connected");
                 return new Response()
                 {
                     StatusCode = 500,
@@ -372,10 +375,11 @@ namespace tMax14rest
             {
                 if (req.WebSocketUpgrade)
                 {
-                    Console.WriteLine("wsOPH Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    Hlpr.WriteRestLog("wsOPH Connected");
                     req.SendUpgrade("wsOph");
                     return HandlerStatus.Handled;
                 }
+                Hlpr.WriteRestLog("wsOPH Not Connected");
                 return new Response()
                 {
                     StatusCode = 500,
@@ -476,10 +480,12 @@ namespace tMax14rest
             {
                 if (req.WebSocketUpgrade)
                 {
-                    Console.WriteLine("wsAFB Connected {0} {1}", DateTime.Now, req.GetWebSocketId());
+                    Hlpr.WriteRestLog("wsAFB Connected");
                     req.SendUpgrade("wsAfb");
                     return HandlerStatus.Handled;
                 }
+                Hlpr.WriteRestLog("wsAFB Not Connected");
+
                 return new Response()
                 {
                     StatusCode = 500,
@@ -944,7 +950,7 @@ namespace tMax14rest
                 sendMail("sener.demiral@gmail.com", "DENEME", "deneme");
                 return "OK";
             });
-
+            /*
             Handle.Tcp(8585, (TcpSocket tcpSocket, Byte[] incomingData) =>
             {
                 UInt64 socketId = tcpSocket.ToUInt64();
@@ -965,7 +971,7 @@ namespace tMax14rest
 
                 // Or even more data, if its needed: tcpSocket.Send(someMoreData);
             });
-
+            */
             /*
             Handle.Udp(6000, (IPAddress clientIp, UInt16 clientPort, Byte[] datagram) =>
             {

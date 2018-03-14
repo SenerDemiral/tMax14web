@@ -1,9 +1,348 @@
-﻿<link rel="import" href="/sys/polymer/polymer.html">
+﻿<link rel="import" href="/sys/moment-element/moment-element.html">
 
 <template>
     <dom-bind>
         <template>
-
+            <ecssbc-tbl data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></ecssbc-tbl>
         </template>
     </dom-bind>
+    <script>
+        (function () {
+            var curRowIndex = -1;
+            var curCellIndex = -1;
+
+            var script = document._currentScript || document.currentScript;
+            tmplt = Polymer.Element ? script.previousElementSibling : script.previousElementSibling.firstElementChild;
+            console.log("Script run", tmplt);
+        })();
+    </script>
 </template>
+
+<dom-module id="ecssbc-tbl">
+    <template>
+        <style>
+            table {
+                border-collapse: collapse;
+                border: 1px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .oph-table {
+                max-height: var(--main-height);
+                width: var(--main-width);
+                overflow: auto;
+                font-size: small;
+            }
+
+            table > caption {
+                text-align: left;
+                margin-bottom: var(--grid-gap);
+            }
+
+            tbody:before {
+                line-height: 0px;
+                content: "\200C";
+                display: block;
+            }
+
+            tfoot {
+                background-color: mediumaquamarine;
+                border: 1px solid lightgray;
+            }
+
+            tfoot th {
+                text-align: left;
+            }
+
+            tfoot th * {
+                padding-left: 1em;
+            }
+
+            th {
+                line-height: 2em;
+                text-align: center;
+                border: 1px solid lightgray;
+            }
+
+            td {
+                line-height: 1.5em;
+                padding: 0.2em 0.4em;
+                border: 1px solid #CBCBCB;
+            }
+            .curRow {
+                background-color: orange !important;
+                color: white;
+            }
+
+            .curSort {
+                background-color: red !important;
+                color: white;
+            }
+
+
+            /* Add this attribute to the element that needs a tooltip */
+            [data-tooltip] {
+                position: relative;
+                z-index: 2;
+                cursor: pointer;
+            }
+
+                /* Hide the tooltip content by default */
+                [data-tooltip]:before,
+                [data-tooltip]:after {
+                    visibility: hidden;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                /* Position tooltip above the element */
+                [data-tooltip]:before {
+                    position: absolute;
+                    top: 2em;
+                    padding: 7px;
+                    background-color: #000;
+                    color: #fff;
+                    content: attr(data-tooltip);
+                    text-align: center;
+                    font-size: 1em;
+                    line-height: 1.2;
+                }
+
+                /* Show tooltip content on hover */
+                [data-tooltip]:hover:before {
+                    visibility: visible;
+                    opacity: 1;
+                }
+
+            .searchInput {
+                width: 100%;
+                border-style: none;
+                text-align: center;
+                line-height: unset;
+                background-color: honeydew;
+            }
+
+        </style>
+		<div class="oph-table">
+            <table id="tblEcsNbc" on-click="handleClick">
+                <thead>
+                    <tr>
+                        <template is="dom-repeat" items="[[fields]]">
+                            <th id="[[item.fN]]" data-tooltip$="[[item.fT]]">[[item.fC]]</th>
+                        </template>
+                    </tr>
+                    <tr>
+                        <template is="dom-repeat" items="[[fields]]">
+                            <th><input on-keyup="MyFilter" type="text" class="searchInput" required></th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template is="dom-repeat" items="[[data]]">
+                        <tr>
+                            <td>[[item.mRefNo]]</td>
+                            <td>[[item.OpmID]]</td>
+                            <td>[[item.AccAd]]</td>
+                            <td>[[item.mCntNoS]]</td>
+                            <td>[[item.Org]]</td>
+                            <td>[[item.mPOU]]</td>
+                            <td><moment-element datetime="[[item.mETA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td><moment-element datetime="[[item.mATA_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.CusLoc]]</td>
+                            <td><moment-element datetime="[[item.DRBD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td><moment-element datetime="[[item.DRCD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.Dst]]</td>
+                            <td><moment-element datetime="[[item.ROS_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td><moment-element datetime="[[item.ROH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.PODinf]]</td>
+                            <td><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.mpInfoS]]</td>
+                            <td>[[item.mHndInf]]</td>
+                        </tr>
+                    </template>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="37">
+                            <span> #Rec: [[NOR]]</span>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+		</div>
+    </template>
+
+    <script>
+        Polymer({
+            is: "ecssbc-tbl",
+            properties: {
+                data: {
+                    type: Array,
+                    observer: 'updateData'
+                },
+                captions: {
+                    type: {},
+                    observer: 'updateCaptions'
+                },
+                fields: {
+                    type: Array,
+                    observer: 'updateFields'
+                },
+                prvRowIndex: {
+                    type: Number,
+                    value: -1
+                },
+                curCellIndex: {
+                    type: Number,
+                    value: -1
+                },
+                NOR: {
+                    type: Number,
+                    value: 0
+                },
+            },
+            attached: function () {
+                console.log("attached");
+            },
+            sort: function (a, b) {
+                var nameA = a.mCntNoS; // ignore upper and lowercase
+                var nameB = b.mCntNoS; // ignore upper and lowercase
+                console.log("a b", nameA, nameB);
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+
+                // names must be equal
+                return 0;
+            },
+
+            handleClick: function (e) {
+                console.log("handleClick", e.target);
+                var tr = e.target.closest("tr");
+                var tbl = e.target.closest("table");
+                //console.log("e.target", e.target);
+                //console.log("tbl", tbl);
+                //console.log("tr.rowIndex", tr.rowIndex, this.prvRowIndex);
+                //console.log("e.target.cellIndex", e.target.cellIndex);
+
+                if (tr.rowIndex == 0) {     // Field Captions Sort
+                    if (this.curCellIndex != -1) {
+                        this.$.tblEcsNbc.rows[0].cells[this.curCellIndex].classList.remove("curSort");
+                    }
+                    //console.log("e.target.id", e.target.id);
+
+                    var sener = JSON.parse(JSON.stringify(this.data));
+                    //this.data = sener.sort(firstBy(e.target.id));
+
+                    if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
+                        this.data = sener.sort(firstBy(e.target.id, -1));
+                    else
+                        this.data = sener.sort(firstBy(e.target.id));
+
+                    this.curCellIndex = e.target.cellIndex;
+                    e.target.classList.add("curSort");
+
+                    //this.data.sort(function (a, b) {
+                    //    var nameA = a.mCntNoS;
+                    //    var nameB = b.mCntNoS;
+                    //    if (nameA < nameB)
+                    //        return -1;
+                    //   
+                    //    if (nameA > nameB)
+                    //        return 1;
+                    //
+                    //    // names must be equal
+                    //    return 0;
+                    //});
+
+                }
+                else if (tr.rowIndex > 1) {  // Highlight Row
+                    if (this.prvRowIndex != -1)
+                        this.$.tblEcsNbc.rows[this.prvRowIndex].classList.remove("curRow");
+                    //tbl.rows[this.prvRowIndex].classList.remove("curRow");
+                    tr.classList.add("curRow"); //curTr.classList.add("curRow");
+                    this.prvRowIndex = tr.rowIndex;
+                }
+            },
+
+            updateData: function () {
+                console.log("updateData");
+                if (this.prvRowIndex != -1)
+                    this.$.tblEcsNbc.rows[this.prvRowIndex].classList.remove("curRow");
+                this.prvRowIndex = -1;
+                if (this.curCellIndex != -1)
+                    this.$.tblEcsNbc.rows[0].cells[this.curCellIndex].classList.remove("curSort");
+                this.curCellIndex = -1;
+                this.NOR = this.data.length;
+
+            },
+
+            updateCaptions: function () {
+                //this.captions = captions;
+                //console.log("updateCaptions", this.captions);
+                //console.log(Object.keys(this.captions));
+                //
+                //for (var propertyName in this.captions) {
+                //    console.log(propertyName + ":" + this.captions[propertyName]);
+                //}
+            },
+            updateFields: function () {
+                console.log("updateFields");
+            },
+
+            MyFilter: function (e) {
+                var tbl = this.$.tblEcsNbc;
+
+                var nor = tbl.rows.length - 1;  // Footer'i sayma
+                var noc = tbl.rows[0].cells.length;
+                //var tbl = document.querySelector('#tblOphs');
+                //console.log("TBL:", tbl, "NOR:", nor, "NOC:", noc);
+                var fnor = 0;   // Filtered NOR
+
+                // Search values
+                var svs = tbl.querySelectorAll('thead tr input');
+                //console.log("Search value:", svs);
+                var sva = [];
+                for (var j = 0; j < svs.length; j++) {
+                    sva.push(svs[j].value);
+
+                }
+                //console.log("Search value array:", sva);
+
+                var sv, cv;
+                for (var i = 2; i < nor; i++) {     // Header'i gec
+                    var show = sva.every(function (input, index) {
+                        if (input === '') {
+                            return true;
+                        }
+
+                        if (tbl.rows[i].cells[index].childElementCount == 0)
+                            cv = tbl.rows[i].cells[index].innerText;
+                        else {
+                            console.log(tbl.rows[i].cells[index].firstElementChild.__data.output);
+                            cv = tbl.rows[i].cells[index].firstElementChild.__data.output;
+                            //cv = tbl.rows[i].cells[index].firstChild.__data__.output;   // moment-element'in koydugu deger
+                        }
+
+                        return cv.indexOf(input) != -1;
+                    });
+
+                    if (show) {
+                        tbl.rows[i].style.display = '';
+                        fnor++;
+                    }
+                    else
+                        tbl.rows[i].style.display = 'none';
+                }
+                this.NOR = fnor;
+            }
+
+
+
+        });
+    </script>
+</dom-module>

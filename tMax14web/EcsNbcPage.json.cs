@@ -114,11 +114,12 @@ namespace tMax14web
                 return;
             OphsElementJson oph;
             //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
-            foreach(var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.EXD >= ? and ROT = ? and MOT = ?", std, "E", "R"))
+
+            foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", std, "E", "R"))
             {
                 oph = Ophs.Add();
                 oph.mRefNo = h.Opm?.RefNo;
-                oph.OpmID = (long)h.OpmID;
+                oph.OpmID = h.OpmID ?? 0;
                 oph.mCntNoS = h.CntNoS;
                 oph.Org = h.Org;
                 oph.EOH_t = $"{h.EOH:s}";
@@ -137,7 +138,7 @@ namespace tMax14web
             }
 
             //sener.NoR = DateTime.Now.Ticks;
-            int NOP = Ophs.Count;
+            //int NOP = Ophs.Count;
 
         }
     }

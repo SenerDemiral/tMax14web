@@ -128,6 +128,7 @@ namespace FbLibrary
         public static void FrtSend(string typ)
         {
             int nor = fta.Fill(dts.WEB_FRT_MDFD, typ);
+            FbLibrary.Logs.WriteErrorLog($"FrtSend: {nor}");
 
             if (nor > 0)
             {
@@ -187,6 +188,7 @@ namespace FbLibrary
         public static void FrcSend(string typ)
         {
             int nor = cta.Fill(dts.WEB_FRC_MDFD, typ);
+            FbLibrary.Logs.WriteErrorLog($"FrcSend: {nor}");
 
             if (nor > 0)
             {
@@ -232,6 +234,7 @@ namespace FbLibrary
         public static void OpmSend(string typ)
         {
             int nor = mta.Fill(dts.WEB_OPM_MDFD, typ);
+            FbLibrary.Logs.WriteErrorLog($"OpmSend: {nor}");
 
             if (nor > 0)
             {
@@ -315,6 +318,7 @@ namespace FbLibrary
         public static void OphSend(string typ)
         {
             int nor = hta.Fill(dts.WEB_OPH_MDFD, typ);
+            FbLibrary.Logs.WriteErrorLog($"OphSend: {nor}");
 
             if (nor > 0)
             {
@@ -398,6 +402,7 @@ namespace FbLibrary
         public static void AfbSend(string typ)
         {
             int nor = ata.Fill(dts.WEB_AFB_MDFD, typ);
+            FbLibrary.Logs.WriteErrorLog($"AfbSend: {nor}");
 
             if (nor > 0)
             {

@@ -1,2 +1,35 @@
 {
+  "Html": "/tMax14web/EcsSbcPage.html",
+  "Fmt": "DD.MM.YY",
+
+  "Fields": [
+    {
+      "fN": "",
+      "fC": "",
+      "fT": ""
+    }
+  ],
+
+  "Ophs": [
+    {
+      "mRefNo": "",
+      "OpmID": 0,
+	  "AccAd": "",
+      "mCntNoS": "",
+	  "Org": "",
+	  "mPOU": "",
+	  "mETA_t": "",
+	  "mATA_t": "",
+      "CusLoc": "",
+      "DRBD_t": "",
+      "DRCD_t": "",
+      "Dst": "",
+      "ROS_t": "",
+      "ROH_t": "",
+	  "PODinf": "",
+	  "POD_t": "",
+      "mpInfoS": "",
+      "mHndInf": ""
+    }
+  ]
 }

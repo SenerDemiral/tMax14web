@@ -3,7 +3,7 @@
 <template>
     <dom-bind>
         <template>
-            <sener-tbl data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></sener-tbl>
+            <ecsnbc-tbl data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></ecsnbc-tbl>
         </template>
     </dom-bind>
     <script>
@@ -18,21 +18,21 @@
     </script>
 </template>
 
-<dom-module id="sener-tbl">
+<dom-module id="ecsnbc-tbl">
     <template>
         <style>
-            table {
-                border-collapse: collapse;
-                border: 1px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
             .oph-table {
                 max-height: var(--main-height);
                 width: var(--main-width);
                 overflow: auto;
                 font-size: small;
+            }
+
+            table {
+                border-collapse: collapse;
+                border: 1px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             table > caption {
@@ -124,7 +124,12 @@
             }
 
         </style>
+		<div class="oph-table">
             <table id="tblEcsNbc" on-click="handleClick">
+                <caption>
+                    <input type="button" data-link="/tMax14web/ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" />
+                    <!--<input type="button" data-link="ophs2xlsx/[[model.fID]]/[[model.StartDate]]" on-tap="MyDownload" value="Download Excel" /> Bu da calisiyor-->
+                </caption>
                 <thead>
                     <tr>
                         <template is="dom-repeat" items="[[fields]]">
@@ -167,11 +172,12 @@
                     </tr>
                 </tfoot>
             </table>
+		</div>
     </template>
 
     <script>
         Polymer({
-            is: "sener-tbl",
+            is: "ecsnbc-tbl",
             properties: {
                 data: {
                     type: Array,
@@ -232,7 +238,12 @@
                     //console.log("e.target.id", e.target.id);
 
                     var sener = JSON.parse(JSON.stringify(this.data));
-                    this.data = sener.sort(firstBy(e.target.id));
+                    //this.data = sener.sort(firstBy(e.target.id));
+
+                    if (e.target.id.endsWith("_t") || e.target.id.endsWith("ID"))
+                        this.data = sener.sort(firstBy(e.target.id, -1));
+                    else
+                        this.data = sener.sort(firstBy(e.target.id));
 
                     this.curCellIndex = e.target.cellIndex;
                     e.target.classList.add("curSort");
@@ -337,33 +348,3 @@
         });
     </script>
 </dom-module>
-
-
-<dom-module is="define-local">
-    <template>
-        Sener
-    </template>
-    <script>
-        Polymer({
-            is: 'define-local',
-            properties: {
-                public: {
-                    type: Object,
-                    notify: true
-                },
-                prop: {
-                    type: String
-                }
-            },
-            attached: function () {
-                if (this.prop) {
-                    Object.defineProperty(this.public, this.prop, {
-                        enumerable: false,
-                        value: {}
-                    });
-                }
-            }
-        })
-    </script>
-</dom-module>
-
