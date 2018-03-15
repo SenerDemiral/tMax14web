@@ -49,7 +49,7 @@ namespace tMax14web
                 Db.Transact(() =>
                 {
                     var fECS = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", 29651).FirstOrDefault();
-                    fECS.Pwd = "29651";
+                    fECS.Pwd = "ECS2020";
                 });
                 return "OK";
             });
@@ -280,6 +280,91 @@ namespace tMax14web
 					{
 						ws.Column(c).AutoFit(6);
 					}*/
+
+                    Response r = new Response();
+                    //r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    r.ContentType = "application/octet-stream";
+                    r.Headers["Content-Disposition"] = "attachment; filename=\"tMax14web-ophs.xlsx\"";
+
+                    var oms = new MemoryStream();
+                    pck.SaveAs(oms);
+                    oms.Seek(0, SeekOrigin.Begin);
+
+                    r.StreamedBody = oms;
+                    return r;
+                }
+            });
+
+            Handle.GET("/tMax14web/EcsNBC/{?}/{?}", (string frtID, string sDate) =>
+            {
+                using (OfficeOpenXml.ExcelPackage pck = new OfficeOpenXml.ExcelPackage())
+                {
+                    //Create the worksheet
+
+                    OfficeOpenXml.ExcelWorksheet ws = pck.Workbook.Worksheets.Add("NB");
+                    int FRTID = Convert.ToInt32(frtID);
+
+                    // Header (first row)
+                    ws.Cells[1, 1].Value = "ECS Ref#";
+                    ws.Cells[1, 2].Value = "TO Ref#";
+                    ws.Cells[1, 3].Value = "Container#";
+                    ws.Cells[1, 4].Value = "Loading Place";
+                    ws.Cells[1, 5].Value = "Requested Loading Date";
+                    ws.Cells[1, 6].Value = "Booked Loading Slot";
+                    ws.Cells[1, 7].Value = "Actual On Hand";
+                    ws.Cells[1, 8].Value = "Seal#";
+                    ws.Cells[1, 9].Value = "Amount of Packages";
+                    ws.Cells[1, 10].Value = "Gross Weight";
+                    ws.Cells[1, 11].Value = "Reason for Change/Delay";
+                    ws.Cells[1, 12].Value = "Customs Location";
+                    ws.Cells[1, 13].Value = "Arrival Date & Time to Unloading Point/Custom";
+                    ws.Cells[1, 14].Value = "Custom Clearance Fisinished";
+                    ws.Cells[1, 15].Value = "Rail Departure Date";
+                    ws.Cells[1, 16].Value = "Extra Cost Description & Amount";
+
+                    ws.Column(5).Style.Numberformat.Format = "dd.mm.yy";
+                    ws.Column(6).Style.Numberformat.Format = "dd.mm.yy";
+                    ws.Column(7).Style.Numberformat.Format = "dd.mm.yy";
+                    ws.Column(13).Style.Numberformat.Format = "dd.mm.yy";
+                    ws.Column(14).Style.Numberformat.Format = "dd.mm.yy";
+                    ws.Column(15).Style.Numberformat.Format = "dd.mm.yy";
+
+                    ws.Column(9).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                    ws.Column(10).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+                    int cr = 2;
+                    foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", Convert.ToDateTime(sDate), "E", "R"))
+                    {
+                        ws.Cells[cr, 1].Value = h.Opm?.RefNo;
+                        ws.Cells[cr, 2].Value = h.OpmID;
+                        ws.Cells[cr, 3].Value = h.CntNoS;
+                        ws.Cells[cr, 4].Value = h.Org;
+                        ws.Cells[cr, 5].Value = h.EOH;
+                        ws.Cells[cr, 6].Value = h.EOH;
+                        ws.Cells[cr, 7].Value = h.AOH;
+                        ws.Cells[cr, 8].Value = h.mSealNoS;
+                        ws.Cells[cr, 9].Value = h.NOP;
+                        ws.Cells[cr, 10].Value = h.GrW;
+                        ws.Cells[cr, 11].Value = h.Opm?.pInfoS;
+                        ws.Cells[cr, 12].Value = h.CusLoc;
+                        ws.Cells[cr, 13].Value = h.Opm?.RTD;
+                        ws.Cells[cr, 14].Value = h.RTR;
+                        ws.Cells[cr, 15].Value = h.Opm?.ATD;
+                        ws.Cells[cr, 16].Value = h.Opm?.HndInf;
+
+                        cr++;
+                    }
+
+
+                    ws.Row(1).Style.Font.Bold = true;
+                    var range = ws.Cells["A1:AB1"];
+                    range.AutoFilter = true;
+                    ws.View.FreezePanes(2, 2);  // 1.Row ve 1.Col fixed
+
+                    var aa = ws.Dimension;
+                    var bb = ws.Dimension.Address;
+
+                    ws.Cells[ws.Dimension.Address].AutoFitColumns();
 
                     Response r = new Response();
                     //r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
