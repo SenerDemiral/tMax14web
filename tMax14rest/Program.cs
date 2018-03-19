@@ -97,6 +97,7 @@ namespace tMax14rest
                     Db.SlowSQL("DELETE FROM TMDB.OPM");
                     Db.SlowSQL("DELETE FROM TMDB.FRC");
                     Db.SlowSQL("DELETE FROM TMDB.FRT");
+                    Db.SlowSQL("DELETE FROM TMDB.LOC");
                 });
 
                 return "OK";
@@ -115,6 +116,73 @@ namespace tMax14rest
             Handle.WebSocketDisconnect("wsOpm", (WebSocket ws) =>
             {
                 Console.WriteLine("wsOpm DisConnected {0}", DateTime.Now);
+            });
+
+            Handle.GET("/wsLocConnect", (Request req) =>
+            {
+                // Checking if its a WebSocket upgrade request.
+                if (req.WebSocketUpgrade)
+                {
+                    Hlpr.WriteRestLog("wsLOC Connected");
+                    req.SendUpgrade("wsLoc");
+                    return HandlerStatus.Handled;
+                }
+                Hlpr.WriteRestLog("wsLOC Not Connected");
+
+                // We only support WebSockets upgrades in this HTTP handler
+                // and not other ordinary HTTP requests.
+                return new Response()
+                {
+                    StatusCode = 500,
+                    StatusDescription = "WebSocket upgrade on " + req.Uri + " was not approved."
+                };
+            });
+
+            Handle.WebSocket("wsLoc", (string str, WebSocket ws) =>
+            {
+                dynamic jsn = JValue.Parse(str);
+
+                string rMsg = "OK";
+
+                Console.WriteLine(str);
+
+                Db.Transact(() =>
+                {
+                    try
+                    {
+                        string LocID = jsn.LocID;
+
+                        if (jsn.Evnt == "D")
+                        {
+                            var locs = Db.SQL<TMDB.LOC>("select f from TMDB.LOC f where f.LocID = ?", LocID);
+                            foreach (var rec in locs)
+                            {
+                                rec.Delete();
+                            }
+                        }
+                        else
+                        {
+                            TMDB.LOC rec = Db.SQL<TMDB.LOC>("select f from TMDB.LOC f where f.LocID = ?", LocID).FirstOrDefault();
+                            if (rec == null)
+                                rec = new TMDB.LOC();
+
+                            if (rec == null)
+                                rMsg = "NoLoc2Update";
+                            else
+                            {
+                                rec.MdfdOn = DateTime.Now;
+                                rec.LocID = jsn.LocID;
+                                rec.Ad = jsn.Ad;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        rMsg = ex.Message;
+                    }
+                });
+
+                //ws.Send(rMsg);
             });
 
             Handle.GET("/wsFrtConnect", (Request req) =>
@@ -330,13 +398,17 @@ namespace tMax14rest
                             rec.RefNo = jsn.RefNo;
                             rec.ROT = jsn.ROT;
                             rec.MOT = jsn.MOT;
-                            rec.Org = jsn.Org;
-                            rec.Dst = jsn.Dst;
+                            rec.OrgID = jsn.Org;
+                            rec.DstID = jsn.Dst;
+                            rec.PolID = jsn.POL;
+                            rec.PouID = jsn.POU;
                             rec.Vhc = jsn.Vhc;
                             rec.nStu = jsn.nStu;
                             rec.pStu = jsn.pStu;
 
                             rec.CntNoS = jsn.CntNoS;
+                            rec.SealNoS = jsn.SealNoS;
+                            rec.pInfoS = jsn.pInfoS;
 
                             rec.ShpID = jsn.ShpID;// == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
                             rec.CneID = jsn.CneID;
@@ -356,13 +428,22 @@ namespace tMax14rest
                             rec.ROH = jsn.ROH;
 
                             if (rec.ShpID != null)
-                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).FirstOrDefault();
+                                rec.SHP = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).FirstOrDefault();
                             if (rec.CneID != null)
-                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).FirstOrDefault();
+                                rec.CNE = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).FirstOrDefault();
                             if (rec.AccID != null)
-                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).FirstOrDefault();
+                                rec.ACC = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).FirstOrDefault();
                             if (rec.CrrID != null)
-                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).FirstOrDefault();
+                                rec.CRR = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).FirstOrDefault();
+
+                            if (rec.OrgID != null)
+                                rec.ORG = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.OrgID).FirstOrDefault();
+                            if (rec.DstID != null)
+                                rec.DST = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.DstID).FirstOrDefault();
+                            if (rec.PolID != null)
+                                rec.POL = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.PolID).FirstOrDefault();
+                            if (rec.PouID != null)
+                                rec.POU = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.PouID).FirstOrDefault();
                         }
                     }
                 });
@@ -423,8 +504,8 @@ namespace tMax14rest
                             rec.RefNo = jsn.RefNo;
                             rec.ROT = jsn.ROT;
                             rec.MOT = jsn.MOT;
-                            rec.Org = jsn.Org;
-                            rec.Dst = jsn.Dst;
+                            rec.OrgID = jsn.Org;
+                            rec.DstID = jsn.Dst;
                             rec.nStu = jsn.nStu;
                             rec.pStu = jsn.pStu;
                             rec.DTM = jsn.DTM;
@@ -456,19 +537,24 @@ namespace tMax14rest
                             rec.DRBD = jsn.DRBD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
 
                             if (rec.OpmID != null)
-                                rec.Opm = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).FirstOrDefault();
+                                rec.OPM = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).FirstOrDefault();
                             if (rec.ShpID != null)
-                                rec.Shp = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).FirstOrDefault();
+                                rec.SHP = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.ShpID).FirstOrDefault();
                             if (rec.CneID != null)
-                                rec.Cne = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).FirstOrDefault();
+                                rec.CNE = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CneID).FirstOrDefault();
                             if (rec.AccID != null)
-                                rec.Acc = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).FirstOrDefault();
+                                rec.ACC = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.AccID).FirstOrDefault();
                             if (rec.MnfID != null)
-                                rec.Mnf = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).FirstOrDefault();
+                                rec.MNF = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.MnfID).FirstOrDefault();
                             if (rec.NfyID != null)
-                                rec.Nfy = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.NfyID).FirstOrDefault();
+                                rec.NFY = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.NfyID).FirstOrDefault();
                             if (rec.CrrID != null)
-                                rec.Crr = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).FirstOrDefault();
+                                rec.CRR = Db.SQL<TMDB.FRT>("select f from FRT f where f.FrtID = ?", rec.CrrID).FirstOrDefault();
+
+                            if (rec.OrgID != null)
+                                rec.ORG = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.OrgID).FirstOrDefault();
+                            if (rec.DstID != null)
+                                rec.DST = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.DstID).FirstOrDefault();
                         }
                     }
                 });

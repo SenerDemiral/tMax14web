@@ -2,7 +2,7 @@
   "Html": "/tMax14web/OphClientPageTable.html",
   "Fmt": "DD.MM.YY",
   "fID": "",
-	"StartDate": "",
+  "StartDate": "",
 
   "Columns": [ "aaaa", "bbb" ],
   "DownloadExcelTrigger$": 0,

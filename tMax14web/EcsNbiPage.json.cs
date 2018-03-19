@@ -118,22 +118,22 @@ namespace tMax14web
             foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", std, "E", "R"))
             {
                 oph = Ophs.Add();
-                oph.mRefNo = h.Opm?.RefNo;
+                oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
                 oph.mCntNoS = h.CntNoS;
-                oph.Org = h.Org;
+                //oph.Org = h.Org;
                 oph.EOH_t = $"{h.EOH:s}";
                 oph.EOH2_t = $"{h.EOH:s}";
                 oph.AOH_t = $"{h.AOH:s}";
-                oph.mSealNoS = h.Opm?.SealNoS;
+                oph.mSealNoS = h.OPM?.SealNoS;
                 oph.NOP = (long)h.NOP;
                 oph.GrW = (decimal)h.GrW;
-                oph.mpInfoS = h.Opm?.pInfoS;
+                oph.mpInfoS = h.OPM?.pInfoS;
                 oph.CusLoc = h.CusLoc;
-                oph.mRTD_t = $"{h.Opm?.RTD:s}";
+                oph.mRTD_t = $"{h.OPM?.RTD:s}";
                 oph.RTR_t = $"{h.RTR:s}";
-                oph.mATD_t = $"{h.Opm?.ATD:s}";
-                oph.mHndInf = h.Opm?.HndInf;
+                oph.mATD_t = $"{h.OPM?.ATD:s}";
+                oph.mHndInf = h.OPM?.HndInf;
 
             }
 

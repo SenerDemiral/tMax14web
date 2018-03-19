@@ -101,20 +101,20 @@ namespace tMax14web
             {
                 oph = Ophs.Add();
 
-                oph.mRefNo = h.Opm?.RefNo;
+                oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
-                oph.AccAd = h.Acc?.AdN;
+                oph.AccAd = h.ACC?.AdN;
                 oph.mCntNoS = h.CntNoS;
                 oph.CusLoc = h.CusLoc;
-                oph.mRTD_t = $"{h.Opm?.RTD:s}";
+                oph.mRTD_t = $"{h.OPM?.RTD:s}";
                 oph.RTR_t = $"{h.EOH:s}";
 
-                oph.Dst = $"{h.Dst:s}";
+                //oph.Dst = $"{h.Dst:s}";
                 oph.PODinf = h.PODinf;
                 oph.POD_t = $"{h.POD:s}";
-                oph.mpInfoS = h.Opm?.pInfoS;
-                oph.mInf = h.Opm?.Inf;
-                oph.mHndInf = h.Opm?.HndInf;
+                oph.mpInfoS = h.OPM?.pInfoS;
+                oph.mInf = h.OPM?.Inf;
+                oph.mHndInf = h.OPM?.HndInf;
 
             }
 

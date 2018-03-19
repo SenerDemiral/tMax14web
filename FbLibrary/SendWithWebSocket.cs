@@ -60,12 +60,14 @@ namespace FbLibrary
         private static tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter mta = new tMax14DataSetTableAdapters.WEB_OPM_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter hta = new tMax14DataSetTableAdapters.WEB_OPH_MDFDTableAdapter();
         private static tMax14DataSetTableAdapters.WEB_AFB_MDFDTableAdapter ata = new tMax14DataSetTableAdapters.WEB_AFB_MDFDTableAdapter();
+        private static tMax14DataSetTableAdapters.WEB_LOC_MDFDTableAdapter lta = new tMax14DataSetTableAdapters.WEB_LOC_MDFDTableAdapter();
 
         private static WebSocket wsFrt = new WebSocket("ws://rest.tMax.online/wsFrtConnect");
         private static WebSocket wsFrc = new WebSocket("ws://rest.tMax.online/wsFrcConnect");
         private static WebSocket wsOpm = new WebSocket("ws://rest.tMax.online/wsOpmConnect");
         private static WebSocket wsOph = new WebSocket("ws://rest.tMax.online/wsOphConnect");
         private static WebSocket wsAfb = new WebSocket("ws://rest.tMax.online/wsAfbConnect");
+        private static WebSocket wsLoc = new WebSocket("ws://rest.tMax.online/wsLocConnect");
 
 
         public static void FrtSendWebClient(string typ)
@@ -263,6 +265,7 @@ namespace FbLibrary
                         jsn.MOT = row["MOT"];
                         jsn.Org = row["ORG"];
                         jsn.Dst = row["DST"];
+                        jsn.POL = row["POL"];
                         jsn.POU = row["POU"];
 
                         jsn.ShpID = row["SHPID"]; // row.IsSHPIDNull() ? "" : row.SHPID.ToString();
@@ -459,6 +462,52 @@ namespace FbLibrary
                 else
                 {
                     Logs.WriteErrorLog("AFB can't connect");
+                }
+            }
+        }
+
+        public static void LocSend(string typ)
+        {
+            int nor = lta.Fill(dts.WEB_LOC_MDFD, typ);
+            FbLibrary.Logs.WriteErrorLog($"LocSend: {nor}");
+
+            if (nor > 0)
+            {
+                if (wsLoc.ReadyState != WebSocketState.Open)
+                    wsLoc.Connect();
+
+                if (wsLoc.ReadyState == WebSocketState.Open)
+                {
+                    if (typ == "F")
+                        Logs.WriteErrorLog("LOC Full " + nor.ToString());
+
+                    dynamic jsn = new JObject();
+
+                    foreach (tMax14DataSet.WEB_LOC_MDFDRow row in dts.WEB_LOC_MDFD.Rows)
+                    {
+                        jsn.Tbl = "LOC";
+                        jsn.Evnt = row["EVNT"];
+
+                        jsn.LocID = row["LOCID"];
+                        jsn.Ad = row["AD"];
+
+                        wsLoc.Send(JsonConvert.SerializeObject(jsn));
+
+
+                        if (typ == "M")
+                        {
+                            Logs.WriteErrorLog("AFB " + row.LOCID.ToString());
+                            row.Delete();
+                        }
+                    }
+                    if (typ == "M")
+                        lta.Update(dts.WEB_LOC_MDFD);
+
+                    wsLoc.Close();
+                }
+                else
+                {
+                    Logs.WriteErrorLog("LOC can't connect");
                 }
             }
         }

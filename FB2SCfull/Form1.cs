@@ -22,12 +22,18 @@ namespace FB2SCfull
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
+        {
+            FbLibrary.SendWithWebSocket.LocSend("F");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
         {
             FbLibrary.SendWithWebSocket.FrtSend("F");
-            FbLibrary.SendWithWebSocket.FrcSend("F");
-            FbLibrary.SendWithWebSocket.OpmSend("F");
-            FbLibrary.SendWithWebSocket.OphSend("F");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -35,9 +41,19 @@ namespace FB2SCfull
             FbLibrary.SendWithWebSocket.AfbSend("F");
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            FbLibrary.SendWithWebSocket.OpmSend("F");
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
             FbLibrary.SendWithWebSocket.FrcSend("F");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FbLibrary.SendWithWebSocket.OphSend("F");
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -131,25 +131,25 @@ namespace tMax14web
             {
                 oph = Ophs.Add();
 
-                oph.mRefNo = h.Opm?.RefNo;
+                oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
-                oph.AccAd = h.Acc?.AdN;
+                oph.AccAd = h.ACC?.AdN;
                 oph.mCntNoS = h.CntNoS;
-                oph.Org = h.Org;
-                oph.mPOU = h.Opm?.POU;
-                oph.mETA_t = $"{h.Opm?.ETA:s}";
-                oph.mATA_t = $"{h.Opm?.ATA:s}";
+                //oph.Org = h.Org;
+                //oph.mPOU = h.OPM?.POU;
+                oph.mETA_t = $"{h.OPM?.ETA:s}";
+                oph.mATA_t = $"{h.OPM?.ATA:s}";
                 oph.CusLoc = h.CusLoc;
                 oph.DRBD_t = $"{h.DRBD:s}";
                 oph.DRCD_t = $"{h.DRCD:s}";
 
-                oph.Dst = $"{h.Dst:s}";
+                //oph.Dst = $"{h.Dst:s}";
                 oph.ROS_t = $"{h.ROS:s}";
                 oph.ROH_t = $"{h.ROH:s}";
                 oph.PODinf = h.PODinf;
                 oph.POD_t = $"{h.POD:s}";
-                oph.mpInfoS = h.Opm?.pInfoS;
-                oph.mHndInf = h.Opm?.HndInf;
+                oph.mpInfoS = h.OPM?.pInfoS;
+                oph.mHndInf = h.OPM?.HndInf;
 
             }
 

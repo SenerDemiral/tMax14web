@@ -119,8 +119,8 @@ namespace tMax14web
 						ws.Cells[cr, (int)hFlds.EXD].Value = h.EXD;
 						ws.Cells[cr, (int)hFlds.ROT].Value = h.ROT;
 						ws.Cells[cr, (int)hFlds.MOT].Value = h.MOT;
-						ws.Cells[cr, (int)hFlds.Org].Value = h.Org;
-						ws.Cells[cr, (int)hFlds.Dst].Value = h.Dst;
+						//ws.Cells[cr, (int)hFlds.Org].Value = h.Org;
+						//ws.Cells[cr, (int)hFlds.Dst].Value = h.Dst;
 						ws.Cells[cr, (int)hFlds.nStu].Value = h.nStu;
 						ws.Cells[cr, (int)hFlds.nStuTS].Value = h.nStuTS;
 						//ws.Cells[cr, (int)hFlds.pStu].Value = h.pStu;

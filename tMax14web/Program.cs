@@ -141,17 +141,17 @@ namespace tMax14web
                         ws.Cells[cr, (int)hFlds.EXD].Value = h.EXD;
                         ws.Cells[cr, (int)hFlds.ROT].Value = h.ROT;
                         ws.Cells[cr, (int)hFlds.MOT].Value = h.MOT;
-                        ws.Cells[cr, (int)hFlds.Org].Value = h.Org;
-                        ws.Cells[cr, (int)hFlds.Dst].Value = h.Dst;
+                        ws.Cells[cr, (int)hFlds.Org].Value = h.ORG?.Ad;
+                        ws.Cells[cr, (int)hFlds.Dst].Value = h.DST?.Ad;
                         ws.Cells[cr, (int)hFlds.nStu].Value = h.nStu;
                         ws.Cells[cr, (int)hFlds.nStuTS].Value = h.nStuTS;
                         //ws.Cells[cr, (int)hFlds.pStu].Value = h.pStu;
                         //ws.Cells[cr, (int)hFlds.pStuTS].Value = h.pStuTS;
-                        ws.Cells[cr, (int)hFlds.Shp].Value = h.ShpAd;
-                        ws.Cells[cr, (int)hFlds.Cne].Value = h.CneAd;
-                        ws.Cells[cr, (int)hFlds.Acc].Value = h.AccAd;
-                        ws.Cells[cr, (int)hFlds.Mnf].Value = h.MnfAd;
-                        ws.Cells[cr, (int)hFlds.Nfy].Value = h.NfyAd;
+                        ws.Cells[cr, (int)hFlds.Shp].Value = h.SHP?.Ad;
+                        ws.Cells[cr, (int)hFlds.Cne].Value = h.CNE?.Ad;
+                        ws.Cells[cr, (int)hFlds.Acc].Value = h.ACC?.Ad;
+                        ws.Cells[cr, (int)hFlds.Mnf].Value = h.MNF?.Ad;
+                        ws.Cells[cr, (int)hFlds.Nfy].Value = h.NFY?.Ad;
                         ws.Cells[cr, (int)hFlds.DTM].Value = h.DTM;
                         ws.Cells[cr, (int)hFlds.PTM].Value = h.PTM;
                         ws.Cells[cr, (int)hFlds.NOP].Value = h.NOP;
@@ -313,13 +313,13 @@ namespace tMax14web
                     ws.Cells[1, 6].Value = "Booked Loading Slot";
                     ws.Cells[1, 7].Value = "Actual On Hand";
                     ws.Cells[1, 8].Value = "Seal#";
-                    ws.Cells[1, 9].Value = "Amount of Packages";
+                    ws.Cells[1, 9].Value = "Number of Packages";
                     ws.Cells[1, 10].Value = "Gross Weight";
                     ws.Cells[1, 11].Value = "Reason for Change/Delay";
                     ws.Cells[1, 12].Value = "Customs Location";
-                    ws.Cells[1, 13].Value = "Arrival Date & Time to Unloading Point/Custom";
+                    ws.Cells[1, 13].Value = "Arrival Date Custom";
                     ws.Cells[1, 14].Value = "Custom Clearance Fisinished";
-                    ws.Cells[1, 15].Value = "Rail Departure Date";
+                    ws.Cells[1, 15].Value = "Departure Date";
                     ws.Cells[1, 16].Value = "Extra Cost Description & Amount";
 
                     ws.Column(5).Style.Numberformat.Format = "dd.mm.yy";
@@ -335,22 +335,22 @@ namespace tMax14web
                     int cr = 2;
                     foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", Convert.ToDateTime(sDate), "E", "R"))
                     {
-                        ws.Cells[cr, 1].Value = h.Opm?.RefNo;
+                        ws.Cells[cr, 1].Value = h.OPM?.RefNo;
                         ws.Cells[cr, 2].Value = h.OpmID;
                         ws.Cells[cr, 3].Value = h.CntNoS;
-                        ws.Cells[cr, 4].Value = h.Org;
+                        ws.Cells[cr, 4].Value = h.ORG?.Ad;
                         ws.Cells[cr, 5].Value = h.EOH;
                         ws.Cells[cr, 6].Value = h.EOH;
                         ws.Cells[cr, 7].Value = h.AOH;
                         ws.Cells[cr, 8].Value = h.mSealNoS;
                         ws.Cells[cr, 9].Value = h.NOP;
                         ws.Cells[cr, 10].Value = h.GrW;
-                        ws.Cells[cr, 11].Value = h.Opm?.pInfoS;
+                        ws.Cells[cr, 11].Value = h.OPM?.pInfoS;
                         ws.Cells[cr, 12].Value = h.CusLoc;
-                        ws.Cells[cr, 13].Value = h.Opm?.RTD;
+                        ws.Cells[cr, 13].Value = h.OPM?.RTD;
                         ws.Cells[cr, 14].Value = h.RTR;
-                        ws.Cells[cr, 15].Value = h.Opm?.ATD;
-                        ws.Cells[cr, 16].Value = h.Opm?.HndInf;
+                        ws.Cells[cr, 15].Value = h.OPM?.ATD;
+                        ws.Cells[cr, 16].Value = h.OPM?.HndInf;
 
                         cr++;
                     }
@@ -369,7 +369,7 @@ namespace tMax14web
                     Response r = new Response();
                     //r.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                     r.ContentType = "application/octet-stream";
-                    r.Headers["Content-Disposition"] = "attachment; filename=\"tMax14web-ophs.xlsx\"";
+                    //r.Headers["Content-Disposition"] = "attachment; filename=\"tMax14web-ophs.xlsx\"";
 
                     var oms = new MemoryStream();
                     pck.SaveAs(oms);

@@ -68,6 +68,14 @@ namespace TMDB
     }
 
     [Database]
+    public class LOC    // Locations
+    {
+		public DateTime MdfdOn { get; set; }
+        public string LocID { get; set; }
+        public string Ad { get; set; }
+    }
+
+    [Database]
 	public class FRT
 	{
 		public DateTime MdfdOn { get; set; }
@@ -144,19 +152,29 @@ namespace TMDB
         public DateTime? EXD { get; set; }
         public string ROT { get; set; }
 		public string MOT { get; set; }
-		public string Org { get; set; }
-        public string Dst { get; set; }
-        public string POU { get; set; }
+
+		//public string Org { get; set; }   // Dropped
+        //public string Dst { get; set; }
+        //public string POU { get; set; }
+
+        public string OrgID { get; set; }
+        public string DstID { get; set; }
+        public string PolID { get; set; }
+        public string PouID { get; set; }
+        public LOC ORG { get; set; }
+        public LOC DST { get; set; }
+        public LOC POL { get; set; }
+        public LOC POU { get; set; }
 
         public int? ShpID { get; set; }
 		public int? CneID { get; set; }
 		public int? AccID { get; set; }
         public int? CrrID { get; set; }
 
-        public FRT Shp { get; set; }
-        public FRT Cne { get; set; }
-        public FRT Acc { get; set; }
-        public FRT Crr { get; set; }
+        public FRT SHP { get; set; }
+        public FRT CNE { get; set; }
+        public FRT ACC { get; set; }
+        public FRT CRR { get; set; }
 
         public string nStu { get; set; }
         public string pStu { get; set; }
@@ -179,10 +197,10 @@ namespace TMDB
         public string SealNoS { get; set; }
         public string pInfoS { get; set; }
 
-        public string ShpAd => Shp?.AdN ?? "";
-        public string CneAd => Cne?.AdN ?? ""; // Cne == null ? "" : Cne.AdN;
-        public string AccAd => Acc?.AdN ?? ""; // Acc == null ? "" : Acc.AdN;
-        public string CrrAd => Crr?.AdN ?? ""; // Crr == null ? "" : Crr.AdN;
+        public string ShpAd => SHP?.AdN ?? "";
+        public string CneAd => CNE?.AdN ?? ""; // Cne == null ? "" : Cne.AdN;
+        public string AccAd => ACC?.AdN ?? ""; // Acc == null ? "" : Acc.AdN;
+        public string CrrAd => CRR?.AdN ?? ""; // Crr == null ? "" : Crr.AdN;
 
         public string nStuAd {
             get
@@ -209,8 +227,14 @@ namespace TMDB
 
         public string ROT { get; set; }
 		public string MOT { get; set; }
-		public string Org { get; set; }
-		public string Dst { get; set; }
+
+        //public string Org { get; set; }
+		//public string Dst { get; set; }
+
+        public string OrgID { get; set; }
+        public string DstID { get; set; }
+        public LOC ORG { get; set; }
+        public LOC DST { get; set; }
 
         public int? ShpID { get; set; }
 		public int? CneID { get; set; }
@@ -219,13 +243,13 @@ namespace TMDB
         public int? NfyID { get; set; }
         public int? CrrID { get; set; }
 
-        public OPM Opm { get; set; }
-        public FRT Shp { get; set; }
-        public FRT Cne { get; set; }
-        public FRT Acc { get; set; }
-        public FRT Mnf { get; set; }
-        public FRT Nfy { get; set; }
-        public FRT Crr { get; set; }
+        public OPM OPM { get; set; }
+        public FRT SHP { get; set; }
+        public FRT CNE { get; set; }
+        public FRT ACC { get; set; }
+        public FRT MNF { get; set; }
+        public FRT NFY { get; set; }
+        public FRT CRR { get; set; }
 
         public string nStu { get; set; }
 		public string pStu { get; set; }
@@ -265,39 +289,39 @@ namespace TMDB
         public string POD_t => $"{POD:s}";
         public string DRBD_t => $"{DRBD:s}";
 
-        public string ShpAd => Shp?.AdN ?? ""; //Shp == null ? "" : Shp.AdN;
-		public string CneAd => Cne?.AdN ?? ""; //Cne == null ? "" : Cne.AdN;
-		public string AccAd => Acc?.AdN ?? ""; //Acc == null ? "" : Acc.AdN;
-        public string MnfAd => Mnf?.AdN ?? ""; //Mnf == null ? "" : Mnf.AdN;
-        public string NfyAd => Nfy?.AdN ?? ""; //Nfy == null ? "" : Nfy.AdN;
-        public string CrrAd => Crr?.AdN ?? ""; // Crr == null ? "" : Crr.AdN;
+        public string ShpAd => SHP?.AdN ?? ""; //Shp == null ? "" : Shp.AdN;
+		public string CneAd => CNE?.AdN ?? ""; //Cne == null ? "" : Cne.AdN;
+		public string AccAd => ACC?.AdN ?? ""; //Acc == null ? "" : Acc.AdN;
+        public string MnfAd => MNF?.AdN ?? ""; //Mnf == null ? "" : Mnf.AdN;
+        public string NfyAd => NFY?.AdN ?? ""; //Nfy == null ? "" : Nfy.AdN;
+        public string CrrAd => CRR?.AdN ?? ""; // Crr == null ? "" : Crr.AdN;
 
-        public DateTime? mETD => Opm?.ETD;
-		public DateTime? mATD => Opm?.ATD;
-		public DateTime? mETA => Opm?.ETA;
-		public DateTime? mATA => Opm?.ATA;
-        public DateTime? mRETD => Opm?.RETD;
-        public DateTime? mRETA => Opm?.RETA;
-        public DateTime? mACOT => Opm?.ACOT;
-        public DateTime? mTPAD => Opm?.TPAD;
-        public DateTime? mTPDD => Opm?.TPDD;
+        public DateTime? mETD => OPM?.ETD;
+		public DateTime? mATD => OPM?.ATD;
+		public DateTime? mETA => OPM?.ETA;
+		public DateTime? mATA => OPM?.ATA;
+        public DateTime? mRETD => OPM?.RETD;
+        public DateTime? mRETA => OPM?.RETA;
+        public DateTime? mACOT => OPM?.ACOT;
+        public DateTime? mTPAD => OPM?.TPAD;
+        public DateTime? mTPDD => OPM?.TPDD;
 
-        public string mVhc => Opm?.Vhc ?? "";
-        public string mInf => Opm?.Inf ?? "";
-        public string mHndInf => Opm?.HndInf ?? "";
-        public string mCntNoS => Opm?.CntNoS ?? "";
-        public string mSealNoS => Opm?.SealNoS ?? "";
-        public string mpInfoS => Opm?.pInfoS ?? "";
+        public string mVhc => OPM?.Vhc ?? "";
+        public string mInf => OPM?.Inf ?? "";
+        public string mHndInf => OPM?.HndInf ?? "";
+        public string mCntNoS => OPM?.CntNoS ?? "";
+        public string mSealNoS => OPM?.SealNoS ?? "";
+        public string mpInfoS => OPM?.pInfoS ?? "";
 
-        public string mETD_t => $"{Opm?.ETD:s}";
-		public string mATD_t => $"{Opm?.ATD:s}";
-		public string mETA_t => $"{Opm?.ETA:s}";
-        public string mATA_t => $"{Opm?.ATA:s}";
-        public string mRETD_t => $"{Opm?.RETD:s}";
-        public string mRETA_t => $"{Opm?.RETA:s}";
-        public string mACOT_t => $"{Opm?.ACOT:s}";
-        public string mTPAD_t => $"{Opm?.TPAD:s}";
-        public string mTPDD_t => $"{Opm?.TPDD:s}";
+        public string mETD_t => $"{OPM?.ETD:s}";
+		public string mATD_t => $"{OPM?.ATD:s}";
+		public string mETA_t => $"{OPM?.ETA:s}";
+        public string mATA_t => $"{OPM?.ATA:s}";
+        public string mRETD_t => $"{OPM?.RETD:s}";
+        public string mRETA_t => $"{OPM?.RETA:s}";
+        public string mACOT_t => $"{OPM?.ACOT:s}";
+        public string mTPAD_t => $"{OPM?.TPAD:s}";
+        public string mTPDD_t => $"{OPM?.TPDD:s}";
 
         public string nStuAd
         {

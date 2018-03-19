@@ -60,8 +60,8 @@ namespace tMax14web
             Fields.Add(new FieldsElementJson
             {
                 fN = "NOP",
-                fC = "AoP",
-                fT = "Amount of Package"
+                fC = "NoP",
+                fT = "Number of Package"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -85,7 +85,7 @@ namespace tMax14web
             {
                 fN = "mRTD_t",
                 fC = "AD2UP",
-                fT = "Arrival Date Time to Unloading Point/Customer"
+                fT = "Arrival Date Customer"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -97,7 +97,7 @@ namespace tMax14web
             {
                 fN = "mATD_t",
                 fC = "RDD",
-                fT = "Rail Departure Date"
+                fT = "Departure Date"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -109,37 +109,39 @@ namespace tMax14web
             var parent = (MasterPage)this.Parent;
             var fid = Convert.ToInt32(parent.fID);
             var std = Convert.ToDateTime(parent.StartDate);
+            fID = parent.fID;
+            StartDate = parent.StartDate;
 
             if (!parent.fOnLine)
                 return;
             OphsElementJson oph;
             //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
-            foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", std, "E", "R"))
+            foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where ROT = ? and MOT = ? and (h.POD >= ? or h.POD is null)", "E", "R", std))
             {
                 oph = Ophs.Add();
-                oph.mRefNo = h.Opm?.RefNo;
+                oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
                 oph.mCntNoS = h.CntNoS;
-                oph.Org = h.Org;
+                oph.OrgAd = h.ORG?.Ad;
+                oph.DstAd = h.DST?.Ad;
                 oph.EOH_t = $"{h.EOH:s}";
                 oph.EOH2_t = $"{h.EOH:s}";
                 oph.AOH_t = $"{h.AOH:s}";
-                oph.mSealNoS = h.Opm?.SealNoS;
+                oph.mSealNoS = h.OPM?.SealNoS;
                 oph.NOP = (long)h.NOP;
                 oph.GrW = (decimal)h.GrW;
-                oph.mpInfoS = h.Opm?.pInfoS;
+                oph.mpInfoS = h.OPM?.pInfoS;
                 oph.CusLoc = h.CusLoc;
-                oph.mRTD_t = $"{h.Opm?.RTD:s}";
+                oph.mRTD_t = $"{h.OPM?.RTD:s}";
                 oph.RTR_t = $"{h.RTR:s}";
-                oph.mATD_t = $"{h.Opm?.ATD:s}";
-                oph.mHndInf = h.Opm?.HndInf;
+                oph.mATD_t = $"{h.OPM?.ATD:s}";
+                oph.mHndInf = h.OPM?.HndInf;
 
             }
 
             //sener.NoR = DateTime.Now.Ticks;
             //int NOP = Ophs.Count;
-
         }
     }
 }

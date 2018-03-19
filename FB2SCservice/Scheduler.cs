@@ -39,6 +39,7 @@ namespace FB2SCservice
             if (!sending)
             {
                 sending = true;
+                FbLibrary.SendWithWebSocket.LocSend("M");
                 FbLibrary.SendWithWebSocket.FrtSend("M");
                 FbLibrary.SendWithWebSocket.FrcSend("M");
                 FbLibrary.SendWithWebSocket.OpmSend("M");
