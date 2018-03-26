@@ -229,12 +229,14 @@ namespace TMDB
 		public string MOT { get; set; }
 
         //public string Org { get; set; }
-		//public string Dst { get; set; }
+        //public string Dst { get; set; }
 
         public string OrgID { get; set; }
         public string DstID { get; set; }
+        public string CusLocID { get; set; }
         public LOC ORG { get; set; }
         public LOC DST { get; set; }
+        public LOC CUSLOC { get; set; }
 
         public int? ShpID { get; set; }
 		public int? CneID { get; set; }
@@ -269,13 +271,16 @@ namespace TMDB
         public DateTime? EOH { get; set; }
         public DateTime? REOH { get; set; }
         public DateTime? AOH { get; set; }
+        public DateTime? AOC { get; set; }
+		public DateTime? RTD { get; set; }
 		public DateTime? RTR { get; set; }
 		public DateTime? ROS { get; set; }
 		public DateTime? POD { get; set; }
         public string PODinf { get; set; }
         public DateTime? DRBD { get; set; }
         public DateTime? DRCD { get; set; }
-        public string CusLoc { get; set; }
+        public string DDT { get; set; }
+        public string OthInf { get; set; }
 
         public string EXD_t => $"{EXD:s}";
 		public string nStuTS_t => $"{nStuTS:s}";

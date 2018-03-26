@@ -19,7 +19,13 @@ namespace tMax14web
             {
                 fN = "OpmID",
                 fC = "ID",
-                fT = "Transorient Ref#"
+                fT = "TO Ref#"
+            });
+            Fields.Add(new FieldsElementJson
+            {
+                fN = "AccAd",
+                fC = "AccAd",
+                fT = "Client"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -32,6 +38,12 @@ namespace tMax14web
                 fN = "Org",
                 fC = "LP",
                 fT = "Loading Place"
+            });
+            Fields.Add(new FieldsElementJson
+            {
+                fN = "Dst",
+                fC = "Dst",
+                fT = "UnLoading Place"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -71,7 +83,7 @@ namespace tMax14web
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mInfoS",
+                fN = "mInf",
                 fC = "RC/D",
                 fT = "Reason for Change/Delay"
             });
@@ -83,27 +95,39 @@ namespace tMax14web
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mRTD_t",
-                fC = "AD2UP",
-                fT = "Arrival Date Customer"
+                fN = "AOC_t",
+                fC = "AOC",
+                fT = "Customs In"
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "RTR_t",
-                fC = "CCF",
-                fT = "Customs Clearance Finished"
+                fN = "RTD_t",
+                fC = "RTD",
+                fT = "Customs Out"
+            });
+            Fields.Add(new FieldsElementJson
+            {
+                fN = "mPOL",
+                fC = "mPOL",
+                fT = "Port of Loading"
+            });
+            Fields.Add(new FieldsElementJson
+            {
+                fN = "mPOU",
+                fC = "mPOU",
+                fT = "Port of Arrival"
             });
             Fields.Add(new FieldsElementJson
             {
                 fN = "mATD_t",
                 fC = "RDD",
-                fT = "Departure Date"
+                fT = "Terminal Departure"
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mHndInf",
+                fN = "hOthInf",
                 fC = "ExDsc",
-                fT = "Extra Cost Description and Amount"
+                fT = "Extra Cost Description"
             });
 
             var parent = (MasterPage)this.Parent;
@@ -114,14 +138,14 @@ namespace tMax14web
 
             if (!parent.fOnLine)
                 return;
-            OphsElementJson oph;
-            //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
+            OphsElementJson oph;
             foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where ROT = ? and MOT = ? and (h.POD >= ? or h.POD is null)", "E", "R", std))
             {
                 oph = Ophs.Add();
                 oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
+                oph.AccAd = h.AccAd;
                 oph.mCntNoS = h.CntNoS;
                 oph.OrgAd = h.ORG?.Ad;
                 oph.DstAd = h.DST?.Ad;
@@ -131,12 +155,12 @@ namespace tMax14web
                 oph.mSealNoS = h.OPM?.SealNoS;
                 oph.NOP = (long)h.NOP;
                 oph.GrW = (decimal)h.GrW;
-                oph.mpInfoS = h.OPM?.pInfoS;
-                oph.CusLoc = h.CusLoc;
-                oph.mRTD_t = $"{h.OPM?.RTD:s}";
-                oph.RTR_t = $"{h.RTR:s}";
+                oph.mInf = h.OPM?.Inf;
+                oph.CusLocAd = h.CUSLOC?.Ad;
+                oph.RTD_t = $"{h.RTD:s}";
+                oph.AOC_t = $"{h.AOC:s}";
                 oph.mATD_t = $"{h.OPM?.ATD:s}";
-                oph.mHndInf = h.OPM?.HndInf;
+                oph.OthInf = h.OthInf;
 
             }
 

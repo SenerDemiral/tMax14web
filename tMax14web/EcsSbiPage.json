@@ -1,6 +1,8 @@
 {
   "Html": "/tMax14web/EcsSbiPage.html",
   "Fmt": "DD.MM.YY",
+  "fID": "",
+  "StartDate": "",
 
   "Fields": [
     {
@@ -10,40 +12,19 @@
     }
   ],
 
-  "Captions": {
-    "mRefNo": "ECS Ref#",
-    "OpmID": "Transorient Ref#",
-    "mCntNoS": "Container#",
-    "Org": "Loading Place",
-    "EOH_t": "Requested Loading Date",
-    "EOH2_t": "Booked Loading Date",
-    "AOH_t": "Actual On Hand",
-    "mSealNoS": "Seal#",
-    "NOP": "Amount of Package",
-    "GrW": "Brutto Weight",
-    "mInfoS": "Reason for Change/Delay",
-    "CusLocAd": "Customs Location",
-    "mRTD_t": "Arrival Date Time to Unloading Point/Customer",
-    "RTR_t": "Customs Clearance Finished",
-    "mATD_t": "Rail Departure Date",
-    "mHndInf": "Extra Cost Description and Amount",
-  },
-
   "Ophs": [
     {
       "mRefNo": "",
       "OpmID": 0,
 	  "AccAd": "",
       "mCntNoS": "",
-      "CusLoc": "",
+      "CusLocAd": "",
       "mRTD_t": "",
       "RTR_t": "",
-      "Dst": "",
+      "DstAd": "",
       "PODinf": "",
       "POD_t": "",
-      "mpInfoS": "",
-      "mInf": "",
-      "mHndInf": ""
+      "OthInf": ""
     }
   ]
 }

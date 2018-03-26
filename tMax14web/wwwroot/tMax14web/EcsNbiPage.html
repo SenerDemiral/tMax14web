@@ -3,7 +3,7 @@
 <template>
     <dom-bind>
         <template>
-            <ecsnbi-tbl data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></ecsnbi-tbl>
+            <ecsnbi-tbl fid="[[model.fID]]" startdate="[[model.StartDate]]" data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></ecsnbi-tbl>
         </template>
     </dom-bind>
     <script>
@@ -126,10 +126,13 @@
         </style>
 		<div class="oph-table">
             <table id="tblEcsNbc" on-click="handleClick">
+                <caption>
+                   <a href="/tMax14web/EcsNBI/[[fid]]/[[startdate]]" download="EcsNBI.xlsx">Download Excel</a>
+                </caption>
                 <thead>
                     <tr>
                         <template is="dom-repeat" items="[[fields]]">
-                            <th id="[[item.fN]]" data-tooltip$="[[item.fT]]">[[item.fC]]</th>
+                            <th id="[[item.fN]]" data-tooltip$="[[item.fT]]">[[item.fT]]</th>
                         </template>
                     </tr>
                     <tr>
@@ -144,19 +147,20 @@
                             <td>[[item.mRefNo]]</td>
                             <td>[[item.OpmID]]</td>
                             <td>[[item.mCntNoS]]</td>
-                            <td>[[item.Org]]</td>
+                            <td>[[item.OrgAd]]</td>
                             <td><moment-element datetime="[[item.EOH_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td><moment-element datetime="[[item.EOH2_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td><moment-element datetime="[[item.EOH2_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td><moment-element datetime="[[item.AOH_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td>[[item.mSealNoS]]</td>
                             <td>[[item.NOP]]</td>
                             <td>[[item.GrW]]</td>
-                            <td>[[item.mpInfoS]]</td>
-                            <td>[[item.CusLoc]]</td>
-                            <td><moment-element datetime="[[item.mRTD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td>[[item.mInf]]</td>
+                            <td>[[item.CusLocAd]]</td>
+                            <td><moment-element datetime="[[item.AOC_t]]" output-format="DD.MM.YY"></moment-element></td>
+                            <td><moment-element datetime="[[item.RTD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td><moment-element datetime="[[item.mATD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td>[[item.mHndInf]]</td>
+                            <td>[[item.OthInf]]</td>
                         </tr>
                     </template>
                 </tbody>
@@ -198,6 +202,14 @@
                 NOR: {
                     type: Number,
                     value: 0
+                },
+                fid: {
+                    type: String,
+                    value: ""
+                },
+                startdate: {
+                    type: String,
+                    value: ""
                 },
             },
             attached: function () {

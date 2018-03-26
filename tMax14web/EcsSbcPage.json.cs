@@ -19,7 +19,7 @@ namespace tMax14web
             {
                 fN = "OpmID",
                 fC = "ID",
-                fT = "Transorient Ref#"
+                fT = "TO Ref#"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -43,19 +43,19 @@ namespace tMax14web
             {
                 fN = "mPOU",
                 fC = "POU",
-                fT = ""
+                fT = "Final Location"
             });
             Fields.Add(new FieldsElementJson
             {
                 fN = "mETA_t",
                 fC = "FT ETA",
-                fT = "Final Train ETA"
+                fT = "Final ETA"
             });
             Fields.Add(new FieldsElementJson
             {
                 fN = "mATA_t",
                 fC = "EfcTrnArv",
-                fT = "Effective Train Arrival"
+                fT = "Effective Arrival"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -67,7 +67,7 @@ namespace tMax14web
             {
                 fN = "DRBD_t",
                 fC = "CI",
-                fT = "Customs In (Terminal)"
+                fT = "Customs In Terminal"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -97,59 +97,58 @@ namespace tMax14web
             {
                 fN = "PODinf",
                 fC = "EDTF",
-                fT = "Effective Delivery Time From"
+                fT = "Effective Delivery From"
             });
             Fields.Add(new FieldsElementJson
             {
                 fN = "POD_t",
                 fC = "EDTT",
-                fT = "Effective Delivery Time To"
+                fT = "Effective Delivery To"
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mpInfoS",
+                fN = "mInf",
                 fC = "RC/D",
                 fT = "Reason for Change/Delay"
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mHndInf",
+                fN = "OthInf",
                 fC = "ECD&A",
-                fT = "Extra Cost Description and Amount"
+                fT = "Extra Cost Description"
             });
 
             var parent = (MasterPage)this.Parent;
             var fid = Convert.ToInt32(parent.fID);
             var std = Convert.ToDateTime(parent.StartDate);
+            fID = parent.fID;
+            StartDate = parent.StartDate;
 
             if (!parent.fOnLine)
                 return;
-            OphsElementJson oph;
-            //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
+            OphsElementJson oph;
             foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", std, "I", "R"))
             {
                 oph = Ophs.Add();
-
                 oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
-                oph.AccAd = h.ACC?.AdN;
+                oph.AccAd = h.AccAd;
                 oph.mCntNoS = h.CntNoS;
-                //oph.Org = h.Org;
-                //oph.mPOU = h.OPM?.POU;
+                oph.OrgAd = h.ORG?.Ad;
+                oph.mPouAd = h.OPM?.POU?.Ad;
                 oph.mETA_t = $"{h.OPM?.ETA:s}";
                 oph.mATA_t = $"{h.OPM?.ATA:s}";
-                oph.CusLoc = h.CusLoc;
+                oph.CusLocAd = h.CUSLOC?.Ad;
                 oph.DRBD_t = $"{h.DRBD:s}";
-                oph.DRCD_t = $"{h.DRCD:s}";
-
-                //oph.Dst = $"{h.Dst:s}";
+                oph.DDT_t = $"{h.DDT:s}";
+                oph.DstAd = h.DST?.Ad;
                 oph.ROS_t = $"{h.ROS:s}";
                 oph.ROH_t = $"{h.ROH:s}";
                 oph.PODinf = h.PODinf;
                 oph.POD_t = $"{h.POD:s}";
-                oph.mpInfoS = h.OPM?.pInfoS;
-                oph.mHndInf = h.OPM?.HndInf;
+                oph.mInf = h.OPM?.Inf;
+                oph.OthInf = h.OthInf;
 
             }
 

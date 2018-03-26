@@ -3,7 +3,7 @@
 <template>
     <dom-bind>
         <template>
-            <ecssbi-tbl data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></ecssbi-tbl>
+            <ecssbi-tbl fid="[[model.fID]]" startdate="[[model.StartDate]]" data="[[model.Ophs]]" captions="{{model.Captions}}" fields="{{model.Fields}}"></ecsibc-tbl>
         </template>
     </dom-bind>
     <script>
@@ -126,10 +126,13 @@
         </style>
 		<div class="oph-table">
             <table id="tblEcsNbc" on-click="handleClick">
+                <caption>
+                   <a href="/tMax14web/EcsSBI/[[fid]]/[[startdate]]" download="EcsSBI.xlsx">Download Excel</a>
+                </caption>
                 <thead>
                     <tr>
                         <template is="dom-repeat" items="[[fields]]">
-                            <th id="[[item.fN]]" data-tooltip$="[[item.fT]]">[[item.fC]]</th>
+                            <th id="[[item.fN]]" data-tooltip$="[[item.fT]]">[[item.fT]]</th>
                         </template>
                     </tr>
                     <tr>
@@ -145,15 +148,13 @@
                             <td>[[item.OpmID]]</td>
                             <td>[[item.AccAd]]</td>
                             <td>[[item.mCntNoS]]</td>
-                            <td>[[item.CusLoc]]</td>
+                            <td>[[item.CusLocAd]]</td>
                             <td><moment-element datetime="[[item.mRTD_t]]" output-format="DD.MM.YY"></moment-element></td>
                             <td><moment-element datetime="[[item.RTR_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td>[[item.Dst]]</td>
+                            <td>[[item.DstAd]]</td>
                             <td>[[item.PODinf]]</td>
                             <td><moment-element datetime="[[item.POD_t]]" output-format="DD.MM.YY"></moment-element></td>
-                            <td>[[item.mpInfoS]]</td>
-                            <td>[[item.mInf]]</td>
-                            <td>[[item.mHndInf]]</td>
+                            <td>[[item.OthInf]]</td>
                         </tr>
                     </template>
                 </tbody>
@@ -195,6 +196,14 @@
                 NOR: {
                     type: Number,
                     value: 0
+                },
+                fid: {
+                    type: String,
+                    value: ""
+                },
+                startdate: {
+                    type: String,
+                    value: ""
                 },
             },
             attached: function () {

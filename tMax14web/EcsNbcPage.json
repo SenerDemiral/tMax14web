@@ -1,7 +1,7 @@
 {
   "Html": "/tMax14web/EcsNbcPage.html",
   "Fmt": "DD.MM.YY",
-  "fID": "abcdef",
+  "fID": "",
   "StartDate": "",
 
   "Fields": [
@@ -16,6 +16,7 @@
     {
       "mRefNo": "",
       "OpmID": 0,
+	  "AccAd": "",
       "mCntNoS": "",
       "OrgAd": "",
       "DstAd": "",
@@ -26,12 +27,14 @@
 
       "NOP": 0,
       "GrW": 0.0,
-      "mpInfoS": "",
-      "CusLoc": "",
-      "mRTD_t": "",
-      "RTR_t": "",
+      "mInf": "",
+      "CusLocAd": "",
+      "AOC_t": "",
+      "RTD_t": "",
+	  "mPolAd": "",
+	  "mPouAd": "",
       "mATD_t": "",
-      "mHndInf": ""
+      "OthInf": ""
     }
   ]
 }

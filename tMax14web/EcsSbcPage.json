@@ -1,6 +1,8 @@
 {
   "Html": "/tMax14web/EcsSbcPage.html",
   "Fmt": "DD.MM.YY",
+  "fID": "",
+  "StartDate": "",
 
   "Fields": [
     {
@@ -16,20 +18,20 @@
       "OpmID": 0,
 	  "AccAd": "",
       "mCntNoS": "",
-	  "Org": "",
-	  "mPOU": "",
-	  "mETA_t": "",
-	  "mATA_t": "",
-      "CusLoc": "",
+      "OrgAd": "",
+      "mPouAd": "",
+      "mETA_t": "",
+      "mATA_t": "",
+      "CusLocAd": "",
       "DRBD_t": "",
-      "DRCD_t": "",
-      "Dst": "",
+      "DDT_t": "",
+      "DstAd": "",
       "ROS_t": "",
       "ROH_t": "",
-	  "PODinf": "",
-	  "POD_t": "",
-      "mpInfoS": "",
-      "mHndInf": ""
+      "PODinf": "",
+      "POD_t": "",
+      "mInf": "",
+      "OthInf": ""
     }
   ]
 }

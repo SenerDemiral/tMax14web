@@ -506,35 +506,40 @@ namespace tMax14rest
                             rec.MOT = jsn.MOT;
                             rec.OrgID = jsn.Org;
                             rec.DstID = jsn.Dst;
+                            rec.CusLocID = jsn.CusLoc;
                             rec.nStu = jsn.nStu;
                             rec.pStu = jsn.pStu;
                             rec.DTM = jsn.DTM;
                             rec.PTM = jsn.PTM;
                             rec.NOP = jsn.NOP; // == "" ? (int?)null : Convert.ToInt32(jsn.NOP);
-                            rec.GrW = jsn.GrW; // == "" ? (double?)null : Convert.ToDouble(jsn.GrW);
-                            rec.VM3 = jsn.VM3; // == "" ? (double?)null : Convert.ToDouble(jsn.VM3);
-                            rec.ChW = jsn.ChW; // == "" ? (int?)null : Convert.ToInt32(jsn.ChW);
+                            rec.GrW = jsn.GrW;
+                            rec.VM3 = jsn.VM3;
+                            rec.ChW = jsn.ChW;
                             rec.CntNoS = jsn.CntNoS;
                             rec.CABW = jsn.CABW;
 
                             rec.ShpID = jsn.ShpID;// == "" ? (int?)null : Convert.ToInt32(jsn.ShpID);
-                            rec.CneID = jsn.CneID;// == "" ? (int?)null : Convert.ToInt32(jsn.CneID);
-                            rec.AccID = jsn.AccID;// == "" ? (int?)null : Convert.ToInt32(jsn.AccID);
-                            rec.MnfID = jsn.MnfID;// == "" ? (int?)null : Convert.ToInt32(jsn.MnfID);
-                            rec.NfyID = jsn.NfyID;// == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
-                            rec.CrrID = jsn.CrrID;// == "" ? (int?)null : Convert.ToInt32(jsn.NfyID);
+                            rec.CneID = jsn.CneID;
+                            rec.AccID = jsn.AccID;
+                            rec.MnfID = jsn.MnfID;
+                            rec.NfyID = jsn.NfyID;
+                            rec.CrrID = jsn.CrrID;
 
                             rec.EXD = jsn.EXD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EXD);
-                            rec.nStuTS = jsn.nStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.nStuTS);
-                            rec.pStuTS = jsn.pStuTS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.pStuTS);
-                            rec.ROH = jsn.ROH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROH);
-                            rec.EOH = jsn.EOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.EOH);
-                            rec.AOH = jsn.AOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.AOH);
-                            rec.RTR = jsn.RTR;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.RTR);
-                            rec.ROS = jsn.ROS;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.ROS);
-                            rec.POD = jsn.POD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.POD);
-                            rec.REOH = jsn.REOH;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
-                            rec.DRBD = jsn.DRBD;// == "" ? (DateTime?)null : Convert.ToDateTime(jsn.REOH);
+                            rec.nStuTS = jsn.nStuTS;
+                            rec.pStuTS = jsn.pStuTS;
+                            rec.ROH = jsn.ROH;
+                            rec.EOH = jsn.EOH;
+                            rec.AOH = jsn.AOH;
+                            rec.AOH = jsn.AOH;
+                            rec.RTD = jsn.RTD;
+                            rec.RTR = jsn.RTR;
+                            rec.ROS = jsn.ROS;
+                            rec.POD = jsn.POD;
+                            rec.REOH = jsn.REOH;
+                            rec.DRBD = jsn.DRBD;
+                            rec.DDT = jsn.DDT;
+                            rec.OthInf = jsn.OthInf;
 
                             if (rec.OpmID != null)
                                 rec.OPM = Db.SQL<TMDB.OPM>("select m from OPM m where m.OpmID = ?", rec.OpmID).FirstOrDefault();
@@ -555,6 +560,8 @@ namespace tMax14rest
                                 rec.ORG = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.OrgID).FirstOrDefault();
                             if (rec.DstID != null)
                                 rec.DST = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.DstID).FirstOrDefault();
+                            if (rec.CusLocID != null)
+                                rec.CUSLOC = Db.SQL<TMDB.LOC>("select f from LOC f where f.LocID = ?", rec.CusLocID).FirstOrDefault();
                         }
                     }
                 });

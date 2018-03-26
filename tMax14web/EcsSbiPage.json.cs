@@ -19,7 +19,7 @@ namespace tMax14web
             {
                 fN = "OpmID",
                 fC = "ID",
-                fT = "Transorient Ref#"
+                fT = "TO Ref#"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -43,7 +43,7 @@ namespace tMax14web
             {
                 fN = "RTD_t",
                 fC = "AD2UP",
-                fT = "Arrival Date Time to Unloading Point/Customer"
+                fT = "Arrival Date Customer"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -71,32 +71,21 @@ namespace tMax14web
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mInfoS",
-                fC = "RC/D",
-                fT = "Reason for Change/Delay"
-            });
-            Fields.Add(new FieldsElementJson
-            {
-                fN = "mInf",
+                fN = "OthInf",
                 fC = "ECD",
                 fT = "Extra Cost Description"
-            });
-            Fields.Add(new FieldsElementJson
-            {
-                fN = "mHndInf",
-                fC = "ECD&A",
-                fT = "Extra Cost Description and Amount"
             });
 
             var parent = (MasterPage)this.Parent;
             var fid = Convert.ToInt32(parent.fID);
             var std = Convert.ToDateTime(parent.StartDate);
+            fID = parent.fID;
+            StartDate = parent.StartDate;
 
             if (!parent.fOnLine)
                 return;
-            OphsElementJson oph;
-            //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
+            OphsElementJson oph;
             foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", std, "I", "R"))
             {
                 oph = Ophs.Add();
@@ -105,16 +94,14 @@ namespace tMax14web
                 oph.OpmID = h.OpmID ?? 0;
                 oph.AccAd = h.ACC?.AdN;
                 oph.mCntNoS = h.CntNoS;
-                oph.CusLoc = h.CusLoc;
+                oph.CusLocAd = h.CUSLOC?.Ad;
                 oph.mRTD_t = $"{h.OPM?.RTD:s}";
                 oph.RTR_t = $"{h.EOH:s}";
 
-                //oph.Dst = $"{h.Dst:s}";
+                oph.DstAd = h.DST?.Ad;
                 oph.PODinf = h.PODinf;
                 oph.POD_t = $"{h.POD:s}";
-                oph.mpInfoS = h.OPM?.pInfoS;
-                oph.mInf = h.OPM?.Inf;
-                oph.mHndInf = h.OPM?.HndInf;
+                oph.OthInf = h.OthInf;
 
             }
 

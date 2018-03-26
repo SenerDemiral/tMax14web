@@ -40,7 +40,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(27, 78);
+            this.button2.Location = new System.Drawing.Point(12, 70);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(116, 23);
             this.button2.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(244, 78);
+            this.button5.Location = new System.Drawing.Point(276, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(116, 23);
             this.button5.TabIndex = 4;
@@ -80,7 +80,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(27, 25);
+            this.button6.Location = new System.Drawing.Point(12, 12);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(116, 23);
             this.button6.TabIndex = 5;
@@ -90,7 +90,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(172, 132);
+            this.button1.Location = new System.Drawing.Point(145, 41);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 23);
             this.button1.TabIndex = 6;
@@ -100,7 +100,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(27, 132);
+            this.button7.Location = new System.Drawing.Point(12, 41);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(116, 23);
             this.button7.TabIndex = 7;
@@ -110,7 +110,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(172, 25);
+            this.button8.Location = new System.Drawing.Point(145, 12);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(116, 23);
             this.button8.TabIndex = 8;

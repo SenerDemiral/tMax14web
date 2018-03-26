@@ -19,7 +19,7 @@ namespace tMax14web
             {
                 fN = "OpmID",
                 fC = "ID",
-                fT = "Transorient Ref#"
+                fT = "TO Ref#"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -43,13 +43,19 @@ namespace tMax14web
             {
                 fN = "EOH2_t",
                 fC = "BLD",
-                fT = "Booked Loading Date"
+                fT = "Booked Loading Slot"
+            });
+            Fields.Add(new FieldsElementJson
+            {
+                fN = "EOH3_t",
+                fC = "BLD",
+                fT = "Effective Loading From"
             });
             Fields.Add(new FieldsElementJson
             {
                 fN = "AOH_t",
                 fC = "AOH",
-                fT = "Actual On Hand"
+                fT = "Effective Loading To"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -60,8 +66,8 @@ namespace tMax14web
             Fields.Add(new FieldsElementJson
             {
                 fN = "NOP",
-                fC = "AoP",
-                fT = "Amount of Package"
+                fC = "NoP",
+                fT = "Number of Package"
             });
             Fields.Add(new FieldsElementJson
             {
@@ -71,7 +77,7 @@ namespace tMax14web
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mInfoS",
+                fN = "mInf",
                 fC = "RC/D",
                 fT = "Reason for Change/Delay"
             });
@@ -83,58 +89,59 @@ namespace tMax14web
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mRTD_t",
-                fC = "AD2UP",
-                fT = "Arrival Date Time to Unloading Point/Customer"
+                fN = "AOC_t",
+                fC = "AOC",
+                fT = "Customs In"
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "RTR_t",
-                fC = "CCF",
-                fT = "Customs Clearance Finished"
+                fN = "RTD_t",
+                fC = "RTD",
+                fT = "Customs Out"
             });
             Fields.Add(new FieldsElementJson
             {
                 fN = "mATD_t",
                 fC = "RDD",
-                fT = "Rail Departure Date"
+                fT = "Terminal Departure"
             });
             Fields.Add(new FieldsElementJson
             {
-                fN = "mHndInf",
+                fN = "hOthInf",
                 fC = "ExDsc",
-                fT = "Extra Cost Description and Amount"
+                fT = "Extra Cost Description"
             });
 
             var parent = (MasterPage)this.Parent;
             var fid = Convert.ToInt32(parent.fID);
             var std = Convert.ToDateTime(parent.StartDate);
+            fID = parent.fID;
+            StartDate = parent.StartDate;
 
             if (!parent.fOnLine)
                 return;
-            OphsElementJson oph;
-            //Ophs.Data = Db.SQL<TMDB.OPH>("select h from OPH h where (h.ShpID = ? or h.CneID = ? or h.AccID = ?) and h.EXD >= ?", fid, fid, fid, std);
 
+            OphsElementJson oph;
             foreach (var h in Db.SQL<TMDB.OPH>("select h from OPH h where h.POD >= ? and ROT = ? and MOT = ?", std, "E", "R"))
             {
                 oph = Ophs.Add();
                 oph.mRefNo = h.OPM?.RefNo;
                 oph.OpmID = h.OpmID ?? 0;
                 oph.mCntNoS = h.CntNoS;
-                //oph.Org = h.Org;
+                oph.OrgAd = h.ORG?.Ad;
                 oph.EOH_t = $"{h.EOH:s}";
                 oph.EOH2_t = $"{h.EOH:s}";
+                oph.EOH3_t = $"{h.EOH:s}";
                 oph.AOH_t = $"{h.AOH:s}";
                 oph.mSealNoS = h.OPM?.SealNoS;
                 oph.NOP = (long)h.NOP;
                 oph.GrW = (decimal)h.GrW;
-                oph.mpInfoS = h.OPM?.pInfoS;
-                oph.CusLoc = h.CusLoc;
-                oph.mRTD_t = $"{h.OPM?.RTD:s}";
-                oph.RTR_t = $"{h.RTR:s}";
+                oph.mInf = h.OPM?.Inf;
+                oph.CusLocAd = h.CUSLOC?.Ad;
+                oph.RTD_t = $"{h.RTD:s}";
+                oph.AOC_t = $"{h.AOC:s}";
                 oph.mATD_t = $"{h.OPM?.ATD:s}";
-                oph.mHndInf = h.OPM?.HndInf;
-
+                oph.OthInf = h.OthInf;
             }
 
             //sener.NoR = DateTime.Now.Ticks;

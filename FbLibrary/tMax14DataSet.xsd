@@ -244,6 +244,10 @@
               <Mapping SourceColumn="CABW" DataSetColumn="CABW" />
               <Mapping SourceColumn="CUSLOC" DataSetColumn="CUSLOC" />
               <Mapping SourceColumn="CNTNOS" DataSetColumn="CNTNOS" />
+              <Mapping SourceColumn="AOC" DataSetColumn="AOC" />
+              <Mapping SourceColumn="RTD" DataSetColumn="RTD" />
+              <Mapping SourceColumn="OTHINF" DataSetColumn="OTHINF" />
+              <Mapping SourceColumn="DDT" DataSetColumn="DDT" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -287,7 +291,7 @@
   <xs:element name="tMax14DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="False" msprop:Generator_DataSetName="tMax14DataSet" msprop:Generator_UserDSName="tMax14DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="WEB_FRT_MDFD" msprop:Generator_TableClassName="WEB_FRT_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_FRT_MDFD" msprop:Generator_TablePropName="WEB_FRT_MDFD" msprop:Generator_RowDeletingName="WEB_FRT_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_FRT_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_FRT_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_FRT_MDFDRowDeleted" msprop:Generator_UserTableName="WEB_FRT_MDFD" msprop:Generator_RowChangedName="WEB_FRT_MDFDRowChanged" msprop:Generator_RowEvArgName="WEB_FRT_MDFDRowChangeEvent" msprop:Generator_RowClassName="WEB_FRT_MDFDRow">
+        <xs:element name="WEB_FRT_MDFD" msprop:Generator_TableClassName="WEB_FRT_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_FRT_MDFD" msprop:Generator_RowChangedName="WEB_FRT_MDFDRowChanged" msprop:Generator_TablePropName="WEB_FRT_MDFD" msprop:Generator_RowDeletingName="WEB_FRT_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_FRT_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_FRT_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_FRT_MDFDRowDeleted" msprop:Generator_RowClassName="WEB_FRT_MDFDRow" msprop:Generator_UserTableName="WEB_FRT_MDFD" msprop:Generator_RowEvArgName="WEB_FRT_MDFDRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TBL" msprop:Generator_ColumnVarNameInTable="columnTBL" msprop:Generator_ColumnPropNameInRow="TBL" msprop:Generator_ColumnPropNameInTable="TBLColumn" msprop:Generator_UserColumnName="TBL" minOccurs="0">
@@ -338,7 +342,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WEB_FRC_MDFD" msprop:Generator_TableClassName="WEB_FRC_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_FRC_MDFD" msprop:Generator_TablePropName="WEB_FRC_MDFD" msprop:Generator_RowDeletingName="WEB_FRC_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_FRC_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_FRC_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_FRC_MDFDRowDeleted" msprop:Generator_UserTableName="WEB_FRC_MDFD" msprop:Generator_RowChangedName="WEB_FRC_MDFDRowChanged" msprop:Generator_RowEvArgName="WEB_FRC_MDFDRowChangeEvent" msprop:Generator_RowClassName="WEB_FRC_MDFDRow">
+        <xs:element name="WEB_FRC_MDFD" msprop:Generator_TableClassName="WEB_FRC_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_FRC_MDFD" msprop:Generator_RowChangedName="WEB_FRC_MDFDRowChanged" msprop:Generator_TablePropName="WEB_FRC_MDFD" msprop:Generator_RowDeletingName="WEB_FRC_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_FRC_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_FRC_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_FRC_MDFDRowDeleted" msprop:Generator_RowClassName="WEB_FRC_MDFDRow" msprop:Generator_UserTableName="WEB_FRC_MDFD" msprop:Generator_RowEvArgName="WEB_FRC_MDFDRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TBL" msprop:Generator_ColumnVarNameInTable="columnTBL" msprop:Generator_ColumnPropNameInRow="TBL" msprop:Generator_ColumnPropNameInTable="TBLColumn" msprop:Generator_UserColumnName="TBL" minOccurs="0">
@@ -383,7 +387,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WEB_AFB_MDFD" msprop:Generator_TableClassName="WEB_AFB_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_AFB_MDFD" msprop:Generator_TablePropName="WEB_AFB_MDFD" msprop:Generator_RowDeletingName="WEB_AFB_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_AFB_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_AFB_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_AFB_MDFDRowDeleted" msprop:Generator_UserTableName="WEB_AFB_MDFD" msprop:Generator_RowChangedName="WEB_AFB_MDFDRowChanged" msprop:Generator_RowEvArgName="WEB_AFB_MDFDRowChangeEvent" msprop:Generator_RowClassName="WEB_AFB_MDFDRow">
+        <xs:element name="WEB_AFB_MDFD" msprop:Generator_TableClassName="WEB_AFB_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_AFB_MDFD" msprop:Generator_RowChangedName="WEB_AFB_MDFDRowChanged" msprop:Generator_TablePropName="WEB_AFB_MDFD" msprop:Generator_RowDeletingName="WEB_AFB_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_AFB_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_AFB_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_AFB_MDFDRowDeleted" msprop:Generator_RowClassName="WEB_AFB_MDFDRow" msprop:Generator_UserTableName="WEB_AFB_MDFD" msprop:Generator_RowEvArgName="WEB_AFB_MDFDRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TBL" msprop:Generator_ColumnVarNameInTable="columnTBL" msprop:Generator_ColumnPropNameInRow="TBL" msprop:Generator_ColumnPropNameInTable="TBLColumn" msprop:Generator_UserColumnName="TBL" minOccurs="0">
@@ -446,7 +450,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WEB_OPM_MDFD" msprop:Generator_TableClassName="WEB_OPM_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_OPM_MDFD" msprop:Generator_TablePropName="WEB_OPM_MDFD" msprop:Generator_RowDeletingName="WEB_OPM_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_OPM_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_OPM_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_OPM_MDFDRowDeleted" msprop:Generator_UserTableName="WEB_OPM_MDFD" msprop:Generator_RowChangedName="WEB_OPM_MDFDRowChanged" msprop:Generator_RowEvArgName="WEB_OPM_MDFDRowChangeEvent" msprop:Generator_RowClassName="WEB_OPM_MDFDRow">
+        <xs:element name="WEB_OPM_MDFD" msprop:Generator_TableClassName="WEB_OPM_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_OPM_MDFD" msprop:Generator_RowChangedName="WEB_OPM_MDFDRowChanged" msprop:Generator_TablePropName="WEB_OPM_MDFD" msprop:Generator_RowDeletingName="WEB_OPM_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_OPM_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_OPM_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_OPM_MDFDRowDeleted" msprop:Generator_RowClassName="WEB_OPM_MDFDRow" msprop:Generator_UserTableName="WEB_OPM_MDFD" msprop:Generator_RowEvArgName="WEB_OPM_MDFDRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TBL" msprop:Generator_ColumnVarNameInTable="columnTBL" msprop:Generator_ColumnPropNameInRow="TBL" msprop:Generator_ColumnPropNameInTable="TBLColumn" msprop:Generator_UserColumnName="TBL" minOccurs="0">
@@ -590,7 +594,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WEB_OPH_MDFD" msprop:Generator_TableClassName="WEB_OPH_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_OPH_MDFD" msprop:Generator_TablePropName="WEB_OPH_MDFD" msprop:Generator_RowDeletingName="WEB_OPH_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_OPH_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_OPH_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_OPH_MDFDRowDeleted" msprop:Generator_UserTableName="WEB_OPH_MDFD" msprop:Generator_RowChangedName="WEB_OPH_MDFDRowChanged" msprop:Generator_RowEvArgName="WEB_OPH_MDFDRowChangeEvent" msprop:Generator_RowClassName="WEB_OPH_MDFDRow">
+        <xs:element name="WEB_OPH_MDFD" msprop:Generator_TableClassName="WEB_OPH_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_OPH_MDFD" msprop:Generator_RowChangedName="WEB_OPH_MDFDRowChanged" msprop:Generator_TablePropName="WEB_OPH_MDFD" msprop:Generator_RowDeletingName="WEB_OPH_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_OPH_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_OPH_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_OPH_MDFDRowDeleted" msprop:Generator_RowClassName="WEB_OPH_MDFDRow" msprop:Generator_UserTableName="WEB_OPH_MDFD" msprop:Generator_RowEvArgName="WEB_OPH_MDFDRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TBL" msprop:Generator_ColumnVarNameInTable="columnTBL" msprop:Generator_ColumnPropNameInRow="TBL" msprop:Generator_ColumnPropNameInTable="TBLColumn" msprop:Generator_UserColumnName="TBL" minOccurs="0">
@@ -724,10 +728,26 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="AOC" msprop:Generator_ColumnVarNameInTable="columnAOC" msprop:Generator_ColumnPropNameInRow="AOC" msprop:Generator_ColumnPropNameInTable="AOCColumn" msprop:Generator_UserColumnName="AOC" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RTD" msprop:Generator_ColumnVarNameInTable="columnRTD" msprop:Generator_ColumnPropNameInRow="RTD" msprop:Generator_ColumnPropNameInTable="RTDColumn" msprop:Generator_UserColumnName="RTD" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OTHINF" msprop:Generator_ColumnVarNameInTable="columnOTHINF" msprop:Generator_ColumnPropNameInRow="OTHINF" msprop:Generator_ColumnPropNameInTable="OTHINFColumn" msprop:Generator_UserColumnName="OTHINF" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DDT" msprop:Generator_ColumnVarNameInTable="columnDDT" msprop:Generator_ColumnPropNameInRow="DDT" msprop:Generator_ColumnPropNameInTable="DDTColumn" msprop:Generator_UserColumnName="DDT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WEB_LOC_MDFD" msprop:Generator_TableClassName="WEB_LOC_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_LOC_MDFD" msprop:Generator_RowChangedName="WEB_LOC_MDFDRowChanged" msprop:Generator_TablePropName="WEB_LOC_MDFD" msprop:Generator_RowDeletingName="WEB_LOC_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_LOC_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_LOC_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_LOC_MDFDRowDeleted" msprop:Generator_RowClassName="WEB_LOC_MDFDRow" msprop:Generator_UserTableName="WEB_LOC_MDFD" msprop:Generator_RowEvArgName="WEB_LOC_MDFDRowChangeEvent">
+        <xs:element name="WEB_LOC_MDFD" msprop:Generator_TableClassName="WEB_LOC_MDFDDataTable" msprop:Generator_TableVarName="tableWEB_LOC_MDFD" msprop:Generator_TablePropName="WEB_LOC_MDFD" msprop:Generator_RowDeletingName="WEB_LOC_MDFDRowDeleting" msprop:Generator_RowChangingName="WEB_LOC_MDFDRowChanging" msprop:Generator_RowEvHandlerName="WEB_LOC_MDFDRowChangeEventHandler" msprop:Generator_RowDeletedName="WEB_LOC_MDFDRowDeleted" msprop:Generator_UserTableName="WEB_LOC_MDFD" msprop:Generator_RowChangedName="WEB_LOC_MDFDRowChanged" msprop:Generator_RowEvArgName="WEB_LOC_MDFDRowChangeEvent" msprop:Generator_RowClassName="WEB_LOC_MDFDRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TBL" msprop:Generator_ColumnVarNameInTable="columnTBL" msprop:Generator_ColumnPropNameInRow="TBL" msprop:Generator_ColumnPropNameInTable="TBLColumn" msprop:Generator_UserColumnName="TBL" minOccurs="0">

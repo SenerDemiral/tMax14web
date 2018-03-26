@@ -373,6 +373,8 @@ namespace FbLibrary
                         jsn.ROH = row["ROH"];
                         jsn.EOH = row["EOH"];
                         jsn.AOH = row["AOH"];
+                        jsn.AOC = row["AOC"];
+                        jsn.RTD = row["RTD"];
                         jsn.RTR = row["RTR"];
                         jsn.ROS = row["ROS"];
                         jsn.POD = row["POD"];
@@ -381,6 +383,8 @@ namespace FbLibrary
                         jsn.DRBD = row["DRBD"];
                         jsn.DRCD = row["DRCD"];
                         jsn.CusLoc = row["CUSLOC"];
+                        jsn.DDT = row["DDT"];
+                        jsn.OthInf = row["OTHINF"];
 
                         wsOph.Send(JsonConvert.SerializeObject(jsn));
 

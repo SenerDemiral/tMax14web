@@ -2505,6 +2505,14 @@ namespace FbLibrary {
             
             private global::System.Data.DataColumn columnCNTNOS;
             
+            private global::System.Data.DataColumn columnAOC;
+            
+            private global::System.Data.DataColumn columnRTD;
+            
+            private global::System.Data.DataColumn columnOTHINF;
+            
+            private global::System.Data.DataColumn columnDDT;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public WEB_OPH_MDFDDataTable() {
@@ -2868,6 +2876,38 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn AOCColumn {
+                get {
+                    return this.columnAOC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RTDColumn {
+                get {
+                    return this.columnRTD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn OTHINFColumn {
+                get {
+                    return this.columnOTHINF;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DDTColumn {
+                get {
+                    return this.columnDDT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2944,7 +2984,11 @@ namespace FbLibrary {
                         System.DateTime DRCD, 
                         string CABW, 
                         string CUSLOC, 
-                        string CNTNOS) {
+                        string CNTNOS, 
+                        System.DateTime AOC, 
+                        System.DateTime RTD, 
+                        string OTHINF, 
+                        string DDT) {
                 WEB_OPH_MDFDRow rowWEB_OPH_MDFDRow = ((WEB_OPH_MDFDRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TBL,
@@ -2987,7 +3031,11 @@ namespace FbLibrary {
                         DRCD,
                         CABW,
                         CUSLOC,
-                        CNTNOS};
+                        CNTNOS,
+                        AOC,
+                        RTD,
+                        OTHINF,
+                        DDT};
                 rowWEB_OPH_MDFDRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWEB_OPH_MDFDRow);
                 return rowWEB_OPH_MDFDRow;
@@ -3051,6 +3099,10 @@ namespace FbLibrary {
                 this.columnCABW = base.Columns["CABW"];
                 this.columnCUSLOC = base.Columns["CUSLOC"];
                 this.columnCNTNOS = base.Columns["CNTNOS"];
+                this.columnAOC = base.Columns["AOC"];
+                this.columnRTD = base.Columns["RTD"];
+                this.columnOTHINF = base.Columns["OTHINF"];
+                this.columnDDT = base.Columns["DDT"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3138,6 +3190,14 @@ namespace FbLibrary {
                 base.Columns.Add(this.columnCUSLOC);
                 this.columnCNTNOS = new global::System.Data.DataColumn("CNTNOS", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCNTNOS);
+                this.columnAOC = new global::System.Data.DataColumn("AOC", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAOC);
+                this.columnRTD = new global::System.Data.DataColumn("RTD", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRTD);
+                this.columnOTHINF = new global::System.Data.DataColumn("OTHINF", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOTHINF);
+                this.columnDDT = new global::System.Data.DataColumn("DDT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDDT);
                 this.columnTBL.MaxLength = 4;
                 this.columnEVNT.MaxLength = 1;
                 this.columnREFNO.MaxLength = 20;
@@ -3153,6 +3213,8 @@ namespace FbLibrary {
                 this.columnCABW.MaxLength = 1;
                 this.columnCUSLOC.MaxLength = 5;
                 this.columnCNTNOS.MaxLength = 2147483647;
+                this.columnOTHINF.MaxLength = 2147483647;
+                this.columnDDT.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6265,6 +6327,70 @@ namespace FbLibrary {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime AOC {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_OPH_MDFD.AOCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AOC\' in table \'WEB_OPH_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPH_MDFD.AOCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime RTD {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableWEB_OPH_MDFD.RTDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RTD\' in table \'WEB_OPH_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPH_MDFD.RTDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string OTHINF {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_OPH_MDFD.OTHINFColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OTHINF\' in table \'WEB_OPH_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPH_MDFD.OTHINFColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DDT {
+                get {
+                    try {
+                        return ((string)(this[this.tableWEB_OPH_MDFD.DDTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DDT\' in table \'WEB_OPH_MDFD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWEB_OPH_MDFD.DDTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsTBLNull() {
                 return this.IsNull(this.tableWEB_OPH_MDFD.TBLColumn);
             }
@@ -6753,6 +6879,54 @@ namespace FbLibrary {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCNTNOSNull() {
                 this[this.tableWEB_OPH_MDFD.CNTNOSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsAOCNull() {
+                return this.IsNull(this.tableWEB_OPH_MDFD.AOCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetAOCNull() {
+                this[this.tableWEB_OPH_MDFD.AOCColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRTDNull() {
+                return this.IsNull(this.tableWEB_OPH_MDFD.RTDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRTDNull() {
+                this[this.tableWEB_OPH_MDFD.RTDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsOTHINFNull() {
+                return this.IsNull(this.tableWEB_OPH_MDFD.OTHINFColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetOTHINFNull() {
+                this[this.tableWEB_OPH_MDFD.OTHINFColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDDTNull() {
+                return this.IsNull(this.tableWEB_OPH_MDFD.DDTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDDTNull() {
+                this[this.tableWEB_OPH_MDFD.DDTColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8222,6 +8396,10 @@ namespace FbLibrary.tMax14DataSetTableAdapters {
             tableMapping.ColumnMappings.Add("CABW", "CABW");
             tableMapping.ColumnMappings.Add("CUSLOC", "CUSLOC");
             tableMapping.ColumnMappings.Add("CNTNOS", "CNTNOS");
+            tableMapping.ColumnMappings.Add("AOC", "AOC");
+            tableMapping.ColumnMappings.Add("RTD", "RTD");
+            tableMapping.ColumnMappings.Add("OTHINF", "OTHINF");
+            tableMapping.ColumnMappings.Add("DDT", "DDT");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::FirebirdSql.Data.FirebirdClient.FbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
